@@ -41,3 +41,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Barlow | OFL-1.1 | https://fontsource.org/fonts/barlow | 016-split-flap-departures |
 | IBM Plex Mono | OFL-1.1 | https://fontsource.org/fonts/ibm-plex-mono | 017-punch-card-batch |
 | IBM Plex Sans | OFL-1.1 | https://fontsource.org/fonts/ibm-plex-sans | 017-punch-card-batch |
+| Press Start 2P | OFL-1.1 | https://fontsource.org/fonts/press-start-2p | 018-four-shade-handheld |
+| Pixelify Sans | OFL-1.1 | https://fontsource.org/fonts/pixelify-sans | 018-four-shade-handheld |

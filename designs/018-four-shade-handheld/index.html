@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four-Shade Handheld · Centiform</title>
+<style>
+/* @fonts: Press Start 2P:400:block; Pixelify Sans:400,600:swap */
+@font-face{font-family:"Press Start 2P";font-style:normal;font-weight:400;font-display:block;src:url(fonts/press-start-2p-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Pixelify Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/pixelify-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Pixelify Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/pixelify-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #9bbc0f;          /* shade 0, lightest */
+  --ink: #0f380f;         /* shade 3, darkest */
+  --accent-1: #306230;    /* shade 2 */
+  --accent-2: #8bac0f;    /* shade 1 */
+  --shell: #c9c6c0;
+  --shell-dk: #a9a59e;
+  --btn: #8a1f4f;
+  --u: 8px;               /* one tile */
+  --px: 3;                /* screen scale, whole numbers only */
+  /* scale on the 8 px tile: 8, 12, 16, 24, 32 */
+  --t-1: 12px; --t0: 16px; --t1: 20px; --t2: 24px; --t3: 32px;
+  --pix: "Press Start 2P", monospace;
+  --sans: "Pixelify Sans", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #e7e4dc; color: var(--ink); }
+body { font: 400 var(--t0)/1.5 var(--sans); min-height: 100vh; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: calc(var(--u) * 5); padding: calc(var(--u) * 3);
+  background-image: radial-gradient(rgba(15,56,15,.08) 1px, transparent 1.4px); background-size: 8px 8px; }
+.side { max-width: 34ch; justify-self: end; }
+.side.r { justify-self: start; }
+.side h1 { margin: 0 0 var(--u); font: 400 var(--t2)/1.4 var(--pix); color: var(--ink); }
+.side p { margin: 0 0 calc(var(--u) * 2); }
+.side .k { font: 400 10px/1.8 var(--pix); letter-spacing: .04em; color: var(--accent-1); }
+.chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.chapters button { all: unset; cursor: pointer; display: grid; grid-template-columns: 3ch 1fr; font: 400 var(--t0)/1.6 var(--sans); padding: 2px 8px; }
+.chapters button[aria-current="true"] { background: var(--ink); color: var(--bg); }
+.chapters button:focus-visible { outline: 2px dashed var(--ink); outline-offset: 2px; }
+/* the handheld */
+.unit { width: calc(160px * var(--px) + 96px); background: linear-gradient(90deg, var(--shell-dk), var(--shell) 6%, var(--shell) 94%, var(--shell-dk)); border-radius: 12px 12px 64px 12px; padding: 24px 24px 40px; box-shadow: inset 0 -6px 0 rgba(0,0,0,.08), 0 20px 30px -16px rgba(15,56,15,.5); position: relative; }
+.unit .rim { display: flex; justify-content: space-between; font: 400 9px/1 var(--pix); color: #6c6a66; margin: -8px 6px 10px; }
+.bezel { background: #5f6068; border-radius: 10px 10px 36px 10px; padding: 22px 38px 26px; position: relative; }
+.bezel::before { content: ""; position: absolute; left: 14px; right: 14px; top: 10px; height: 2px; background: linear-gradient(90deg, #7a2a58 0 40%, transparent 40% 44%, #2a3a7a 44% 100%); opacity: .8; }
+.led { position: absolute; left: 12px; top: 44%; width: 8px; height: 8px; border-radius: 50%; background: #e8322a; box-shadow: 0 0 8px #ff4a3a; }
+.led + span { position: absolute; left: 6px; top: calc(44% + 14px); font: 400 6px/1 var(--pix); color: #b8b8c0; letter-spacing: .06em; }
+canvas { display: block; width: calc(160px * var(--px)); height: calc(144px * var(--px)); image-rendering: pixelated; background: var(--bg); box-shadow: inset 0 0 0 2px #445; }
+.brand { margin: 12px 0 0 4px; font: italic 600 18px/1 var(--sans); color: #2d2d6a; letter-spacing: .02em; }
+.brand b { font-style: normal; font-family: var(--pix); font-size: 10px; margin-left: 6px; color: #8a1f4f; }
+.pad { display: grid; grid-template-columns: auto 1fr auto; align-items: center; margin-top: 28px; }
+.dpad { position: relative; width: 96px; height: 96px; }
+.dpad button { position: absolute; width: 32px; height: 32px; background: #2b2b2e; border: 0; padding: 0; cursor: pointer; }
+.dpad .u { left: 32px; top: 0; border-radius: 4px 4px 0 0; } .dpad .d { left: 32px; bottom: 0; border-radius: 0 0 4px 4px; }
+.dpad .l { left: 0; top: 32px; border-radius: 4px 0 0 4px; } .dpad .r { right: 0; top: 32px; border-radius: 0 4px 4px 0; }
+.dpad::after { content: ""; position: absolute; left: 32px; top: 32px; width: 32px; height: 32px; background: #2b2b2e; }
+.ab { display: flex; gap: 18px; transform: rotate(-25deg); justify-self: end; }
+.ab button { width: 52px; height: 52px; border-radius: 50%; border: 0; background: radial-gradient(circle at 40% 35%, #b03a6e, var(--btn)); color: transparent; cursor: pointer; box-shadow: 0 3px 0 #4a0f2a; position: relative; }
+.ab button span { position: absolute; bottom: -22px; left: 0; right: 0; text-align: center; color: #2d2d6a; font: 400 10px/1 var(--pix); transform: rotate(25deg); }
+.ab button:nth-child(1) { margin-top: 26px; }
+.ss { display: flex; justify-content: center; gap: 22px; margin-top: 30px; }
+.ss button { width: 52px; height: 12px; border-radius: 6px; border: 0; background: #7d7a76; transform: rotate(-25deg); cursor: pointer; position: relative; }
+.ss button span { position: absolute; top: 18px; left: -6px; right: -6px; font: 400 8px/1 var(--pix); color: #2d2d6a; }
+.speaker { position: absolute; right: 30px; bottom: 30px; display: flex; gap: 7px; transform: rotate(-25deg); }
+.speaker i { width: 5px; height: 48px; border-radius: 3px; background: #9e9a93; box-shadow: inset 1px 1px 2px rgba(0,0,0,.35); }
+.unit button:focus-visible { outline: 3px dashed var(--ink); outline-offset: 3px; }
+.unit button:active { transform: translateY(2px); }
+.vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (max-width: 1180px) { body { grid-template-columns: minmax(0, 1fr); justify-items: center; } .side, .side.r { justify-self: center; max-width: 60ch; } .side.l { order: 2; } .side.r { order: 3; } }
+@media (max-width: 560px) { :root { --px: 2; } body { padding: calc(var(--u) * 1.5); gap: calc(var(--u) * 3); } .unit { width: calc(160px * var(--px) + 52px); padding: 16px 12px 30px; } .bezel { padding: 18px 12px 18px; } .led, .led + span { display: none; } .speaker { display: none; } }
+</style>
+</head>
+<body>
+<section class="side l" aria-labelledby="g-h">
+  <p class="k">OFFICIAL PLAYER’S GUIDE</p>
+  <h1 id="g-h">MOSSKEEP</h1>
+  <p>The Lantern Quest, for the Pocketeer handheld, 1991. Six pages of the guide, shown on the screen the way the game draws them: 160 by 144 pixels, four shades of green.</p>
+  <p>Use the D-pad or the arrow keys to turn pages. A goes forward, B goes back, START returns to the title.</p>
+</section>
+<main class="unit" aria-label="Pocketeer handheld">
+  <div class="rim"><span>◁ OFF · ON ▷</span><span>DOT MATRIX WITH STEREO SOUND</span></div>
+  <div class="bezel">
+    <span class="led" aria-hidden="true"></span><span aria-hidden="true">POWER</span>
+    <canvas id="lcd" width="160" height="144" role="img" aria-describedby="alt"></canvas>
+    <p class="vh" id="alt" aria-live="polite"></p>
+  </div>
+  <p class="brand">Pocketeer<b>GUIDE</b></p>
+  <div class="pad">
+    <div class="dpad"><button class="u" type="button" data-k="up" aria-label="Up"></button><button class="l" type="button" data-k="left" aria-label="Left"></button><button class="r" type="button" data-k="right" aria-label="Right"></button><button class="d" type="button" data-k="down" aria-label="Down"></button></div>
+    <span></span>
+    <div class="ab"><button type="button" data-k="b" aria-label="B, back"><span>B</span></button><button type="button" data-k="a" aria-label="A, next"><span>A</span></button></div>
+  </div>
+  <div class="ss"><button type="button" data-k="select" aria-label="Select"><span>SELECT</span></button><button type="button" data-k="start" aria-label="Start"><span>START</span></button></div>
+  <div class="speaker" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</main>
+<section class="side r" aria-labelledby="c-h">
+  <p class="k" id="c-h">GUIDE PAGES</p>
+  <ol class="chapters" id="chap"></ol>
+  <p style="margin-top:16px">Save password for the last page: <b>LANTERN 7 MOSS</b>. Batteries: four AA, about 30 hours.</p>
+</section>
+<script>
+(() => {
+  const P = ["#9bbc0f", "#8bac0f", "#306230", "#0f380f"];
+  const cv = document.getElementById("lcd"), g = cv.getContext("2d", { willReadFrequently: true });
+  g.imageSmoothingEnabled = false;
+  const SPR = {
+    hero: ["....3333....", "...322223...", "..32222223..", "..3.1111.3..", "..3.1311.3..", "...311113...", "..33222233..", ".3.322223.3.", ".3.322223.3.", "...333333...", "...3....3...", "..33....33.."],
+    lamp: ["..33..", ".3113.", "310013", "310013", ".3113.", "..33.."],
+    slime: ["..3333..", ".322223.", "32122123", "32222223", "32322323", ".333333."],
+    bat: ["3......3", "33.33.33", "32333323", ".322223.", "..3..3.."],
+    key: ["..333...", ".3...3..", ".3...3..", "..333...", "...3....", "...333..", "...3....", "...33..."],
+    boot: ["..3333..", "..3223..", "..3223..", "..3223..", ".33223..", "3222223.", "3333333."],
+    tree: [".3333.", "322223", "322223", ".3223.", "..33..", "..33.."],
+    ghost: [".3333.", "322223", "320203", "322223", "322223", "3.33.3"]
+  };
+  const sprite = (n, x, y, s = 1) => SPR[n].forEach((row, j) => [...row].forEach((c, i) => { if (c !== ".") { g.fillStyle = P[+c]; g.fillRect(x + i * s, y + j * s, s, s); } }));
+  const txt = (t, x, y, c = 3) => { g.fillStyle = P[c]; g.font = '8px "Press Start 2P"'; g.textBaseline = "top"; g.fillText(t, x, y); };
+  const box = (x, y, w, h) => { g.fillStyle = P[3]; g.fillRect(x, y, w, h); g.fillStyle = P[0]; g.fillRect(x + 1, y + 1, w - 2, h - 2); g.fillStyle = P[3]; g.fillRect(x + 2, y + 2, w - 4, 1); g.fillRect(x + 2, y + h - 3, w - 4, 1); g.fillRect(x + 2, y + 2, 1, h - 4); g.fillRect(x + w - 3, y + 2, 1, h - 4); };
+  function quantize() {
+    const im = g.getImageData(0, 0, 160, 144), d = im.data, rgb = P.map((h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16)));
+    for (let i = 0; i < d.length; i += 4) { let best = 0, bd = 1e9; for (let k = 0; k < 4; k++) { const dd = (d[i] - rgb[k][0]) ** 2 + (d[i + 1] - rgb[k][1]) ** 2 + (d[i + 2] - rgb[k][2]) ** 2; if (dd < bd) { bd = dd; best = k; } } d[i] = rgb[best][0]; d[i + 1] = rgb[best][1]; d[i + 2] = rgb[best][2]; d[i + 3] = 255; }
+    g.putImageData(im, 0, 0);
+  }
+  const PAGES = [
+    ["TITLE", "Mosskeep title screen with the hero holding a lantern. Press start.", (t) => {
+      g.fillStyle = P[1]; g.fillRect(0, 96, 160, 48);
+      for (let x = 0; x < 160; x += 16) sprite("tree", x + 4, 88);
+      const drop = Math.min(24, t * 2);
+      txt("MOSSKEEP", 16, drop, 3); txt("MOSSKEEP", 15, drop - 1, 2);
+      txt("THE LANTERN QUEST", 12, drop + 14, 2);
+      sprite("hero", 64, 56, 2); sprite("lamp", 90, 70, 2);
+      if (Math.floor(t / 8) % 2) txt("PRESS START", 36, 120, 3);
+      txt("(C)1991 FERNLIGHT", 12, 134, 2);
+    }],
+    ["CONTROLS", "Controls: D-pad walks, A talks and lifts, B swings the lantern, Start opens the map, Select swaps items.", () => {
+      box(0, 0, 160, 20); txt("CONTROLS", 48, 6);
+      [["+PAD", "WALK"], ["A", "TALK/LIFT"], ["B", "SWING LAMP"], ["START", "MAP"], ["SELECT", "ITEMS"]].forEach(([a, b], i) => { txt(a, 8, 30 + i * 20, 2); txt(b, 64, 30 + i * 20, 3); g.fillStyle = P[1]; g.fillRect(8, 40 + i * 20, 144, 1); });
+    }],
+    ["MAP", "Map of Mosskeep: the village at bottom left, the mere in the middle, the keep in the north east.", () => {
+      const M = ["22222222222222222222", "2..TT....~~~....KKK2", "2.TTT...~~~~~...K.K2", "2..T....~~~~....KKK2", "2.......~~~.......T2", "2..TT.............T2", "2.TTTT....==....TT.2", "2..TT.....==.....T.2", "2.........==.......2", "2..HH.....==...TT..2", "2..HH..........TTT.2", "2..........TT......2", "2.........TTTT.....2", "2...~~.....TT...HH.2", "2..~~~~.........HH.2", "2...~~.............2", "2..................2", "22222222222222222222"];
+      M.forEach((row, j) => [...row].forEach((c, i) => { const x = i * 8, y = j * 8; g.fillStyle = P[c === "2" ? 3 : c === "~" ? 2 : c === "=" ? 1 : 0]; g.fillRect(x, y, 8, 8); if (c === "T") sprite("tree", x + 1, y + 1); if (c === "K" || c === "H") { g.fillStyle = P[3]; g.fillRect(x + 1, y + 1, 6, 6); g.fillStyle = P[1]; g.fillRect(x + 3, y + 4, 2, 3); } if (c === "~") { g.fillStyle = P[1]; g.fillRect(x + 1, y + 3, 3, 1); } }));
+      txt("KEEP", 104, 34, 3); txt("MERE", 58, 42, 3); txt("HOME", 10, 90, 3);
+    }],
+    ["ITEMS", "Items: the lantern, the brass key, the moss boots, and the spirit jar.", () => {
+      box(0, 0, 160, 20); txt("ITEMS", 60, 6);
+      [["lamp", "LANTERN", "LIGHTS DARK"], ["key", "BRASS KEY", "KEEP GATE"], ["boot", "MOSS BOOTS", "WALK ON MERE"], ["ghost", "SPIRIT JAR", "HOLDS 1 SOUL"]].forEach(([s, a, b], i) => { box(4, 26 + i * 29, 24, 24); sprite(s, 12, 34 + i * 29); txt(a, 34, 28 + i * 29, 3); txt(b, 34, 40 + i * 29, 2); });
+    }],
+    ["BESTIARY", "Bestiary: moss slime, 2 hearts, weak to light. Cave bat, 1 heart, flees the lantern. Mere ghost, 4 hearts, only the spirit jar holds it.", () => {
+      box(0, 0, 160, 20); txt("BESTIARY", 48, 6);
+      [["slime", "MOSS SLIME", 2], ["bat", "CAVE BAT", 1], ["ghost", "MERE GHOST", 4]].forEach(([s, a, h], i) => { const y = 28 + i * 38; sprite(s, 8, y + 2, 2); txt(a, 34, y, 3); for (let k = 0; k < h; k++) { g.fillStyle = P[3]; g.fillRect(34 + k * 10, y + 14, 7, 6); g.fillStyle = P[1]; g.fillRect(35 + k * 10, y + 15, 2, 2); } g.fillStyle = P[1]; g.fillRect(8, y + 32, 144, 1); });
+    }],
+    ["PASSWORD", "Password for the last dungeon: Lantern 7 Moss. Good luck, keeper.", () => {
+      box(0, 0, 160, 144); txt("PASSWORD", 48, 14);
+      box(16, 36, 128, 44); txt("LANTERN", 50, 46, 3); txt("7  MOSS", 52, 62, 3);
+      sprite("hero", 72, 92, 2); txt("GOOD LUCK", 44, 124, 2); txt("KEEPER", 56, 134, 2);
+    }]
+  ];
+  let page = 0, t = 0, raf = 0;
+  const alt = document.getElementById("alt");
+  const chap = document.getElementById("chap");
+  chap.innerHTML = PAGES.map(([n], i) => `<li><button type="button" data-i="${i}" aria-current="${i === 0}"><span>${i + 1}</span>${n.charAt(0) + n.slice(1).toLowerCase()}</button></li>`).join("");
+  function draw() { g.fillStyle = P[0]; g.fillRect(0, 0, 160, 144); PAGES[page][2](t); quantize(); }
+  function go(i) { page = (i + PAGES.length) % PAGES.length; t = page === 0 ? 0 : 99; alt.textContent = PAGES[page][1]; chap.querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.i === page))); draw(); }
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let last = 0;
+  function loop(now) { if (now - last > 1000 / 15) { last = now; t++; if (page === 0) draw(); } raf = document.hidden ? 0 : requestAnimationFrame(loop); }
+  document.addEventListener("visibilitychange", () => { if (!document.hidden && !raf && !reduce) raf = requestAnimationFrame(loop); });
+  const act = (k) => { if (k === "right" || k === "down" || k === "a") go(page + 1); else if (k === "left" || k === "up" || k === "b") go(page - 1); else if (k === "start") go(0); else if (k === "select") go(3); };
+  document.querySelector(".unit").addEventListener("click", (e) => { const b = e.target.closest("button[data-k]"); if (b) act(b.dataset.k); });
+  chap.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) go(+b.dataset.i); });
+  addEventListener("keydown", (e) => { const k = { ArrowRight: "right", ArrowLeft: "left", ArrowUp: "up", ArrowDown: "down", Enter: "start" }[e.key]; if (k && !e.target.closest("button")) { act(k); e.preventDefault(); } });
+  document.fonts.load('8px "Press Start 2P"').then(() => { go(0); if (reduce) { t = 99; draw(); } else raf = requestAnimationFrame(loop); });
+})();
+</script>
+</body>
+</html>

@@ -127,7 +127,7 @@ window.CENTIFORM = [
     fonts: ["Press Start 2P","Pixelify Sans"], swatch: ["#9bbc0f","#0f380f","#306230","#8bac0f"],
     grammar: "All content rendered on a scaled 160x144 canvas-like grid; image-rendering pixelated",
     motif: "Dot-matrix screen bezel with a power LED",
-    status: "planned" },
+    status: "done" },
   { n: 19, slug: "019-hifi-brochure-1965", title: "Hi-Fi Brochure 1965", family: "Instruments",
     subject: "Launch brochure for a fictional record player.", format: "landing", mode: "light",
     thesis: "West German industrial design: grey, one orange control, strict order",
