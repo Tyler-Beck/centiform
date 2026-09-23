@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Planned - Centiform</title>
+<style>
+  :root { --bg: #1b1b1b; --ink: #d8d8d8; --dim: #8a8a8a; --line: #333; }
+  html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font: 15px/1.5 system-ui, sans-serif; }
+  main { max-width: 680px; padding: 48px 24px; }
+  p.tag { color: var(--dim); text-transform: uppercase; letter-spacing: .1em; font-size: 12px; margin: 0 0 8px; }
+  h1 { font-size: 28px; font-weight: 600; margin: 0 0 24px; }
+  dl { display: grid; grid-template-columns: 110px 1fr; gap: 8px 16px; margin: 0; }
+  dt { color: var(--dim); }
+  dd { margin: 0; }
+  .sw { display: inline-block; width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px; border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+<main>
+  <p class="tag">Planned, not built yet</p>
+  <h1 id="h">Unknown design</h1>
+  <dl id="row"></dl>
+</main>
+<script src="../designs.js"></script>
+<script>
+  // Prints the registry row for a planned design. Reads only the manifest.
+  const d = window.CENTIFORM.find((x) => x.slug === location.hash.slice(1));
+  if (d) {
+    document.getElementById("h").textContent = String(d.n).padStart(3, "0") + " " + d.title;
+    const rows = [["Subject", d.subject], ["Format", d.format + ", " + d.mode], ["Thesis", d.thesis],
+      ["Fonts", d.fonts.join("; ")], ["Palette", ""], ["Grammar", d.grammar], ["Motif", d.motif]];
+    const dl = document.getElementById("row");
+    for (const [k, v] of rows) {
+      const dt = document.createElement("dt"); dt.textContent = k;
+      const dd = document.createElement("dd");
+      if (k === "Palette") d.swatch.forEach((c) => { const s = document.createElement("span"); s.className = "sw"; s.style.background = c; dd.append(s, c + " "); });
+      else dd.textContent = v;
+      dl.append(dt, dd);
+    }
+  }
+</script>
+</body>
+</html>
