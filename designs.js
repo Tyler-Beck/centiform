@@ -78,7 +78,7 @@ window.CENTIFORM = [
     fonts: ["Share Tech Mono","Chakra Petch"], swatch: ["#0a0f0a","#6aff8f","#1c3a22","#ffb000"],
     grammar: "Bezel frame with knob controls, 10x8 graticule, live SVG waveform",
     motif: "Phosphor glow with fading persistence trails",
-    status: "planned" },
+    status: "done" },
   { n: 12, slug: "012-pocket-calculator-manual", title: "Pocket Calculator Manual", family: "Instruments",
     subject: "Owner's manual for a fictional 1983 pocket calculator.", format: "docs", mode: "light",
     thesis: "Japanese electronics manual: device drawing with numbered callouts",

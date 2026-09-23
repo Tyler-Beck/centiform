@@ -27,3 +27,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Alegreya SC | OFL-1.1 | https://fontsource.org/fonts/alegreya-sc | 009-farmers-almanac |
 | Newsreader | OFL-1.1 | https://fontsource.org/fonts/newsreader | 010-museum-wall-label |
 | Karla | OFL-1.1 | https://fontsource.org/fonts/karla | 010-museum-wall-label |
+| Share Tech Mono | OFL-1.1 | https://fontsource.org/fonts/share-tech-mono | 011-phosphor-scope |
+| Chakra Petch | OFL-1.1 | https://fontsource.org/fonts/chakra-petch | 011-phosphor-scope |
