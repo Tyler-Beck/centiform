@@ -120,7 +120,7 @@ window.CENTIFORM = [
     fonts: ["IBM Plex Mono","IBM Plex Sans"], swatch: ["#f0e7c6","#1f2a44","#c6d9b8","#d23c2a"],
     grammar: "Content set on 80-column cards; output pages on greenbar paper",
     motif: "Punched rectangles that encode each heading",
-    status: "planned" },
+    status: "done" },
   { n: 18, slug: "018-four-shade-handheld", title: "Four-Shade Handheld", family: "Instruments",
     subject: "Guide to a fictional handheld game.", format: "app", mode: "light",
     thesis: "160x144 pixel screen, exactly four shades of green",

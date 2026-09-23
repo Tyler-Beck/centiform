@@ -39,3 +39,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Libre Baskerville | OFL-1.1 | https://fontsource.org/fonts/libre-baskerville | 015-card-catalog |
 | Barlow Condensed | OFL-1.1 | https://fontsource.org/fonts/barlow-condensed | 016-split-flap-departures |
 | Barlow | OFL-1.1 | https://fontsource.org/fonts/barlow | 016-split-flap-departures |
+| IBM Plex Mono | OFL-1.1 | https://fontsource.org/fonts/ibm-plex-mono | 017-punch-card-batch |
+| IBM Plex Sans | OFL-1.1 | https://fontsource.org/fonts/ibm-plex-sans | 017-punch-card-batch |
