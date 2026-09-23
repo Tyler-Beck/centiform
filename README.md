@@ -2,7 +2,13 @@
 
 100 hand-authored HTML design systems in one static gallery. Each design is one fictional product, place or organisation, built in the language of one source medium (a lightbox of Kodachrome slides, a split-flap board, a Persian miniature folio, a 1-bit desktop). No two designs share a font, a layout skeleton or a motif.
 
-## Open it
+## Browse it online
+
+<https://tyler-beck.github.io/centiform/>
+
+Served by GitHub Pages from `main` at the site root. Every design is reachable from the rail, and each one also opens alone at `https://tyler-beck.github.io/centiform/designs/NNN-slug/index.html`.
+
+## Open it locally
 
 Open `index.html` in a browser. No server, no build, no network. It also works from any static server (`python3 -m http.server`).
 
