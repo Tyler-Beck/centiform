@@ -71,7 +71,7 @@ window.CENTIFORM = [
     fonts: ["Newsreader","Karla"], swatch: ["#f7f6f2","#222222","#3d5a73","#c9c4b8"],
     grammar: "One object per full screen, label at eye level lower-left, 80% empty wall",
     motif: "Tombstone label (artist, date, medium, accession)",
-    status: "planned" },
+    status: "done" },
   { n: 11, slug: "011-phosphor-scope", title: "Phosphor Scope", family: "Instruments",
     subject: "Product page for a modular synth oscillator.", format: "app", mode: "dark",
     thesis: "Analogue oscilloscope: P31 green phosphor, graticule, persistence",

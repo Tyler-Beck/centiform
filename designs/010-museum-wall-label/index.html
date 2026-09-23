@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museum Wall Label · Centiform</title>
+<style>
+/* @fonts: Newsreader:300,400,400i:swap; Karla:400,600:swap */
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/newsreader-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Newsreader";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/newsreader-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Newsreader";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/newsreader-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Karla";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/karla-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Karla";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/karla-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f7f6f2;          /* gallery white, warm */
+  --ink: #222222;
+  --accent-1: #3d5a73;    /* the one painted wall */
+  --accent-2: #c9c4b8;    /* plinth, baseboard, label stock edge */
+  --floor: #b9ab93;
+  --u: 8px;
+  --eye: 58vh;            /* label centre at eye height: 145 cm on a 250 cm wall */
+  /* scale 1.333 on 17px; wall vinyl uses the top step */
+  --t-1: 12.5px; --t0: 17px; --t1: 22.7px; --t2: 30px; --t3: 40px; --t4: clamp(48px, 6.4vw, 104px);
+  --serif: "Newsreader", Georgia, serif;
+  --sans: "Karla", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html { scroll-snap-type: y proximity; background: var(--bg); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.55 var(--sans); }
+.room { position: relative; min-height: 100vh; scroll-snap-align: start; overflow: hidden;
+  background: radial-gradient(60% 55% at var(--sx, 62%) 18%, #ffffff 0, rgba(255,255,255,0) 70%), var(--wall, var(--bg)); }
+.room::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 7vh; background: linear-gradient(var(--accent-2) 0 10px, #e4e0d6 10px 12px, var(--floor) 12px); }
+.room.blue { --wall: var(--accent-1); color: #f7f6f2; }
+.no { position: absolute; top: calc(var(--u) * 4); left: calc(var(--u) * 5); font: 600 var(--t-1)/1 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--accent-1); }
+.blue .no { color: var(--accent-2); }
+/* wall vinyl */
+.vinyl { position: absolute; left: 8vw; top: 18vh; max-width: 36ch; }
+.vinyl h1 { margin: 0 0 calc(var(--u) * 4); font: 300 var(--t4)/1.02 var(--serif); letter-spacing: -.015em; }
+.vinyl h1 i { font-weight: 400; }
+.vinyl p { margin: 0 0 calc(var(--u) * 2); font: 400 var(--t1)/1.5 var(--serif); max-width: 38ch; }
+.vinyl .dates { font: 600 var(--t-1)/1.4 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-1); }
+/* a doorway into the next room */
+.door { position: absolute; right: 12vw; bottom: 7vh; width: min(26vw, 380px); height: 62vh; background: linear-gradient(#efece4, #e6e1d5 88%, #cbbfa7 88%); box-shadow: inset 12px 0 18px -10px rgba(0,0,0,.18), inset 0 10px 18px -12px rgba(0,0,0,.2); }
+.door svg { position: absolute; left: 50%; bottom: 10%; height: 44%; transform: translateX(-50%); }
+.door span { position: absolute; top: -34px; left: 0; font: 600 var(--t-1)/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+/* the object */
+.obj { position: absolute; left: var(--ox, 58%); bottom: 7vh; transform: translateX(-50%); height: var(--oh, 70vh); }
+.obj svg { height: 100%; width: auto; display: block; overflow: visible; }
+.shadow { position: absolute; left: 50%; bottom: -4px; width: 80%; height: 16px; transform: translateX(-50%); background: radial-gradient(closest-side, rgba(0,0,0,.28), transparent); }
+/* tombstone label */
+.label { position: absolute; left: 8vw; top: var(--eye); transform: translateY(-50%); width: min(300px, 76vw); background: #fbfaf7; padding: calc(var(--u) * 2.5) calc(var(--u) * 3); box-shadow: 0 0 0 1px rgba(34,34,34,.06), 1px 2px 0 var(--accent-2); color: var(--ink); font: 400 15px/1.45 var(--sans); }
+.label .artist { font-weight: 600; margin: 0; }
+.label .life { margin: 0 0 var(--u); color: #5b5b5b; }
+.label .title { margin: 0; font: italic 400 var(--t1)/1.2 var(--serif); }
+.label .date { margin: 0 0 var(--u); }
+.label .med { margin: 0; }
+.label .credit { margin: var(--u) 0 0; font-size: var(--t-1); color: #5b5b5b; }
+.label .acc { margin: 2px 0 0; font-size: var(--t-1); letter-spacing: .06em; color: var(--accent-1); font-variant-numeric: tabular-nums; }
+.label .txt { margin: calc(var(--u) * 1.5) 0 0; padding-top: calc(var(--u) * 1.5); border-top: 1px solid var(--accent-2); font: 400 16px/1.55 var(--serif); }
+.stanchion { position: absolute; bottom: 7vh; height: 18vh; width: 3px; background: #8f8a80; }
+.stanchion::before { content: ""; position: absolute; top: -6px; left: -5px; width: 13px; height: 13px; border-radius: 50%; background: #8f8a80; }
+.rope { position: absolute; bottom: calc(7vh + 15vh); height: 3vh; border-bottom: 3px solid #7a2e2e; border-radius: 0 0 50% 50%; }
+.visit { position: absolute; left: 8vw; top: 16vh; right: 8vw; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 6vw; }
+.visit h2 { margin: 0 0 calc(var(--u) * 3); font: 300 var(--t3)/1.1 var(--serif); }
+.visit dl { display: grid; grid-template-columns: auto 1fr; gap: var(--u) calc(var(--u) * 3); margin: 0; font-variant-numeric: tabular-nums; }
+.visit dt { font-weight: 600; font-size: var(--t-1); letter-spacing: .14em; text-transform: uppercase; padding-top: 4px; }
+.visit dd { margin: 0; }
+.visit a { color: var(--accent-1); text-underline-offset: 3px; }
+.visit a:focus-visible, .nav a:focus-visible, .door:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 4px; }
+.nav { position: fixed; right: calc(var(--u) * 4); top: 50%; transform: translateY(-50%); display: grid; gap: calc(var(--u) * 1.5); z-index: 5; list-style: none; margin: 0; padding: 0; }
+.nav a { display: block; width: 10px; height: 10px; border: 1px solid var(--ink); border-radius: 50%; background: transparent; }
+.nav a:hover { background: var(--ink); }
+.nav span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+@media (max-width: 760px) {
+  :root { --eye: auto; }
+  .vinyl { left: calc(var(--u) * 3); right: calc(var(--u) * 3); top: 12vh; }
+  .obj { --oh: 52vh !important; left: 60% !important; }
+  .label { top: auto; bottom: calc(7vh + var(--u) * 2); left: calc(var(--u) * 2); transform: none; width: 62vw; padding: calc(var(--u) * 1.5) calc(var(--u) * 2); font-size: 13px; }
+  .label .txt { display: none; }
+  .visit { grid-template-columns: minmax(0, 1fr); top: 10vh; left: calc(var(--u) * 3); right: calc(var(--u) * 3); gap: calc(var(--u) * 4); }
+  .no { left: calc(var(--u) * 3); }
+  .door { right: calc(var(--u) * 3); width: 40vw; height: 34vh; }
+  .vinyl h1 { font-size: 40px; }
+  .vinyl p { font-size: 18px; }
+  .nav { right: calc(var(--u) * 1.5); }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="wal" x1="0" x2="1"><stop offset="0" stop-color="#3b2416"/><stop offset=".45" stop-color="#6e4a2e"/><stop offset=".7" stop-color="#8a5f3b"/><stop offset="1" stop-color="#4a2e1b"/></linearGradient>
+    <linearGradient id="gilt" x1="0" x2="1"><stop offset="0" stop-color="#8a6a2a"/><stop offset=".5" stop-color="#e2c679"/><stop offset="1" stop-color="#9a7730"/></linearGradient>
+    <linearGradient id="sb" x1="0" x2="1"><stop offset="0" stop-color="#c9a877"/><stop offset="1" stop-color="#e9d3a8"/></linearGradient>
+  </defs>
+  <symbol id="harp" viewBox="0 0 200 420">
+    <path d="M40 400 L52 60" stroke="url(#wal)" stroke-width="16" stroke-linecap="round"/>
+    <path d="M56 70 C90 40 120 90 150 70 C170 58 178 40 176 30" stroke="url(#wal)" stroke-width="14" fill="none" stroke-linecap="round"/>
+    <path d="M60 390 L176 40 L186 44 L78 398Z" fill="url(#sb)" stroke="#6e4a2e" stroke-width="2"/>
+    <g stroke="#6e4a2e" stroke-width="1.4" opacity=".6"><path d="M92 300 l22 8 M110 246 l22 8 M128 192 l22 8 M146 138 l22 8"/></g>
+    <g id="strings" stroke="#e8e2d0" stroke-width=".9"></g>
+    <rect x="22" y="392" width="84" height="18" rx="3" fill="url(#wal)"/>
+    <path d="M26 410 l-4 8 h10z M100 410 l4 8 h-10z" fill="#3b2416"/>
+    <path d="M40 48 c-10 -14 0 -34 14 -30 c16 4 12 22 2 24 c-6 1 -8 -6 -4 -8" stroke="url(#gilt)" stroke-width="6" fill="none"/>
+    <circle cx="176" cy="28" r="7" fill="url(#gilt)"/>
+    <g fill="url(#gilt)"><rect x="44" y="120" width="14" height="4"/><rect x="42" y="250" width="14" height="4"/><rect x="40" y="370" width="16" height="5"/></g>
+  </symbol>
+</svg>
+
+<nav aria-label="Rooms"><ol class="nav"><li><a href="#r1"><span>Room 1</span></a></li><li><a href="#r2"><span>Room 2</span></a></li><li><a href="#r3"><span>Room 3</span></a></li><li><a href="#r4"><span>Room 4</span></a></li><li><a href="#r5"><span>Room 5</span></a></li></ol></nav>
+
+<main>
+  <section class="room" id="r1" aria-labelledby="t1" style="--sx:30%">
+    <p class="no">Gallery 14 · Room 1 of 5</p>
+    <div class="vinyl">
+      <p class="dates">14 March – 30 August 2026</p>
+      <h1 id="t1">One harp,<br><i>two hundred</i><br>and thirty years</h1>
+      <p>In 1794 a cabinet-maker in Bristol built a pedal harp for a girl of eleven. It survived a shipwreck, a fire, and a century in a barn in Somerset. This exhibition shows one object and nothing else.</p>
+      <p>Walk slowly. Sit if you like. The harp is played on Sundays at 2 pm.</p>
+    </div>
+    <a class="door" href="#r2" aria-label="Enter Room 2"><span>Room 2 →</span><svg viewBox="0 0 200 420" aria-hidden="true"><use href="#harp"/></svg></a>
+  </section>
+
+  <section class="room" id="r2" aria-labelledby="t2">
+    <p class="no">Room 2</p>
+    <figure class="obj" style="--ox:62%;--oh:74vh;margin:0"><svg viewBox="0 0 200 420" role="img" aria-label="Single-action pedal harp"><use href="#harp"/></svg><span class="shadow"></span></figure>
+    <span class="stanchion" style="left:44%"></span><span class="stanchion" style="left:80%"></span><span class="rope" style="left:44%;width:36%"></span>
+    <aside class="label" aria-labelledby="t2">
+      <p class="artist">Jonas Ashcombe</p>
+      <p class="life">English, 1751–1819</p>
+      <p class="title" id="t2">Single-action pedal harp</p>
+      <p class="date">1794</p>
+      <p class="med">Sycamore, walnut, spruce soundboard, gilt gesso, brass action; 38 gut strings</p>
+      <p class="credit">Gift of the Pellow family, 1987</p>
+      <p class="acc">1987.114</p>
+      <p class="txt">Made for Anne Pellow on her eleventh birthday. The seven brass pedals raise each string by a semitone; Anne’s pencilled tuning notes are still inside the base.</p>
+    </aside>
+  </section>
+
+  <section class="room blue" id="r3" aria-labelledby="t3" style="--sx:70%">
+    <p class="no">Room 3</p>
+    <figure class="obj" style="--ox:66%;--oh:150vh;bottom:-60vh;margin:0"><svg viewBox="0 0 200 420" role="img" aria-label="Detail of the carved scroll and neck"><use href="#harp"/></svg></figure>
+    <aside class="label" aria-labelledby="t3">
+      <p class="artist">Jonas Ashcombe</p>
+      <p class="title" id="t3">Scroll and neck, detail</p>
+      <p class="date">1794, regilded 1851</p>
+      <p class="med">Carved sycamore, gesso, water gilding over red bole</p>
+      <p class="acc">1987.114 (detail)</p>
+      <p class="txt">The gilding you see is Victorian. Under the lamp in the corner, a scrape shows the first gold, redder and thinner, laid when the harp was new.</p>
+    </aside>
+  </section>
+
+  <section class="room" id="r4" aria-labelledby="t4" style="--sx:50%">
+    <p class="no">Room 4</p>
+    <figure class="obj" style="--ox:58%;--oh:30vh;margin:0">
+      <svg viewBox="0 0 200 160" role="img" aria-label="Brass tuning key in a glass case"><rect x="10" y="80" width="180" height="80" fill="#c9c4b8"/><rect x="14" y="0" width="172" height="80" fill="rgba(255,255,255,.35)" stroke="#b8b3a8" stroke-width="1.5"/><path d="M60 58 h52 m0 -8 v16 h16 a8 8 0 0 0 0 -16z" fill="none" stroke="#b28a3a" stroke-width="5"/><circle cx="54" cy="58" r="10" fill="none" stroke="#b28a3a" stroke-width="5"/><path d="M20 6 L60 74" stroke="#fff" stroke-width="3" opacity=".7"/></svg>
+    </figure>
+    <aside class="label" aria-labelledby="t4">
+      <p class="artist">Unknown maker</p>
+      <p class="title" id="t4">Tuning key</p>
+      <p class="date">about 1790</p>
+      <p class="med">Cast and turned brass</p>
+      <p class="credit">Found in the harp’s base, 1987</p>
+      <p class="acc">1987.114.2</p>
+      <p class="txt">Worn flat on one side by a right thumb. It fits every pin but the lowest, which was replaced after the fire of 1852.</p>
+    </aside>
+  </section>
+
+  <section class="room" id="r5" aria-labelledby="t5" style="--sx:40%">
+    <p class="no">Room 5 · Exit</p>
+    <div class="visit">
+      <div>
+        <h2 id="t5">Hear it played</h2>
+        <p style="font:400 22px/1.5 var(--serif);max-width:38ch;margin:0">Sundays at 2 pm, Room 2. Rachel Onwu plays twenty minutes of music written between 1780 and 1810, on the harp and on a modern copy, so you can hear the difference. Free with admission. Seats for forty.</p>
+      </div>
+      <dl>
+        <dt>Where</dt><dd>Calder Street Museum of Art, 40 Calder Street</dd>
+        <dt>Hours</dt><dd>Tue–Sun 10:00–17:30, Thu to 21:00</dd>
+        <dt>Admission</dt><dd>£9, concessions £6, under-18s free</dd>
+        <dt>Access</dt><dd>Step-free throughout; seats in every room</dd>
+        <dt>More</dt><dd><a href="#r1">Back to Room 1</a></dd>
+      </dl>
+    </div>
+  </section>
+</main>
+<script>
+  // 38 strings between neck and soundboard, spaced along the line of the board.
+  const g = document.getElementById("strings"); let s = "";
+  for (let i = 0; i < 38; i++) { const t = i / 37, x = 66 + t * 112, y = 392 - t * 350; const top = 64 + Math.sin(t * Math.PI * 1.1) * -14 + t * -26; s += `<line x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(x - 2).toFixed(1)}" y2="${Math.max(top, 40).toFixed(1)}"/>`; }
+  g.innerHTML = s;
+</script>
+</body>
+</html>
