@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transit Diagram · Centiform</title>
+<style>
+/* @fonts: Encode Sans:400,600,800:swap */
+@font-face{font-family:"Encode Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/encode-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Encode Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/encode-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Encode Sans";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/encode-sans-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #eef0f2;          /* diagram paper */
+  --ink: #22313f;         /* station names, roundel rings */
+  --accent-1: #00843d;    /* Green line */
+  --accent-2: #a05eb5;    /* Purple line */
+  --orange: #e87722;      /* Orange line */
+  --express: #22313f;
+  --u: 8px;
+  /* scale: 1.2 on 16px */
+  --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px; --t3: 28px; --t4: clamp(32px, 3.4vw, 48px);
+  --f: "Encode Sans", "Johnston", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--f); min-height: 100vh; overflow-x: hidden; }
+button { font: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.map { position: relative; height: 100vh; min-height: 620px; }
+.map svg { width: 100%; height: 100%; display: block; }
+svg text { font-family: var(--f); }
+.ln { fill: none; stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; transition: opacity .3s; }
+.ln.ex { stroke-width: 5; stroke-dasharray: 2 12; }
+.tick { stroke-width: 8; }
+.stn { cursor: pointer; }
+.stn text { font-size: 17px; font-weight: 600; fill: var(--ink); paint-order: stroke; stroke: var(--bg); stroke-width: 5px; }
+.stn:hover text, .stn:focus text { fill: var(--accent-2); }
+.stn:focus { outline: none; }
+.stn:focus-visible .hit { stroke: var(--accent-2); stroke-width: 3; }
+.ring { fill: #fff; stroke: var(--ink); stroke-width: 5; }
+.dim .ln:not(.on) { opacity: .15; }
+.title { position: absolute; left: calc(var(--u) * 4); top: calc(var(--u) * 3); }
+.title h1 { margin: 0; font: 800 var(--t4)/1 var(--f); letter-spacing: -.01em; }
+.title p { margin: 4px 0 0; font-size: var(--t-1); }
+.legend { position: absolute; left: calc(var(--u) * 4); bottom: calc(var(--u) * 3); background: #fff; border: 2px solid var(--ink); padding: calc(var(--u) * 1.5) calc(var(--u) * 2); display: grid; gap: 4px; }
+.legend button { all: unset; cursor: pointer; display: flex; align-items: center; gap: 10px; font: 600 var(--t-1)/1.6 var(--f); }
+.legend button i { width: 34px; height: 8px; border-radius: 4px; background: var(--c); }
+.legend button[aria-pressed="true"] { text-decoration: underline; text-underline-offset: 4px; }
+.legend button:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+/* station panel */
+.panel { position: absolute; right: calc(var(--u) * 3); top: calc(var(--u) * 3); width: min(360px, calc(100% - 48px)); background: #fff; border: 2px solid var(--ink); box-shadow: 8px 8px 0 rgba(34,49,63,.12); }
+.panel header { padding: calc(var(--u) * 2); border-bottom: 2px solid var(--ink); display: flex; gap: calc(var(--u) * 1.5); align-items: center; }
+.panel h2 { margin: 0; font: 800 var(--t2)/1.1 var(--f); }
+.bullets { display: flex; gap: 4px; }
+.bullets i { width: 26px; height: 26px; border-radius: 50%; background: var(--c); color: #fff; display: grid; place-items: center; font: 800 12px/1 var(--f); font-style: normal; }
+.panel .body { padding: calc(var(--u) * 2); }
+.panel dl { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 2); margin: 0 0 var(--u); font-size: 15px; }
+.panel dt { font-weight: 600; }
+.panel dd { margin: 0; }
+.panel p { margin: 0; font-size: 15px; }
+.panel .close { margin-left: auto; border: 2px solid var(--ink); background: #fff; width: 32px; height: 32px; cursor: pointer; font-weight: 800; }
+@media (max-width: 800px) {
+  .map { height: 70vh; min-height: 520px; }
+  .panel { position: static; width: auto; margin: calc(var(--u) * 2); }
+  .legend { position: static; margin: calc(var(--u) * 2); }
+  .title { left: calc(var(--u) * 2); }
+}
+</style>
+</head>
+<body>
+<main>
+  <div class="map" id="map">
+    <div class="title"><h1>Vessary Metro</h1><p>Network diagram, not to scale · December 2026</p></div>
+    <svg id="svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid meet" role="group" aria-label="Metro diagram. Tab to a station for details."></svg>
+    <div class="legend" role="group" aria-label="Lines" id="legend"></div>
+  </div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</main>
+<script>
+(() => {
+  const S = {
+    westmoor: [120, 500, "Westmoor", "b"], harrow: [260, 500, "Harrow Lane", "b"], castle: [400, 500, "Castle Gate", "b"], central: [700, 500, "Central", "br"], market: [850, 500, "Market", "b"], riverside: [1000, 400, "Riverside", "t"], docks: [1150, 400, "Docks", "br"], eastfield: [1300, 400, "Eastfield", "t"], airport: [1480, 400, "Airport", "t"],
+    northgate: [700, 110, "Northgate", "r"], hill: [700, 250, "Hill Street", "tr"], opera: [700, 370, "Opera", "l"], cathedral: [700, 620, "Cathedral", "l"], southbank: [820, 740, "Southbank", "r"], stadium: [820, 880, "Stadium", "r"],
+    oldtown: [180, 250, "Oldtown", "t"], university: [400, 250, "University", "t"], museum: [860, 250, "Museum", "t"], fairfield: [1150, 600, "Fairfield", "r"], lakeside: [1150, 760, "Lakeside", "r"]
+  };
+  const L = {
+    G: { n: "Green line", c: "#00843d", p: ["westmoor", "harrow", "castle", "central", "market", [900, 500], "riverside", "docks", "eastfield", "airport"] },
+    P: { n: "Purple line", c: "#a05eb5", p: ["northgate", "hill", "opera", "central", "cathedral", [700, 620], "southbank", "stadium"] },
+    O: { n: "Orange line", c: "#e87722", p: ["oldtown", "university", "hill", "museum", [1000, 250], "docks", "fairfield", "lakeside"] },
+    X: { n: "Airport Express", c: "#22313f", p: [[700, 470], [1480, 470], [1480, 400]], ex: true, st: ["central", "airport"] }
+  };
+  const INFO = {
+    central: ["Six exits. The Green line platforms are the deepest in the network, 34 m down.", "Step-free from street to all platforms", "Every 3 min"],
+    hill: ["Built inside the old Hill Street tram depot; the iron roof is original, 1911.", "Step-free, Purple only", "Every 4 min"],
+    docks: ["Change here for the ferry to Inch Island, 200 m walk.", "Step-free", "Every 4 min"],
+    airport: ["Terminals 1 and 2. The Express takes 14 minutes to Central.", "Step-free", "Every 10 min"],
+    stadium: ["Extra trains on match days; queue lanes open from 90 minutes before.", "Step-free", "Every 5 min"]
+  };
+  const lines = (id) => Object.keys(L).filter((k) => (L[k].st || L[k].p).includes(id));
+  const pt = (p) => (typeof p === "string" ? S[p] : p);
+  let o = "";
+  // route lines, octilinear: every segment is at 0, 45 or 90 degrees
+  for (const k in L) { const l = L[k]; o += `<path class="ln${l.ex ? " ex" : ""}" data-l="${k}" stroke="${l.c}" d="M${l.p.map((p) => pt(p).slice(0, 2).join(" ")).join(" L")}"/>`; }
+  // stations: ticks on one line, roundels where lines meet
+  for (const id in S) { const [x, y, nm, pos] = S[id]; const ls = lines(id); let mark;
+    if (ls.filter((k) => k !== "X").length > 1 || id === "airport" || id === "central") mark = `<circle class="ring" cx="${x}" cy="${y}" r="15"/>`;
+    else { const l = L[ls[0]], i = l.p.indexOf(id), a = pt(l.p[Math.max(0, i - 1)]), b = pt(l.p[Math.min(l.p.length - 1, i + 1)]); let dx = b[0] - a[0], dy = b[1] - a[1]; const m = Math.hypot(dx, dy) || 1; dx /= m; dy /= m;
+      mark = `<line class="tick" x1="${x}" y1="${y}" x2="${(x - dy * 16).toFixed(1)}" y2="${(y + dx * 16).toFixed(1)}" stroke="${l.c}"/>`; }
+    const off = { t: [0, -28, "middle"], b: [0, 40, "middle"], r: [24, 6, "start"], l: [-24, 6, "end"], br: [18, 40, "start"], tr: [24, -22, "start"] }[pos];
+    o += `<g class="stn" tabindex="0" role="button" aria-label="${nm} station" data-id="${id}"><circle class="hit" cx="${x}" cy="${y}" r="22" fill="transparent"/>${mark}<text x="${x + off[0]}" y="${y + off[1]}" text-anchor="${off[2]}">${nm}</text></g>`; }
+  o += `<g aria-hidden="true"><path d="M1330 820 q20 -30 60 -20 q40 10 70 -20" stroke="#9cc7e0" stroke-width="30" fill="none" opacity=".5"/><text x="1340" y="870" font-size="14" fill="#6a7c8c" font-style="italic">River Vess</text></g>`;
+  const svg = document.getElementById("svg"); svg.innerHTML = o;
+  // legend: pick a line to see it alone
+  const leg = document.getElementById("legend"), map = document.getElementById("map");
+  leg.innerHTML = Object.keys(L).map((k) => `<button type="button" data-l="${k}" aria-pressed="false"><i style="--c:${L[k].c}"></i>${L[k].n}</button>`).join("");
+  leg.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; const on = b.getAttribute("aria-pressed") !== "true";
+    leg.querySelectorAll("button").forEach((x) => x.setAttribute("aria-pressed", String(x === b && on))); map.classList.toggle("dim", on);
+    svg.querySelectorAll(".ln").forEach((p) => p.classList.toggle("on", on && p.dataset.l === b.dataset.l)); });
+  const panel = document.getElementById("panel");
+  const show = (id) => { const [, , nm] = S[id], ls = lines(id), inf = INFO[id] || ["A local station. Trains stop here on request after 23:00.", ["northgate", "westmoor", "oldtown"].includes(id) ? "Step-free" : "Stairs only, 38 steps", "Every 5 min"];
+    panel.innerHTML = `<header><div class="bullets">${ls.map((k) => `<i style="--c:${L[k].c}">${k}</i>`).join("")}</div><h2>${nm}</h2><button class="close" type="button" aria-label="Close" id="cl">×</button></header><div class="body"><dl><dt>Lines</dt><dd>${ls.map((k) => L[k].n).join(", ")}</dd><dt>Access</dt><dd>${inf[1]}</dd><dt>Trains</dt><dd>${inf[2]}, 05:30 to 00:40</dd></dl><p>${inf[0]}</p></div>`;
+    document.getElementById("cl").addEventListener("click", () => show("central")); };
+  svg.addEventListener("click", (e) => { const g = e.target.closest(".stn"); if (g) show(g.dataset.id); });
+  svg.addEventListener("keydown", (e) => { const g = e.target.closest(".stn"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); show(g.dataset.id); } });
+  show("central");
+})();
+</script>
+</body>
+</html>

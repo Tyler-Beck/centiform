@@ -82,8 +82,8 @@ a { color: inherit; }
   for (let x = 12; x < W - 12; x += 8) { [[1, 0], [0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [1, 3]].forEach(([a, b]) => put(x + a, 37 + b, "r")); put(x + 1, 36, "l"); put(x + 4, 38, "l"); put(x + 5, 38, "l"); }
   text("BY NEEDLE AND", 44, "r"); text("THREAD WE MEND", 53, "r"); text("THE WORLD", 62, "r");
   // a house between two trees
-  const hx = 38; for (let y = 0; y < 12; y++) for (let x = 0; x < 20; x++) { const inRoof = y < 6 && Math.abs(x - 9.5) <= y + 3.5; const inWall = y >= 6 && x >= 2 && x < 18; const door = y >= 8 && x >= 8 && x < 11; const win = y >= 7 && y < 9 && (x === 4 || x === 5 || x === 14 || x === 15); if (inRoof) put(hx + x, 72 + y, "r"); else if (inWall && !door && !win) put(hx + x, 72 + y, "y"); else if (door) put(hx + x, 72 + y, "b"); }
-  [[18, 70], [70, 70]].forEach(([tx, ty]) => { for (let y = 0; y < 9; y++) for (let x = -4; x <= 4; x++) if (Math.abs(x) <= 4 - Math.abs(y - 4) * .6) put(tx + x, ty + y, "l"); for (let y = 9; y < 14; y++) put(tx, ty + y, "b"); });
+  const hx = 40; for (let y = 0; y < 12; y++) for (let x = 0; x < 20; x++) { const inRoof = y < 6 && Math.abs(x - 9.5) <= y + 3.5; const inWall = y >= 6 && x >= 2 && x < 18; const door = y >= 8 && x >= 8 && x < 11; const win = y >= 7 && y < 9 && (x === 4 || x === 5 || x === 14 || x === 15); if (inRoof) put(hx + x, 72 + y, "r"); else if (inWall && !door && !win) put(hx + x, 72 + y, "y"); else if (door) put(hx + x, 72 + y, "b"); }
+  [[20, 70], [80, 70]].forEach(([tx, ty]) => { for (let y = 0; y < 9; y++) for (let x = -4; x <= 4; x++) if (Math.abs(x) <= 4 - Math.abs(y - 4) * .6) put(tx + x, ty + y, "l"); for (let y = 9; y < 14; y++) put(tx, ty + y, "b"); });
   for (let x = 8; x < W - 8; x++) put(x, 85, "l");
   text("AD 2026", 88, "g");
   // linen holes, then the stitches row by row

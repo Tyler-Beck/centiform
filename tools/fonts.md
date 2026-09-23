@@ -28,3 +28,5 @@ Source: Fontsource packages on jsDelivr. Download at authoring time and commit. 
 
 - Only the weights and styles the design uses. No faux bold or faux italic.
 - Keep each design's `fonts/` under 900 KB. `node tools/check.mjs` enforces this and the rule that no family appears in two designs.
+- The script keeps a numbered CJK slice only when it covers a used character that the latin files and earlier slices do not. Every character in the file counts, including `$` and backticks in scripts.
+- CJK slices are 50-90 KB each. If the text family of a CJK design only sets Latin, give it the `latin` flag, and keep the set of distinct CJK characters small.

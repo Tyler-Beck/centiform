@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal Wayfinding · Centiform</title>
+<style>
+/* @fonts: Signika:400,600,700:swap */
+@font-face{font-family:"Signika";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/signika-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Signika";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/signika-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Signika";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/signika-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #2b2d2f;          /* sign panel grey */
+  --ink: #ffd100;         /* directional yellow */
+  --accent-1: #ffffff;    /* white: facilities */
+  --accent-2: #4a4d50;    /* module divider grey */
+  --black: #18191a;
+  --u: 8px;
+  --m: 96px;              /* one sign module height */
+  /* scale: sign letter heights, 1.333 on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 43px; --t4: clamp(44px, 5vw, 76px);
+  --f: "Signika", "Frutiger", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--black); }
+body { margin: 0; color: var(--accent-1); background: var(--black); font: 400 var(--t0)/1.5 var(--f); overflow-x: hidden; }
+button { font: inherit; }
+:focus-visible { outline: 4px solid var(--ink); outline-offset: 3px; }
+/* the overhead gantry: modules of pictogram, text and arrow */
+.gantry { background: var(--bg); border-bottom: 6px solid var(--black); display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.mod { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: calc(var(--u) * 2); min-height: var(--m); padding: 0 calc(var(--u) * 2.5); border-right: 3px solid var(--accent-2); color: var(--ink); }
+.mod.w { color: var(--accent-1); }
+.mod .t { font: 700 var(--t1)/1.05 var(--f); }
+.mod .t small { display: block; font: 400 var(--t-1)/1.3 var(--f); opacity: .85; }
+.pic { width: 56px; height: 56px; background: var(--black); border-radius: 6px; display: grid; place-items: center; flex: none; }
+.mod.w .pic { background: var(--accent-1); }
+.pic svg { width: 40px; height: 40px; }
+.arr { width: 52px; height: 52px; }
+.hall { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: calc(var(--u) * 5); padding: calc(var(--u) * 5); }
+h1 { margin: 0; font: 700 var(--t4)/1 var(--f); color: var(--ink); }
+h1 small { display: block; font: 400 var(--t0)/1.4 var(--f); color: var(--accent-1); margin-bottom: var(--u); letter-spacing: .06em; }
+.q { margin-top: calc(var(--u) * 3); }
+.q h2 { font: 600 var(--t-1)/1 var(--f); letter-spacing: .14em; text-transform: uppercase; color: #b9bcbf; margin: 0 0 var(--u); }
+.chips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin-bottom: calc(var(--u) * 3); }
+.chips button { display: flex; gap: var(--u); align-items: center; background: var(--bg); color: var(--accent-1); border: 2px solid var(--accent-2); padding: 10px 12px; text-align: left; cursor: pointer; font: 600 var(--t0)/1.2 var(--f); }
+.chips button .pic { width: 36px; height: 36px; color: var(--ink); }
+.chips button .pic[style] { background: var(--accent-1); }
+.route .mod.w .pic[style] { background: var(--accent-1); }
+.chips button .pic svg { width: 26px; height: 26px; }
+.chips button[aria-pressed="true"] { border-color: var(--ink); background: #3a3c3e; color: var(--ink); }
+/* the route, as the sequence of signs you will pass */
+.route { display: flex; flex-direction: column; gap: 0; }
+.route .mod { border-right: 0; border-bottom: 3px solid var(--accent-2); background: var(--bg); min-height: calc(var(--m) * 1.1); }
+.route .step { font: 700 var(--t-1)/1 var(--f); color: var(--black); background: var(--ink); width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; }
+.route .mod .t { font-size: var(--t2); }
+.meta { display: flex; justify-content: space-between; margin-top: calc(var(--u) * 2); font-size: var(--t0); color: #cfd2d4; flex-wrap: wrap; gap: var(--u); }
+.meta b { color: var(--ink); font-size: var(--t2); }
+.board { margin-top: calc(var(--u) * 3); background: var(--black); border: 3px solid var(--accent-2); }
+.board table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.board th { text-align: left; font: 600 var(--t-1)/1 var(--f); letter-spacing: .1em; text-transform: uppercase; color: #b9bcbf; padding: 10px; border-bottom: 2px solid var(--accent-2); }
+.board td { padding: 8px 10px; border-bottom: 1px solid #2f3133; font-size: var(--t0); }
+.board td.g { color: var(--ink); font-weight: 700; }
+@media (max-width: 900px) { .hall { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2.5); } .gantry { grid-template-columns: repeat(2, minmax(0, 1fr)); } .mod { padding: 0 10px; gap: 10px; } .mod .t { font-size: 18px; } .pic { width: 44px; height: 44px; } .pic svg { width: 30px; height: 30px; } .arr { width: 36px; height: 36px; } .route .mod .t { font-size: var(--t1); } .chips { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-plane" viewBox="0 0 40 40"><path d="M20 3 C22 3 23 5 23 8 V16 L36 24 V28 L23 24 V32 L27 35 V37 L20 35 L13 37 V35 L17 32 V24 L4 28 V24 L17 16 V8 C17 5 18 3 20 3Z" fill="currentColor"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 40 40"><rect x="7" y="12" width="26" height="22" rx="3" fill="currentColor"/><path d="M15 12 V7 H25 V12" stroke="currentColor" stroke-width="3" fill="none"/><circle cx="12" cy="37" r="2" fill="currentColor"/><circle cx="28" cy="37" r="2" fill="currentColor"/></symbol>
+    <symbol id="i-train" viewBox="0 0 40 40"><rect x="9" y="4" width="22" height="26" rx="5" fill="currentColor"/><rect x="12" y="8" width="16" height="9" fill="#18191a"/><circle cx="14" cy="24" r="2" fill="#18191a"/><circle cx="26" cy="24" r="2" fill="#18191a"/><path d="M12 30 L8 37 M28 30 L32 37" stroke="currentColor" stroke-width="3"/></symbol>
+    <symbol id="i-taxi" viewBox="0 0 40 40"><path d="M6 22 L10 12 H30 L34 22 V31 H6Z" fill="currentColor"/><rect x="16" y="6" width="8" height="5" fill="currentColor"/><circle cx="12" cy="31" r="3.5" fill="#18191a"/><circle cx="28" cy="31" r="3.5" fill="#18191a"/><rect x="12" y="15" width="16" height="6" fill="#18191a"/></symbol>
+    <symbol id="i-wc" viewBox="0 0 40 40"><circle cx="11" cy="7" r="3.5" fill="currentColor"/><path d="M7 13 H15 V25 H13 V36 H9 V25 H7Z" fill="currentColor"/><circle cx="29" cy="7" r="3.5" fill="currentColor"/><path d="M25 13 H33 L36 27 H33 V36 H25 V27 H22Z" fill="currentColor"/><path d="M20 4 V38" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-cup" viewBox="0 0 40 40"><path d="M7 14 H29 V24 C29 31 24 35 18 35 C12 35 7 31 7 24Z" fill="currentColor"/><path d="M29 17 C35 17 35 25 29 25" stroke="currentColor" stroke-width="3" fill="none"/><path d="M13 4 C11 7 15 8 13 11 M20 4 C18 7 22 8 20 11" stroke="currentColor" stroke-width="2" fill="none"/></symbol>
+    <symbol id="i-info" viewBox="0 0 40 40"><circle cx="20" cy="9" r="4" fill="currentColor"/><path d="M15 16 H23 V32 H26 V36 H14 V32 H17 V20 H15Z" fill="currentColor"/></symbol>
+    <symbol id="i-lift" viewBox="0 0 40 40"><rect x="5" y="4" width="30" height="32" fill="none" stroke="currentColor" stroke-width="3"/><path d="M12 16 L16 10 L20 16Z M12 24 L16 30 L20 24Z" fill="currentColor"/><circle cx="27" cy="12" r="3" fill="currentColor"/><path d="M24 17 H30 V30 H24Z" fill="currentColor"/></symbol>
+    <symbol id="a-l" viewBox="0 0 52 52"><path d="M6 26 L24 8 V19 H46 V33 H24 V44Z" fill="currentColor"/></symbol>
+    <symbol id="a-r" viewBox="0 0 52 52"><path d="M46 26 L28 8 V19 H6 V33 H28 V44Z" fill="currentColor"/></symbol>
+    <symbol id="a-u" viewBox="0 0 52 52"><path d="M26 6 L44 24 H33 V46 H19 V24 H8Z" fill="currentColor"/></symbol>
+    <symbol id="a-ur" viewBox="0 0 52 52"><path d="M42 10 V36 L34 28 L17 45 L7 35 L24 18 L16 10Z" fill="currentColor"/></symbol>
+    <symbol id="a-d" viewBox="0 0 52 52"><path d="M26 46 L44 28 H33 V6 H19 V28 H8Z" fill="currentColor"/></symbol>
+  </defs>
+</svg>
+<header class="gantry" aria-label="Overhead sign">
+  <div class="mod"><span class="pic"><svg><use href="#i-plane"/></svg></span><span class="t">Gates B1–B19</span><svg class="arr"><use href="#a-l"/></svg></div>
+  <div class="mod"><span class="pic"><svg><use href="#i-plane"/></svg></span><span class="t">Gates B20–B38<small>6 min</small></span><svg class="arr"><use href="#a-r"/></svg></div>
+  <div class="mod w"><span class="pic" style="color:#18191a"><svg><use href="#i-train"/></svg></span><span class="t">Trains<small>City in 17 min</small></span><svg class="arr"><use href="#a-d"/></svg></div>
+  <div class="mod w"><span class="pic" style="color:#18191a"><svg><use href="#i-wc"/></svg></span><span class="t">Toilets</span><svg class="arr"><use href="#a-u"/></svg></div>
+</header>
+<main class="hall">
+  <section aria-labelledby="h">
+    <h1 id="h"><small>Harrowmere International · Terminal 2 · Airside</small>Where to next?</h1>
+    <div class="q"><h2>You are at</h2><p style="margin:0 0 16px; font-size: 22px"><b style="color:#ffd100">Security exit, Level 2</b> · next to the pharmacy</p>
+      <h2 id="to-h">Take me to</h2>
+      <div class="chips" role="group" aria-labelledby="to-h" id="to"></div>
+    </div>
+    <div class="board" aria-label="Departures from B gates"><table><thead><tr><th>Time</th><th>To</th><th>Gate</th><th>Status</th></tr></thead><tbody>
+      <tr><td>10:05</td><td>Lisbon</td><td class="g">B24</td><td>Boarding</td></tr><tr><td>10:20</td><td>Reykjavík</td><td class="g">B31</td><td>Gate opens 09:50</td></tr><tr><td>10:35</td><td>Toronto</td><td class="g">B36</td><td>Wait in lounge</td></tr><tr><td>10:50</td><td>Split</td><td class="g">B12</td><td>Delayed 11:25</td></tr></tbody></table></div>
+  </section>
+  <section aria-labelledby="r-h" aria-live="polite">
+    <h2 id="r-h" style="font: 600 14px/1 var(--f); letter-spacing:.14em; text-transform:uppercase; color:#b9bcbf; margin: 8px 0 12px">Follow these signs</h2>
+    <div class="route" id="route"></div>
+    <div class="meta" id="meta"></div>
+  </section>
+</main>
+<script>
+(() => {
+  const D = {
+    "Gate B31": { p: "i-plane", c: "y", min: 9, steps: [["a-r", "i-plane", "Gates B20–B38", "turn right past the pharmacy"], ["a-u", "i-plane", "B20–B38", "travelator, 140 m"], ["a-ur", "i-plane", "B30–B34", "up the ramp on the left"], ["a-l", "i-plane", "Gate B31", "gate lounge, seats for 180"]] },
+    "Gate B12": { p: "i-plane", c: "y", min: 5, steps: [["a-l", "i-plane", "Gates B1–B19", "straight on through the shops"], ["a-u", "i-plane", "B10–B14", "past the clock tower"], ["a-r", "i-plane", "Gate B12", "on your right"]] },
+    "Trains": { p: "i-train", c: "w", min: 7, steps: [["a-u", "i-info", "Arrivals and Trains", "follow the white signs"], ["a-d", "i-lift", "Level 0", "lifts or escalator down two floors"], ["a-r", "i-train", "Trains", "platform 1 for the city, every 10 min"]] },
+    "Baggage reclaim": { p: "i-bag", c: "w", min: 8, steps: [["a-u", "i-info", "Arrivals", "only after you land"], ["a-d", "i-lift", "Level 1", "down one floor"], ["a-l", "i-bag", "Baggage reclaim", "belts 1 to 9"]] },
+    "Taxis": { p: "i-taxi", c: "w", min: 10, steps: [["a-u", "i-info", "Exit", "via arrivals hall"], ["a-d", "i-lift", "Level 0", "down two floors"], ["a-r", "i-taxi", "Taxis", "rank door 4, fixed fare to the city £38"]] },
+    "Coffee": { p: "i-cup", c: "w", min: 2, steps: [["a-ur", "i-cup", "Café Aldous", "opposite the clock, open 04:30"]] }
+  };
+  const $ = (id) => document.getElementById(id);
+  const icon = (id, dark) => `<span class="pic"${dark ? ' style="color:#18191a"' : ""}><svg><use href="#${id}"/></svg></span>`;
+  $("to").innerHTML = Object.keys(D).map((k, i) => `<button type="button" aria-pressed="${i === 0}" data-k="${k}">${icon(D[k].p, D[k].c === "w")}${k}</button>`).join("");
+  const show = (k) => { const d = D[k];
+    $("route").innerHTML = d.steps.map(([a, p, t, s], i) => `<div class="mod${d.c === "w" && i === d.steps.length - 1 || p !== "i-plane" ? " w" : ""}"><span style="display:flex;gap:12px;align-items:center"><span class="step">${i + 1}</span>${icon(p, p !== "i-plane")}</span><span class="t">${t}<small>${s}</small></span><svg class="arr"><use href="#${a}"/></svg></div>`).join("");
+    $("meta").innerHTML = `<span>Walking time at an easy pace</span><b>${d.min} min</b>`;
+    document.querySelectorAll("#to button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === k))); };
+  $("to").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) show(b.dataset.k); });
+  show("Gate B31");
+})();
+</script>
+</body>
+</html>

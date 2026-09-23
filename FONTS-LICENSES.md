@@ -145,3 +145,11 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Gochi Hand | OFL-1.1 | https://fontsource.org/fonts/gochi-hand | 069-school-chalkboard |
 | Handjet | OFL-1.1 | https://fontsource.org/fonts/handjet | 070-sampler-stitch |
 | Nunito | OFL-1.1 | https://fontsource.org/fonts/nunito | 070-sampler-stitch |
+| Signika | OFL-1.1 | https://fontsource.org/fonts/signika | 071-terminal-wayfinding |
+| Overpass | OFL-1.1 | https://fontsource.org/fonts/overpass | 072-interstate-signage |
+| Overpass Mono | OFL-1.1 | https://fontsource.org/fonts/overpass-mono | 072-interstate-signage |
+| Teko | OFL-1.1 | https://fontsource.org/fonts/teko | 073-signal-flags |
+| Heebo | OFL-1.1 | https://fontsource.org/fonts/heebo | 073-signal-flags |
+| Encode Sans | OFL-1.1 | https://fontsource.org/fonts/encode-sans | 074-transit-diagram |
+| Libre Caslon Display | OFL-1.1 | https://fontsource.org/fonts/libre-caslon-display | 075-engraved-score |
+| Noto Music | OFL-1.1 | https://fontsource.org/fonts/noto-music | 075-engraved-score |

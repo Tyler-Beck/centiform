@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interstate Signage · Centiform</title>
+<style>
+/* @fonts: Overpass:400,700,800:swap; Overpass Mono:400,600:swap */
+@font-face{font-family:"Overpass";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/overpass-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Overpass";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/overpass-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Overpass";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/overpass-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Overpass Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/overpass-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Overpass Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/overpass-mono-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #dfe3e0;          /* overcast sky over concrete */
+  --ink: #0b6b3a;         /* guide-sign green */
+  --accent-1: #ffffff;    /* reflective legend */
+  --accent-2: #1f4d9b;    /* services blue */
+  --steel: #8a9096;
+  --text: #1c2622;
+  --u: 8px;
+  /* scale: legend heights 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(44px, 5.4vw, 84px);
+  --hwy: "Overpass", "Highway Gothic", sans-serif;
+  --mono: "Overpass Mono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--text); background: linear-gradient(#cfd6d3, var(--bg) 30%); font: 400 var(--t0)/1.6 var(--hwy); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+/* a gantry: a steel truss carrying green panels over the lanes */
+.gantry { position: relative; padding: 0 calc(var(--u) * 4); }
+.truss { height: 26px; margin: 0 -32px; background: repeating-linear-gradient(60deg, transparent 0 14px, var(--steel) 14px 17px), repeating-linear-gradient(-60deg, transparent 0 14px, var(--steel) 14px 17px); border-top: 5px solid var(--steel); border-bottom: 5px solid var(--steel); }
+.panels { display: flex; gap: calc(var(--u) * 3); justify-content: center; align-items: flex-start; flex-wrap: wrap; margin-top: -6px; }
+.sign { position: relative; background: var(--ink); color: var(--accent-1); border-radius: 12px; padding: calc(var(--u) * 2.5) calc(var(--u) * 4); box-shadow: inset 0 0 0 4px var(--ink), inset 0 0 0 7px var(--accent-1), 0 10px 18px -10px rgba(0,0,0,.5); min-width: 280px; }
+.sign.blue { background: var(--accent-2); box-shadow: inset 0 0 0 4px var(--accent-2), inset 0 0 0 7px var(--accent-1), 0 10px 18px -10px rgba(0,0,0,.5); }
+.tab { position: absolute; top: -34px; right: 24px; background: var(--ink); color: var(--accent-1); border-radius: 10px 10px 0 0; padding: 6px 16px 4px; font: 800 var(--t1)/1 var(--hwy); box-shadow: inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--accent-1); letter-spacing: .02em; }
+.sign .ctl { font: 700 var(--t3)/1.05 var(--hwy); }
+.sign .dist { display: grid; grid-template-columns: 1fr auto; gap: 0 calc(var(--u) * 4); font: 700 var(--t1)/1.35 var(--hwy); font-variant-numeric: tabular-nums; }
+.sign .row { display: flex; align-items: center; gap: calc(var(--u) * 2); margin-bottom: var(--u); }
+.lanes { display: flex; justify-content: center; gap: calc(var(--u) * 10); margin-top: var(--u); color: var(--ink); }
+.lanes svg { width: 30px; height: 40px; }
+/* shields */
+.shield { width: 64px; height: 68px; flex: none; }
+.hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: space-between; padding-bottom: calc(var(--u) * 4); }
+.hero .intro { padding: calc(var(--u) * 6) calc(var(--u) * 6) 0; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: calc(var(--u) * 5); align-items: end; }
+h1 { margin: 0; font: 800 var(--t4)/.95 var(--hwy); color: var(--ink); }
+.intro p { margin: 0; font-size: var(--t1); line-height: 1.45; }
+.road { height: 120px; background: linear-gradient(#5d6468, #474d51); position: relative; overflow: hidden; }
+.road::before { content: ""; position: absolute; left: 0; right: 0; top: 56px; height: 8px; background: repeating-linear-gradient(90deg, #f2f2f2 0 60px, transparent 60px 140px); }
+.road::after { content: ""; position: absolute; left: 0; right: 0; top: 8px; height: 5px; background: #f4c542; }
+.leg { padding: calc(var(--u) * 6) 0 calc(var(--u) * 8); }
+.leg .body { max-width: 1100px; margin: calc(var(--u) * 5) auto 0; padding: 0 calc(var(--u) * 4); display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: calc(var(--u) * 5); }
+.leg p { margin: 0 0 calc(var(--u) * 2); max-width: 60ch; }
+.log { font: 400 var(--t-1)/1.6 var(--mono); border-left: 4px solid var(--ink); padding-left: calc(var(--u) * 2); }
+.log b { font-weight: 600; }
+/* the mile marker, fixed at the roadside */
+.mp { position: fixed; right: 18px; bottom: 18px; z-index: 5; width: 62px; background: var(--ink); color: var(--accent-1); border-radius: 6px; text-align: center; padding: 8px 4px; box-shadow: inset 0 0 0 2px var(--ink), inset 0 0 0 4px var(--accent-1), 0 6px 10px rgba(0,0,0,.3); }
+.mp span { display: block; font: 700 12px/1 var(--hwy); letter-spacing: .1em; }
+.mp b { display: block; font: 800 var(--t1)/1.2 var(--hwy); font-variant-numeric: tabular-nums; }
+.mp::after { content: ""; position: absolute; left: 50%; top: 100%; width: 6px; height: 18px; margin-left: -3px; background: var(--steel); }
+footer { background: var(--ink); color: var(--accent-1); padding: calc(var(--u) * 3) calc(var(--u) * 6); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); font-weight: 700; }
+.hero .gantry { padding-top: 40px; }
+.hero .gantry::before, .hero .gantry::after { content: ""; position: absolute; top: 0; bottom: -40px; width: 22px; background: linear-gradient(90deg, #7a8086, #a2a8ad, #7a8086); left: 2%; }
+.hero .gantry::after { left: auto; right: 2%; }
+.hero .sign .ctl { font-size: clamp(34px, 3.2vw, 54px); }
+.hero .sign .dist { font-size: var(--t2); }
+.hero .shield { width: 90px; height: 96px; }
+@media (max-width: 900px) {
+  .hero .intro, .leg .body { grid-template-columns: minmax(0, 1fr); padding-left: calc(var(--u) * 2.5); padding-right: calc(var(--u) * 2.5); }
+  .gantry { padding: 0 calc(var(--u) * 1.5); }
+  .truss { margin: 0 calc(var(--u) * -1.5); }
+  .sign { min-width: 0; width: 100%; padding: calc(var(--u) * 2) calc(var(--u) * 2.5); }
+  .sign .ctl { font-size: var(--t2); }
+  .panels { gap: calc(var(--u) * 5); }
+  .panels .sign:nth-child(n+2) { display: none; }
+  .mp { width: 54px; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="int" viewBox="0 0 64 68"><path d="M4 8 C14 12 24 4 32 2 C40 4 50 12 60 8 C64 30 58 54 32 66 C6 54 0 30 4 8Z" fill="#1f4d9b" stroke="#fff" stroke-width="3"/><path d="M4 8 C14 12 24 4 32 2 C40 4 50 12 60 8 L61 20 H3Z" fill="#c8312c" stroke="#fff" stroke-width="3"/></symbol>
+  <symbol id="us" viewBox="0 0 64 68"><path d="M8 4 H56 C56 12 60 14 62 18 C58 40 60 56 32 66 C4 56 6 40 2 18 C4 14 8 12 8 4Z" fill="#fff" stroke="#111" stroke-width="3"/></symbol>
+</defs></svg>
+<header class="hero">
+  <div class="gantry" role="img" aria-label="Overhead signs: Interstate 97 West to Harlan Falls, exit 42 for US 413 to Bluecreek">
+    <div class="truss"></div>
+    <div class="panels">
+      <div class="sign"><div class="row"><svg class="shield" viewBox="0 0 64 68"><use href="#int"/><text x="32" y="50" text-anchor="middle" font-family="Overpass" font-weight="800" font-size="26" fill="#fff">97</text></svg><span class="ctl">West<br>Harlan Falls</span></div><div class="dist"><span>Bluecreek</span><span>42</span><span>Harlan Falls</span><span>118</span><span>Pacific</span><span>2,914</span></div></div>
+      <div class="sign" style="margin-top: 30px"><span class="tab">EXIT 42</span><div class="row"><svg class="shield" viewBox="0 0 64 68"><use href="#us"/><text x="32" y="46" text-anchor="middle" font-family="Overpass" font-weight="800" font-size="23" fill="#111">413</text></svg><span class="ctl">Bluecreek<br>Old Mill Rd</span></div><div class="dist"><span>1/2 mile</span><span></span></div></div>
+      <div class="sign blue"><div class="ctl" style="font-size: var(--t2)">Gas · Food · Lodging</div><div class="dist"><span>Next services</span><span>27</span></div></div>
+    </div>
+    <div class="lanes" aria-hidden="true"><svg viewBox="0 0 30 40"><path d="M15 2 L27 16 H19 V38 H11 V16 H3Z" fill="currentColor"/></svg><svg viewBox="0 0 30 40"><path d="M15 2 L27 16 H19 V38 H11 V16 H3Z" fill="currentColor"/></svg><svg viewBox="0 0 30 40"><path d="M27 6 V22 L22 17 L10 30 V38 H3 V27 L17 12 L12 6Z" fill="currentColor"/></svg></div>
+  </div>
+  <div class="intro"><h1>The Long Way West</h1><p>Two thousand nine hundred and fourteen miles, eleven days, one station wagon with a cassette deck. Our road log, sign by sign, from the Atlantic to the other ocean.</p></div>
+  <div class="road" aria-hidden="true"></div>
+</header>
+<main>
+  <section class="leg" aria-labelledby="l1">
+    <div class="gantry"><div class="truss"></div><div class="panels"><div class="sign"><span class="tab">EXIT 1</span><div class="row"><svg class="shield" viewBox="0 0 64 68"><use href="#int"/><text x="32" y="50" text-anchor="middle" font-family="Overpass" font-weight="800" font-size="26" fill="#fff">97</text></svg><span class="ctl" id="l1">Days 1–3<br>Coast to Plains</span></div><div class="dist"><span>Miles</span><span>0–812</span></div></div></div></div>
+    <div class="body"><div><p>We left Port Amity at 5:40 in the morning with the ferry horn going. By Bluecreek the hills had flattened; by Harlan Falls there was nothing but sky and grain elevators, every one of them with a town name painted on it in letters taller than the car.</p><p>Best pie: Dot’s Grill, exit 212, rhubarb, $3.25 a slice.</p></div>
+      <div class="log"><b>Day 1</b> Port Amity → Bluecreek · 341 mi<br><b>Day 2</b> → Harlan Falls · 276 mi<br><b>Day 3</b> → Custer Flats · 195 mi<br>Fuel: $148.60 · Tolls: $12.40</div></div>
+  </section>
+  <section class="leg" aria-labelledby="l2">
+    <div class="gantry"><div class="truss"></div><div class="panels"><div class="sign"><span class="tab">EXIT 813</span><div class="row"><svg class="shield" viewBox="0 0 64 68"><use href="#us"/><text x="32" y="46" text-anchor="middle" font-family="Overpass" font-weight="800" font-size="23" fill="#111">413</text></svg><span class="ctl" id="l2">Days 4–7<br>High Desert</span></div><div class="dist"><span>Miles</span><span>813–1,977</span></div></div><div class="sign blue"><div class="ctl" style="font-size: var(--t1)">Scenic Overlook</div><div class="dist"><span>Painted Mesa</span><span>1 mi</span></div></div></div></div>
+    <div class="body"><div><p>Past mile 900 the road climbs in long, dead-straight grades and the signs start warning about wind. We counted forty-one miles between one gas station and the next, and filled up at both.</p><p>At the Painted Mesa overlook a ranger explained that the stripes in the rock are 180 million years of sea floor. The kids asked if there were fish in it. There are.</p></div>
+      <div class="log"><b>Day 4</b> → Two Wells · 262 mi<br><b>Day 5</b> → Painted Mesa · 318 mi<br><b>Day 6</b> rest, motel pool<br><b>Day 7</b> → Sagebrush Pass · 584 mi</div></div>
+  </section>
+  <section class="leg" aria-labelledby="l3">
+    <div class="gantry"><div class="truss"></div><div class="panels"><div class="sign"><span class="tab">EXIT 2914</span><div class="row"><svg class="shield" viewBox="0 0 64 68"><use href="#int"/><text x="32" y="50" text-anchor="middle" font-family="Overpass" font-weight="800" font-size="26" fill="#fff">97</text></svg><span class="ctl" id="l3">Days 8–11<br>End of the Road</span></div><div class="dist"><span>Pacific</span><span>0</span></div></div></div></div>
+    <div class="body"><div><p>The last sign on the interstate reads END in white on green. After it, a stop light, a bait shop, and the ocean. We parked, walked into the water to our knees, and drove back to the motel to find sand in the cassette deck.</p></div>
+      <div class="log"><b>Total</b> 2,914 mi · 11 days<br><b>Fuel</b> $612.80<br><b>Tapes worn out</b> 2<br><b>State lines</b> 9</div></div>
+  </section>
+</main>
+<div class="mp" aria-hidden="true"><span>MILE</span><b id="mile">0</b></div>
+<footer><span>The Long Way West · a family road log</span><span>Drive safely · buckle up · stop for pie</span></footer>
+<script>
+(() => {
+  const m = document.getElementById("mile"); let q = false;
+  const upd = () => { q = false; const p = Math.min(1, scrollY / ((document.documentElement.scrollHeight - innerHeight) || 1)); m.textContent = Math.round(p * 2914).toLocaleString("en-US"); };
+  addEventListener("scroll", () => { if (!q) { q = true; requestAnimationFrame(upd); } }, { passive: true }); upd();
+})();
+</script>
+</body>
+</html>
