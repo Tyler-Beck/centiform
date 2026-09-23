@@ -92,7 +92,7 @@ window.CENTIFORM = [
     fonts: ["B612","B612 Mono"], swatch: ["#000000","#3df2ff","#ff3df2","#3dff5a"],
     grammar: "Primary flight display and navigation display as the two main tiles",
     motif: "Attitude indicator horizon that tilts on scroll",
-    status: "planned" },
+    status: "done" },
   { n: 14, slug: "014-valve-radio-dial", title: "Valve Radio Dial", family: "Instruments",
     subject: "A radio-drama archive.", format: "landing", mode: "dark",
     thesis: "1950s valve radio: bakelite case, glowing dial glass",

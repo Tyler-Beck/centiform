@@ -31,3 +31,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Chakra Petch | OFL-1.1 | https://fontsource.org/fonts/chakra-petch | 011-phosphor-scope |
 | DotGothic16 | OFL-1.1 | https://fontsource.org/fonts/dotgothic16 | 012-pocket-calculator-manual |
 | M PLUS 1p | OFL-1.1 | https://fontsource.org/fonts/m-plus-1p | 012-pocket-calculator-manual |
+| B612 | OFL-1.1 | https://fontsource.org/fonts/b612 | 013-glass-cockpit |
+| B612 Mono | OFL-1.1 | https://fontsource.org/fonts/b612-mono | 013-glass-cockpit |
