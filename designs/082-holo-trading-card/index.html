@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Holo Trading Card · Centiform</title>
+<style>
+/* @fonts: Alfa Slab One:400:block; Mada:400,700 */
+@font-face{font-family:"Alfa Slab One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/alfa-slab-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mada";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mada-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mada";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/mada-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #0e2a2f;          /* binder vinyl, deep teal */
+  --ink: #f2f2f2;
+  --accent-1: #9d7bff;    /* foil violet */
+  --accent-2: #ff7ac8;    /* foil pink */
+  --page: #0a1f23;        /* the pocket page under the sleeves */
+  --sleeve: rgba(220, 240, 245, .07);
+  --muted: #9fb7ba;
+  --tide: #3cc6d6; --ember: #ff8a3d; --moss: #7bc96f; --void: #9d7bff; --coral: #ff7ac8;
+  --u: 8px;
+  --card-w: min(174px, 11.4vw);   /* one pocket; cards are 63 x 88 */
+  /* scale: 1.25 on 17px */
+  --t-2: 10.9px; --t-1: 13.6px; --t0: 17px; --t1: 21.3px; --t2: 26.6px; --t3: clamp(33px, 3vw, 52px);
+  --slab: "Alfa Slab One", "Rockwell", serif;
+  --text: "Mada", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--text); overflow-x: hidden;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,.04) 1px, transparent 1.5px); background-size: 6px 6px; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+
+.wrap { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: calc(var(--u) * 5); padding: calc(var(--u) * 3) calc(var(--u) * 5); min-height: 100svh; align-items: center; }
+
+/* binder page: three rows of three sleeved pockets, ring holes down the spine */
+.binder { position: relative; background: var(--page); padding: calc(var(--u) * 2.5) calc(var(--u) * 2.5) calc(var(--u) * 2.5) calc(var(--u) * 7); border-radius: 6px; box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 20px 40px rgba(0,0,0,.4); }
+.binder::before { content: ""; position: absolute; left: 18px; top: 12%; bottom: 12%; width: 16px; background: radial-gradient(circle, var(--bg) 6px, rgba(255,255,255,.12) 7px, transparent 8px) center top / 16px calc((100% - 16px) / 2) repeat-y; }
+.binder h2 { position: absolute; left: 0; top: 50%; transform: translate(-44%, -50%) rotate(-90deg); margin: 0; font: 400 var(--t-2)/1 var(--text); letter-spacing: .3em; color: var(--muted); white-space: nowrap; }
+.pockets { display: grid; grid-template-columns: repeat(3, var(--card-w)); gap: calc(var(--u) * 1.5); }
+.pocket { position: relative; aspect-ratio: 63 / 88; background: var(--sleeve); border: 0; padding: 5px; cursor: pointer; border-radius: 4px; }
+.pocket::before { content: ""; position: absolute; left: 10%; right: 10%; top: 0; height: 4px; border-radius: 0 0 4px 4px; background: rgba(0,0,0,.4); z-index: 2; }
+.pocket::after { content: ""; position: absolute; inset: 0; border-radius: 4px; background: linear-gradient(115deg, rgba(255,255,255,.14), transparent 30% 72%, rgba(255,255,255,.06)); pointer-events: none; }
+.pocket[aria-pressed="true"] .card { opacity: .18; filter: grayscale(1); }
+.pocket:hover .card { transform: translateY(-4px); }
+
+/* a card, at any size: everything is in em of the card width */
+.card { --w: 100%; width: 100%; height: 100%; font-size: calc(var(--cw, 174px) / 17.4); border-radius: .5em; padding: .5em; background: linear-gradient(160deg, #f6e7a8, #d9b650 40%, #b48a2c); position: relative; overflow: hidden; color: #1b1b1b; display: grid; grid-template-rows: auto auto 1fr auto; transition: transform .2s, opacity .2s; }
+.card .top { display: flex; justify-content: space-between; align-items: baseline; background: var(--t); padding: .15em .5em .1em; border-radius: .3em .3em 0 0; }
+.card .nm { font: 400 1.25em/1.15 var(--slab); color: #101010; }
+.card .hp { font: 700 .95em/1 var(--text); }
+.card .hp b { font: 400 1.4em/1 var(--slab); }
+.card .pic { background: radial-gradient(circle at 50% 40%, #fff9, transparent 60%), var(--t); aspect-ratio: 4 / 3; border: .22em solid #d4af52; outline: .08em solid #6b5419; position: relative; overflow: hidden; }
+.card .pic svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.card .txt { background: #f6f0de; padding: .35em .5em; font-size: .78em; line-height: 1.3; display: grid; align-content: start; gap: .3em; }
+.card .atk { display: grid; grid-template-columns: auto 1fr auto; gap: .4em; align-items: center; border-bottom: .06em solid #b8ab8a; padding-bottom: .25em; }
+.card .atk .cost { display: flex; gap: .15em; }
+.card .atk .cost i { width: 1em; height: 1em; border-radius: 50%; background: var(--t); border: .1em solid #1b1b1b; }
+.card .atk b { font: 700 1.05em/1.1 var(--text); }
+.card .atk strong { font: 400 1.3em/1 var(--slab); }
+.card .flav { font-style: normal; color: #5a5040; font-size: .92em; }
+.card .foot { display: flex; justify-content: space-between; font: 700 .62em/1.4 var(--text); padding: .2em .4em 0; color: #3c2f10; letter-spacing: .04em; }
+/* foil: a rainbow band that follows the light */
+.foil { position: absolute; inset: 0; border-radius: inherit; pointer-events: none; mix-blend-mode: color-dodge; opacity: var(--holo, 0);
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.75), transparent 38%),
+    repeating-linear-gradient(115deg, #ff7ac8 0, #9d7bff 6%, #3cc6d6 12%, #7bc96f 18%, #ffd86b 24%, #ff7ac8 30%);
+  background-size: 100% 100%, 300% 300%; background-position: 0 0, var(--mx, 50%) var(--my, 50%); }
+.foil.soft { opacity: calc(var(--holo, 0) * .22); }
+.foil::after { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(255,255,255,.08) 0 1px, transparent 1px 5px); }
+
+/* the lifted card and its record */
+.desk { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: calc(var(--u) * 5); align-items: center; min-width: 0; }
+.lift { --cw: min(360px, 34vw, calc((100svh - 80px) * .63)); width: var(--cw); aspect-ratio: 63 / 88; perspective: 900px; touch-action: none; }
+.lift .card { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); box-shadow: 0 30px 60px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.2); transition: transform .12s linear; }
+.rec h1 { margin: 0 0 var(--u); font: 400 var(--t3)/1.02 var(--slab); }
+.rec .set { font-size: var(--t-1); letter-spacing: .2em; text-transform: uppercase; color: var(--muted); margin: 0 0 calc(var(--u) * 2); }
+.rec p { margin: 0 0 calc(var(--u) * 2); max-width: 32em; }
+.tiers { display: flex; gap: var(--u); flex-wrap: wrap; margin: calc(var(--u) * 2) 0; }
+.tier { padding: 4px 10px; border: 1px solid rgba(255,255,255,.2); font-size: var(--t-1); display: inline-flex; gap: 6px; align-items: center; }
+.tier.on { border-color: var(--accent-2); background: rgba(255, 122, 200, .12); }
+.tier svg { width: 12px; height: 12px; }
+dl { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 3); margin: 0; font-size: var(--t-1); font-variant-numeric: tabular-nums; }
+dt { color: var(--muted); }
+dd { margin: 0; font-weight: 700; }
+.hint { font-size: var(--t-1); color: var(--muted); }
+
+@media (min-width: 1900px) { :root { --card-w: 210px; --t0: 19px; } }
+@media (max-width: 1200px) { .wrap { grid-template-columns: minmax(0, 1fr); justify-items: center; } .binder { order: 2; } :root { --card-w: min(174px, 26vw); } }
+@media (max-width: 700px) {
+  .wrap { padding: calc(var(--u) * 2); gap: calc(var(--u) * 3); }
+  .desk { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .lift { --cw: min(300px, 76vw); }
+  .binder { padding: 12px 12px 12px 36px; } .binder::before { left: 10px; } .binder h2 { display: none; }
+  :root { --card-w: calc((100vw - 32px - 48px - 24px) / 3); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="binder" aria-labelledby="bh">
+    <h2 id="bh">BINDER · PAGE 06 · SET 3</h2>
+    <div class="pockets" id="pockets"></div>
+  </section>
+  <main class="desk">
+    <div class="lift" id="lift" aria-live="polite"></div>
+    <div class="rec">
+      <p class="set" id="setline"></p>
+      <h1 id="rname"></h1>
+      <p id="rnote"></p>
+      <div class="tiers" id="tiers"></div>
+      <dl id="rdl"></dl>
+      <p class="hint" style="margin-top:16px">Tilt the card with the pointer; the foil catches the light the way the printed sheet does. Tidewyrm, Set 3: <i>Brine &amp; Ember</i>, 120 cards, released 12 April 2026 by Longfin Games, Portland.</p>
+    </div>
+  </main>
+</div>
+<script>
+(() => {
+  const TIERS = [["Common", "c"], ["Uncommon", "u"], ["Rare", "r"], ["Holo rare", "h"], ["Secret", "s"]];
+  const MARK = { c: '<circle cx="6" cy="6" r="5" fill="currentColor"/>', u: '<path d="M6 0l6 6-6 6-6-6z" fill="currentColor"/>', r: '<path d="M6 0l1.8 4 4.2.4-3.2 2.8 1 4.2L6 9.2 2.2 11.4l1-4.2L0 4.4 4.2 4z" fill="currentColor"/>', h: '<path d="M6 0l1.8 4 4.2.4-3.2 2.8 1 4.2L6 9.2 2.2 11.4l1-4.2L0 4.4 4.2 4z" fill="none" stroke="currentColor" stroke-width="1.4"/>', s: '<path d="M6 0l1.8 4 4.2.4-3.2 2.8 1 4.2L6 9.2 2.2 11.4l1-4.2L0 4.4 4.2 4z" fill="#ffd86b"/>' };
+  // creatures: body shape, fins, eyes; all drawn from a few primitives
+  const C = [
+    { n: "Brinecalf", t: "tide", hp: 60, r: "c", no: 12, atk: [["Splash", 1, 20]], f: "Grazes kelp in the shallows and follows boats for scraps.", body: "M20 60 C20 30 80 30 88 52 C80 72 30 76 20 60Z", fin: "M50 38 l10 -18 8 20Z", eyes: [[76, 50]], price: "0.15", pull: "1 in 1.2 packs" },
+    { n: "Cindermoth", t: "ember", hp: 50, r: "u", no: 23, atk: [["Ash Flutter", 1, 10], ["Singe", 2, 30]], f: "Its wings carry sparks from one chimney to the next.", body: "M50 30 C58 30 60 70 50 74 C40 70 42 30 50 30Z", fin: "M50 44 C20 18 8 44 46 54Z M54 44 C80 18 92 44 54 54Z", eyes: [[46, 34], [54, 34]], price: "0.40", pull: "1 in 3 packs" },
+    { n: "Kelpstrider", t: "moss", hp: 80, r: "u", no: 31, atk: [["Tangle", 2, 30]], f: "Walks the sea floor on stilt legs and never hurries.", body: "M30 40 C40 24 70 24 76 40 C70 52 40 54 30 40Z", fin: "M36 48 l-6 30 M48 50 l-2 30 M62 50 l4 30 M72 46 l10 28", eyes: [[68, 36]], price: "0.35", pull: "1 in 3 packs" },
+    { n: "Lanternjelly", t: "void", hp: 70, r: "r", no: 58, atk: [["Glow Sting", 2, 50]], f: "Seen only below the thermocline, blinking in threes.", body: "M24 50 C24 20 76 20 76 50 Z", fin: "M30 50 q4 16 -2 28 M42 50 q-4 16 2 28 M56 50 q4 16 -2 28 M68 50 q-4 16 2 28", eyes: [[42, 40], [58, 40]], price: "2.80", pull: "1 in 10 packs" },
+    { n: "Coralhorn", t: "coral", hp: 110, r: "r", no: 64, atk: [["Headbutt", 2, 40], ["Reef Charge", 3, 90]], f: "Grows a new branch on its horn for every storm it survives.", body: "M22 62 C22 40 70 34 82 52 C84 66 40 76 22 62Z", fin: "M70 44 l6 -24 M70 40 l-8 -14 M76 32 l8 -10", eyes: [[72, 52]], price: "3.10", pull: "1 in 10 packs" },
+    { n: "Tidewyrm", t: "tide", hp: 170, r: "h", no: 88, atk: [["Undertow", 2, 60], ["Spring Tide", 4, 150]], f: "The whole coast feels it turn over in its sleep, twice a day.", body: "M10 70 C30 20 50 90 70 40 C78 22 92 30 90 42 C86 56 74 50 70 58 C56 88 34 60 10 70Z", fin: "M40 50 l4 -18 8 16Z M60 50 l6 -16 6 16Z", eyes: [[84, 38]], price: "48.00", pull: "1 in 36 packs" },
+    { n: "Smeltgrub", t: "ember", hp: 40, r: "c", no: 7, atk: [["Nibble", 1, 10]], f: "Lives in the cooling slag and eats the bits nobody wants.", body: "M20 60 C24 44 76 44 80 60 C76 70 24 70 20 60Z", fin: "M30 52 v-6 M42 50 v-7 M54 50 v-7 M66 52 v-6", eyes: [[74, 56]], price: "0.10", pull: "1 in 1.2 packs" },
+    { n: "Mossback", t: "moss", hp: 130, r: "h", no: 91, atk: [["Shelter", 2, 0], ["Slow Crush", 3, 110]], f: "Islands have been mapped on its shell. They moved.", body: "M16 64 C16 34 84 34 84 64 Z", fin: "M24 56 l8 -10 8 10 8 -12 8 12 8 -10 8 10", eyes: [[86, 58]], price: "36.50", pull: "1 in 36 packs" },
+    { n: "Nullray", t: "void", hp: 190, r: "s", no: 121, atk: [["Quiet Field", 3, 80], ["Absent Light", 5, 220]], f: "Numbered 121 of 120. The printer says it was never on the sheet.", body: "M50 26 C70 40 92 50 96 56 C80 60 64 62 50 78 C36 62 20 60 4 56 C8 50 30 40 50 26Z", fin: "M50 78 q4 10 0 18", eyes: [[44, 48], [56, 48]], price: "410.00", pull: "1 in 540 packs" },
+  ];
+  const HOLO = { c: 0, u: .12, r: .3, h: .85, s: 1 };
+  const art = (c) => `<svg viewBox="0 0 100 90" aria-hidden="true"><path d="M0 76 C20 70 40 82 60 76 S90 70 100 76 V90 H0Z" fill="rgba(0,0,0,.18)"/><path d="${c.body}" fill="rgba(255,255,255,.88)" stroke="#1b1b1b" stroke-width="2.2" stroke-linejoin="round"/><path d="${c.fin}" fill="rgba(255,255,255,.7)" stroke="#1b1b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>${c.eyes.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="3.2" fill="#1b1b1b"/><circle cx="${x + 1}" cy="${y - 1}" r="1" fill="#fff"/>`).join("")}</svg>`;
+  const card = (c) => `<div class="card" style="--t:var(--${c.t});--holo:${HOLO[c.r]}"><div class="top"><span class="nm">${c.n}</span><span class="hp">HP <b>${c.hp}</b></span></div><div class="pic">${art(c)}<div class="foil"></div></div><div class="txt">${c.atk.map(([a, k, d]) => `<div class="atk"><span class="cost">${"<i></i>".repeat(k)}</span><b>${a}</b><strong>${d || ""}</strong></div>`).join("")}<span class="flav">${c.f}</span></div><div class="foot"><span>${String(c.no).padStart(3, "0")}/120</span><span><svg width="8" height="8" viewBox="0 0 12 12">${MARK[c.r]}</svg></span><span>Illus. M. Ito</span></div><div class="foil soft"></div></div>`;
+  const pockets = document.getElementById("pockets");
+  pockets.innerHTML = C.map((c, i) => `<button class="pocket" type="button" data-i="${i}" aria-pressed="false" aria-label="${c.n}, ${TIERS.find((t) => t[1] === c.r)[0]}">${card(c)}</button>`).join("");
+  const sizePockets = () => { const w = pockets.querySelector(".pocket").clientWidth - 10; pockets.style.setProperty("--cw", w + "px"); };
+  sizePockets(); addEventListener("resize", sizePockets);
+  const lift = document.getElementById("lift");
+  const show = (i) => {
+    const c = C[i];
+    pockets.querySelectorAll(".pocket").forEach((p) => p.setAttribute("aria-pressed", String(+p.dataset.i === i)));
+    lift.innerHTML = card(c);
+    document.getElementById("setline").textContent = `Set 3 · Brine & Ember · No. ${String(c.no).padStart(3, "0")}`;
+    document.getElementById("rname").textContent = c.n;
+    document.getElementById("rnote").textContent = c.f;
+    document.getElementById("tiers").innerHTML = TIERS.map(([nm, k]) => `<span class="tier${k === c.r ? " on" : ""}"><svg viewBox="0 0 12 12" aria-hidden="true">${MARK[k]}</svg>${nm}</span>`).join("");
+    document.getElementById("rdl").innerHTML = `<dt>Type</dt><dd>${c.t[0].toUpperCase() + c.t.slice(1)}</dd><dt>Pull rate</dt><dd>${c.pull}</dd><dt>Market, near mint</dt><dd>$${c.price}</dd><dt>Graded 10, pop.</dt><dd>${c.r === "s" ? 14 : c.r === "h" ? 212 : 1800 + c.no * 7}</dd>`;
+  };
+  pockets.addEventListener("click", (e) => { const p = e.target.closest(".pocket"); if (p) show(+p.dataset.i); });
+
+  // tilt: pointer position becomes rotation and the foil’s light point
+  let pending = null;
+  const apply = () => { if (!pending) return; const { x, y } = pending; pending = null;
+    const cd = lift.querySelector(".card"); if (!cd) return;
+    lift.style.setProperty("--rx", ((.5 - y) * 22).toFixed(2) + "deg"); lift.style.setProperty("--ry", ((x - .5) * 26).toFixed(2) + "deg");
+    cd.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); cd.style.setProperty("--my", (y * 100).toFixed(1) + "%"); };
+  const motion = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  lift.addEventListener("pointermove", (e) => { const r = lift.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    if (!motion) { lift.querySelector(".card").style.setProperty("--mx", x * 100 + "%"); lift.querySelector(".card").style.setProperty("--my", y * 100 + "%"); return; }
+    const first = !pending; pending = { x, y }; if (first) requestAnimationFrame(apply); });
+  lift.addEventListener("pointerleave", () => { lift.style.setProperty("--rx", "0deg"); lift.style.setProperty("--ry", "0deg"); });
+  show(5);
+  // a resting tilt so the foil shows before the pointer arrives
+  pending = { x: .72, y: .3 }; apply();
+})();
+</script>
+</body>
+</html>
