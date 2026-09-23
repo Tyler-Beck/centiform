@@ -105,3 +105,23 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Rosarivo | OFL-1.1 | https://fontsource.org/fonts/rosarivo | 049-wiener-werkstatte |
 | Cinzel | OFL-1.1 | https://fontsource.org/fonts/cinzel | 050-lapidary-capitals |
 | Castoro | OFL-1.1 | https://fontsource.org/fonts/castoro | 050-lapidary-capitals |
+| Fira Sans Condensed | OFL-1.1 | https://fontsource.org/fonts/fira-sans-condensed | 051-ordnance-contours |
+| Merriweather | OFL-1.1 | https://fontsource.org/fonts/merriweather | 051-ordnance-contours |
+| Saira Condensed | OFL-1.1 | https://fontsource.org/fonts/saira-condensed | 052-nautical-chart |
+| Vollkorn | OFL-1.1 | https://fontsource.org/fonts/vollkorn | 052-nautical-chart |
+| IM Fell English SC | OFL-1.1 | https://fontsource.org/fonts/im-fell-english-sc | 053-engraved-star-atlas |
+| IM Fell English | OFL-1.1 | https://fontsource.org/fonts/im-fell-english | 053-engraved-star-atlas |
+| Spline Sans Mono | OFL-1.1 | https://fontsource.org/fonts/spline-sans-mono | 054-crystal-habit |
+| Literata | OFL-1.1 | https://fontsource.org/fonts/literata | 054-crystal-habit |
+| Young Serif | OFL-1.1 | https://fontsource.org/fonts/young-serif | 055-mycology-field-guide |
+| Libre Franklin | OFL-1.1 | https://fontsource.org/fonts/libre-franklin | 055-mycology-field-guide |
+| Advent Pro | OFL-1.1 | https://fontsource.org/fonts/advent-pro | 056-abyssal-light |
+| Sarabun | OFL-1.1 | https://fontsource.org/fonts/sarabun | 056-abyssal-light |
+| Lexend | OFL-1.1 | https://fontsource.org/fonts/lexend | 057-petri-culture |
+| Victor Mono | OFL-1.1 | https://fontsource.org/fonts/victor-mono | 057-petri-culture |
+| Azeret Mono | OFL-1.1 | https://fontsource.org/fonts/azeret-mono | 058-synoptic-chart |
+| Sofia Sans Condensed | OFL-1.1 | https://fontsource.org/fonts/sofia-sans-condensed | 058-synoptic-chart |
+| Gilda Display | OFL-1.1 | https://fontsource.org/fonts/gilda-display | 059-entomology-drawers |
+| Petrona | OFL-1.1 | https://fontsource.org/fonts/petrona | 059-entomology-drawers |
+| Hanken Grotesk | OFL-1.1 | https://fontsource.org/fonts/hanken-grotesk | 060-electron-micrograph |
+| Major Mono Display | OFL-1.1 | https://fontsource.org/fonts/major-mono-display | 060-electron-micrograph |

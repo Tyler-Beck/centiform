@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Synoptic Chart · Centiform</title>
+<style>
+/* @fonts: Azeret Mono:400,600:swap; Sofia Sans Condensed:400,700:swap */
+@font-face{font-family:"Azeret Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/azeret-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Azeret Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/azeret-mono-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sofia Sans Condensed";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sofia-sans-condensed-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sofia Sans Condensed";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/sofia-sans-condensed-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ffffff;          /* chart paper */
+  --ink: #1a1a1a;         /* isobars and station plots */
+  --accent-1: #d62d20;    /* warm front */
+  --accent-2: #2b59c3;    /* cold front */
+  --occ: #7a3aa0;         /* occlusion */
+  --land: #eceae4;
+  --u: 8px;
+  /* scale: 1.2 on 16px */
+  --t-2: 11px; --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px; --t3: 28px; --t4: 34px;
+  --mono: "Azeret Mono", ui-monospace, monospace;
+  --cond: "Sofia Sans Condensed", "Arial Narrow", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--cond); display: grid; grid-template-columns: minmax(0, 1fr) 380px; min-height: 100vh; overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.chart { position: relative; height: 100vh; border-right: 2px solid var(--ink); overflow: hidden; }
+.chart svg { width: 100%; height: 100%; display: block; }
+svg text { font-family: var(--mono); }
+.iso { fill: none; stroke: var(--ink); stroke-width: 1.1; }
+.isl { font-size: 11px; fill: var(--ink); paint-order: stroke; stroke: #fff; stroke-width: 4px; }
+.ctr { font: 700 44px var(--cond); }
+.stn { cursor: pointer; }
+.stn:focus { outline: none; }
+.stn:focus-visible circle.o, .stn:hover circle.o { stroke: var(--accent-2); stroke-width: 2.4; }
+.stn text { font-size: 11px; fill: var(--ink); }
+.area { fill: transparent; stroke: #9a9a9a; stroke-dasharray: 5 5; stroke-width: 1; }
+.area.hi { fill: rgba(43,89,195,.08); stroke: var(--accent-2); stroke-dasharray: none; }
+.alab { font: 700 13px var(--cond); letter-spacing: .14em; fill: #7a7a7a; text-transform: uppercase; }
+.box { position: absolute; left: 16px; top: 16px; background: #fff; border: 2px solid var(--ink); padding: 10px 14px; font: 400 var(--t-1)/1.4 var(--mono); }
+.box b { display: block; font: 700 var(--t2)/1.1 var(--cond); }
+.times { position: absolute; left: 16px; bottom: 16px; display: flex; gap: 0; border: 2px solid var(--ink); background: #fff; }
+.times button { font: 600 var(--t-1)/1 var(--mono); background: #fff; border: 0; border-left: 1px solid var(--ink); padding: 10px 14px; cursor: pointer; }
+.times button:first-child { border-left: 0; }
+.times button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.fc { padding: calc(var(--u) * 3); overflow: auto; height: 100vh; }
+.fc h1 { margin: 0; font: 700 var(--t3)/1 var(--cond); }
+.fc .iss { font: 400 var(--t-1)/1.4 var(--mono); margin: 6px 0 calc(var(--u) * 2); }
+.fc .gw { background: var(--accent-1); color: #fff; padding: 6px 10px; font: 700 var(--t-1)/1.3 var(--mono); margin-bottom: calc(var(--u) * 2); }
+.fc h2 { font: 700 var(--t-1)/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; margin: calc(var(--u) * 2) 0 var(--u); }
+.fc ol { list-style: none; margin: 0; padding: 0; }
+.fc li { border-top: 1px solid var(--ink); padding: 8px 0; }
+.fc li b { font: 700 var(--t1)/1.2 var(--cond); display: block; }
+.fc li span { font-size: 16px; }
+.obs { border: 2px solid var(--ink); padding: 10px; font: 400 var(--t-1)/1.5 var(--mono); min-height: 96px; }
+.obs b { font-family: var(--cond); font-size: var(--t1); }
+@media (max-width: 900px) {
+  body { grid-template-columns: minmax(0, 1fr); }
+  .chart { height: 76vh; border-right: 0; border-bottom: 2px solid var(--ink); }
+  .fc { height: auto; }
+  .box { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<main class="chart">
+  <svg id="map" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Surface pressure chart with isobars, fronts and station plots"></svg>
+  <div class="box"><b>Surface analysis</b><span id="valid">Valid 00 UTC Fri 14 Nov</span><br>Isobars at 4 hPa</div>
+  <div class="times" role="group" aria-label="Chart time"><button type="button" data-t="0" aria-pressed="true">T+0</button><button type="button" data-t="1" aria-pressed="false">T+12</button><button type="button" data-t="2" aria-pressed="false">T+24</button></div>
+</main>
+<aside class="fc">
+  <h1>Northern Approaches Marine Forecast</h1>
+  <div class="iss">Issued 23:05 UTC Thursday by the Halse Point Met Office</div>
+  <div class="gw">Gale warnings in force: Kerrow, Orrin Bank, Skerrach</div>
+  <h2>General synopsis</h2>
+  <p style="margin:0">Low, Faldane Deep, 972, moving steadily northeast, expected Skerrach 980 by 00 UTC Saturday. High, 1030, holding west of Mull of Dun.</p>
+  <h2>Sea areas</h2>
+  <ol id="areas"></ol>
+  <h2>Station plot</h2>
+  <div class="obs" id="obs" aria-live="polite">Select a station circle on the chart to decode its plot.</div>
+</aside>
+<script>
+(() => {
+  const W = 1200, H = 900, CS = 12, NX = W / CS, NY = H / CS;
+  const T = [{ L: [520, 330], L2: [880, 560], Hc: [170, 640], v: "Valid 00 UTC Fri 14 Nov" }, { L: [640, 250], L2: [930, 520], Hc: [210, 620], v: "Valid 12 UTC Fri 14 Nov" }, { L: [770, 190], L2: [990, 480], Hc: [260, 600], v: "Valid 00 UTC Sat 15 Nov" }];
+  const AREAS = [["Kerrow", "M600 0 L1200 0 L1200 300 L760 380Z", [920, 120], "Southwest 7 to severe gale 9, veering west 6 later. Very rough. Rain, then squally showers. Moderate, occasionally poor."],
+    ["Faldane", "M0 0 L600 0 L760 380 L420 470 L0 400Z", [230, 120], "West 6 to gale 8, decreasing 5 later. Rough or very rough. Showers. Good."],
+    ["Orrin Bank", "M760 380 L1200 300 L1200 700 L820 700Z", [1010, 480], "South 6 to gale 8, veering southwest. Rough. Rain. Poor."],
+    ["Skerrach", "M420 470 L760 380 L820 700 L480 740Z", [590, 590], "Cyclonic 7 to severe gale 9, becoming west 6. High for a time. Rain then showers. Poor."],
+    ["Mull of Dun", "M0 400 L420 470 L480 740 L360 900 L0 900Z", [150, 700], "Northwest 4 or 5, backing west 3. Moderate. Fair. Good."],
+    ["West Halse", "M480 740 L820 700 L1200 700 L1200 900 L360 900Z", [800, 820], "Southwest 5 to 7. Moderate or rough. Occasional rain. Moderate."]];
+  const land = `<path d="M1040 0 C1060 60 1110 90 1120 150 C1130 210 1090 240 1110 300 C1130 340 1200 350 1200 380 V0Z M0 830 C80 800 140 830 200 860 C240 880 300 870 330 900 H0Z M1080 760 C1110 740 1160 750 1200 740 V900 H1020 C1030 850 1050 790 1080 760Z" fill="#eceae4" stroke="#8a8a8a" stroke-width="1"/>`;
+  const svg = document.getElementById("map");
+  const barb = (dir, kt) => { let o = `<path d="M0 0 L0 -40" stroke="#1a1a1a" stroke-width="1.6"/>`; let y = -40, k = kt; while (k >= 50) { o += `<path d="M0 ${y} L14 ${y + 4} L0 ${y + 8}Z" fill="#1a1a1a"/>`; y += 10; k -= 50; } while (k >= 10) { o += `<path d="M0 ${y} L16 ${y - 6}" stroke="#1a1a1a" stroke-width="1.6"/>`; y += 6; k -= 10; } if (k >= 5) o += `<path d="M0 ${y} L8 ${y - 3}" stroke="#1a1a1a" stroke-width="1.6"/>`; return `<g transform="rotate(${dir})">${o}</g>`; };
+  const STN = [["Halse Point", 1000, 170, 250, 34, 9, 7, 3, "Cloud 6/8, rain"], ["Skerrach Light", 610, 520, 230, 45, 11, 10, 8, "Cloud 8/8, heavy rain"], ["Orrin Buoy", 980, 400, 200, 38, 12, 11, 6, "Cloud 8/8, drizzle"], ["Faldane Rig", 330, 250, 280, 30, 8, 5, 5, "Cloud 7/8, showers"], ["Dun Head", 200, 520, 320, 12, 7, 3, 2, "Cloud 2/8, fair"], ["Ship EDQV", 760, 740, 240, 26, 13, 12, 4, "Cloud 8/8, mist"]];
+  function draw(ti) {
+    const t = T[ti], P = (x, y) => { const g = (cx, cy, a, s) => a * Math.exp(-((x - cx) ** 2 + (y - cy) ** 2) / (2 * s * s)); return 1012 - g(...t.L, 40, 190) - g(...t.L2, 14, 130) + g(...t.Hc, 20, 300) + 3 * Math.sin(x / 160); };
+    const G = []; for (let j = 0; j <= NY; j++) { G[j] = []; for (let i = 0; i <= NX; i++) G[j][i] = P(i * CS, j * CS); }
+    let o = AREAS.map(([n, d], k) => `<path class="area" id="a${k}" d="${d}"/>`).join("") + land;
+    AREAS.forEach(([n, , [x, y]]) => (o += `<text class="alab" x="${x}" y="${y}" text-anchor="middle">${n}</text>`));
+    const lerp = (a, b, l) => (l - a) / (b - a); const labs = [];
+    for (let L = 972; L <= 1032; L += 4) { let d = "";
+      for (let j = 0; j < NY; j++) for (let i = 0; i < NX; i++) { const a = G[j][i], b = G[j][i + 1], c = G[j + 1][i + 1], e = G[j + 1][i];
+        const idx = (a > L) | ((b > L) << 1) | ((c > L) << 2) | ((e > L) << 3); if (idx === 0 || idx === 15) continue;
+        const x = i * CS, y = j * CS, Tt = [x + CS * lerp(a, b, L), y], R = [x + CS, y + CS * lerp(b, c, L)], B = [x + CS * lerp(e, c, L), y + CS], Lf = [x, y + CS * lerp(a, e, L)];
+        const s = { 1: [Lf, Tt], 2: [Tt, R], 3: [Lf, R], 4: [R, B], 5: [Lf, Tt, R, B], 6: [Tt, B], 7: [Lf, B], 8: [B, Lf], 9: [B, Tt], 10: [Tt, R, B, Lf], 11: [R, B], 12: [R, Lf], 13: [R, Tt], 14: [Tt, Lf] }[idx];
+        for (let q = 0; q < s.length; q += 2) d += `M${s[q][0].toFixed(1)} ${s[q][1].toFixed(1)}L${s[q + 1][0].toFixed(1)} ${s[q + 1][1].toFixed(1)}`;
+        if (i === Math.round(NX * .5 + L % 3) && !labs.includes(L)) { labs.push(L); o += `<text class="isl" x="${x}" y="${y}">${L}</text>`; } }
+      o += `<path class="iso" d="${d}"/>`; }
+    // fronts from the main low: warm to the east, cold trailing south-west, occlusion near the centre
+    const [lx, ly] = t.L;
+    const warm = [[lx + 60, ly + 40], [lx + 150, ly + 90], [lx + 240, ly + 170], [lx + 300, ly + 260]];
+    const cold = [[lx + 60, ly + 40], [lx + 40, ly + 160], [lx - 20, ly + 280], [lx - 110, ly + 390], [lx - 220, ly + 480]];
+    const occ = [[lx, ly], [lx + 30, ly + 20], [lx + 60, ly + 40]];
+    const fr = (pts, col, kind) => { let d = "M" + pts.map((p) => p.join(" ")).join(" L"); let o2 = `<path d="${d}" fill="none" stroke="${col}" stroke-width="3.5"/>`;
+      for (let s = 0; s < pts.length - 1; s++) { const [a, b] = [pts[s], pts[s + 1]], len = Math.hypot(b[0] - a[0], b[1] - a[1]), ang = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI;
+        for (let u = 18; u < len - 10; u += 44) { const x = a[0] + (b[0] - a[0]) * u / len, y = a[1] + (b[1] - a[1]) * u / len; const k = kind === "occ" ? (u % 88 < 44 ? "cold" : "warm") : kind;
+          o2 += `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${ang.toFixed(1)})">${k === "cold" ? `<path d="M-9 0 L0 -13 L9 0Z" fill="${col}"/>` : `<path d="M-9 0 A9 9 0 0 1 9 0Z" fill="${col}"/>`}</g>`; } }
+      return o2; };
+    o += fr(warm, "#d62d20", "warm") + fr(cold, "#2b59c3", "cold") + fr(occ, "#7a3aa0", "occ");
+    o += `<text class="ctr" x="${lx - 14}" y="${ly + 14}" fill="#d62d20">L</text><text x="${lx - 14}" y="${ly + 36}" font-size="13" font-weight="600">${Math.round(P(lx, ly))}</text>`;
+    o += `<text class="ctr" x="${t.L2[0] - 12}" y="${t.L2[1] + 14}" fill="#d62d20" font-size="32">L</text>`;
+    o += `<text class="ctr" x="${t.Hc[0] - 14}" y="${t.Hc[1] + 14}" fill="#2b59c3">H</text><text x="${t.Hc[0] - 16}" y="${t.Hc[1] + 36}" font-size="13" font-weight="600">${Math.round(P(...t.Hc))}</text>`;
+    // station models
+    STN.forEach(([n, x, y, dir, kt, tt, td, cov], k) => { const p = P(x, y), pp = String(Math.round(p * 10) % 1000).padStart(3, "0");
+      const fill = cov >= 8 ? `<circle r="8" fill="#1a1a1a"/>` : cov >= 4 ? `<path d="M0 -8 A8 8 0 0 1 0 8Z" fill="#1a1a1a"/>` : cov >= 2 ? `<path d="M0 0 L0 -8 A8 8 0 0 1 8 0Z" fill="#1a1a1a"/>` : "";
+      o += `<g class="stn" tabindex="0" role="button" aria-label="Station ${n}" data-k="${k}" transform="translate(${x} ${y})">${barb(dir, kt)}<circle class="o" r="8" fill="#fff" stroke="#1a1a1a" stroke-width="1.6"/>${fill}<text x="-30" y="-6">${tt}</text><text x="-30" y="16">${td}</text><text x="12" y="-6">${pp}</text><rect x="-44" y="-30" width="96" height="56" fill="transparent"/></g>`; });
+    svg.innerHTML = o;
+    document.getElementById("valid").textContent = t.v;
+    svg.querySelectorAll(".stn").forEach((g) => { const f = () => { const [n, , , dir, kt, tt, td, cov, wx] = STN[+g.dataset.k]; document.getElementById("obs").innerHTML = `<b>${n}</b><br>Wind ${String(dir).padStart(3, "0")}° ${kt} kt · Air ${tt} °C · Dew point ${td} °C<br>${wx}`; };
+      g.addEventListener("click", f); g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); f(); } }); });
+  }
+  document.querySelector(".times").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; document.querySelectorAll(".times button").forEach((x) => x.setAttribute("aria-pressed", String(x === b))); draw(+b.dataset.t); });
+  document.getElementById("areas").innerHTML = AREAS.map(([n, , , f], k) => `<li data-k="${k}" tabindex="0"><b>${n}</b><span>${f}</span></li>`).join("");
+  document.querySelectorAll("#areas li").forEach((li) => { const on = (v) => { const a = document.getElementById("a" + li.dataset.k); if (a) a.classList.toggle("hi", v); };
+    li.addEventListener("mouseenter", () => on(true)); li.addEventListener("mouseleave", () => on(false)); li.addEventListener("focus", () => on(true)); li.addEventListener("blur", () => on(false)); });
+  draw(0);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engraved Star Atlas · Centiform</title>
+<style>
+/* @fonts: IM Fell English SC:400:block; IM Fell English:400,400i:swap */
+@font-face{font-family:"IM Fell English SC";font-style:normal;font-weight:400;font-display:block;src:url(fonts/im-fell-english-sc-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IM Fell English";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/im-fell-english-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IM Fell English";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/im-fell-english-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f3ead5;          /* rag paper */
+  --ink: #2d261e;         /* copperplate ink */
+  --accent-1: #8a5a2b;    /* foxing, the bistre of the border wash */
+  --accent-2: #1b3b6f;    /* the hand-coloured blue of the reissue */
+  --plate: #efe4cb;
+  --u: 8px;
+  /* scale: 1.25 on 19px (Fell runs small) */
+  --t-1: 15px; --t0: 19px; --t1: 24px; --t2: 30px; --t3: 37px; --t4: clamp(40px, 4.6vw, 72px);
+  --sc: "IM Fell English SC", serif;
+  --fell: "IM Fell English", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: radial-gradient(ellipse at 30% 20%, #f7f0de, var(--bg) 60%, #e9dcc0); font: 400 var(--t0)/1.5 var(--fell); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+.title { text-align: center; padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 2); }
+.title .sm { font: 400 var(--t-1)/1.4 var(--sc); letter-spacing: .24em; }
+h1 { margin: var(--u) 0; font: 400 var(--t4)/1 var(--sc); letter-spacing: .06em; }
+.title p { margin: 0 auto; max-width: 56ch; font-style: italic; }
+.rule { width: min(520px, 70%); height: 10px; margin: calc(var(--u) * 2) auto 0; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.atlas { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: calc(var(--u) * 5); padding: calc(var(--u) * 3) calc(var(--u) * 5) calc(var(--u) * 6); align-items: start; max-width: 1600px; margin: 0 auto; }
+.platebox { position: relative; }
+.platebox svg { width: 100%; height: auto; display: block; background: var(--plate); box-shadow: 0 0 0 1px var(--accent-1), 0 2px 0 6px rgba(138,90,43,.12), 0 20px 30px -20px rgba(45,38,30,.5); }
+svg text { font-family: var(--fell); }
+.plates { display: flex; gap: 6px; margin-top: calc(var(--u) * 2); flex-wrap: wrap; }
+.plates button { font: 400 var(--t-1)/1 var(--sc); letter-spacing: .08em; background: transparent; border: 1px solid var(--ink); color: var(--ink); padding: 8px 12px; cursor: pointer; }
+.plates button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.desc h2 { margin: 0; font: 400 var(--t3)/1 var(--sc); }
+.desc .lat { font-style: italic; color: var(--accent-1); margin: 4px 0 calc(var(--u) * 2); }
+.desc p { margin: 0 0 calc(var(--u) * 2); max-width: 46ch; }
+table { width: 100%; border-collapse: collapse; font-size: 16px; font-variant-numeric: tabular-nums; }
+th { font: 400 var(--t-1)/1.2 var(--sc); letter-spacing: .08em; text-align: left; border-bottom: 2px solid var(--ink); padding: 4px 6px 4px 0; }
+td { border-bottom: 1px solid rgba(45,38,30,.3); padding: 4px 6px 4px 0; }
+td:nth-child(2) { font-style: italic; }
+.buy { margin-top: calc(var(--u) * 3); border: 1px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 3px; padding: calc(var(--u) * 2); }
+.buy b { font: 400 var(--t1)/1.1 var(--sc); display: block; }
+footer { text-align: center; padding: 0 calc(var(--u) * 3) calc(var(--u) * 5); font: 400 var(--t-1)/1.5 var(--sc); letter-spacing: .12em; }
+@media (prefers-reduced-motion: no-preference) { #plate g.sky { transition: opacity .5s; } #plate.fade g.sky { opacity: 0; } }
+@media (max-width: 1000px) { .atlas { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); } }
+</style>
+</head>
+<body>
+<header class="title">
+  <div class="sm">Printed for the Subscribers · MDCCCI · Reissued MMXXVI</div>
+  <h1>Atlas Coelestis Minor</h1>
+  <p>Twenty plates of the northern heavens, engraved on copper by Mary Ashwell of Bath from her own observations, now printed again from the original plates.</p>
+  <div class="rule" aria-hidden="true"></div>
+</header>
+<main class="atlas">
+  <figure class="platebox" style="margin:0">
+    <svg id="plate" viewBox="0 0 900 700" role="img" aria-labelledby="pname"></svg>
+    <div class="plates" role="group" aria-label="Choose a plate" id="plates"></div>
+  </figure>
+  <section class="desc" aria-live="polite">
+    <h2 id="pname">Orion</h2>
+    <div class="lat" id="plat">Plate VII · the Hunter</div>
+    <p id="ptext"></p>
+    <table><thead><tr><th>Star</th><th>Name</th><th>Mag.</th><th>R.A.</th><th>Decl.</th></tr></thead><tbody id="ptab"></tbody></table>
+    <div class="buy"><b>Single plates, £38</b>Printed by hand on Somerset rag, 56 × 44 cm, from the steel-faced copper. The full set of twenty in a clamshell box, £640.</div>
+  </section>
+</main>
+<footer>Ashwell Press · 4 Lansdown Crescent, Bath · Proofs may be seen by appointment</footer>
+<script>
+(() => {
+  // [ra hours, dec degrees, magnitude, Bayer letter, name]
+  const P = {
+    Orion: { no: "VII", lat: "the Hunter", ra0: 5.58, d0: 0, sc: 88, t: "Seen best on January evenings, due south at nine. Mrs Ashwell measured the belt stars from her garden wall with a borrowed quadrant, and corrected Flamsteed by two minutes.",
+      s: [[5.92, 7.4, .5, "α", "Betelgeuse"], [5.24, -8.2, .1, "β", "Rigel"], [5.42, 6.35, 1.6, "γ", "Bellatrix"], [5.53, -.3, 2.2, "δ", "Mintaka"], [5.60, -1.2, 1.7, "ε", "Alnilam"], [5.68, -1.9, 1.8, "ζ", "Alnitak"], [5.80, -9.7, 2.1, "κ", "Saiph"], [5.59, 9.9, 3.4, "λ", "Meissa"]],
+      l: [[7, 0], [7, 2], [0, 5], [2, 3], [3, 4], [4, 5], [5, 6], [3, 1]] },
+    Cassiopeia: { no: "II", lat: "the Queen in her Chair", ra0: 1.03, d0: 60, sc: 150, t: "Circumpolar from Bath, never setting. The W stands on end in autumn. Tycho’s new star of 1572 flared beside it; the engraver marked the place with a small cross.",
+      s: [[.15, 59.1, 2.3, "β", "Caph"], [.68, 56.5, 2.2, "α", "Schedar"], [.95, 60.7, 2.4, "γ", "Cih"], [1.43, 60.2, 2.7, "δ", "Ruchbah"], [1.91, 63.7, 3.4, "ε", "Segin"]], l: [[0, 1], [1, 2], [2, 3], [3, 4]] },
+    Cygnus: { no: "XI", lat: "the Swan", ra0: 20.15, d0: 37, sc: 110, t: "The Swan flies down the Milky Way, which the engraver stippled by hand with a fine point, some four thousand dots on this plate alone.",
+      s: [[20.69, 45.3, 1.3, "α", "Deneb"], [20.37, 40.3, 2.2, "γ", "Sadr"], [20.77, 33.97, 2.5, "ε", "Gienah"], [19.75, 45.1, 2.9, "δ", ""], [19.51, 27.96, 3.1, "β", "Albireo"]], l: [[0, 1], [1, 4], [3, 1], [1, 2]], mw: true },
+    Lyra: { no: "XII", lat: "the Harp", ra0: 18.8, d0: 35.8, sc: 290, t: "A small figure on a large plate, so that Vega could be drawn with its full eight rays. Epsilon, the double-double, is noted in the margin in Mrs Ashwell’s hand.",
+      s: [[18.62, 38.8, 0, "α", "Vega"], [18.83, 33.4, 3.5, "β", "Sheliak"], [18.98, 32.7, 3.2, "γ", "Sulafat"], [18.91, 36.9, 4.3, "δ", ""], [18.75, 37.6, 4.3, "ζ", ""]], l: [[0, 4], [4, 3], [3, 2], [2, 1], [1, 4]] },
+    "Ursa Major": { no: "V", lat: "the Great Bear", ra0: 12.42, d0: 56, sc: 100, t: "The Plough, as the farmers of Somerset call the seven bright stars. Mizar’s faint companion Alcor is engraved, as a test of the subscriber’s eyes.",
+      s: [[11.06, 61.75, 1.8, "α", "Dubhe"], [11.03, 56.4, 2.3, "β", "Merak"], [11.90, 53.7, 2.4, "γ", "Phecda"], [12.26, 57.0, 3.3, "δ", "Megrez"], [12.90, 55.96, 1.8, "ε", "Alioth"], [13.40, 54.9, 2.2, "ζ", "Mizar"], [13.79, 49.3, 1.9, "η", "Alkaid"], [13.42, 54.99, 4.0, "g", "Alcor"]], l: [[0, 1], [1, 2], [2, 3], [3, 0], [3, 4], [4, 5], [5, 6]] }
+  };
+  const svg = document.getElementById("plate");
+  const draw = (name) => {
+    const c = P[name]; let seed = name.length * 97; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const cx = 450, cy = 350, k = c.sc, cosd = Math.cos(c.d0 * Math.PI / 180);
+    const X = (ra) => cx - (ra - c.ra0) * 15 * cosd * k / 4, Y = (d) => cy - (d - c.d0) * k / 4 * 1.0;
+    let o = `<defs><pattern id="hat" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="5" stroke="#2d261e" stroke-width=".7"/></pattern><clipPath id="face"><rect x="70" y="60" width="760" height="580"/></clipPath></defs>`;
+    // border: a hatched band between double rules, with degree ticks
+    o += `<rect x="30" y="20" width="840" height="660" fill="url(#hat)" opacity=".5"/><rect x="30" y="20" width="840" height="660" fill="none" stroke="#2d261e" stroke-width="2"/><rect x="70" y="60" width="760" height="580" fill="#efe4cb" stroke="#2d261e" stroke-width="1.5"/>`;
+    o += `<g clip-path="url(#face)" class="sky">`;
+    if (c.mw) for (let i = 0; i < 2600; i++) { const t = rnd(), x = 70 + t * 760, y = 640 - t * 580 + (rnd() - .5) * 260 * (1 - Math.abs(t - .5)); o += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r=".7" fill="#2d261e" opacity=".55"/>`; }
+    // right ascension and declination lines
+    for (let d = Math.floor((c.d0 - 40) / 5) * 5; d <= c.d0 + 40; d += 5) { const y = Y(d); o += `<line x1="70" y1="${y}" x2="830" y2="${y}" stroke="#2d261e" stroke-width="${d % 10 ? .3 : .6}"/>`; }
+    for (let m = -120; m <= 120; m += 10) { const ra = c.ra0 + m / 60, x = X(ra); o += `<line x1="${x}" y1="60" x2="${x}" y2="640" stroke="#2d261e" stroke-width="${m % 30 ? .3 : .6}"/>`; }
+    // figure lines, dotted as the engraver roulette left them
+    c.l.forEach(([a, b]) => { o += `<line x1="${X(c.s[a][0])}" y1="${Y(c.s[a][1])}" x2="${X(c.s[b][0])}" y2="${Y(c.s[b][1])}" stroke="#1b3b6f" stroke-width="1.2" stroke-dasharray="1 5" stroke-linecap="round"/>`; });
+    // faint field stars
+    for (let i = 0; i < 160; i++) o += `<circle cx="${(70 + rnd() * 760).toFixed(1)}" cy="${(60 + rnd() * 580).toFixed(1)}" r="${(.6 + rnd() * 1.1).toFixed(1)}" fill="#2d261e"/>`;
+    // named stars: size by magnitude, rays for the first magnitude
+    c.s.forEach(([ra, d, m, b, n]) => { const x = X(ra), y = Y(d), r = Math.max(1.6, 7.5 - m * 1.4);
+      if (m < 1.5) for (let a = 0; a < 8; a++) { const t = a * Math.PI / 4; o += `<line x1="${x + Math.cos(t) * (r + 2)}" y1="${y + Math.sin(t) * (r + 2)}" x2="${x + Math.cos(t) * (r + (a % 2 ? 6 : 11))}" y2="${y + Math.sin(t) * (r + (a % 2 ? 6 : 11))}" stroke="#2d261e" stroke-width="1"/>`; }
+      o += `<circle cx="${x}" cy="${y}" r="${r}" fill="#2d261e"/><text x="${x + r + 6}" y="${y - r}" font-size="16" font-style="italic" fill="#2d261e">${b}</text>`;
+      if (n) o += `<text x="${x + r + 6}" y="${y + r + 14}" font-size="14" fill="#8a5a2b">${n}</text>`; });
+    o += `</g>`;
+    // tick scales on the neat line
+    for (let x = 70; x <= 830; x += 19) o += `<line x1="${x}" y1="60" x2="${x}" y2="${(x - 70) % 95 ? 54 : 48}" stroke="#2d261e"/><line x1="${x}" y1="640" x2="${x}" y2="${(x - 70) % 95 ? 646 : 652}" stroke="#2d261e"/>`;
+    for (let y = 60; y <= 640; y += 14.5) o += `<line x1="70" y1="${y}" x2="${(y - 60) % 72.5 ? 64 : 58}" y2="${y}" stroke="#2d261e"/><line x1="830" y1="${y}" x2="${(y - 60) % 72.5 ? 836 : 842}" y2="${y}" stroke="#2d261e"/>`;
+    // cartouche
+    o += `<g transform="translate(96 560)"><rect width="250" height="62" fill="#efe4cb" stroke="#2d261e" stroke-width="1.5"/><rect x="4" y="4" width="242" height="54" fill="none" stroke="#2d261e" stroke-width=".6"/><text x="125" y="30" text-anchor="middle" font-size="24" font-family="IM Fell English SC">${name.toUpperCase()}</text><text x="125" y="49" text-anchor="middle" font-size="13" font-style="italic">Tab. ${c.no} · M. Ashwell delin. et sculp.</text></g>`;
+    svg.innerHTML = o;
+    document.getElementById("pname").textContent = name; document.getElementById("plat").textContent = "Plate " + c.no + " · " + c.lat; document.getElementById("ptext").textContent = c.t;
+    const hm = (ra) => { const h = Math.floor(ra), mm = Math.round((ra - h) * 60); return h + "h " + String(mm).padStart(2, "0") + "m"; };
+    document.getElementById("ptab").innerHTML = c.s.filter((s) => s[4]).map(([ra, d, m, b, n]) => `<tr><td>${b}</td><td>${n}</td><td>${m.toFixed(1)}</td><td>${hm(ra)}</td><td>${d >= 0 ? "+" : "−"}${Math.abs(d).toFixed(1)}°</td></tr>`).join("");
+  };
+  const names = Object.keys(P), box = document.getElementById("plates");
+  box.innerHTML = names.map((n, i) => `<button type="button" aria-pressed="${i === 0}">Tab. ${P[n].no} ${n}</button>`).join("");
+  box.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; const n = names[[...box.children].indexOf(b)];
+    [...box.children].forEach((x) => x.setAttribute("aria-pressed", String(x === b))); svg.classList.add("fade"); setTimeout(() => { draw(n); svg.classList.remove("fade"); }, matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 450); });
+  draw(names[0]);
+})();
+</script>
+</body>
+</html>

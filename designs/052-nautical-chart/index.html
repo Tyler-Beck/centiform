@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nautical Chart · Centiform</title>
+<style>
+/* @fonts: Saira Condensed:500,700:swap; Vollkorn:400,400i,600:swap */
+@font-face{font-family:"Saira Condensed";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/saira-condensed-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Saira Condensed";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/saira-condensed-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Vollkorn";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/vollkorn-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Vollkorn";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/vollkorn-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Vollkorn";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/vollkorn-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f5ecd0;          /* land, chart buff */
+  --ink: #1e2b3a;         /* chart black */
+  --accent-1: #8ec3e6;    /* shallow water, under 5 m */
+  --accent-2: #c23b8e;    /* magenta: lights, hazards, cautions */
+  --sea: #fbfdfe;
+  --shoal: #cfe6f5;
+  --u: 8px;
+  /* scale: 1.2 on 16px */
+  --t-2: 11px; --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px; --t3: 28px; --t4: 34px;
+  --cond: "Saira Condensed", "Arial Narrow", sans-serif;
+  --serif: "Vollkorn", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--sea); color: var(--ink); font: 400 var(--t0)/1.5 var(--serif); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.chart { position: relative; min-height: 100vh; border: 12px solid var(--sea); outline: 1.5px solid var(--ink); outline-offset: -12px; overflow: hidden; }
+.chart > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+svg text { font-family: var(--serif); }
+.snd { font-size: 14px; font-style: italic; fill: var(--ink); }
+.snd.sm { font-size: 10px; }
+.hz { cursor: pointer; }
+.hz:hover .hmark, .hz:focus .hmark { stroke-width: 3; }
+.hz:focus { outline: none; }
+.hz:focus-visible .hmark { stroke: var(--ink); }
+.ltxt { font: italic 600 13px var(--serif); fill: var(--accent-2); }
+.lbl { font-family: var(--cond); font-weight: 700; letter-spacing: .12em; fill: var(--ink); }
+.cart { position: absolute; left: 32px; bottom: 32px; width: min(420px, calc(100% - 64px)); background: var(--bg); border: 1.5px solid var(--ink); padding: calc(var(--u) * 2) calc(var(--u) * 2.5); box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--ink); }
+.cart .kick { font: 700 var(--t-1)/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2); }
+.cart h1 { margin: 6px 0; font: 600 var(--t3)/1.05 var(--serif); }
+.cart p { margin: 0; font-size: 15px; }
+.cart .sc { display: flex; justify-content: space-between; margin-top: var(--u); font: 500 var(--t-1)/1 var(--cond); letter-spacing: .08em; }
+.notes { position: absolute; right: 32px; top: 32px; width: min(360px, calc(100% - 64px)); background: rgba(251,253,254,.94); border: 1.5px solid var(--ink); padding: calc(var(--u) * 2); font-size: 15px; }
+.notes h2 { margin: 0 0 var(--u); font: 700 var(--t0)/1 var(--cond); letter-spacing: .2em; text-transform: uppercase; }
+.notes h2.cau { color: var(--accent-2); }
+.notes p { margin: 0 0 var(--u); }
+.notes table { width: 100%; border-collapse: collapse; font: 500 var(--t-1)/1.3 var(--cond); font-variant-numeric: tabular-nums; margin-bottom: var(--u); }
+.notes th, .notes td { border: 1px solid var(--ink); padding: 3px 5px; text-align: center; }
+.notes .sel { border-top: 2px solid var(--accent-2); padding-top: var(--u); min-height: 90px; }
+.notes .sel b { color: var(--accent-2); font-family: var(--cond); letter-spacing: .06em; }
+@media (prefers-reduced-motion: no-preference) {
+  .flare { animation: fl2 10s steps(1) infinite; }
+  @keyframes fl2 { 0% { opacity: 1; } 5% { opacity: .15; } 10% { opacity: 1; } 15%, 100% { opacity: .15; } }
+}
+@media (max-width: 900px) {
+  .chart { min-height: 78vh; }
+  .panels { position: relative; }
+  .notes, .cart { position: static; width: auto; margin: 12px; }
+}
+</style>
+</head>
+<body>
+<main>
+<div class="chart">
+  <svg id="c" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Chart of Porthwenna Harbour with soundings, hazards, a lighthouse and a compass rose">
+    <defs>
+      <path id="land" d="M0 0 H1600 V250 C1520 270 1480 330 1400 320 C1320 310 1280 240 1180 260 C1100 276 1080 360 1010 380 C960 395 930 340 900 330 C860 318 860 420 820 440 C780 460 740 430 720 380 C700 330 680 300 640 310 C560 330 560 420 470 420 C390 420 360 330 280 330 C200 330 140 390 60 380 L0 372 Z"/>
+    </defs>
+    <rect width="1600" height="1000" fill="#fbfdfe"/>
+    <use href="#land" fill="none" stroke="#e3f0f9" stroke-width="170"/>
+    <use href="#land" fill="none" stroke="#cfe6f5" stroke-width="110"/>
+    <use href="#land" fill="none" stroke="#8ec3e6" stroke-width="44"/>
+    <use href="#land" fill="#f5ecd0" stroke="#1e2b3a" stroke-width="2"/>
+    <g id="dyn"></g>
+  </svg>
+  <div class="panels">
+    <aside class="notes" aria-label="Chart notes">
+      <h2 class="cau">Caution</h2>
+      <p>The Mowl Ledges dry at half-tide and break in any swell. Students keep east of the red can at all states of tide.</p>
+      <h2>Tidal streams off the pier</h2>
+      <table><thead><tr><th>Hours</th><th>−3</th><th>−1</th><th>HW</th><th>+2</th><th>+4</th></tr></thead><tbody><tr><td>Dir °</td><td>062</td><td>071</td><td>slack</td><td>248</td><td>240</td></tr><tr><td>Knots</td><td>1.4</td><td>0.8</td><td>0.2</td><td>1.1</td><td>1.6</td></tr></tbody></table>
+      <div class="sel" id="sel" aria-live="polite"><b>Select a magenta symbol</b><br>Each hazard on the chart carries a note from the instructors.</div>
+    </aside>
+    <div class="cart">
+      <div class="kick">Porthwenna Sailing School · Harbour guide</div>
+      <h1>Porthwenna Harbour and Approaches</h1>
+      <p>Soundings in metres, reduced to chart datum. Heights above mean high water springs. For teaching only: carry the official chart when afloat.</p>
+      <div class="sc"><span>Scale 1:7 500</span><span>Datum WGS84</span><span>Edition 4, 2026</span></div>
+    </div>
+  </div>
+</div>
+</main>
+<script>
+(() => {
+  let seed = 52; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const coast = (x) => { const pts = [[0, 372], [60, 380], [280, 330], [470, 420], [640, 310], [720, 380], [820, 440], [900, 330], [1010, 380], [1180, 260], [1400, 320], [1600, 250]]; for (let i = 1; i < pts.length; i++) if (x <= pts[i][0]) { const [a, b] = [pts[i - 1], pts[i]]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); } return 250; };
+  let o = "";
+  [[70, "10"], [160, "20"]].forEach(([off, lab]) => { let d = ""; for (let x = 0; x <= 1600; x += 40) d += (x ? " L" : "M") + x + " " + (coast(x) + off + Math.sin(x / 90) * 18).toFixed(0); o += `<path d="${d}" fill="none" stroke="#1e2b3a" stroke-width="1" stroke-dasharray="2 5" opacity=".7"/><text class="snd sm" x="${lab === "10" ? 300 : 1100}" y="${(coast(lab === "10" ? 300 : 1100) + off + 14).toFixed(0)}">${lab}</text>`; });
+  for (let k = 0; k < 150; k++) { const x = 30 + rnd() * 1540, cy = coast(x), y = cy + 40 + rnd() * (980 - cy - 40);
+    if (x < 540 && y > 640) continue; if (x > 1000 && y < 400) continue; if (Math.hypot(x - 1320, y - 820) < 160) continue;
+    const dd = Math.max(.4, (y - cy) / 26 + rnd() * 2 - 1); const whole = Math.floor(dd), frac = Math.floor((dd - whole) * 10);
+    o += `<text class="snd" x="${x.toFixed(0)}" y="${y.toFixed(0)}">${whole}${dd < 10 ? `<tspan class="snd sm" dy="3">${frac}</tspan>` : ""}</text>`; }
+  o += `<path d="M700 380 L760 520 L776 516 L716 376Z" fill="#1e2b3a"/><rect x="740" y="520" width="42" height="10" fill="#1e2b3a" transform="rotate(-24 761 525)"/>`;
+  o += `<text class="lbl" x="590" y="250" font-size="30">PORTHWENNA</text><text class="lbl" x="880" y="200" font-size="18">Tregarth Head</text><text class="lbl" x="80" y="300" font-size="16">Mowl Point</text>`;
+  o += `<g transform="translate(282 330)"><circle r="6" fill="#1e2b3a"/><path class="flare" d="M0 0 C-10 26 -4 44 12 50 C22 40 20 18 0 0Z" fill="#c23b8e" transform="rotate(-30)"/></g><text class="ltxt" x="300" y="306">Fl(2) 10s 42m 14M</text>`;
+  const HZ = [
+    [300, 470, "rock", "Mowl Ledges", "Dries 1.8 m. Twenty-two boats have touched here in the school’s records. Keep the church tower open of the pier head."],
+    [520, 540, "wreck", "Wreck of the Kittiwake", "Crabber, lost 1987. 2.1 m over it at datum. Divers use it; give their flag 50 m."],
+    [960, 520, "can", "Red can, Pier Spit", "Leave to port entering. Q.R light. Rounding mark for Tuesday racing."],
+    [1060, 470, "cone", "Green cone, Tregarth", "Leave to starboard entering. Fl.G 3s. Seals sleep on it in August."],
+    [1300, 620, "rock", "The Minnows", "Covers at half-tide, 0.4 m at datum. Surf breaks here in any westerly over force 4."]
+  ];
+  HZ.forEach(([x, y, t, n], i) => {
+    let s = "";
+    if (t === "rock") s = `<g class="hmark" stroke="#c23b8e" stroke-width="2" fill="none"><path d="M-9 0 H9 M0 -9 V9 M-6 -6 L6 6 M6 -6 L-6 6"/><circle r="15" stroke-dasharray="3 3"/></g>`;
+    if (t === "wreck") s = `<g class="hmark" stroke="#c23b8e" stroke-width="2" fill="none"><path d="M-16 0 H16 M-8 -6 V6 M0 -8 V8 M8 -6 V6"/><ellipse rx="24" ry="13" stroke-dasharray="3 3"/></g>`;
+    if (t === "can") s = `<g class="hmark" stroke="#1e2b3a" stroke-width="1.5"><rect x="-7" y="-14" width="14" height="14" fill="#d23b2b"/><circle r="10" fill="none" stroke="#c23b8e" stroke-width="2" cy="-18"/></g>`;
+    if (t === "cone") s = `<g class="hmark" stroke="#1e2b3a" stroke-width="1.5"><path d="M-8 0 L0 -16 L8 0Z" fill="#2e8b4a"/><circle r="10" fill="none" stroke="#c23b8e" stroke-width="2" cy="-20"/></g>`;
+    o += `<g class="hz" tabindex="0" role="button" aria-label="${n}" data-i="${i}" transform="translate(${x} ${y})"><circle r="26" fill="transparent"/>${s}</g>`;
+  });
+  let r = `<g transform="translate(1320 820)"><circle r="130" fill="none" stroke="#c23b8e" stroke-width="1.2"/><circle r="112" fill="none" stroke="#c23b8e" stroke-width="1"/>`;
+  for (let a = 0; a < 360; a += 5) { const L = a % 30 === 0 ? 14 : a % 10 === 0 ? 9 : 5, t = (a - 90) * Math.PI / 180; r += `<line x1="${(Math.cos(t) * 130).toFixed(1)}" y1="${(Math.sin(t) * 130).toFixed(1)}" x2="${(Math.cos(t) * (130 - L)).toFixed(1)}" y2="${(Math.sin(t) * (130 - L)).toFixed(1)}" stroke="#c23b8e"/>`;
+    if (a % 30 === 0) r += `<text x="${(Math.cos(t) * 146).toFixed(1)}" y="${(Math.sin(t) * 146 + 4).toFixed(1)}" text-anchor="middle" font-size="11" fill="#c23b8e" font-family="Saira Condensed">${String(a).padStart(3, "0")}</text>`; }
+  r += `<g transform="rotate(-2)"><circle r="80" fill="none" stroke="#c23b8e"/>`;
+  for (let a = 0; a < 360; a += 10) { const t = (a - 90) * Math.PI / 180; r += `<line x1="${(Math.cos(t) * 80).toFixed(1)}" y1="${(Math.sin(t) * 80).toFixed(1)}" x2="${(Math.cos(t) * 72).toFixed(1)}" y2="${(Math.sin(t) * 72).toFixed(1)}" stroke="#c23b8e"/>`; }
+  r += `<path d="M0 -70 L6 -6 L0 0 L-6 -6Z" fill="#c23b8e"/><path d="M0 70 L6 6 L0 0 L-6 6Z" fill="none" stroke="#c23b8e"/><text y="40" text-anchor="middle" font-size="10" fill="#c23b8e" font-family="Vollkorn" font-style="italic">VAR 2°W (2026)</text></g>`;
+  r += `<path d="M0 -112 L-8 -126 H8Z" fill="#c23b8e"/></g>`;
+  o += r;
+  document.getElementById("dyn").innerHTML = o;
+  const sel = document.getElementById("sel");
+  const pick = (g) => { const h = HZ[+g.dataset.i]; sel.innerHTML = `<b>${h[3]}</b><br>${h[4]}`; };
+  document.querySelectorAll(".hz").forEach((g) => { g.addEventListener("click", () => pick(g)); g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(g); } }); });
+})();
+</script>
+</body>
+</html>
