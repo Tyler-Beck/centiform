@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cyanotype Blueprint · Centiform</title>
+<style>
+/* @fonts: Architects Daughter:400:block; Sono:400,600:swap */
+@font-face{font-family:"Architects Daughter";font-style:normal;font-weight:400;font-display:block;src:url(fonts/architects-daughter-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/sono-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #12426b;          /* ferric ferrocyanide blue */
+  --ink: #eaf2f8;         /* bleached line */
+  --accent-1: #8fb4d1;    /* faint line, construction lines */
+  --accent-2: #f5d76e;    /* revision crayon on the print */
+  --deep: #0c3354;
+  --line: rgba(234,242,248,.9);
+  --u: 8px;               /* drafting grid */
+  /* scale: major third, 1.25 on 16px */
+  --t-2: 12.8px; --t-1: 14px; --t0: 16px; --t1: 20px; --t2: 25px; --t3: 31px;
+  --t4: clamp(34px, 4.2vw, 61px);
+  --hand: "Architects Daughter", "Comic Sans MS", cursive;
+  --mono: "Sono", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #0a2c49; }
+body { color: var(--ink); font: 400 var(--t0)/1.5 var(--mono); padding: calc(var(--u) * 2); min-height: 100vh; }
+.sheet {
+  position: relative; min-height: calc(100vh - var(--u) * 4); padding: calc(var(--u) * 4);
+  background:
+    radial-gradient(140% 100% at 50% 40%, transparent 55%, rgba(4,20,36,.55)),
+    linear-gradient(rgba(143,180,209,.07) 1px, transparent 1px) 0 0 / calc(var(--u) * 3) calc(var(--u) * 3),
+    linear-gradient(90deg, rgba(143,180,209,.07) 1px, transparent 1px) 0 0 / calc(var(--u) * 3) calc(var(--u) * 3),
+    var(--bg);
+  box-shadow: 0 0 0 1px #0a2c49, 0 20px 60px -20px #000;
+}
+.sheet::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: screen;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' seed='11'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .7 0 0 0 0 .82 0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>"); }
+/* border with zone references */
+.frame { position: relative; border: 2px solid var(--line); outline: 1px solid var(--accent-1); outline-offset: calc(var(--u) * 1.5); min-height: calc(100vh - var(--u) * 12); display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); grid-template-rows: auto 1fr auto; }
+.zones { position: absolute; display: flex; justify-content: space-around; font: 400 var(--t-2)/1 var(--mono); color: var(--accent-1); pointer-events: none; }
+.zones.top { left: 0; right: 0; top: calc(var(--u) * -3); }
+.zones.side { top: 0; bottom: 0; left: calc(var(--u) * -3.2); flex-direction: column; }
+.zones.side.r { left: auto; right: calc(var(--u) * -3.2); }
+
+.bar { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: stretch; border-bottom: 2px solid var(--line); }
+.bar h1 { margin: 0; padding: calc(var(--u) * 1.5) calc(var(--u) * 3); font: 400 var(--t3)/1.1 var(--hand); letter-spacing: .02em; border-right: 1px solid var(--line); flex: 1 1 auto; }
+.bar nav { display: flex; }
+.bar button { font: 600 var(--t-1)/1.2 var(--mono); letter-spacing: .08em; color: var(--ink); background: transparent; border: 0; border-left: 1px solid var(--line); padding: var(--u) calc(var(--u) * 2.5); cursor: pointer; text-align: left; }
+.bar button small { display: block; font: 400 var(--t-2)/1.2 var(--mono); color: var(--accent-1); letter-spacing: .04em; }
+.bar button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.bar button[aria-pressed="true"] small { color: var(--deep); }
+button:focus-visible, a:focus-visible { outline: 2px dashed var(--accent-2); outline-offset: -5px; }
+
+.view { position: relative; border-right: 2px solid var(--line); padding: calc(var(--u) * 2); display: flex; flex-direction: column; }
+.view svg { width: 100%; height: auto; max-height: calc(100vh - var(--u) * 30); flex: 1; }
+.caption { display: flex; align-items: center; gap: calc(var(--u) * 1.5); font: 400 var(--t1)/1.2 var(--hand); }
+.caption .bubble { display: inline-grid; place-items: center; width: calc(var(--u) * 6); height: calc(var(--u) * 6); border: 2px solid var(--ink); border-radius: 50%; position: relative; font: 600 var(--t-1)/1 var(--mono); flex: none; }
+.caption .bubble::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--ink); }
+.caption .bubble b { position: absolute; top: 7px; font-weight: 600; }
+.caption .bubble i { position: absolute; bottom: 8px; font-style: normal; font-size: 10px; }
+.caption u { text-decoration: none; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+.caption span:last-child { font: 400 var(--t-2)/1 var(--mono); color: var(--accent-1); margin-left: auto; }
+
+svg { font-family: var(--hand); }
+.l { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linejoin: round; }
+.l.th { stroke-width: 2.6; }
+.l.cl { stroke: var(--accent-1); stroke-width: .9; stroke-dasharray: 14 4 2 4; }
+.dim { fill: none; stroke: var(--ink); stroke-width: 1; }
+.lab { fill: var(--ink); font-size: 15px; }
+.lab.s { font-size: 12.5px; fill: var(--accent-1); }
+.rev { fill: none; stroke: var(--accent-2); stroke-width: 2; }
+.rev-t { fill: var(--accent-2); font-size: 14px; }
+.hatch { fill: url(#rock); stroke: none; }
+g.dwg { display: none; }
+g.dwg.on { display: inline; }
+
+.notes { padding: calc(var(--u) * 3); overflow: auto; }
+.notes h2 { font: 600 var(--t-1)/1.2 var(--mono); letter-spacing: .14em; text-transform: uppercase; margin: 0 0 calc(var(--u) * 1.5); padding-bottom: var(--u); border-bottom: 1px solid var(--line); }
+.notes ol { margin: 0 0 calc(var(--u) * 3); padding-left: calc(var(--u) * 3); font-size: var(--t0); line-height: 1.5; }
+.notes li { margin-bottom: var(--u); padding-left: var(--u); max-width: 60ch; }
+.notes li::marker { font-weight: 600; }
+.notes .hand { font: 400 var(--t1)/1.35 var(--hand); color: var(--accent-2); margin: 0 0 calc(var(--u) * 3); transform: rotate(-2deg); }
+table { width: 100%; border-collapse: collapse; font-size: var(--t-2); font-variant-numeric: tabular-nums; }
+th, td { border: 1px solid var(--accent-1); padding: 5px var(--u); text-align: left; vertical-align: top; }
+th { font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+tr.chg td { color: var(--accent-2); }
+tr.chg td:first-child::before { content: "\25B3 "; }
+
+.tb { grid-column: 2; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 2px solid var(--line); font-size: var(--t-2); }
+.tb > div { border-left: 1px solid var(--line); border-top: 1px solid var(--line); padding: 6px var(--u); min-height: calc(var(--u) * 6); }
+.tb > div:nth-child(-n+4) { border-top: 0; }
+.tb > div:nth-child(4n+1) { border-left: 0; }
+.tb span { display: block; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-1); }
+.tb b { font-weight: 600; font-size: var(--t-1); }
+.tb .big { grid-column: span 2; }
+.tb .big b { font: 400 var(--t2)/1.1 var(--hand); }
+.tb .no b { font: 600 var(--t1)/1 var(--mono); }
+.scale { grid-column: 1; border-top: 2px solid var(--line); border-right: 2px solid var(--line); display: flex; align-items: center; gap: calc(var(--u) * 3); padding: var(--u) calc(var(--u) * 2); font-size: var(--t-2); color: var(--accent-1); flex-wrap: wrap; }
+.scale svg { width: 240px; height: 28px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  g.dwg.on .l, g.dwg.on .dim { stroke-dasharray: 1; stroke-dashoffset: 1; animation: plot 1.6s cubic-bezier(.4,.1,.3,1) forwards; }
+  g.dwg.on .l.cl { stroke-dasharray: 14 4 2 4; stroke-dashoffset: 0; animation: none; }
+  g.dwg.on .dim { animation-delay: .9s; animation-duration: .9s; }
+  g.dwg.on .lab, g.dwg.on .rev, g.dwg.on .rev-t { opacity: 0; animation: ink .5s 1.5s forwards; }
+  @keyframes plot { to { stroke-dashoffset: 0; } }
+  @keyframes ink { to { opacity: 1; } }
+}
+@media (max-width: 900px) {
+  body { padding: var(--u); }
+  .sheet { padding: calc(var(--u) * 2.5); }
+  .frame { grid-template-columns: minmax(0, 1fr); outline-offset: var(--u); }
+  .view { border-right: 0; border-bottom: 2px solid var(--line); }
+  .view svg { max-height: 62vh; }
+  .tb, .scale { grid-column: 1; }
+  .tb { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tb > div:nth-child(n) { border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .tb > div:nth-child(2n+1) { border-left: 0; }
+  .zones { display: none; }
+  .bar h1 { font-size: var(--t2); }
+  .bar nav { width: 100%; border-top: 1px solid var(--line); }
+  .bar button { flex: 1; padding: var(--u); }
+  .bar button:first-child { border-left: 0; }
+  .caption span:last-child { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+<div class="frame">
+  <div class="zones top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div>
+  <div class="zones side" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+  <div class="zones side r" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span><span>E</span></div>
+
+  <header class="bar">
+    <h1>Gannet Head Light · Construction Set</h1>
+    <nav aria-label="Drawings">
+      <button type="button" data-d="elev" aria-pressed="true">A-101<small>West elevation</small></button>
+      <button type="button" data-d="sect" aria-pressed="false">A-201<small>Section A–A</small></button>
+      <button type="button" data-d="plan" aria-pressed="false">A-301<small>Lantern plan</small></button>
+    </nav>
+  </header>
+
+  <main class="view">
+    <div class="caption"><span class="bubble"><b>1</b><i id="capsheet">A-101</i></span><u id="captitle">West Elevation</u><span id="capscale">Scale 1:100 at A1</span></div>
+    <svg viewBox="0 0 640 780" role="img" aria-labelledby="svgt">
+      <title id="svgt">Line drawings of the Gannet Head lighthouse tower</title>
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0 2 L10 5 L0 8" fill="none" stroke="#eaf2f8" stroke-width="1.2"/></marker>
+        <pattern id="rock" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="#8fb4d1" stroke-width="1"/></pattern>
+      </defs>
+      <g class="dwg on" id="elev">
+        <rect class="hatch" x="120" y="702" width="380" height="40"/>
+        <path class="l th" pathLength="1" d="M110 702 H520"/>
+        <path class="l" pathLength="1" d="M210 702 V676 H410 V702"/>
+        <path class="l th" pathLength="1" d="M228 676 L262 262 H358 L392 676 Z"/>
+        <path class="l" pathLength="1" d="M236 580 H384 M244 470 H376 M252 360 H368"/>
+        <path class="l" pathLength="1" d="M296 676 V636 A14 14 0 0 1 324 636 V676"/>
+        <path class="l" pathLength="1" d="M302 528 h16 v28 h-16 Z M304 418 h12 v26 h-12 Z M306 308 h10 v24 h-10 Z"/>
+        <path class="l th" pathLength="1" d="M232 262 H388 V250 H232 Z"/>
+        <path class="l" pathLength="1" d="M236 250 V226 H384 V250 M236 234 H384 M256 250 V226 M276 250 V226 M296 250 V226 M324 250 V226 M344 250 V226 M364 250 V226"/>
+        <path class="l th" pathLength="1" d="M270 226 V160 H350 V226 M270 160 C274 128 300 114 310 112 C320 114 346 128 350 160"/>
+        <path class="l" pathLength="1" d="M290 226 V160 M310 226 V160 M330 226 V160 M270 204 H350 M270 182 H350"/>
+        <path class="l" pathLength="1" d="M310 112 V104 M302 96 a8 8 0 1 0 16 0 a8 8 0 1 0 -16 0 M310 88 V60"/>
+        <path class="l cl" d="M310 40 V740"/>
+        <path class="dim" pathLength="1" d="M470 702 H530 M470 60 H530 M470 262 H530"/>
+        <path class="dim" pathLength="1" d="M515 702 V60" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <path class="dim" pathLength="1" d="M490 702 V262" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="lab" x="510" y="390" transform="rotate(-90 510 390)" text-anchor="middle">31.40 overall</text>
+        <text class="lab" x="485" y="560" transform="rotate(-90 485 560)" text-anchor="middle">22.85 to gallery</text>
+        <path class="dim" pathLength="1" d="M228 690 V760 M392 690 V760"/>
+        <path class="dim" pathLength="1" d="M228 750 H392" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="lab" x="310" y="772" text-anchor="middle">Ø 7.20 at plinth</text>
+        <path class="dim" pathLength="1" d="M100 702 h40 M112 702 l8 -10 l8 10 M100 262 h40 M112 262 l8 -10 l8 10 M100 160 h40 M112 160 l8 -10 l8 10"/>
+        <text class="lab s" x="40" y="690">+0.00 GL</text>
+        <text class="lab s" x="20" y="250">+22.85 GALLERY</text>
+        <text class="lab s" x="22" y="148">+26.10 LANTERN</text>
+        <text class="lab" x="120" y="520">granite ashlar,</text><text class="lab" x="120" y="538">lime-washed</text>
+        <path class="dim" pathLength="1" d="M222 526 L250 540"/>
+        <path class="rev" d="M258 150 a14 14 0 0 1 22 -16 a14 14 0 0 1 26 -6 a14 14 0 0 1 26 4 a14 14 0 0 1 22 14 a14 14 0 0 1 4 26 a14 14 0 0 1 2 28 a14 14 0 0 1 -12 22 a14 14 0 0 1 -26 6 a14 14 0 0 1 -26 0 a14 14 0 0 1 -26 -8 a14 14 0 0 1 -10 -22 a14 14 0 0 1 -4 -26 a14 14 0 0 1 2 -22 z"/>
+        <path class="rev" d="M396 150 l14 -24 l14 24 z"/><text class="rev-t" x="406" y="146">2</text>
+        <text class="rev-t" x="432" y="146">glazing bars to 8 no.</text>
+      </g>
+      <g class="dwg" id="sect">
+        <rect class="hatch" x="120" y="702" width="380" height="40"/>
+        <path class="l th" pathLength="1" d="M110 702 H520"/>
+        <path class="l th" pathLength="1" d="M228 676 L262 262 H358 L392 676 Z"/>
+        <path class="l th" pathLength="1" d="M258 676 L280 262 M362 676 L340 262"/>
+        <path class="l" pathLength="1" d="M258 600 H362 M263 520 H357 M268 440 H352 M273 360 H347 M278 280 H342"/>
+        <path class="l" pathLength="1" d="M262 676 l12 -10 l12 -10 l12 -10 l12 -10 l12 -10 l12 -10 l12 -10 l12 -10 M266 600 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 M270 520 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 l10 -10 M274 440 l9 -10 l9 -10 l9 -10 l9 -10 l9 -10 l9 -10 l9 -10 l9 -10 M278 360 l8 -10 l8 -10 l8 -10 l8 -10 l8 -10 l8 -10 l8 -10 l8 -10"/>
+        <path class="l th" pathLength="1" d="M232 262 H388 V250 H232 Z M270 250 V160 H350 V250 M270 160 C274 128 300 114 310 112 C320 114 346 128 350 160"/>
+        <path class="l" pathLength="1" d="M290 234 h40 v-54 h-40 Z M296 222 h28 M296 206 h28 M296 190 h28"/>
+        <path class="l cl" d="M310 40 V740"/>
+        <path class="dim" pathLength="1" d="M258 640 H300" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="lab" x="400" y="648">wall 1.10 at base,</text><text class="lab" x="400" y="666">0.60 at gallery</text>
+        <path class="dim" pathLength="1" d="M396 652 L306 640"/>
+        <text class="lab" x="400" y="420">112 granite treads,</text><text class="lab" x="400" y="438">rise 204 mm</text>
+        <path class="dim" pathLength="1" d="M396 426 L318 430"/>
+        <text class="lab" x="400" y="206">3rd order Fresnel lens,</text><text class="lab" x="400" y="224">focal plane +27.40</text>
+        <path class="dim" pathLength="1" d="M396 212 L332 206"/>
+        <text class="lab s" x="40" y="690">+0.00 GL</text><text class="lab s" x="30" y="592">WATCH ROOM</text><text class="lab s" x="30" y="352">OIL STORE</text>
+      </g>
+      <g class="dwg" id="plan">
+        <circle class="l th" pathLength="1" cx="320" cy="390" r="210"/>
+        <circle class="l" pathLength="1" cx="320" cy="390" r="196"/>
+        <path class="l th" pathLength="1" d="M320 250 L419 291 L460 390 L419 489 L320 530 L221 489 L180 390 L221 291 Z"/>
+        <circle class="l" pathLength="1" cx="320" cy="390" r="44"/>
+        <circle class="l" pathLength="1" cx="320" cy="390" r="14"/>
+        <path class="l cl" d="M80 390 H560 M320 150 V630"/>
+        <path class="dim" pathLength="1" d="M320 390 L446 170 M320 390 L140 294"/>
+        <path class="dim" pathLength="1" d="M390 268 A140 140 0 1 1 196 324" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="lab" x="452" y="166">040°</text><text class="lab" x="92" y="286">310°</text>
+        <text class="lab" x="360" y="590">white sector, 270°</text>
+        <text class="lab s" x="338" y="380">FOCAL PLANE</text>
+        <path class="dim" pathLength="1" d="M110 390 V650 M530 390 V650"/>
+        <path class="dim" pathLength="1" d="M110 640 H530" marker-start="url(#ar)" marker-end="url(#ar)"/>
+        <text class="lab" x="320" y="668" text-anchor="middle">Ø 4.20 gallery</text>
+        <path class="rev" d="M402 272 a12 12 0 0 1 22 -6 a12 12 0 0 1 18 14 a12 12 0 0 1 4 22 a12 12 0 0 1 -18 12 a12 12 0 0 1 -22 -8 a12 12 0 0 1 -4 -22 a12 12 0 0 1 0 -12z"/>
+        <text class="rev-t" x="456" y="262">△3 new vent</text>
+      </g>
+    </svg>
+  </main>
+
+  <aside class="notes" aria-label="General notes">
+    <h2>General notes</h2>
+    <ol>
+      <li>All dimensions in metres unless noted. Do not scale from this drawing.</li>
+      <li>Ground level +0.00 = 38.20 m above datum, at the plinth door.</li>
+      <li>Tower: Penryn granite ashlar in 450 mm courses, bedded in lime mortar. No cement.</li>
+      <li>Lantern: cast bronze frame, 8 glazing bars, storm panes to the seaward half.</li>
+      <li>Light: Fl(2) W 15s, range 18 nautical miles. Keep the focal plane clear of all fixings.</li>
+    </ol>
+    <p class="hand">RS: check tread 57, it rocks.</p>
+    <h2>Revisions</h2>
+    <table>
+      <thead><tr><th>Rev</th><th>Date</th><th>Description</th><th>By</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>14.02.1911</td><td>Issued for tender</td><td>HW</td></tr>
+        <tr class="chg"><td>2</td><td>03.05.1911</td><td>Lantern glazing bars from 6 to 8</td><td>RS</td></tr>
+        <tr class="chg"><td>3</td><td>21.08.1911</td><td>Vent added at dome, NE quadrant</td><td>RS</td></tr>
+      </tbody>
+    </table>
+  </aside>
+
+  <div class="scale">
+    <svg viewBox="0 0 240 28" aria-hidden="true"><path d="M1 8 H239 M1 4 V14 M49 4 V14 M97 4 V14 M145 4 V14 M193 4 V14 M239 4 V14" stroke="#eaf2f8" fill="none"/><path d="M1 6 H49 V10 H1 Z M97 6 H145 V10 H97 Z" fill="#eaf2f8"/><text x="1" y="26" fill="#8fb4d1" font-size="10">0</text><text x="92" y="26" fill="#8fb4d1" font-size="10">2 m</text><text x="222" y="26" fill="#8fb4d1" font-size="10">5 m</text></svg>
+    <span>True north lies 4° west of sheet north</span>
+  </div>
+  <div class="tb" aria-label="Title block">
+    <div class="big"><span>Project</span><b>Gannet Head Light</b></div>
+    <div><span>Client</span><b>Northern Lights Trust</b></div>
+    <div><span>Job no.</span><b>1908/44</b></div>
+    <div class="big"><span>Drawing</span><b id="tbtitle">West Elevation</b></div>
+    <div><span>Drawn / Checked</span><b>H. Wray / R. Sillars</b></div>
+    <div class="no"><span>Sheet · Rev</span><b id="tbno">A-101 · 2</b></div>
+  </div>
+</div>
+</div>
+<script>
+(() => {
+  const D = { elev: ["A-101", "West Elevation", "Scale 1:100 at A1", "2"], sect: ["A-201", "Section A–A", "Scale 1:100 at A1", "1"], plan: ["A-301", "Lantern Plan", "Scale 1:20 at A1", "3"] };
+  const $ = (id) => document.getElementById(id);
+  document.querySelector(".bar nav").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    document.querySelectorAll(".bar button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    document.querySelectorAll("g.dwg").forEach((g) => g.classList.toggle("on", g.id === b.dataset.d));
+    const [no, t, sc, rev] = D[b.dataset.d];
+    $("capsheet").textContent = no; $("captitle").textContent = t; $("capscale").textContent = sc;
+    $("tbtitle").textContent = t; $("tbno").textContent = no + " · " + rev;
+  });
+})();
+</script>
+</body>
+</html>
