@@ -187,3 +187,13 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Jersey 10 | OFL-1.1 | https://fontsource.org/fonts/jersey-10 | 092-one-bit-desktop |
 | Inconsolata | OFL-1.1 | https://fontsource.org/fonts/inconsolata | 093-ascii-only |
 | Archivo | OFL-1.1 | https://fontsource.org/fonts/archivo | 094-single-hue |
+| Unica One | OFL-1.1 | https://fontsource.org/fonts/unica-one | 096-corridor-3d |
+| Mukta | OFL-1.1 | https://fontsource.org/fonts/mukta | 096-corridor-3d |
+| Gloock | OFL-1.1 | https://fontsource.org/fonts/gloock | 097-lipogram |
+| Schibsted Grotesk | OFL-1.1 | https://fontsource.org/fonts/schibsted-grotesk | 097-lipogram |
+| Grenze Gotisch | OFL-1.1 | https://fontsource.org/fonts/grenze-gotisch | 098-marseille-tarot |
+| Grenze | OFL-1.1 | https://fontsource.org/fonts/grenze | 098-marseille-tarot |
+| Bricolage Grotesque | OFL-1.1 | https://fontsource.org/fonts/bricolage-grotesque | 099-solarpunk-coop |
+| Source Serif 4 | OFL-1.1 | https://fontsource.org/fonts/source-serif-4 | 099-solarpunk-coop |
+| Philosopher | OFL-1.1 | https://fontsource.org/fonts/philosopher | 100-sundial-hours |
+| Nunito Sans | OFL-1.1 | https://fontsource.org/fonts/nunito-sans | 100-sundial-hours |
