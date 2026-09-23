@@ -64,7 +64,7 @@ window.CENTIFORM = [
     fonts: ["Sorts Mill Goudy","Alegreya SC"], swatch: ["#f1e6c8","#2b2118","#a33b20","#5b6b3a"],
     grammar: "Month tables with ruled rows, woodcut sun and moon in headers",
     motif: "Rows of moon-phase glyphs drawn in SVG",
-    status: "planned" },
+    status: "done" },
   { n: 10, slug: "010-museum-wall-label", title: "Museum Wall Label", family: "Paper & Print",
     subject: "A single-object museum exhibition.", format: "landing", mode: "light",
     thesis: "Gallery minimalism: one object, a lot of wall, one tombstone label",

@@ -23,3 +23,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Spectral | OFL-1.1 | https://fontsource.org/fonts/spectral | 007-transit-annual-1972 |
 | Anton | OFL-1.1 | https://fontsource.org/fonts/anton | 008-basement-xerox |
 | Special Elite | Apache-2.0 | https://fontsource.org/fonts/special-elite | 008-basement-xerox |
+| Sorts Mill Goudy | OFL-1.1 | https://fontsource.org/fonts/sorts-mill-goudy | 009-farmers-almanac |
+| Alegreya SC | OFL-1.1 | https://fontsource.org/fonts/alegreya-sc | 009-farmers-almanac |
