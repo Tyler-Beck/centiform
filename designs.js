@@ -29,7 +29,7 @@ window.CENTIFORM = [
     fonts: ["UnifrakturMaguntia","Old Standard TT"], swatch: ["#e9e0cb","#1b1814","#7a1f1f","#8a7f6a"],
     grammar: "Seven columns with vertical hairline rules, stacked decks of headlines, no whitespace",
     motif: "Engraved dingbats and a blackletter masthead with ornamental rules",
-    status: "planned" },
+    status: "done" },
   { n: 5, slug: "005-triband-paperbacks", title: "Tri-Band Paperbacks", family: "Paper & Print",
     subject: "Backlist of a fictional mid-century paperback imprint.", format: "catalog", mode: "light",
     thesis: "Horizontal three-band book covers; colour codes the genre",

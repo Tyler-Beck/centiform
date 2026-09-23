@@ -13,3 +13,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Red Hat Mono | OFL-1.1 | https://fontsource.org/fonts/red-hat-mono | 002-alpine-timetable |
 | Rubik Mono One | OFL-1.1 | https://fontsource.org/fonts/rubik-mono-one | 003-riso-repair-zine |
 | Rubik | OFL-1.1 | https://fontsource.org/fonts/rubik | 003-riso-repair-zine |
+| UnifrakturMaguntia | OFL-1.1 | https://fontsource.org/fonts/unifrakturmaguntia | 004-exposition-broadsheet |
+| Old Standard TT | OFL-1.1 | https://fontsource.org/fonts/old-standard-tt | 004-exposition-broadsheet |
