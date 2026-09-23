@@ -43,3 +43,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | IBM Plex Sans | OFL-1.1 | https://fontsource.org/fonts/ibm-plex-sans | 017-punch-card-batch |
 | Press Start 2P | OFL-1.1 | https://fontsource.org/fonts/press-start-2p | 018-four-shade-handheld |
 | Pixelify Sans | OFL-1.1 | https://fontsource.org/fonts/pixelify-sans | 018-four-shade-handheld |
+| Jost | OFL-1.1 | https://fontsource.org/fonts/jost | 019-hifi-brochure-1965 |
+| Chivo Mono | OFL-1.1 | https://fontsource.org/fonts/chivo-mono | 019-hifi-brochure-1965 |

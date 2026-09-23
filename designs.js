@@ -134,7 +134,7 @@ window.CENTIFORM = [
     fonts: ["Jost","Chivo Mono"], swatch: ["#e4e2dd","#3a3a38","#f25c05","#b9b6ae"],
     grammar: "Product at 1:1 scale drawing, specs in a rigid two-column table",
     motif: "Circular speaker perforation grid",
-    status: "planned" },
+    status: "done" },
   { n: 20, slug: "020-darkroom-contact-sheet", title: "Darkroom Contact Sheet", family: "Instruments",
     subject: "Portfolio of a documentary photographer.", format: "catalog", mode: "dark",
     thesis: "Red safelight darkroom: contact sheets, grease-pencil crop marks",
