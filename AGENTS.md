@@ -58,3 +58,10 @@ A design passes only if a designer who knows the source medium would recognise i
 - The worker screenshots each design at 1440x900 and 390x844 with `chrome-devtools-axi` and puts the files in the firstmate task data folder (not in the repo), then lists them in the PR body with the self-review answers.
 - Reviewer (captain for the pilot, firstmate after) opens the gallery and checks: registry fidelity, the 5.2 rules, and a side-by-side against palette neighbours and against all done designs of the same format.
 - Rejection reasons are written as a single line per design; the same ship fixes them before merge.
+
+## Maintaining this file
+
+Keep this file for knowledge useful to almost every future agent session in this project.
+Do not repeat what the codebase already shows; point to the authoritative file or command instead.
+Prefer rewriting or pruning existing entries over appending new ones.
+When updating this file, preserve this bar for all agents and keep entries concise.
