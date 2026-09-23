@@ -7,3 +7,7 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 
 | Family | License | Source | Design |
 |---|---|---|---|
+| Cutive Mono | OFL-1.1 | https://fontsource.org/fonts/cutive-mono | 001-kodachrome-lightbox |
+| Caveat | OFL-1.1 | https://fontsource.org/fonts/caveat | 001-kodachrome-lightbox |
+| Instrument Sans | OFL-1.1 | https://fontsource.org/fonts/instrument-sans | 002-alpine-timetable |
+| Red Hat Mono | OFL-1.1 | https://fontsource.org/fonts/red-hat-mono | 002-alpine-timetable |
