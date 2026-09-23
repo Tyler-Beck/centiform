@@ -21,3 +21,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Sometype Mono | OFL-1.1 | https://fontsource.org/fonts/sometype-mono | 006-herbarium-sheets |
 | Work Sans | OFL-1.1 | https://fontsource.org/fonts/work-sans | 007-transit-annual-1972 |
 | Spectral | OFL-1.1 | https://fontsource.org/fonts/spectral | 007-transit-annual-1972 |
+| Anton | OFL-1.1 | https://fontsource.org/fonts/anton | 008-basement-xerox |
+| Special Elite | Apache-2.0 | https://fontsource.org/fonts/special-elite | 008-basement-xerox |

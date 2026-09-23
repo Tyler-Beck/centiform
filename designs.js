@@ -57,7 +57,7 @@ window.CENTIFORM = [
     fonts: ["Anton","Special Elite"], swatch: ["#d9d9d4","#0d0d0d","#e8ff3a","#ff3b1f"],
     grammar: "Rotated, overlapping fragments with no grid; content held together by tape",
     motif: "Torn paper edges (clip-path) and ransom-note letters",
-    status: "planned" },
+    status: "done" },
   { n: 9, slug: "009-farmers-almanac", title: "Farmer's Almanac", family: "Paper & Print",
     subject: "Planting calendar and moon-phase tables for one year.", format: "tool", mode: "light",
     thesis: "19th-century almanac: dense tables, woodcuts, red and black ink",
