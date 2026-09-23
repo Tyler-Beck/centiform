@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bagru Block Print · Centiform</title>
+<style>
+/* @fonts: Yatra One:400:block; Martel:400,700:swap */
+@font-face{font-family:"Yatra One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/yatra-one-devanagari-400-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+@font-face{font-family:"Yatra One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/yatra-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Martel";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/martel-devanagari-400-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+@font-face{font-family:"Martel";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/martel-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Martel";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/martel-devanagari-700-normal.woff2) format("woff2");unicode-range:U+0900-097F,U+1CD0-1CF9,U+200C-200D,U+20A8,U+20B9,U+20F0,U+25CC,U+A830-A839,U+A8E0-A8FF,U+11B00-11B09;}
+@font-face{font-family:"Martel";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/martel-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f3d9b1;          /* cotton washed in harda (myrobalan) */
+  --ink: #2a1f1a;         /* syahi: iron-rust black */
+  --accent-1: #a8322d;    /* begar: alum-mordanted madder red */
+  --accent-2: #2f4f7a;    /* indigo over dabu mud resist */
+  --card: #efe3cc;        /* sample-book card */
+  --unbleached: #f6ecdb;
+  --teak: #8a5a33;
+  --u: 8px;
+  /* scale: 1.25 on 17px */
+  --t-1: 13.6px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: clamp(44px, 5.2vw, 84px);
+  --disp: "Yatra One", serif;
+  --text: "Martel", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+.shop { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); min-height: 100vh; }
+/* left: the printing table, with the process */
+.table { position: sticky; top: 0; align-self: start; min-height: 100vh; padding: calc(var(--u) * 5); background: repeating-linear-gradient(0deg, transparent 0 22px, rgba(42,31,26,.05) 22px 23px), #e9c998; border-right: 6px double rgba(42,31,26,.4); }
+.table .dev { font: 400 var(--t3)/1 var(--disp); color: var(--accent-1); }
+h1 { margin: calc(var(--u) * 1) 0 calc(var(--u) * 2); font: 400 var(--t4)/1 var(--disp); }
+.table > p { margin: 0 0 calc(var(--u) * 3); max-width: 36ch; }
+.steps { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+.steps li { counter-increment: s; display: grid; grid-template-columns: 40px 1fr; gap: calc(var(--u) * 1.5); padding: var(--u) 0; border-top: 1px dashed rgba(42,31,26,.35); font-size: 16px; }
+.steps li::before { content: counter(s); font: 400 var(--t1)/1.3 var(--disp); color: var(--accent-1); }
+.steps b { display: block; }
+/* right: the sample book */
+.book { padding: calc(var(--u) * 5); }
+.book header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--u); margin-bottom: calc(var(--u) * 3); }
+.book h2 { margin: 0; font: 400 var(--t2)/1.1 var(--disp); }
+.book header p { margin: 0; font-size: var(--t-1); letter-spacing: .06em; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: calc(var(--u) * 3); }
+.card { background: var(--card); padding: calc(var(--u) * 1.5) calc(var(--u) * 1.5) calc(var(--u) * 2); box-shadow: 0 1px 0 rgba(0,0,0,.08), 0 10px 18px -12px rgba(42,31,26,.4); position: relative; }
+.card::before { content: ""; position: absolute; top: 8px; left: 50%; width: 30px; height: 6px; margin-left: -15px; border: 2px solid #9a948a; border-bottom: 0; z-index: 2; }
+.swatch { position: relative; aspect-ratio: 4 / 3; overflow: hidden; cursor: none; }
+.swatch svg.cloth { display: block; width: 100%; height: 100%; }
+.swatch .edge { position: absolute; inset: auto 0 0; height: 10px; background: repeating-linear-gradient(90deg, transparent 0 3px, rgba(239,227,204,.9) 3px 4px); }
+.block { position: absolute; width: 72px; height: 72px; left: 0; top: 0; pointer-events: none; transform: translate(var(--bx, -200px), var(--by, -200px)); opacity: 0; transition: opacity .2s; z-index: 3; }
+.swatch:hover .block { opacity: 1; }
+.block svg { width: 100%; height: 100%; filter: drop-shadow(4px 8px 4px rgba(42,31,26,.45)); transform-origin: 50% 50%; }
+.block.press svg { animation: press .32s steps(3) both; }
+@keyframes press { 50% { transform: scale(.9); filter: drop-shadow(1px 2px 1px rgba(42,31,26,.5)); } }
+.card h3 { margin: calc(var(--u) * 1.5) 0 0; font: 400 var(--t1)/1.2 var(--disp); }
+.card .hi { font-size: var(--t-1); color: #6b5443; }
+.card dl { margin: var(--u) 0 0; display: grid; grid-template-columns: auto 1fr; gap: 0 calc(var(--u) * 1.5); font-size: var(--t-1); font-variant-numeric: tabular-nums; }
+.card dt { font-weight: 700; }
+.card dd { margin: 0; }
+.card .row { display: flex; justify-content: space-between; align-items: center; margin-top: calc(var(--u) * 1.5); }
+.card .price { font: 400 var(--t1)/1 var(--disp); color: var(--accent-1); }
+.stamp { font: 700 var(--t-1)/1 var(--text); background: var(--ink); color: var(--unbleached); border: 0; padding: 8px 12px; cursor: pointer; }
+.stamp:hover { background: var(--accent-2); }
+footer { grid-column: 1 / -1; padding: calc(var(--u) * 3) calc(var(--u) * 5); background: var(--ink); color: var(--bg); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); font-size: var(--t-1); }
+@media (max-width: 900px) {
+  .shop { grid-template-columns: minmax(0, 1fr); }
+  .table { position: static; min-height: 0; border-right: 0; border-bottom: 6px double rgba(42,31,26,.4); padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+  .book { padding: calc(var(--u) * 3) calc(var(--u) * 2); }
+  .swatch { cursor: auto; }
+}
+</style>
+</head>
+<body>
+<div class="shop">
+  <aside class="table" aria-labelledby="coop">
+    <div class="dev" lang="hi">बगरू</div>
+    <h1 id="coop">Bagru Chhapa Sangh</h1>
+    <p>Eleven Chhipa printing families on one street in Bagru, forty minutes from Jaipur. We print by hand with teak blocks carved by Ramesh Kumawat, and we dye with what grows or rusts nearby.</p>
+    <ol class="steps">
+      <li><span><b>Harda</b>Unbleached cotton soaked in myrobalan. It turns the cloth this warm yellow and takes the black.</span></li>
+      <li><span><b>Syahi and begar</b>Black from old iron and jaggery, red from alum that later meets madder in the pot.</span></li>
+      <li><span><b>Dabu</b>Mud, gum and lime pressed on by block. Wherever it sits, the indigo cannot reach.</span></li>
+      <li><span><b>Indigo vat</b>Dipped, lifted, oxidised green to blue. Four dips for mid-blue, nine for night.</span></li>
+      <li><span><b>Sun and river</b>Dried on the sand by the pond. Washed until the water runs clear.</span></li>
+    </ol>
+  </aside>
+
+  <main class="book">
+    <header><h2>Sample book · Winter 2026</h2><p>All cloth 110 cm wide. Price per metre. Minimum 2 m.</p></header>
+    <div class="cards" id="cards"></div>
+  </main>
+  <footer><span>Bagru Chhapa Sangh, Chhipa Mohalla, Bagru, Rajasthan 303007</span><span>Every piece shows its registration. That is how you know a hand held the block.</span></footer>
+</div>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  const SW = [
+    { n: "Buti, small flower", h: "Syahi-begar on harda", k: "buti", bg: "#f3d9b1", c1: "#2a1f1a", c2: "#a8322d", blocks: 2, p: "₹420" },
+    { n: "Jaal, trellis", h: "Syahi on harda", k: "jaal", bg: "#efd3a6", c1: "#2a1f1a", c2: "#a8322d", blocks: 2, p: "₹480" },
+    { n: "Dabu indigo, gudda", h: "Mud resist, 6 dips", k: "dabu", bg: "#2f4f7a", c1: "#dfe3e6", c2: "#8fa6c2", blocks: 1, p: "₹560" },
+    { n: "Chameli, jasmine", h: "Begar on unbleached", k: "buti", bg: "#f6ecdb", c1: "#a8322d", c2: "#2a1f1a", blocks: 2, p: "₹450" },
+    { n: "Dabu night sky", h: "Mud resist, 9 dips", k: "dots", bg: "#1f3553", c1: "#e7e2d6", c2: "#6f88ad", blocks: 1, p: "₹640" },
+    { n: "Lehar border", h: "Syahi-begar, 3 blocks", k: "border", bg: "#f3d9b1", c1: "#2a1f1a", c2: "#a8322d", blocks: 3, p: "₹520" }
+  ];
+  let seed = 34; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const MOT = {
+    buti: (c1, c2) => `<g fill="${c2}"><circle r="4.5" cy="-6"/><circle r="4.5" cx="5.7" cy="-1.9"/><circle r="4.5" cx="3.5" cy="4.9"/><circle r="4.5" cx="-3.5" cy="4.9"/><circle r="4.5" cx="-5.7" cy="-1.9"/></g><g fill="${c1}"><circle r="2.4"/><path d="M0 7 q-2 6 -7 8 M0 7 q3 5 7 7" stroke="${c1}" stroke-width="1.6" fill="none"/></g>`,
+    jaal: (c1, c2) => `<path d="M-14 0 L0 -14 L14 0 L0 14 Z" fill="none" stroke="${c1}" stroke-width="1.8"/><circle r="3.2" fill="${c2}"/><circle r="1.6" cx="-14" fill="${c1}"/><circle r="1.6" cy="-14" fill="${c1}"/>`,
+    dabu: (c1, c2) => `<g fill="${c1}"><circle r="6"/><circle r="2.5" cx="-10" cy="-10"/><circle r="2.5" cx="10" cy="-10"/><circle r="2.5" cx="-10" cy="10"/><circle r="2.5" cx="10" cy="10"/></g><circle r="2.4" fill="${c2}"/>`,
+    dots: (c1, c2) => `<g fill="${c1}"><circle r="2.2"/><circle r="1.4" cx="8" cy="5"/><circle r="1" cx="-7" cy="7"/></g>`,
+    border: (c1, c2) => `<path d="M-14 -4 q7 -10 14 0 t14 0" stroke="${c1}" stroke-width="2.2" fill="none"/><path d="M-14 4 q7 -10 14 0 t14 0" stroke="${c2}" stroke-width="2.2" fill="none"/>`
+  };
+  const step = { buti: 28, jaal: 28, dabu: 30, dots: 18, border: 28 };
+  const imp = (s, x, y, fresh) => {
+    // two colour blocks, each laid by hand: the second never lands exactly on the first
+    const dx = (rnd() - .5) * 2.4, dy = (rnd() - .5) * 2.4, rot = (rnd() - .5) * 3, a = fresh ? 1 : .86 + rnd() * .14;
+    return `<g transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})" opacity="${a.toFixed(2)}">${MOT[s.k](s.c1, "transparent")}<g transform="translate(${dx.toFixed(1)} ${dy.toFixed(1)})">${MOT[s.k]("transparent", s.c2)}</g></g>`;
+  };
+  const cards = document.getElementById("cards");
+  cards.innerHTML = SW.map((s, i) => `<article class="card"><div class="swatch" data-i="${i}"><svg class="cloth" viewBox="0 0 240 180" aria-label="Printed swatch: ${s.n}" role="img"></svg><div class="edge"></div><div class="block" aria-hidden="true"><svg viewBox="0 0 72 72"><rect x="6" y="18" width="60" height="48" rx="3" fill="#8a5a33" stroke="#5e3b1f" stroke-width="2"/><rect x="10" y="22" width="52" height="40" fill="none" stroke="#b07a4c" stroke-width="1"/><path d="M26 18 V8 Q36 0 46 8 V18" fill="#a06a3d" stroke="#5e3b1f" stroke-width="2"/><g transform="translate(36 42) scale(.8)">${MOT[s.k]("#5e3b1f", "#c48a58")}</g></svg></div></div>
+    <h3>${s.n}</h3><div class="hi">${s.h}</div>
+    <dl><dt>Blocks</dt><dd>${s.blocks} teak, hand-carved</dd><dt>Fastness</dt><dd>Wash cold, dry in shade</dd></dl>
+    <div class="row"><span class="price">${s.p}</span><button type="button" class="stamp" data-i="${i}">Stamp once</button></div></article>`).join("");
+  document.querySelectorAll(".swatch").forEach((sw) => {
+    const s = SW[+sw.dataset.i], svg = sw.querySelector("svg.cloth"), st = step[s.k];
+    let o = `<rect width="240" height="180" fill="${s.bg}"/>`;
+    if (s.k === "border") { for (let y = 20; y < 180; y += 38) for (let x = 0; x < 260; x += st) o += imp(s, x, y); }
+    else for (let y = 8, r = 0; y < 196; y += st * .86, r++) for (let x = (r % 2) * st / 2; x < 260; x += st) o += imp(s, x, y);
+    svg.innerHTML = o;
+    const block = sw.querySelector(".block");
+    const at = (e) => { const r = sw.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top, r]; };
+    sw.addEventListener("pointermove", (e) => { const [x, y] = at(e); block.style.setProperty("--bx", (x - 36) + "px"); block.style.setProperty("--by", (y - 44) + "px"); });
+    sw.addEventListener("click", (e) => { const [x, y, r] = at(e); stamp(sw, x / r.width * 240, y / r.height * 180); });
+  });
+  function stamp(sw, x, y) {
+    const s = SW[+sw.dataset.i], svg = sw.querySelector("svg.cloth"), block = sw.querySelector(".block");
+    svg.insertAdjacentHTML("beforeend", imp(s, x, y, true));
+    block.classList.remove("press"); void block.offsetWidth; block.classList.add("press");
+  }
+  document.querySelectorAll(".stamp").forEach((b) => b.addEventListener("click", () => { const sw = document.querySelector(`.swatch[data-i="${b.dataset.i}"]`); stamp(sw, 60 + rnd() * 120, 40 + rnd() * 100); }));
+})();
+</script>
+</body>
+</html>

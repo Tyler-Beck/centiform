@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Subway Tile Station · Centiform</title>
+<style>
+/* @fonts: Arvo:400,700:block; Hind:400,600:swap */
+@font-face{font-family:"Arvo";font-style:normal;font-weight:400;font-display:block;src:url(fonts/arvo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Arvo";font-style:normal;font-weight:700;font-display:block;src:url(fonts/arvo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hind";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/hind-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hind";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/hind-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f4f4ef;          /* white glazed tile */
+  --ink: #1d3b2a;         /* bottle-green trim */
+  --accent-1: #b8862f;    /* faience ochre */
+  --accent-2: #8a3324;    /* terracotta band */
+  --grout: #cfcfc4;
+  --trim: var(--ink);
+  /* the tile is 3 x 6 inches; one inch = 8 px, so the tile is 24 x 48 */
+  --th: 24px; --tw: 48px;
+  --u: 8px;
+  /* scale in tile courses: 24 = one course, text sits on half courses */
+  --t-1: 14px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 48px; --t4: clamp(48px, 6vw, 96px);
+  --slab: "Arvo", "Rockwell", serif;
+  --text: "Hind", "Helvetica Neue", sans-serif;
+  --tile: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='%23ffffff' stop-opacity='.9'/><stop offset='.35' stop-color='%23ffffff' stop-opacity='0'/><stop offset='1' stop-color='%23000000' stop-opacity='.05'/></linearGradient></defs><rect width='48' height='48' fill='%23f4f4ef'/><rect x='1' y='1' width='46' height='22' rx='1.5' fill='url(%23g)'/><rect x='-23' y='25' width='46' height='22' rx='1.5' fill='url(%23g)'/><rect x='25' y='25' width='46' height='22' rx='1.5' fill='url(%23g)'/><path d='M0 .5H48M0 24.5H48M.5 0V24M24.5 24V48' stroke='%23cfcfc4' stroke-width='1.6'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-height: 100vh; color: var(--ink); font: 400 var(--t0)/24px var(--text); background: var(--tile) 0 0 / var(--tw) calc(var(--th) * 2), var(--bg); overflow-x: hidden; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+/* the wall: every panel snaps to whole tiles */
+.wall { display: grid; grid-template-columns: repeat(auto-fill, var(--tw)); grid-auto-rows: var(--th); grid-auto-flow: row dense; justify-content: center; padding: var(--th) 0; }
+.p { grid-column: span var(--c, 6); grid-row: span var(--r, 2); position: relative; }
+
+/* trim bands: courses of coloured tile */
+.band { grid-column: 1 / -1; grid-row: span 3; display: flex; align-items: center; justify-content: space-between; padding: 0 var(--tw); color: var(--bg);
+  background: linear-gradient(var(--accent-1) 0 var(--th), transparent var(--th)), repeating-linear-gradient(90deg, var(--trim) 0 calc(var(--tw) - 2px), #2f5040 calc(var(--tw) - 2px) var(--tw)); }
+.band::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--grout); }
+.band b { font: 700 var(--t1)/1 var(--slab); letter-spacing: .06em; padding-top: var(--th); }
+.band span { font: 600 var(--t-1)/1 var(--text); letter-spacing: .14em; text-transform: uppercase; padding-top: var(--th); font-variant-numeric: tabular-nums; }
+
+/* mosaic name tablet with a border band */
+.tablet { --c: 18; --r: 8; padding: var(--th) calc(var(--tw) / 2); background: var(--accent-2); display: grid; }
+.tablet .field { position: relative; display: grid; place-items: center; text-align: center; padding: var(--th);
+  background: repeating-linear-gradient(90deg, transparent 0 7px, rgba(0,0,0,.08) 7px 8px), repeating-linear-gradient(transparent 0 7px, rgba(0,0,0,.08) 7px 8px), #fbfaf4;
+  box-shadow: 0 0 0 12px var(--tb, var(--ink)), 0 0 0 16px var(--accent-1); }
+.tablet .field::before { content: ""; position: absolute; inset: -12px; pointer-events: none;
+  background: repeating-linear-gradient(90deg, var(--accent-1) 0 12px, var(--tb, var(--ink)) 12px 24px) top / 100% 12px no-repeat, repeating-linear-gradient(90deg, var(--accent-1) 0 12px, var(--tb, var(--ink)) 12px 24px) bottom / 100% 12px no-repeat; }
+.tablet h1 { margin: 0; font: 700 var(--t4)/1 var(--slab); letter-spacing: .08em; text-transform: uppercase; color: var(--tb, var(--ink)); }
+.tablet p { margin: var(--u) 0 0; font: 400 var(--t-1)/1 var(--slab); letter-spacing: .3em; text-transform: uppercase; }
+
+.box { background: var(--bg); border: 6px solid var(--ink); padding: calc(var(--th) / 2) calc(var(--tw) / 3); box-shadow: inset 0 0 0 2px var(--grout); }
+.box h2 { margin: 0 0 calc(var(--th) / 2); font: 700 var(--t1)/var(--th) var(--slab); text-transform: uppercase; letter-spacing: .04em; }
+.next { --c: 12; }
+.next ol { list-style: none; margin: 0; padding: 0; }
+.next li { display: grid; grid-template-columns: auto 1fr auto; gap: var(--u); align-items: baseline; padding: calc(var(--th) / 4) 0; border-top: 1px solid var(--grout); }
+.next .dir { font: 700 var(--t-1)/24px var(--text); letter-spacing: .1em; text-transform: uppercase; }
+.next .min { font: 700 var(--t2)/48px var(--slab); font-variant-numeric: tabular-nums; }
+.next .min small { font-size: var(--t-1); }
+.bullet { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--accent-2); color: var(--bg); font: 700 var(--t0)/1 var(--slab); }
+
+/* the line: one course of stations */
+.line { grid-column: 1 / -1; --r: 5; }
+.line ol { list-style: none; margin: 0; padding: 0; display: flex; justify-content: space-between; position: relative; gap: 4px; }
+.line ol::before { content: ""; position: absolute; left: 12px; right: 12px; top: 11px; height: 6px; background: var(--accent-2); }
+.line li { position: relative; flex: 1; min-width: 0; }
+.line button { all: unset; cursor: pointer; display: grid; justify-items: start; gap: 6px; font: 600 var(--t-1)/1.2 var(--text); width: 100%; }
+.line button::before { content: ""; width: 20px; height: 20px; border: 4px solid var(--accent-2); background: var(--bg); border-radius: 50%; position: relative; }
+.line button[aria-pressed="true"]::before { background: var(--accent-2); box-shadow: 0 0 0 4px var(--bg), 0 0 0 7px var(--accent-2); }
+.line button[aria-pressed="true"] { color: var(--accent-2); }
+.line button:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 4px; }
+.exits { --c: 10; }
+.exits dl, .facts dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 0 calc(var(--u) * 2); }
+.exits dt { font: 700 var(--t0)/24px var(--slab); color: var(--bg); background: var(--ink); width: 24px; text-align: center; margin: 3px 0; line-height: 24px; }
+.exits dd, .facts dd { margin: 0 0 calc(var(--th) / 4); }
+.facts { --c: 12; }
+.facts dt { font-weight: 600; }
+.fare { --c: 8; background: var(--ink); color: var(--bg); border-color: var(--accent-1); }
+.fare b { display: block; font: 700 var(--t3)/48px var(--slab); color: var(--accent-1); font-variant-numeric: tabular-nums; }
+.fare p { margin: 0; }
+@media (max-width: 1430px) { .tablet { --c: 16; } .next { --c: 10; } .exits { --c: 9; } .facts { --c: 9; } }
+@media (min-width: 1900px) { .tablet { --c: 24; } .next { --c: 14; } .exits { --c: 12; } .facts { --c: 14; } .fare { --c: 12; } }
+@media (max-width: 1240px) { .tablet { --c: 14; } .next { --c: 8; } .exits, .facts { --c: 11; } .fare { --c: 11; } }
+@media (max-width: 800px) {
+  .p, .band { grid-column: 1 / -1; }
+  .band { padding: 0 calc(var(--tw) / 3); }
+  .band span:last-child { display: none; }
+  .tablet { padding: var(--th) 12px; }
+  .line ol { flex-direction: column; gap: 8px; }
+  .line ol::before { left: 11px; right: auto; top: 12px; bottom: 12px; width: 6px; height: auto; }
+  .line button { grid-auto-flow: column; justify-content: start; align-items: center; gap: 12px; }
+}
+</style>
+</head>
+<body>
+<main class="wall" id="wall">
+  <header class="band p"><b>Harbour Line</b><span id="clock">Service every 6 minutes</span><span>Carrow Transit Company, 1904</span></header>
+
+  <section class="tablet p" aria-live="polite">
+    <div class="field" id="field"><div><h1 id="name">Carrow St</h1><p id="sub">Harbour Line · Station 3 of 7</p></div></div>
+  </section>
+
+  <section class="box next p" aria-labelledby="next-h">
+    <h2 id="next-h">Next trains</h2>
+    <ol id="next"></ol>
+  </section>
+
+  <nav class="box line p" aria-label="Stations on the Harbour Line">
+    <h2>Choose a station</h2>
+    <ol id="stations"></ol>
+  </nav>
+
+  <section class="box exits p" aria-labelledby="exits-h">
+    <h2 id="exits-h">Street exits</h2>
+    <dl id="exits"></dl>
+  </section>
+
+  <section class="box facts p" aria-labelledby="facts-h">
+    <h2 id="facts-h">At this station</h2>
+    <dl id="facts"></dl>
+  </section>
+
+  <section class="box fare p" aria-labelledby="fare-h">
+    <h2 id="fare-h">Fare</h2>
+    <b>$2.40</b>
+    <p>Any distance, one line. Tap in at the turnstile. Transfers to the Crosstown are free for 90 minutes.</p>
+  </section>
+</main>
+<script>
+(() => {
+  const S = [
+    { n: "Northgate", t: "#1d3b2a", x: [["A", "Northgate Rd, bus terminal"], ["B", "Mercer Park, east gate"]], f: [["Lift", "Street to both platforms"], ["Toilets", "Mezzanine, 06:00–22:00"], ["Transfer", "Buses 12, 40, 41"]] },
+    { n: "Mill Road", t: "#b8862f", x: [["A", "Mill Rd and Fenwick St"], ["B", "Brewery Lane"]], f: [["Lift", "None, 38 steps"], ["Tiles", "Original 1904 wheat-sheaf plaques"], ["Transfer", "Bus 7"]] },
+    { n: "Carrow St", t: "#1d3b2a", x: [["A", "Carrow St and 4th Ave, NW corner"], ["B", "Carrow St and 4th Ave, SE corner"], ["C", "Market Hall, lower level"]], f: [["Lift", "Exit C to both platforms"], ["Transfer", "Crosstown Line, platform 3"], ["Lost property", "Booth at exit A, weekdays"]] },
+    { n: "Custom House", t: "#8a3324", x: [["A", "Custom House Sq"], ["B", "Bond Street"]], f: [["Lift", "Exit A, uptown only"], ["Tiles", "Anchor medallions every 12 ft"], ["Note", "Downtown platform closed Sundays until May"]] },
+    { n: "Fishmarket", t: "#2c5d7a", x: [["A", "Quay Street, market doors"], ["B", "Salt Lane"]], f: [["Lift", "Both platforms"], ["Toilets", "Mezzanine"], ["Market", "Opens 04:30, first train 04:52"]] },
+    { n: "Pier Head", t: "#8a3324", x: [["A", "Ferry terminal"], ["B", "Harbour Parade"]], f: [["Lift", "Both platforms"], ["Transfer", "Ferries to Inchmore, every 30 min"], ["Luggage", "Wide gate at exit A"]] },
+    { n: "Southsea", t: "#b8862f", x: [["A", "Esplanade"], ["B", "Southsea Green"]], f: [["Lift", "Street to platform"], ["End of line", "All trains terminate. Stay on for the depot? You may not."], ["Transfer", "Bus 2"]] }
+  ];
+  const $ = (id) => document.getElementById(id);
+  let cur = 2;
+  $("stations").innerHTML = S.map((s, i) => `<li><button type="button" aria-pressed="${i === cur}" data-i="${i}">${s.n}</button></li>`).join("");
+  const next = () => {
+    const d = new Date(), m = d.getHours() * 60 + d.getMinutes() + d.getSeconds() / 60;
+    const up = (6 - ((m + cur * 2) % 6)) | 0, dn = (6 - ((m + (6 - cur) * 2 + 3) % 6)) | 0;
+    const rows = [];
+    if (cur > 0) rows.push(["Uptown", "Northgate", up], ["Uptown", "Northgate", up + 6]);
+    if (cur < 6) rows.push(["Downtown", "Southsea", dn], ["Downtown", "Southsea", dn + 6]);
+    $("next").innerHTML = rows.map(([dir, to, n]) => `<li><span class="bullet" aria-hidden="true">H</span><span><span class="dir">${dir}</span><br>to ${to}</span><span class="min">${n || "Due"}${n ? " <small>min</small>" : ""}</span></li>`).join("");
+    $("clock").textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0") + " · every 6 minutes";
+  };
+  const show = () => {
+    const s = S[cur];
+    $("name").textContent = s.n; $("sub").textContent = "Harbour Line · Station " + (cur + 1) + " of 7";
+    $("field").style.setProperty("--tb", s.t);
+    $("exits").innerHTML = s.x.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("");
+    $("facts").innerHTML = s.f.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("");
+    document.querySelectorAll("#stations button").forEach((b, i) => b.setAttribute("aria-pressed", String(i === cur)));
+    next(); snap();
+  };
+  // every panel takes a whole number of tile courses
+  function snap() {
+    const x = document.querySelector(".band").getBoundingClientRect().left;
+    document.body.style.backgroundPosition = (x % 48) + "px 0, 0 0";
+    document.querySelectorAll(".box").forEach((b) => {
+      b.style.setProperty("--r", 1);
+      const h = b.scrollHeight + 12;
+      b.style.setProperty("--r", Math.max(2, Math.ceil(h / 24)));
+    });
+  }
+  $("stations").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; cur = +b.dataset.i; show(); });
+  addEventListener("resize", () => requestAnimationFrame(snap));
+  document.fonts && document.fonts.ready.then(snap);
+  setInterval(() => { if (!document.hidden) next(); }, 20000);
+  show();
+})();
+</script>
+</body>
+</html>

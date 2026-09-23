@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sampler Stitch · Centiform</title>
+<style>
+/* @fonts: Handjet:var:block; Nunito:400,700:swap */
+@font-face{font-family:"Handjet";font-style:normal;font-weight:100 900;font-display:block;src:url(fonts/handjet-latin-wght-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Nunito";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/nunito-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Nunito";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/nunito-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #efe6d6;          /* 28-count linen */
+  --ink: #27413a;         /* bottle-green silk */
+  --accent-1: #b3413b;    /* madder red */
+  --accent-2: #d8a24a;    /* old gold */
+  --frame: #6b4a2e;
+  --u: 8px;
+  --cell: 10px;           /* one stitch in the SVG's units */
+  /* scale: in stitch heights, 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(40px, 4.6vw, 64px);
+  --stitch: "Handjet", monospace;
+  --text: "Nunito", "Verdana", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: #d9ccb4; }
+body { margin: 0; color: var(--ink); background: linear-gradient(#e2d6bf, #cdbd9f); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden; min-height: 100vh; }
+a { color: inherit; }
+:focus-visible { outline: 3px dashed var(--accent-1); outline-offset: 3px; }
+.wall { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 1fr); gap: calc(var(--u) * 6); align-items: center; padding: calc(var(--u) * 5) calc(var(--u) * 6); min-height: 100vh; }
+/* the frame: oak, a slip of card, then the linen */
+.frame { background: linear-gradient(135deg, #7d5836, var(--frame) 50%, #5a3d25); padding: 22px; box-shadow: 0 24px 36px -16px rgba(0,0,0,.5); justify-self: center; width: min(100%, 78vh); }
+.frame .slip { background: #f6f0e3; padding: 14px; box-shadow: inset 0 0 0 1px rgba(0,0,0,.2); }
+.frame svg { display: block; width: 100%; height: auto; background: var(--bg); }
+.hole { fill: rgba(107,74,46,.18); }
+.st { fill: none; stroke-width: 2.6; stroke-linecap: round; }
+.label { background: #fbf7ee; padding: calc(var(--u) * 4); box-shadow: 0 2px 0 rgba(0,0,0,.08), 0 16px 24px -16px rgba(0,0,0,.4); transform: rotate(1deg); position: relative; }
+.label::before { content: ""; position: absolute; top: -10px; left: 50%; width: 18px; height: 18px; margin-left: -9px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, var(--accent-1) 60%); }
+.label .k { font: 500 var(--t0)/1 var(--stitch); letter-spacing: .2em; color: var(--accent-1); text-transform: uppercase; }
+.label h1 { margin: var(--u) 0 calc(var(--u) * 2); font: 700 var(--t4)/.95 var(--stitch); font-variation-settings: "ELSH" 2; }
+.label p { margin: 0 0 calc(var(--u) * 1.5); }
+.label dl { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 2); margin: calc(var(--u) * 2) 0 0; font-size: 16px; }
+.label dt { font: 600 var(--t1)/1 var(--stitch); color: var(--accent-1); }
+.label dd { margin: 0; }
+.thread { display: flex; gap: 6px; margin-top: calc(var(--u) * 2); }
+.thread i { width: 36px; height: 12px; border-radius: 6px; background: repeating-linear-gradient(60deg, var(--c) 0 3px, rgba(255,255,255,.25) 3px 4px); }
+@media (prefers-reduced-motion: no-preference) {
+  .row { opacity: 0; animation: sew .01s linear forwards; animation-delay: var(--d); }
+  @keyframes sew { to { opacity: 1; } }
+}
+@media (max-width: 1000px) { .wall { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); } .frame { width: 100%; padding: 12px; } .frame .slip { padding: 8px; } }
+</style>
+</head>
+<body>
+<main class="wall">
+  <figure class="frame" style="margin:0"><div class="slip">
+    <svg id="s" role="img" aria-label="Cross-stitch sampler: the alphabet, the numbers, and the motto By needle and thread we mend the world, with a house and two trees, worked by the guild in 2026"></svg>
+  </div></figure>
+  <aside class="label" aria-labelledby="h">
+    <div class="k">The Wexford Needlework Guild</div>
+    <h1 id="h">Annual Show of Samplers</h1>
+    <p>Two hundred and twelve pieces by forty-six members, from a first alphabet worked by Aoife, aged seven, to Mrs Delia Byrne’s map of the county in 11,000 stitches.</p>
+    <p>The sampler on the left was worked by the whole guild, one row each, on 28-count Irish linen in silks from the Dublin Road dye house.</p>
+    <dl><dt>When</dt><dd>Sat 14 to Sun 22 November, 10:00 to 17:00</dd><dt>Where</dt><dd>The Assembly Rooms, Cornmarket, Wexford</dd><dt>Entry</dt><dd>€4, members and children free</dd><dt>Class</dt><dd>Cross-stitch for beginners, Saturday at 11, bring glasses</dd></dl>
+    <div class="thread" aria-hidden="true"><i style="--c:#27413a"></i><i style="--c:#b3413b"></i><i style="--c:#d8a24a"></i><i style="--c:#6f8a5a"></i></div>
+  </aside>
+</main>
+<script>
+(() => {
+  const F = { A: "01110100011000111111100011000110001", B: "11110100011000111110100011000111110", C: "01110100011000010000100001000101110", D: "11110100011000110001100011000111110", E: "11111100001000011110100001000011111", F: "11111100001000011110100001000010000", G: "01110100011000010111100011000101111", H: "10001100011000111111100011000110001", I: "01110001000010000100001000010001110", J: "00111000100001000010000101001001100", K: "10001100101010011000101001001010001", L: "10000100001000010000100001000011111", M: "10001110111010110101100011000110001", N: "10001100011100110101100111000110001", O: "01110100011000110001100011000101110", P: "11110100011000111110100001000010000", Q: "01110100011000110001101011001001101", R: "11110100011000111110101001001010001", S: "01111100001000001110000010000111110", T: "11111001000010000100001000010000100", U: "10001100011000110001100011000101110", V: "10001100011000110001100010101000100", W: "10001100011000110101101011010101010", X: "10001100010101000100010101000110001", Y: "10001100010101000100001000010000100", Z: "11111000010001000100010001000011111",
+    0: "01110100011001110101110011000101110", 1: "00100011000010000100001000010001110", 2: "01110100010000100010001000100011111", 3: "11111000100010000010000011000101110", 4: "00010001100101010010111110001000010", 5: "11111100001111000001000011000101110", 6: "00110010001000011110100011000101110", 7: "11111000010001000100010000100001000", 8: "01110100011000101110100011000101110", 9: "01110100011000101111000010001001100", " ": "0".repeat(35) };
+  const W = 100, H = 102, C = 10, cols = { g: "#27413a", r: "#b3413b", y: "#d8a24a", l: "#6f8a5a", b: "#6b4a2e" };
+  const rows = {}; // y -> {colour: [cells]}
+  const put = (x, y, c) => { if (x < 0 || y < 0 || x >= W || y >= H) return; (rows[y] ||= {}); (rows[y][c] ||= []).push(x); };
+  const text = (s, y, c) => { const w = s.length * 6 - 1, x0 = Math.floor((W - w) / 2); [...s].forEach((ch, i) => { const g = F[ch] || F[" "]; for (let k = 0; k < 35; k++) if (g[k] === "1") put(x0 + i * 6 + (k % 5), y + Math.floor(k / 5), c); }); };
+  // border: a band of alternating zigzags, two stitches in from the edge
+  for (let x = 2; x < W - 2; x++) { put(x, 2, "r"); put(x, H - 3, "r"); const z = x % 4 < 2 ? 4 : 5; put(x, z, "g"); put(x, H - 1 - z, "g"); }
+  for (let y = 2; y < H - 2; y++) { put(2, y, "r"); put(W - 3, y, "r"); const z = y % 4 < 2 ? 4 : 5; put(z, y, "g"); put(W - 1 - z, y, "g"); }
+  text("ABCDEFGHIJKLM", 9, "g"); text("NOPQRSTUVWXYZ", 18, "g"); text("0123456789", 27, "y");
+  // strawberry band
+  for (let x = 12; x < W - 12; x += 8) { [[1, 0], [0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [1, 3]].forEach(([a, b]) => put(x + a, 37 + b, "r")); put(x + 1, 36, "l"); put(x + 4, 38, "l"); put(x + 5, 38, "l"); }
+  text("BY NEEDLE AND", 44, "r"); text("THREAD WE MEND", 53, "r"); text("THE WORLD", 62, "r");
+  // a house between two trees
+  const hx = 40; for (let y = 0; y < 12; y++) for (let x = 0; x < 20; x++) { const inRoof = y < 6 && Math.abs(x - 9.5) <= y + 3.5; const inWall = y >= 6 && x >= 2 && x < 18; const door = y >= 8 && x >= 8 && x < 11; const win = y >= 7 && y < 9 && (x === 4 || x === 5 || x === 14 || x === 15); if (inRoof) put(hx + x, 72 + y, "r"); else if (inWall && !door && !win) put(hx + x, 72 + y, "y"); else if (door) put(hx + x, 72 + y, "b"); }
+  [[20, 70], [80, 70]].forEach(([tx, ty]) => { for (let y = 0; y < 9; y++) for (let x = -4; x <= 4; x++) if (Math.abs(x) <= 4 - Math.abs(y - 4) * .6) put(tx + x, ty + y, "l"); for (let y = 9; y < 14; y++) put(tx, ty + y, "b"); });
+  for (let x = 8; x < W - 8; x++) put(x, 85, "l");
+  text("AD 2026", 88, "g");
+  // linen holes, then the stitches row by row
+  const svg = document.getElementById("s"); svg.setAttribute("viewBox", `0 0 ${W * C} ${H * C}`);
+  let o = `<defs><pattern id="ln" width="${C}" height="${C}" patternUnits="userSpaceOnUse"><rect width="${C}" height="${C}" fill="#efe6d6"/><circle class="hole" cx="0" cy="0" r="1.3"/><path d="M0 5 H10 M5 0 V10" stroke="rgba(107,74,46,.05)" stroke-width="3"/></pattern></defs><rect width="${W * C}" height="${H * C}" fill="url(#ln)"/>`;
+  Object.keys(rows).map(Number).sort((a, b) => a - b).forEach((y, i) => { let g = `<g class="row" style="--d:${(i * .022).toFixed(2)}s">`;
+    for (const c in rows[y]) { let d = ""; rows[y][c].forEach((x) => { const X = x * C, Y = y * C; d += `M${X + 1.5} ${Y + 1.5}L${X + C - 1.5} ${Y + C - 1.5}M${X + C - 1.5} ${Y + 1.5}L${X + 1.5} ${Y + C - 1.5}`; }); g += `<path class="st" stroke="${cols[c]}" d="${d}"/>`; }
+    o += g + `</g>`; });
+  svg.innerHTML = o;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mycology Field Guide · Centiform</title>
+<style>
+/* @fonts: Young Serif:400:block; Libre Franklin:400,600,400i:swap */
+@font-face{font-family:"Young Serif";font-style:normal;font-weight:400;font-display:block;src:url(fonts/young-serif-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Libre Franklin";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/libre-franklin-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Libre Franklin";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/libre-franklin-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Libre Franklin";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/libre-franklin-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #efe8dc;          /* field-guide stock */
+  --ink: #3a2c22;         /* humus brown */
+  --accent-1: #b5552d;    /* poison, and the fly agaric red */
+  --accent-2: #7b8b52;    /* edible, moss */
+  --card: #f7f2e8;
+  --rule: #d6cbb8;
+  --u: 8px;
+  /* scale: 1.25 on 17px */
+  --t-1: 13.6px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: clamp(40px, 4.8vw, 72px);
+  --serif: "Young Serif", Georgia, serif;
+  --sans: "Libre Franklin", "Franklin Gothic", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--sans); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.guide { display: grid; grid-template-columns: 330px minmax(0, 1fr); min-height: 100vh; }
+/* the key: a dichotomous key in the left margin */
+.key { position: sticky; top: 0; height: 100vh; overflow: auto; padding: calc(var(--u) * 4) calc(var(--u) * 3); border-right: 2px solid var(--ink); background: #e8dfcf; }
+.key h1 { margin: 0 0 var(--u); font: 400 var(--t3)/1 var(--serif); }
+.key .sub { font-size: var(--t-1); margin: 0 0 calc(var(--u) * 3); }
+.key h2 { font: 600 var(--t-1)/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; margin: calc(var(--u) * 2) 0 var(--u); display: flex; align-items: center; gap: var(--u); }
+.key h2 svg { width: 22px; height: 22px; }
+.couplet { margin-bottom: calc(var(--u) * 2); }
+.couplet b { font: 400 var(--t0)/1 var(--serif); margin-right: 6px; }
+.couplet button { display: block; width: 100%; text-align: left; font: 400 15px/1.35 var(--sans); background: transparent; border: 0; border-top: 1px dotted var(--ink); padding: 7px 0; cursor: pointer; color: var(--ink); }
+.couplet button[aria-pressed="true"] { color: var(--accent-1); font-weight: 600; }
+.couplet button span { float: right; font-variant-numeric: tabular-nums; }
+.reset { font: 600 var(--t-1)/1 var(--sans); background: var(--ink); color: var(--bg); border: 0; padding: 8px 12px; cursor: pointer; }
+.warn { margin-top: calc(var(--u) * 3); border: 2px solid var(--accent-1); padding: var(--u) calc(var(--u) * 1.5); font-size: var(--t-1); }
+.warn b { color: var(--accent-1); }
+/* species pages */
+.pages { padding: calc(var(--u) * 4); display: grid; grid-template-columns: repeat(auto-fill, minmax(min(470px, 100%), 1fr)); gap: calc(var(--u) * 4); align-content: start; }
+.sp { background: var(--card); border: 1px solid var(--rule); display: grid; grid-template-columns: 150px minmax(0, 1fr); grid-template-rows: auto 1fr; box-shadow: 0 1px 0 var(--rule); }
+.sp[hidden] { display: none; }
+.sp header { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: calc(var(--u) * 2); align-items: center; padding: calc(var(--u) * 2) calc(var(--u) * 2.5); border-bottom: 1px solid var(--rule); }
+.sp header .no { font: 400 var(--t2)/1 var(--serif); color: #8a7a68; }
+.sp h3 { margin: 0; font: 400 var(--t1)/1.15 var(--serif); }
+.sp h3 i { display: block; font: italic 400 15px/1.3 var(--sans); }
+.code { width: 46px; height: 46px; }
+.art { padding: calc(var(--u) * 2); border-right: 1px solid var(--rule); display: grid; gap: var(--u); justify-items: center; align-content: start; font-size: 12.5px; text-align: center; }
+.art svg { width: 100%; height: auto; }
+.body { padding: calc(var(--u) * 2) calc(var(--u) * 2.5); }
+.body p { margin: 0 0 var(--u); }
+.body dl { display: grid; grid-template-columns: auto 1fr; gap: 2px calc(var(--u) * 1.5); margin: 0 0 var(--u); font-size: 15px; }
+.body dt { font-weight: 600; }
+.body dd { margin: 0; }
+.months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; font: 600 10px/1 var(--sans); text-align: center; }
+.months span { padding: 4px 0; background: #e3d9c8; color: #8a7a68; }
+.months span.on { background: var(--ink); color: var(--card); }
+@media (max-width: 1000px) {
+  .guide { grid-template-columns: minmax(0, 1fr); }
+  .key { position: static; height: auto; border-right: 0; border-bottom: 2px solid var(--ink); }
+  .pages { padding: calc(var(--u) * 2); }
+  .sp { grid-template-columns: 120px minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="guide">
+  <aside class="key" aria-label="Key to the genera">
+    <h1>Fungi of the Weald</h1>
+    <p class="sub">A pocket field guide to 48 common species of the oak and chestnut woods between Tonbridge and Rye. Sample pages.</p>
+    <h2><svg viewBox="-12 -12 24 24" class="sm" aria-hidden="true" data-spore="#3a2c22"></svg>Key</h2>
+    <div class="couplet"><b>1</b>
+      <button type="button" data-f="gills" aria-pressed="false">a. Under the cap, true gills, thin as paper <span>→ 2</span></button>
+      <button type="button" data-f="ridges" aria-pressed="false">b. Blunt forking ridges instead <span>Chanterelle</span></button></div>
+    <div class="couplet"><b>2</b>
+      <button type="button" data-f="volva" aria-pressed="false">a. A sac at the stem base; dig, do not pull <span>Amanita</span></button>
+      <button type="button" data-f="novolva" aria-pressed="false">b. No sac at the base <span>→ 3</span></button></div>
+    <div class="couplet"><b>3</b>
+      <button type="button" data-f="dark" aria-pressed="false">a. Spore print dark: brown, purple or black <span>3 spp.</span></button>
+      <button type="button" data-f="pale" aria-pressed="false">b. Spore print white or pale <span>1 sp.</span></button></div>
+    <button type="button" class="reset" id="reset">Show all pages</button>
+    <div class="warn"><b>Never eat a mushroom on the word of a book.</b> Take it to the Wednesday identification table at Bewl Water visitor centre, 10:00 to 12:00, September to November.</div>
+  </aside>
+  <main class="pages" id="pages"></main>
+</div>
+<script>
+(() => {
+  // spore print: fine radial lines around the stem hole, in the colour of the spores
+  const spore = (c, r = 11, n = 64) => { let o = ""; for (let i = 0; i < n; i++) { const a = i / n * Math.PI * 2, r0 = r * .28, r1 = r * (.86 + ((i * 7) % 5) * .03); o += `<line x1="${(Math.cos(a) * r0).toFixed(2)}" y1="${(Math.sin(a) * r0).toFixed(2)}" x2="${(Math.cos(a) * r1).toFixed(2)}" y2="${(Math.sin(a) * r1).toFixed(2)}" stroke="${c}" stroke-width="${(r / 40).toFixed(2)}" opacity=".85"/>`; } return o + `<circle r="${r * .22}" fill="none" stroke="${c}" stroke-width="${r / 40}"/>`; };
+  document.querySelectorAll("svg[data-spore]").forEach((s) => (s.innerHTML = spore(s.dataset.spore)));
+  // edibility codes, drawn for this guide
+  const CODE = { E: `<circle cx="23" cy="23" r="20" fill="#7b8b52"/><path d="M13 24 l7 7 l13 -15" stroke="#f7f2e8" stroke-width="4" fill="none" stroke-linecap="round"/>`,
+    P: `<circle cx="23" cy="23" r="20" fill="#b5552d"/><path d="M15 15 L31 31 M31 15 L15 31" stroke="#f7f2e8" stroke-width="4" stroke-linecap="round"/>`,
+    D: `<circle cx="23" cy="23" r="20" fill="#3a2c22"/><circle cx="23" cy="23" r="15" fill="none" stroke="#b5552d" stroke-width="3"/><path d="M16 16 L30 30 M30 16 L16 30" stroke="#f7f2e8" stroke-width="3.5" stroke-linecap="round"/>`,
+    C: `<circle cx="23" cy="23" r="20" fill="#d9a441"/><path d="M23 12 V26 M23 32 v1" stroke="#3a2c22" stroke-width="4" stroke-linecap="round"/>` };
+  const LAB = { E: "Edible, well cooked", P: "Poisonous", D: "Deadly", C: "Edible with care" };
+  // cross-section drawing: cap, gills, stem, ring, volva
+  const section = (s) => { const cap = { convex: "M10 40 Q50 -4 90 40 Z", funnel: "M10 22 Q30 40 50 42 Q70 40 90 22 Q50 30 10 22Z", bell: "M24 56 Q24 4 50 4 Q76 4 76 56 Z", flat: "M8 36 Q50 12 92 36 Z" }[s.cap];
+    let g = ""; const under = s.cap === "bell" ? 56 : s.cap === "funnel" ? 42 : 40;
+    for (let x = s.cap === "bell" ? 28 : 14; x < (s.cap === "bell" ? 72 : 86); x += 4) g += `<line x1="${x}" y1="${under - 1}" x2="${x}" y2="${under - (s.ridges ? 3 : 7)}" stroke="#3a2c22" stroke-width="${s.ridges ? 1.8 : .7}"/>`;
+    const top = under, bot = 120;
+    let o = `<svg viewBox="0 0 100 130" role="img" aria-label="Cross-section of cap, gills and stem"><path d="${cap}" fill="${s.col}" stroke="#3a2c22" stroke-width="1.2"/>${g}<path d="M${50 - s.w} ${top} L${50 - s.w - 1} ${bot} L${50 + s.w + 1} ${bot} L${50 + s.w} ${top}Z" fill="#f4ecdc" stroke="#3a2c22" stroke-width="1.2"/>`;
+    if (s.ring) o += `<path d="M${50 - s.w - 7} ${top + 16} Q50 ${top + 26} ${50 + s.w + 7} ${top + 16}" fill="none" stroke="#3a2c22" stroke-width="1.6"/>`;
+    if (s.volva) o += `<path d="M${50 - s.w - 10} ${bot - 16} Q${50 - s.w - 12} ${bot + 6} 50 ${bot + 6} Q${50 + s.w + 12} ${bot + 6} ${50 + s.w + 10} ${bot - 16}" fill="#fbf7ee" stroke="#3a2c22" stroke-width="1.4"/>`;
+    return o + `<path d="M2 ${bot + 4} H98" stroke="#7b8b52" stroke-width="2" stroke-dasharray="3 3"/></svg>`; };
+  const SP = [
+    { n: "Chanterelle", l: "Cantharellus cibarius", c: "E", sp: "#e9d9a6", spn: "pale cream", cap: "funnel", col: "#e3a93a", w: 8, ridges: true, f: ["ridges", "pale"], m: [6, 7, 8, 9, 10], t: "Egg-yolk yellow, smelling faintly of apricots. The ridges run down the stem and fork like veins; they are never sharp-edged.", d: [["Cap", "3–10 cm, wavy"], ["Habitat", "Under oak and beech, in moss"], ["Confused with", "False chanterelle, orange and true-gilled"]] },
+    { n: "Death cap", l: "Amanita phalloides", c: "D", sp: "#ffffff", spn: "white", cap: "convex", col: "#b7bd86", w: 6, ring: true, volva: true, f: ["gills", "volva", "pale"], m: [8, 9, 10, 11], t: "Olive-green cap with fine radiating fibres, white gills that never darken, a skirt on the stem and a loose sac at the base. Half a cap can kill an adult.", d: [["Cap", "5–15 cm, olive to yellow-green"], ["Habitat", "Under oak, often near paths"], ["Note", "Symptoms start 6–24 hours later. Call 111 at once."]] },
+    { n: "Field mushroom", l: "Agaricus campestris", c: "E", sp: "#4a3024", spn: "chocolate brown", cap: "convex", col: "#efe6d6", w: 6, ring: true, f: ["gills", "novolva", "dark"], m: [7, 8, 9, 10], t: "White cap, pink gills in youth that turn chocolate with age. A thin ring. Grows in grass, never in woods. It smells of mushrooms, nothing sharper.", d: [["Cap", "3–10 cm, silky white"], ["Habitat", "Old pasture, grazed by horses"], ["Confused with", "Yellow stainer, which smells of ink"]] },
+    { n: "Shaggy ink cap", l: "Coprinus comatus", c: "C", sp: "#1d1714", spn: "black", cap: "bell", col: "#f2ede2", w: 4, ring: true, f: ["gills", "novolva", "dark"], m: [8, 9, 10, 11], t: "A tall white bell with shaggy scales. From the bottom edge the gills dissolve into black ink within hours of picking. Cook the same day, while still white.", d: [["Cap", "5–15 cm tall"], ["Habitat", "Road verges, new lawns"], ["Note", "Do not drink alcohol with it"]] },
+    { n: "Sulphur tuft", l: "Hypholoma fasciculare", c: "P", sp: "#4d3a4a", spn: "purple-brown", cap: "convex", col: "#d9c24a", w: 3, f: ["gills", "novolva", "dark"], m: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], t: "Dense clumps of sulphur-yellow caps on dead stumps, gills greenish-yellow darkening to purple-brown. Very bitter. Found in every month of the year.", d: [["Cap", "2–7 cm, in tufts"], ["Habitat", "Stumps of any tree"], ["Taste", "Bitter; do not test it"]] }
+  ];
+  const MON = ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"];
+  document.getElementById("pages").innerHTML = SP.map((s, i) => `<article class="sp" data-f="${s.f.join(" ")}" aria-labelledby="sp${i}">
+    <header><span class="no">${String(i * 9 + 4).padStart(2, "0")}</span><h3 id="sp${i}">${s.n}<i>${s.l}</i></h3><svg class="code" viewBox="0 0 46 46" role="img" aria-label="${LAB[s.c]}">${CODE[s.c]}</svg></header>
+    <div class="art">${section(s)}<svg viewBox="-12 -12 24 24" style="width:78%;background:${s.sp === "#ffffff" ? "#3a2c22" : "#f7f2e8"};border-radius:50%" role="img" aria-label="Spore print, ${s.spn}">${spore(s.sp)}</svg><span>Spore print: ${s.spn}</span></div>
+    <div class="body"><p>${s.t}</p><dl>${s.d.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}<dt>Code</dt><dd>${LAB[s.c]}</dd></dl>
+    <div class="months" aria-label="Season">${MON.map((m, k) => `<span class="${s.m.includes(k + 1) ? "on" : ""}">${m}</span>`).join("")}</div></div></article>`).join("");
+  const btns = document.querySelectorAll(".couplet button");
+  btns.forEach((b) => b.addEventListener("click", () => { btns.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    document.querySelectorAll(".sp").forEach((p) => (p.hidden = !p.dataset.f.split(" ").includes(b.dataset.f))); }));
+  document.getElementById("reset").addEventListener("click", () => { btns.forEach((x) => x.setAttribute("aria-pressed", "false")); document.querySelectorAll(".sp").forEach((p) => (p.hidden = false)); });
+})();
+</script>
+</body>
+</html>

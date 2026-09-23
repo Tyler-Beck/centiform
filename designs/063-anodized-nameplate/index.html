@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anodized Nameplate · Centiform</title>
+<style>
+/* @fonts: Michroma:400:block; Tomorrow:400,600:swap */
+@font-face{font-family:"Michroma";font-style:normal;font-weight:400;font-display:block;src:url(fonts/michroma-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tomorrow";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tomorrow-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tomorrow";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/tomorrow-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #c8ccd0;          /* brushed stainless */
+  --ink: #1b1e22;         /* engraving fill, black */
+  --accent-1: #2f6db3;    /* blue anodise */
+  --accent-2: #c0392b;    /* red anodise, for warnings */
+  --alu: #dfe2e5;
+  --u: 8px;
+  /* scale: 1.25 on 16px; engraving sizes follow the same steps */
+  --t-2: 10.24px; --t-1: 12.8px; --t0: 16px; --t1: 20px; --t2: 25px; --t3: 31px; --t4: clamp(30px, 3.6vw, 52px);
+  --wide: "Michroma", "Eurostile", sans-serif;
+  --text: "Tomorrow", "Arial", sans-serif;
+  --brush: repeating-linear-gradient(0deg, rgba(255,255,255,.22) 0 1px, rgba(0,0,0,.05) 1px 2px, rgba(255,255,255,.08) 2px 3px, rgba(0,0,0,.04) 3px 5px);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden;
+  background: var(--brush), linear-gradient(100deg, #b9bec3, #d5d8dc 30%, #bfc3c8 55%, #d2d5d9 80%, #b8bcc1); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+/* a plate: anodised aluminium, four screws, bevelled edge */
+.plate { position: relative; padding: calc(var(--u) * 4) calc(var(--u) * 5); background: var(--brush), linear-gradient(95deg, #d3d6da, #eceef0 40%, #d8dbde 70%, #e6e8ea); border-radius: 3px; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.25), 0 1px 0 rgba(255,255,255,.6), 0 3px 6px rgba(0,0,0,.28); }
+.plate.blue { background: var(--brush), linear-gradient(95deg, #26599a, #3b7cc6 45%, #2b64a8 75%, #3572b8); color: #eef3f8; }
+.plate.red { background: var(--brush), linear-gradient(95deg, #a02f23, #cf4636 45%, #b23628 75%, #c3402f); color: #fbeeea; }
+.plate.black { background: var(--brush), linear-gradient(95deg, #17191c, #2b2f34 45%, #1d2024 75%); color: #d8dce0; }
+.screw { position: absolute; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fafafa, #9aa0a6 60%, #6b7076); box-shadow: 0 1px 1px rgba(0,0,0,.5), inset 0 -1px 1px rgba(0,0,0,.3); }
+.screw::before, .screw::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 2px; margin: -1px 0 0 -4px; background: #4a4f55; border-radius: 1px; }
+.screw::after { transform: rotate(90deg); }
+.screw.a { left: 8px; top: 8px; transform: rotate(12deg); } .screw.b { right: 8px; top: 8px; transform: rotate(-30deg); } .screw.c { left: 8px; bottom: 8px; transform: rotate(47deg); } .screw.d { right: 8px; bottom: 8px; transform: rotate(5deg); }
+/* engraving: a cut through the coating, dark infill on bare metal, bright metal through anodise */
+.eng { font-family: var(--wide); text-transform: uppercase; letter-spacing: .14em; color: #2a2e33; text-shadow: 0 1px 0 rgba(255,255,255,.7), 0 -1px 0 rgba(0,0,0,.35); }
+.blue .eng, .red .eng, .black .eng { color: #eef1f4; text-shadow: 0 1px 0 rgba(0,0,0,.35), 0 -1px 0 rgba(255,255,255,.25); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: calc(var(--u) * 4); align-items: center; margin: calc(var(--u) * 4); }
+.head h1 { margin: 0; font: 400 var(--t4)/1.1 var(--wide); letter-spacing: .1em; }
+.head p { margin: var(--u) 0 0; font-size: var(--t0); max-width: 60ch; }
+.head .model { text-align: right; font-size: var(--t-1); }
+.head .model b { display: block; font: 400 var(--t2)/1.2 var(--wide); }
+.rack { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: calc(var(--u) * 3); margin: 0 calc(var(--u) * 4) calc(var(--u) * 4); }
+.spec { grid-column: span var(--c, 4); display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+.spec .plate { flex: 1; display: grid; place-items: center; min-height: 220px; }
+.cap { font-size: var(--t-1); display: flex; justify-content: space-between; gap: var(--u); }
+.cap b { font: 400 var(--t-1)/1.3 var(--wide); letter-spacing: .08em; }
+/* specimen contents */
+.dial { position: relative; width: 170px; height: 170px; }
+.dial .ticks { position: absolute; inset: 0; }
+.knob { position: absolute; left: 50%; top: 50%; width: 86px; height: 86px; margin: -43px; border-radius: 50%; background: repeating-conic-gradient(#2a2d31 0 4deg, #1b1e22 4deg 8deg); box-shadow: 0 4px 6px rgba(0,0,0,.45), inset 0 0 0 6px #202327; transform: rotate(var(--k, -135deg)); cursor: grab; border: 0; }
+.knob::after { content: ""; position: absolute; left: 50%; top: 8px; width: 4px; height: 22px; margin-left: -2px; background: #f4f6f8; border-radius: 2px; }
+.readout { font: 600 var(--t1)/1 var(--text); font-variant-numeric: tabular-nums; margin-top: var(--u); text-align: center; }
+.tgl { display: flex; align-items: center; gap: calc(var(--u) * 3); }
+.tgl button { width: 60px; height: 60px; border-radius: 50%; border: 0; cursor: pointer; background: radial-gradient(circle at 40% 35%, #f2f4f6, #9aa0a6 70%); box-shadow: 0 2px 3px rgba(0,0,0,.4); position: relative; }
+.tgl button::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 40px; margin: -34px 0 0 -6px; border-radius: 6px; background: linear-gradient(90deg, #8a9097, #f4f6f8, #8a9097); transform-origin: 50% 85%; transform: rotate(-28deg); transition: transform .15s steps(2); }
+.tgl button[aria-pressed="true"]::after { transform: rotate(28deg); }
+.lamp { width: 22px; height: 22px; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ffb3a9, #6e1d15 70%); box-shadow: inset 0 0 0 3px #2a2e33; }
+.lamp.on { background: radial-gradient(circle at 40% 35%, #fff, #ff5a42 45%, #b3261a); box-shadow: inset 0 0 0 3px #2a2e33, 0 0 16px #ff5a42; }
+.bnc { width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, #1b1e22 0 9px, #e6e8ea 10px 16px, #9aa0a6 17px 25px, #cfd2d5 26px 33px, transparent 34px); }
+.serial { width: 100%; font-size: var(--t-1); }
+.serial table { width: 100%; border-collapse: collapse; }
+.serial td { border-top: 1px solid rgba(238,241,244,.35); padding: 5px 4px; font-variant-numeric: tabular-nums; }
+.serial td:first-child { font-family: var(--wide); font-size: var(--t-2); letter-spacing: .14em; }
+.warn { text-align: center; }
+.warn svg { width: 60px; height: 54px; }
+footer { margin: 0 calc(var(--u) * 4) calc(var(--u) * 4); }
+footer .plate { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); font-size: var(--t-1); padding: calc(var(--u) * 2) calc(var(--u) * 5); }
+@media (max-width: 1000px) { .spec { grid-column: span 6; } }
+@media (max-width: 640px) { .head h1 { font-size: 19px; } .plate { padding: calc(var(--u) * 3) calc(var(--u) * 3); } .serial td:first-child { letter-spacing: .06em; } .rack { grid-template-columns: minmax(0, 1fr); margin: 0 calc(var(--u) * 2) calc(var(--u) * 3); } .spec { grid-column: auto; } .head { grid-template-columns: minmax(0, 1fr); margin: calc(var(--u) * 2); } .head .model { text-align: left; } footer { margin: 0 calc(var(--u) * 2) calc(var(--u) * 3); } }
+</style>
+</head>
+<body>
+<header class="head plate">
+  <i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+  <div><h1 class="eng">Kessel Instruments</h1><p>Panel hardware specimen, series 70. Every legend is cut, not printed: a 0.3 mm engraving through 25 µm of hard anodise, filled with black lacquer or left bright.</p></div>
+  <div class="model"><b class="eng">KS-70</b>Catalogue 14 · Stuttgart · 1976</div>
+</header>
+<main class="rack">
+  <div class="spec" style="--c: 4">
+    <div class="plate"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+      <div><div class="dial"><svg class="ticks" viewBox="0 0 170 170" aria-hidden="true" id="ticks"></svg><button class="knob" id="knob" type="button" aria-label="Attenuator knob, press arrow keys to turn"></button></div><div class="readout" id="read">0 dB</div></div></div>
+    <div class="cap"><b class="eng">P-7102 Dial plate</b><span>Natural anodise, 0 to 10, 270°</span></div>
+  </div>
+  <div class="spec" style="--c: 4">
+    <div class="plate blue"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+      <div style="text-align:center"><div class="eng" style="font-size:var(--t-1);margin-bottom:12px">Power</div><div class="tgl"><span class="eng" style="font-size:var(--t-2)">Off</span><button type="button" id="tgl" aria-pressed="false" aria-label="Power toggle"></button><span class="eng" style="font-size:var(--t-2)">On</span></div><div style="display:flex;justify-content:center;margin-top:14px"><i class="lamp" id="lamp"></i></div></div></div>
+    <div class="cap"><b class="eng">P-7110 Switch legend</b><span>Blue anodise, bright engraving</span></div>
+  </div>
+  <div class="spec" style="--c: 4">
+    <div class="plate black"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;text-align:center"><div><div class="bnc"></div><div class="eng" style="font-size:var(--t-2);margin-top:8px">CH A · 1 MΩ</div></div><div><div class="bnc"></div><div class="eng" style="font-size:var(--t-2);margin-top:8px">CH B · 50 Ω</div></div></div></div>
+    <div class="cap"><b class="eng">P-7130 Connector plate</b><span>Black anodise, for BNC</span></div>
+  </div>
+  <div class="spec" style="--c: 5">
+    <div class="plate red warn"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+      <div><svg viewBox="0 0 60 54" aria-hidden="true"><path d="M30 3 L57 51 H3Z" fill="none" stroke="#eef1f4" stroke-width="4" stroke-linejoin="round"/><path d="M33 16 L24 32 H31 L27 44 L38 26 H31 L35 16Z" fill="#eef1f4"/></svg><div class="eng" style="font-size:var(--t1);margin-top:8px">High voltage inside</div><div class="eng" style="font-size:var(--t-2);margin-top:6px">Remove mains before opening · 1.2 kV</div></div></div>
+    <div class="cap"><b class="eng">P-7150 Warning plate</b><span>Red anodise, to DIN 40008</span></div>
+  </div>
+  <div class="spec" style="--c: 7">
+    <div class="plate blue"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i>
+      <div class="serial"><div class="eng" style="font-size:var(--t1);margin-bottom:10px">Kessel · Pulse Generator PG-714</div>
+        <table><tbody><tr><td>Serial</td><td>714 · 00382</td></tr><tr><td>Supply</td><td>220 V ~ 50 Hz · 45 VA</td></tr><tr><td>Fuse</td><td>T 0.4 A</td></tr><tr><td>Made in</td><td>Stuttgart-Vaihingen, West Germany</td></tr></tbody></table></div></div>
+    <div class="cap"><b class="eng">P-7190 Serial nameplate</b><span>Blue anodise, numbered by hand-punch</span></div>
+  </div>
+</main>
+<footer><div class="plate black"><i class="screw a"></i><i class="screw b"></i><i class="screw c"></i><i class="screw d"></i><span class="eng">Kessel Instruments GmbH</span><span>Plates to your drawing from 50 pieces · sample plate in 10 working days</span></div></footer>
+<script>
+(() => {
+  // dial ticks 0 to 10 over 270 degrees
+  let t = ""; for (let i = 0; i <= 50; i++) { const a = (-225 + i * 5.4) * Math.PI / 180, r1 = 80, r2 = i % 5 ? 74 : 68; t += `<line x1="${85 + Math.cos(a) * r1}" y1="${85 + Math.sin(a) * r1}" x2="${85 + Math.cos(a) * r2}" y2="${85 + Math.sin(a) * r2}" stroke="#2a2e33" stroke-width="${i % 5 ? 1 : 2}"/>`;
+    if (i % 5 === 0) t += `<text x="${85 + Math.cos(a) * 58}" y="${85 + Math.sin(a) * 58 + 3.5}" text-anchor="middle" font-size="10" font-family="Michroma" fill="#2a2e33">${i / 5}</text>`; }
+  document.getElementById("ticks").innerHTML = t;
+  const knob = document.getElementById("knob"), read = document.getElementById("read");
+  let v = 0; const set = (n) => { v = Math.max(0, Math.min(10, n)); knob.style.setProperty("--k", (-135 + v * 27) + "deg"); read.textContent = "−" + (v * 6).toFixed(0) + " dB"; knob.setAttribute("aria-valuenow", v); };
+  knob.setAttribute("role", "slider"); knob.setAttribute("aria-valuemin", 0); knob.setAttribute("aria-valuemax", 10);
+  knob.addEventListener("keydown", (e) => { if (["ArrowUp", "ArrowRight"].includes(e.key)) { e.preventDefault(); set(v + .5); } if (["ArrowDown", "ArrowLeft"].includes(e.key)) { e.preventDefault(); set(v - .5); } });
+  let drag = null;
+  knob.addEventListener("pointerdown", (e) => { drag = { y: e.clientY, v }; knob.setPointerCapture(e.pointerId); });
+  knob.addEventListener("pointermove", (e) => { if (drag) set(drag.v + (drag.y - e.clientY) / 20); });
+  knob.addEventListener("pointerup", () => (drag = null));
+  set(3);
+  document.getElementById("tgl").addEventListener("click", (e) => { const on = e.currentTarget.getAttribute("aria-pressed") !== "true"; e.currentTarget.setAttribute("aria-pressed", String(on)); document.getElementById("lamp").classList.toggle("on", on); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rose Window · Centiform</title>
+<style>
+/* @fonts: Uncial Antiqua:400:block; Cardo:400,400i,700:swap */
+@font-face{font-family:"Uncial Antiqua";font-style:normal;font-weight:400;font-display:block;src:url(fonts/uncial-antiqua-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cardo";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cardo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cardo";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/cardo-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cardo";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/cardo-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #101018;          /* the nave at dusk */
+  --ink: #efe6cf;         /* candle-lit parchment text */
+  --accent-1: #b0182a;    /* ruby, copper-flashed */
+  --accent-2: #1d4ea8;    /* cobalt blue */
+  --gold: #e8b923;        /* silver-stain yellow */
+  --lead: #07070b;
+  --stone: #2b2a31;
+  --muted: #a9a3b8;
+  --u: 8px;
+  /* scale: 1.333 on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 43px; --t4: clamp(48px, 5.6vw, 96px);
+  --uncial: "Uncial Antiqua", serif;
+  --text: "Cardo", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: radial-gradient(90% 70% at 62% 40%, #1b1a28, var(--bg) 70%); font: 400 var(--t0)/1.55 var(--text); min-height: 100vh; overflow-x: hidden; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.poster { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: 100vh; gap: calc(var(--u) * 4); padding: calc(var(--u) * 5) calc(var(--u) * 6); align-items: center; position: relative; }
+.left { position: relative; z-index: 2; }
+.kicker { font: 400 var(--t-1)/1.4 var(--text); letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+h1 { margin: calc(var(--u) * 2) 0 calc(var(--u) * 3); font: 400 var(--t4)/.95 var(--uncial); color: var(--ink); }
+h1 em { font-style: normal; color: var(--gold); }
+.lede { font-size: var(--t1); line-height: 1.4; font-style: italic; max-width: 26ch; margin: 0 0 calc(var(--u) * 4); }
+.meter { max-width: 420px; }
+.meter .bar { height: 14px; background: var(--stone); border: 2px solid var(--lead); display: flex; }
+.meter .bar i { width: 63%; background: linear-gradient(90deg, var(--accent-1), var(--gold)); }
+.meter p { display: flex; justify-content: space-between; margin: var(--u) 0 0; font-variant-numeric: tabular-nums; font-size: var(--t-1); color: var(--muted); }
+.meter b { color: var(--ink); font-size: var(--t0); }
+
+.panel { margin-top: calc(var(--u) * 4); border-top: 1px solid #3c3a48; padding-top: calc(var(--u) * 3); min-height: 200px; }
+.panel .no { font: 400 var(--t2)/1 var(--uncial); color: var(--gold); }
+.panel h2 { margin: var(--u) 0; font: 700 var(--t1)/1.2 var(--text); }
+.panel p { margin: 0 0 var(--u); max-width: 42ch; }
+.panel dl { display: grid; grid-template-columns: auto 1fr; gap: 2px calc(var(--u) * 2); margin: calc(var(--u) * 2) 0 0; font-size: var(--t-1); }
+.panel dt { color: var(--muted); letter-spacing: .12em; text-transform: uppercase; }
+.panel dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+.rose { position: relative; justify-self: center; width: min(100%, 86vh); aspect-ratio: 1; }
+.rose svg { width: 100%; height: 100%; display: block; position: relative; z-index: 1; }
+.petal { cursor: pointer; }
+.petal .glass { transition: filter .4s; }
+.petal:hover .glass, .petal:focus .glass { filter: brightness(1.35); }
+.petal[aria-pressed="true"] .glass { filter: brightness(1.55) saturate(1.2); }
+.petal:focus { outline: none; }
+.petal:focus-visible .lead-o { stroke: var(--gold); stroke-width: 4; }
+/* the light the window throws onto the nave floor */
+.cast { position: fixed; left: 30%; bottom: -30vh; width: 90vh; height: 90vh; pointer-events: none; opacity: .32; filter: blur(22px) saturate(1.4); mix-blend-mode: screen; transform: perspective(700px) rotateX(64deg) rotateZ(-8deg); z-index: 0; }
+.cast svg { width: 100%; height: 100%; }
+.tiers { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 3); border-top: 1px solid #3c3a48; padding-top: calc(var(--u) * 3); position: relative; z-index: 2; }
+.tiers div { font-size: var(--t-1); color: var(--muted); }
+.tiers b { display: block; color: var(--ink); font: 400 var(--t1)/1.2 var(--uncial); }
+@media (prefers-reduced-motion: no-preference) {
+  .cast { animation: sun 60s ease-in-out infinite alternate; }
+  @keyframes sun { from { transform: perspective(700px) rotateX(64deg) rotateZ(-8deg) translateX(-12vh); } to { transform: perspective(700px) rotateX(64deg) rotateZ(6deg) translateX(14vh); } }
+}
+@media (max-width: 900px) {
+  .poster { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+  .rose { order: -1; width: 100%; }
+  .tiers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cast { left: -20%; width: 120vw; height: 120vw; }
+  .lede { font-size: var(--t0); }
+}
+</style>
+</head>
+<body>
+<div class="cast" aria-hidden="true"><svg viewBox="0 0 600 600"><use href="#glassonly"/></svg></div>
+<main class="poster">
+  <div class="left">
+    <div class="kicker">St. Aldhelm’s Cathedral, Wexcombe · West front</div>
+    <h1>Save the <em>West Rose</em></h1>
+    <p class="lede">Seven hundred and fifty years of weather. One hundred and forty panes loose in their lead.</p>
+    <div class="meter" aria-label="Appeal total">
+      <div class="bar"><i></i></div>
+      <p><span><b>£1,197,400</b> given</span><span>of £1,900,000</span></p>
+    </div>
+    <section class="panel" aria-live="polite">
+      <div class="no" id="pno">Petal I</div>
+      <h2 id="ptitle">January · The Feast</h2>
+      <p id="ptext">A man at a table with two faces, one looking back at the old year. The ruby is the original 1272 glass; it has held.</p>
+      <dl>
+        <dt>Condition</dt><dd id="pcond">Stable, cleaned 2019</dd>
+        <dt>To adopt</dt><dd id="pcost">Adopted by the Wexcombe Bakers’ Guild</dd>
+      </dl>
+    </section>
+  </div>
+  <div class="rose">
+    <svg viewBox="0 0 600 600" role="group" aria-label="The twelve petals of the West Rose, the Labours of the Months">
+      <defs>
+        <filter id="seed" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .35 0"/><feComposite in2="SourceGraphic" operator="in"/><feBlend in2="SourceGraphic" mode="soft-light"/></filter>
+      </defs>
+      <circle cx="300" cy="300" r="296" fill="#2b2a31"/>
+      <circle cx="300" cy="300" r="296" fill="none" stroke="#3a3942" stroke-width="6"/>
+      <g id="glassonly"></g>
+      <g id="petals"></g>
+    </svg>
+  </div>
+  <div class="tiers">
+    <div><b>£40</b>Re-leads one hand-sized pane. Your name in the restoration book.</div>
+    <div><b>£600</b>One roundel in the outer ring, cleaned, consolidated, re-set.</div>
+    <div><b>£9,500</b>Adopt a petal. Four petals are still waiting.</div>
+    <div><b>Visit</b>Scaffold tours on Saturdays at 11 and 2, from the south porch.</div>
+  </div>
+</main>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg", C = 300;
+  const P = (r, a) => [C + r * Math.sin(a * Math.PI / 180), C - r * Math.cos(a * Math.PI / 180)].map((v) => v.toFixed(1)).join(" ");
+  const M = [
+    ["January · The Feast", "A man at a table with two faces, one looking back at the old year. The ruby is the original 1272 glass; it has held.", "Stable, cleaned 2019", "Adopted by the Wexcombe Bakers’ Guild"],
+    ["February · By the Fire", "A figure warms his feet at a hearth. Half the blue was replaced in 1861 with a colder Victorian cobalt.", "Paint loss on the face", "£9,500"],
+    ["March · Pruning", "A vine-dresser with a hooked knife. The lead here is the worst in the window: 1861, and tired.", "Urgent, bulging 18 mm", "£9,500"],
+    ["April · Flowers", "A young woman holding two branches in flower. The yellow is silver stain, fired onto clear glass.", "Stable", "Adopted in memory of Joan Tilley"],
+    ["May · Hawking", "A rider with a hawk on his wrist. Three panes cracked in the storm of February 2022.", "Cracked, taped from inside", "£9,500"],
+    ["June · Mowing", "A mower swings a scythe through blue grass. Medieval glaziers had no green that would last.", "Stable, cleaned 2020", "Adopted by Wexcombe Cricket Club"],
+    ["July · Reaping", "Two reapers with sickles, bent at the waist. The best-preserved petal in the rose.", "Stable", "Adopted by the Fenner family"],
+    ["August · Threshing", "A flail raised over a floor of gold. Pigeons have nested behind this one since 1990.", "Loose panes, guard needed", "£9,500"],
+    ["September · Vintage", "Treading grapes in a tub. The purple is ruby glass laid over blue: plating, 13th-century.", "Stable", "Adopted by the Close Vintners"],
+    ["October · Sowing", "A sower with a bag across his chest. Grisaille border, much of it original.", "Corrosion on the outer face", "Adopted by St. Aldhelm’s School"],
+    ["November · Acorns", "A swineherd knocks acorns down for his pigs. Glass painter’s thumbprint visible in the paint.", "Stable", "Adopted by the Oakley Trust"],
+    ["December · Baking", "Loaves going into an oven. The flame is the brightest yellow in the window.", "Cleaned 2021", "Adopted by the Bakers’ Guild"]
+  ];
+  const ROMAN = ["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII"];
+  const glass = document.getElementById("glassonly"), petals = document.getElementById("petals");
+  const el = (n, a, parent) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); parent && parent.appendChild(e); return e; };
+  // outer ring of 24 roundels
+  for (let i = 0; i < 24; i++) {
+    const a = i * 15 + 7.5, [x, y] = P(270, a).split(" ");
+    el("circle", { cx: x, cy: y, r: 17, fill: i % 2 ? "#e8b923" : "#1d4ea8", filter: "url(#seed)" }, glass);
+    el("circle", { cx: x, cy: y, r: 17, fill: "none", stroke: "#07070b", "stroke-width": 5 }, petals);
+  }
+  for (let i = 0; i < 12; i++) {
+    const t = i * 30, red = i % 2 === 0;
+    const d = `M ${P(86, t - 10)} L ${P(212, t - 13.5)} Q ${P(250, t - 9)} ${P(258, t)} Q ${P(250, t + 9)} ${P(212, t + 13.5)} L ${P(86, t + 10)} A 86 86 0 0 0 ${P(86, t - 10)} Z`;
+    const g = el("g", { class: "petal", tabindex: 0, role: "button", "aria-pressed": i === 0 ? "true" : "false", "aria-label": "Petal " + ROMAN[i] + ", " + M[i][0] }, petals);
+    const gl = el("g", { class: "glass" }, g);
+    el("path", { d, fill: red ? "#b0182a" : "#1d4ea8", filter: "url(#seed)" }, gl);
+    el("path", { d, fill: red ? "#b0182a" : "#1d4ea8" }, glass);
+    // inner quatrefoil medallion
+    const [mx, my] = P(170, t).split(" ");
+    el("circle", { cx: mx, cy: my, r: 30, fill: red ? "#1d4ea8" : "#b0182a", filter: "url(#seed)" }, gl);
+    el("circle", { cx: mx, cy: my, r: 13, fill: "#e8b923" }, gl);
+    el("circle", { cx: mx, cy: my, r: 13, fill: "#e8b923" }, glass);
+    // lead cames
+    el("path", { d, fill: "none", stroke: "#07070b", "stroke-width": 7, class: "lead-o" }, g);
+    el("circle", { cx: mx, cy: my, r: 30, fill: "none", stroke: "#07070b", "stroke-width": 4 }, g);
+    el("circle", { cx: mx, cy: my, r: 13, fill: "none", stroke: "#07070b", "stroke-width": 3 }, g);
+    el("path", { d: `M ${P(92, t)} L ${P(140, t)} M ${P(200, t)} L ${P(250, t)} M ${P(120, t - 9)} L ${P(120, t + 9)} M ${P(215, t - 11)} L ${P(215, t + 11)}`, stroke: "#07070b", "stroke-width": 3.5, fill: "none" }, g);
+    g.addEventListener("click", () => pick(i));
+    g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(i); } });
+  }
+  // the oculus
+  el("circle", { cx: 300, cy: 300, r: 70, fill: "#e8b923", filter: "url(#seed)" }, petals);
+  el("circle", { cx: 300, cy: 300, r: 70, fill: "#e8b923", opacity: .9 }, glass);
+  el("circle", { cx: 300, cy: 300, r: 40, fill: "#b0182a", filter: "url(#seed)" }, petals);
+  for (let i = 0; i < 8; i++) el("path", { d: `M ${P(40, i * 45)} L ${P(70, i * 45)}`, stroke: "#07070b", "stroke-width": 4 }, petals);
+  el("circle", { cx: 300, cy: 300, r: 40, fill: "none", stroke: "#07070b", "stroke-width": 4 }, petals);
+  el("circle", { cx: 300, cy: 300, r: 72, fill: "none", stroke: "#2b2a31", "stroke-width": 8 }, petals);
+  const $ = (id) => document.getElementById(id);
+  function pick(i) {
+    petals.querySelectorAll(".petal").forEach((p, k) => p.setAttribute("aria-pressed", String(k === i)));
+    $("pno").textContent = "Petal " + ROMAN[i]; $("ptitle").textContent = M[i][0]; $("ptext").textContent = M[i][1];
+    $("pcond").textContent = M[i][2]; $("pcost").textContent = M[i][3];
+  }
+})();
+</script>
+</body>
+</html>

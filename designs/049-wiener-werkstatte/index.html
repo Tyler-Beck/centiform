@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wiener Werkstatte · Centiform</title>
+<style>
+/* @fonts: Federo:400:block; Rosarivo:400,400i:swap */
+@font-face{font-family:"Federo";font-style:normal;font-weight:400;font-display:block;src:url(fonts/federo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rosarivo";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rosarivo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rosarivo";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/rosarivo-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #faf8f3;          /* white laid paper */
+  --ink: #0a0a0a;         /* black lacquer */
+  --accent-1: #bfa76a;    /* gilt */
+  --accent-2: #6b6b6b;    /* silver in shadow */
+  --q: 8px;               /* one checker square; everything is a multiple */
+  /* scale: doubling squares 1, 2, 3, 4, 6 of 8px, applied to type in 1.25 steps on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 22px; --t2: 28px; --t3: 36px; --t4: clamp(40px, 5vw, 72px);
+  --disp: "Federo", serif;
+  --text: "Rosarivo", Georgia, serif;
+  --checker: conic-gradient(var(--ink) 25%, var(--bg) 0 50%, var(--ink) 0 75%, var(--bg) 0) 0 0 / calc(var(--q) * 2) calc(var(--q) * 2);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 3px; }
+/* a checker border: two rows of small squares */
+.chk { padding: calc(var(--q) * 2); background: var(--checker); }
+.chk > .in { background: var(--bg); height: 100%; }
+.page { width: min(1440px, 100%); margin: 0 auto; padding: calc(var(--q) * 4); }
+.head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: calc(var(--q) * 4); align-items: stretch; }
+.mono { width: calc(var(--q) * 22); aspect-ratio: 1; }
+.mono .in { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; border: 3px solid var(--ink); }
+.mono span { display: grid; place-items: center; font: 400 calc(var(--q) * 6)/1 var(--disp); border: 1px solid var(--ink); }
+.mono span:nth-child(2), .mono span:nth-child(3) { background: var(--ink); color: var(--bg); }
+.title { display: flex; flex-direction: column; justify-content: center; border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); }
+.title h1 { margin: 0; font: 400 var(--t4)/1 var(--disp); letter-spacing: .12em; text-transform: uppercase; }
+.title p { margin: var(--q) 0 0; font-style: italic; }
+.ed { width: calc(var(--q) * 22); aspect-ratio: 1; border: 3px solid var(--ink); display: grid; place-content: center; text-align: center; font: 400 var(--t-1)/1.4 var(--disp); letter-spacing: .14em; text-transform: uppercase; }
+.ed b { display: block; font: 400 var(--t3)/1 var(--disp); letter-spacing: 0; color: var(--accent-1); }
+nav.sec { display: flex; gap: calc(var(--q) * 2); margin: calc(var(--q) * 4) 0 calc(var(--q) * 2); flex-wrap: wrap; }
+nav.sec a { font: 400 var(--t-1)/1 var(--disp); letter-spacing: .2em; text-transform: uppercase; text-decoration: none; border: 2px solid var(--ink); padding: calc(var(--q) * 1.25) calc(var(--q) * 2); }
+nav.sec a:hover { background: var(--ink); color: var(--bg); }
+h2 { font: 400 var(--t2)/1 var(--disp); letter-spacing: .14em; text-transform: uppercase; margin: calc(var(--q) * 5) 0 calc(var(--q) * 2); display: flex; align-items: center; gap: calc(var(--q) * 2); }
+h2::before { content: ""; width: calc(var(--q) * 4); height: calc(var(--q) * 4); background: var(--checker); flex: none; }
+/* the catalogue: every piece in a square */
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--q) * 2); }
+.item { aspect-ratio: 1; padding: var(--q); display: grid; grid-template-rows: minmax(0, 1fr) auto; position: relative; background: var(--checker); }
+.item > svg, .item > .l { background: var(--bg); }
+.item::after { right: calc(var(--q) * 2.5) !important; top: calc(var(--q) * 2.5) !important; }
+.item svg { width: 100%; height: 100%; display: block; padding: calc(var(--q) * 3) calc(var(--q) * 3) 0; }
+.item .l { border-top: 3px solid var(--ink); display: grid; grid-template-columns: calc(var(--q) * 7) minmax(0, 1fr) auto; }
+.item .no { background: var(--ink); color: var(--bg); display: grid; place-items: center; font: 400 var(--t0)/1 var(--disp); }
+.item .nm { padding: var(--q) calc(var(--q) * 1.5); font-size: 16px; line-height: 1.3; }
+.item .nm i { display: block; font-size: var(--t-1); color: var(--accent-2); }
+.item .pr { padding: var(--q) calc(var(--q) * 1.5); border-left: 1px solid var(--ink); font: 400 var(--t-1)/1.3 var(--disp); text-align: right; font-variant-numeric: tabular-nums; }
+.item::after { content: "GW"; position: absolute; right: calc(var(--q) * 1.5); top: calc(var(--q) * 1.5); width: calc(var(--q) * 4); height: calc(var(--q) * 4); border: 1.5px solid var(--ink); display: grid; place-items: center; font: 400 11px/1 var(--disp); letter-spacing: .08em; }
+.l-ink { stroke: var(--ink); fill: none; stroke-width: 1.6; }
+.item:hover .gilt, .item:focus-within .gilt { fill: var(--accent-1); }
+.gilt { fill: var(--bg); stroke: var(--ink); stroke-width: 1.2; transition: fill .3s steps(3); }
+.notes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--q) * 2); margin-top: calc(var(--q) * 2); }
+.notes .in { padding: calc(var(--q) * 3); }
+.notes b { font: 400 var(--t1)/1.2 var(--disp); letter-spacing: .1em; text-transform: uppercase; display: block; margin-bottom: var(--q); }
+.notes p { margin: 0; font-size: 16px; }
+footer { margin-top: calc(var(--q) * 5); border-top: 3px solid var(--ink); padding-top: calc(var(--q) * 2); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--q); font-size: var(--t-1); }
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px) {
+  .page { padding: calc(var(--q) * 2); }
+  .head { grid-template-columns: auto minmax(0, 1fr); }
+  .ed { display: none; }
+  .mono { width: calc(var(--q) * 12); }
+  .mono span { font-size: 26px; }
+  .grid, .notes { grid-template-columns: minmax(0, 1fr); }
+  .title h1 { font-size: 30px; letter-spacing: .06em; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="head">
+    <div class="mono chk" aria-hidden="true"><div class="in"><span>G</span><span>W</span><span>W</span><span>I</span></div></div>
+    <div class="title"><h1>Gitterwerk Wien</h1><p>Silver, metalwork and furniture from the workshops in the Neustiftgasse · Catalogue for the year 1905</p></div>
+    <div class="ed"><b>1905</b>Catalogue<br>no. 2</div>
+  </header>
+  <nav class="sec" aria-label="Sections"><a href="#silber">Silver</a><a href="#moebel">Furniture</a><a href="#bedingungen">Terms</a></nav>
+
+  <main>
+  <h2 id="silber">Silver and Metal</h2>
+  <div class="grid" id="silver"></div>
+  <h2 id="moebel">Furniture</h2>
+  <div class="grid" id="furn"></div>
+
+  <h2 id="bedingungen">Terms of the Workshop</h2>
+  <div class="notes">
+    <div class="chk"><div class="in"><b>Marks</b><p>Every piece carries the square monogram of the workshop, the mark of the master, and the rose mark of the Vienna assay office.</p></div></div>
+    <div class="chk"><div class="in"><b>Orders</b><p>Pieces are made to order in the sequence received. Silver takes eight to twelve weeks; furniture, four to six months.</p></div></div>
+    <div class="chk"><div class="in"><b>Prices</b><p>In Kronen, for silver of 900 fineness. Gilding inside bowls and beakers at 12 Kronen extra.</p></div></div>
+  </div>
+  </main>
+  <footer><span>Gitterwerk Wien · Neustiftgasse 32 · Wien VII</span><span>Director: Adolf Kerner · Design: Lotte Brandl, Josef Hauer</span></footer>
+</div>
+<script>
+(() => {
+  const g = (s) => `<svg viewBox="0 0 100 100" aria-hidden="true">${s}</svg>`;
+  const lattice = (x, y, w, h, n) => { let o = ""; const s = w / n; for (let j = 0; j < h / s - .01; j++) for (let i = 0; i < n; i++) o += `<rect x="${(x + i * s + s * .22).toFixed(1)}" y="${(y + j * s + s * .22).toFixed(1)}" width="${(s * .56).toFixed(1)}" height="${(s * .56).toFixed(1)}" fill="#0a0a0a"/>`; return o; };
+  const SIL = [
+    ["Fruit basket", "Perforated sheet silver", "240 K", `<path class="l-ink" d="M20 30 H80 L74 72 H26Z"/>${lattice(26, 34, 48, 30, 8)}<path class="l-ink" d="M40 72 V82 H60 V72 M34 82 H66"/><rect class="gilt" x="46" y="84" width="8" height="4"/>`],
+    ["Flower vase", "Silver, square section", "180 K", `<path class="l-ink" d="M38 12 H62 V88 H38Z"/>${lattice(40, 16, 20, 60, 4)}<path class="l-ink" d="M32 88 H68"/><rect class="gilt" x="44" y="80" width="12" height="4"/>`],
+    ["Tea service", "Silver, ebony, 4 pieces", "620 K", `<path class="l-ink" d="M22 40 H58 V78 H22Z M58 48 H70 V64 H58 M22 50 L10 42 M34 40 V32 H46 V40"/><rect x="36" y="26" width="8" height="6" fill="#0a0a0a"/><rect class="gilt" x="26" y="60" width="28" height="4"/><path class="l-ink" d="M66 60 H88 V80 H66Z M74 60 V56 H80 V60"/>`],
+    ["Cutlery, 12 settings", "Silver, square ends", "1,450 K", `<path class="l-ink" d="M30 14 V86 M44 14 V86 M58 14 V86 M72 14 V86"/><rect x="26" y="14" width="8" height="8" fill="#0a0a0a"/><rect x="40" y="14" width="8" height="8" fill="#0a0a0a"/><rect x="54" y="14" width="8" height="8" fill="#0a0a0a"/><rect x="68" y="14" width="8" height="8" fill="#0a0a0a"/><path class="l-ink" d="M26 66 H34 M40 70 L44 64 L48 70 M54 64 H62 V74 H54Z M68 64 L76 64 L74 80"/><rect class="gilt" x="40" y="42" width="8" height="8"/>`]
+  ];
+  const FUR = [
+    ["Armchair", "Beech, ebonised, square cut-outs", "310 K", `<path class="l-ink" d="M22 20 H78 V56 H22Z M22 56 V86 M78 56 V86 M30 56 V86 M70 56 V86 M22 70 H78"/>${lattice(28, 24, 44, 22, 6)}<rect class="gilt" x="46" y="60" width="8" height="8"/>`],
+    ["Cabinet", "Oak, black-stained, 16 doors", "880 K", `<path class="l-ink" d="M24 10 H76 V82 H24Z M24 28 H76 M24 46 H76 M24 64 H76 M37 10 V82 M50 10 V82 M63 10 V82 M28 82 V90 M72 82 V90"/>${[0, 1, 2, 3].map((k) => `<rect class="gilt" x="${29 + k * 13}" y="${17 + (k % 2) * 36}" width="4" height="4"/>`).join("")}`],
+    ["Mantel clock", "Silver, enamel dial", "260 K", `<path class="l-ink" d="M26 16 H74 V80 H26Z M32 22 H68 V58 H32Z M50 40 V28 M50 40 L60 44 M26 80 V88 H74 V80"/>${lattice(32, 62, 36, 14, 6)}<rect class="gilt" x="46" y="36" width="8" height="8"/>`],
+    ["Brooch", "Silver, gilt, lapis", "95 K", `<rect class="l-ink" x="26" y="26" width="48" height="48"/><rect class="l-ink" x="34" y="34" width="32" height="32"/><rect class="gilt" x="42" y="42" width="16" height="16"/>${[[26, 26], [66, 26], [26, 66], [66, 66]].map(([x, y]) => `<rect x="${x}" y="${y}" width="8" height="8" fill="#0a0a0a"/>`).join("")}<rect x="46" y="46" width="8" height="8" fill="#1f3f7a"/>`]
+  ];
+  const card = (list, start) => list.map(([n, m, p, s], i) => `<article class="item" tabindex="0">${g(s)}<div class="l"><span class="no">${start + i}</span><span class="nm">${n}<i>${m}</i></span><span class="pr">${p}</span></div></article>`).join("");
+  document.getElementById("silver").innerHTML = card(SIL, 101);
+  document.getElementById("furn").innerHTML = card(FUR, 201);
+})();
+</script>
+</body>
+</html>

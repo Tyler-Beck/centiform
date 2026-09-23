@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lapidary Capitals · Centiform</title>
+<style>
+/* @fonts: Cinzel:400,600:block; Castoro:400,400i:swap */
+@font-face{font-family:"Cinzel";font-style:normal;font-weight:400;font-display:block;src:url(fonts/cinzel-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cinzel";font-style:normal;font-weight:600;font-display:block;src:url(fonts/cinzel-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Castoro";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/castoro-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Castoro";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/castoro-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ece8e1;          /* the museum wall, lime-washed */
+  --ink: #2f2b28;
+  --accent-1: #8b3a2e;    /* minium red, repainted into the grooves */
+  --accent-2: #a9a39a;    /* weathered marble */
+  --marble: #e2ddd4;
+  --u: 8px;
+  /* scale: Roman foot of 29.6 cm, letters graded as on the stone, 1.333 on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 43px; --t4: clamp(30px, 4.4vw, 76px);
+  --cap: "Cinzel", serif;
+  --text: "Castoro", Georgia, serif;
+  --lx: 0; --ly: -1;      /* raking light direction */
+  --vein: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><filter id='v'><feTurbulence type='turbulence' baseFrequency='.006 .02' numOctaves='4' seed='9'/><feColorMatrix values='0 0 0 0 .45 0 0 0 0 .43 0 0 0 0 .40 -1.6 0 0 0 .55'/></filter><rect width='100%' height='100%' filter='url(%23v)' opacity='.5'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.65 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+.mast { text-align: center; padding: calc(var(--u) * 5) calc(var(--u) * 3) calc(var(--u) * 3); border-bottom: 1px solid var(--accent-2); }
+.mast .t { font: 600 var(--t2)/1 var(--cap); letter-spacing: .3em; }
+.mast p { margin: var(--u) 0 0; font-size: var(--t-1); letter-spacing: .12em; font-style: italic; }
+/* the stone: a carved panel with a moulded frame */
+.stone { position: relative; margin: calc(var(--u) * 5) auto; width: min(1240px, calc(100% - 32px)); padding: clamp(24px, 5vw, 72px) clamp(16px, 5vw, 80px); text-align: center;
+  background: var(--vein) center / cover, radial-gradient(ellipse at 30% 20%, #f1ede6, var(--marble) 60%, #d4cec3);
+  box-shadow: inset 0 0 0 10px #d8d2c7, inset 0 0 0 12px #bdb6aa, inset 0 0 0 22px #e4dfd6, inset 0 0 0 23px #b8b1a5, 0 24px 40px -24px rgba(47,43,40,.6); }
+.stone .ins { position: relative; font: 600 var(--t4)/1.35 var(--cap); letter-spacing: .06em; color: var(--accent-1);
+  /* incised: the groove's upper wall in shadow, its lower lip catching the light */
+  text-shadow: calc(var(--lx) * 1.4px) calc(var(--ly) * 1.4px) 0 rgba(20,14,10,.55), calc(var(--lx) * -1.2px) calc(var(--ly) * -1.2px) 0 rgba(255,255,255,.75); }
+.stone .ins span { display: block; }
+.stone .ins .s { font-size: .74em; }
+.stone .ins .xs { font-size: .6em; }
+.stone .ins span { background: linear-gradient(rgba(139,58,46,.6), rgba(139,58,46,.6)) 0 24% / 0 1px no-repeat, linear-gradient(rgba(139,58,46,.6), rgba(139,58,46,.6)) 0 79% / 0 1px no-repeat; transition: background-size .8s; }
+.stone.show .ins span { background-size: 100% 1px, 100% 1px; }
+.cap { width: min(1240px, calc(100% - 32px)); margin: 0 auto; display: flex; justify-content: space-between; gap: calc(var(--u) * 2); flex-wrap: wrap; font-size: var(--t-1); color: #5b554f; font-variant-numeric: tabular-nums; }
+.cap button { font: 400 var(--t-1)/1 var(--text); background: transparent; color: var(--ink); border: 1px solid var(--ink); padding: 8px 12px; cursor: pointer; }
+.cap button[aria-pressed="true"] { background: var(--accent-1); color: var(--bg); border-color: var(--accent-1); }
+article { width: min(1080px, calc(100% - 32px)); margin: calc(var(--u) * 6) auto; }
+article h1 { font: 400 var(--t3)/1.1 var(--cap); text-align: center; margin: 0 0 var(--u); letter-spacing: .04em; }
+article .dek { text-align: center; font-style: italic; font-size: var(--t1); margin: 0 auto calc(var(--u) * 5); max-width: 36ch; line-height: 1.4; }
+.cols { columns: 2 22em; column-gap: calc(var(--u) * 6); column-rule: 1px solid var(--accent-2); }
+.cols p { margin: 0 0 calc(var(--u) * 2); }
+.cols p:first-child::first-letter { float: left; font: 600 4.2em/.8 var(--cap); color: var(--accent-1); margin: .06em .08em 0 0; }
+.tr { break-inside: avoid; border-top: 3px double var(--ink); border-bottom: 3px double var(--ink); padding: var(--u) 0; margin: 0 0 calc(var(--u) * 2); }
+.tr b { font: 400 var(--t-1)/1.4 var(--cap); letter-spacing: .12em; display: block; }
+.tr i { font-size: var(--t0); }
+footer { text-align: center; padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 6); font-size: var(--t-1); letter-spacing: .08em; border-top: 1px solid var(--accent-2); }
+@media (max-width: 700px) { .stone .ins { letter-spacing: .02em; } }
+</style>
+</head>
+<body>
+<header class="mast"><div class="t">LAPIDARIVM</div><p>Journal of the Vallensian Collection · Number 14 · Spring 2026</p></header>
+<main>
+  <figure class="stone" id="s1" style="margin-bottom: calc(8px * 2)" aria-labelledby="c1">
+    <div class="ins" lang="la">
+      <span>IMP · CAESARI</span>
+      <span>DIVI · TRAIANI · F</span>
+      <span class="s">AQVAEDVCTVM · NOVVM</span>
+      <span class="s">RES · PVBLICA · VALLENSIVM</span>
+      <span class="xs">PECVNIA · SVA · FECIT</span>
+    </div>
+  </figure>
+  <div class="cap"><span id="c1">Inv. L 214 · Building inscription from the aqueduct gate · limestone, H 84 cm, W 212 cm · letters 7.2 to 4.1 cm · AD 118–125</span><span><button type="button" data-s="s1" aria-pressed="false">Show the setting-out lines</button></span></div>
+
+  <article aria-labelledby="h">
+    <h1 id="h">The Water Came Downhill</h1>
+    <p class="dek">How the town of Vallis paid for its own aqueduct, and wanted everyone to know it.</p>
+    <div class="cols">
+      <p>The stone above hung over the arch where the new aqueduct entered the town. It is a dedication to the emperor, but read to the end: the last line, smaller and closer to the reader’s eye, says the town paid for it with its own money. That was the point.</p>
+      <div class="tr"><b>Translation</b><i>To the Emperor Caesar, son of the deified Trajan. The community of the Vallenses built the new aqueduct at its own expense.</i></div>
+      <p>The letters shrink line by line, from 7.2 centimetres at the top to 4.1 at the foot. A mason called the ordinator painted every letter on the stone first, with a brush, between ruled lines; the cutter followed the paint. You can still see two of his guide lines, scratched too deep, under the second row.</p>
+      <p>The red is modern. Traces of minium were found in the grooves in 1998, and the museum repainted them the next year, as a Roman visitor would have seen them. Press the button under the stone to show the ruling as the ordinator laid it out.</p>
+      <p>Move your pointer across the stone: the light follows it, as a torch held low against the surface does for the epigraphers in the store room.</p>
+    </div>
+  </article>
+
+  <figure class="stone" id="s2" style="width: min(760px, calc(100% - 32px))" aria-labelledby="c2">
+    <div class="ins" lang="la" style="font-size: clamp(26px, 3.4vw, 58px)">
+      <span>D · M</span>
+      <span class="s">AELIAE · SECVNDAE</span>
+      <span class="s">VIXIT · ANNOS · XXXII</span>
+      <span class="s">MARITVS · FECIT</span>
+      <span>B · M</span>
+    </div>
+  </figure>
+  <div class="cap" style="width: min(760px, calc(100% - 32px))"><span id="c2">Inv. L 87 · Tombstone · marble, H 96 cm · 2nd century AD</span><span><button type="button" data-s="s2" aria-pressed="false">Show the setting-out lines</button></span></div>
+  <article><div class="tr" style="max-width: 640px; margin: calc(8px * 3) auto 0; text-align: center"><b>Translation</b><i>To the spirits of the dead. For Aelia Secunda, who lived thirty-two years. Her husband made this, for one who deserved it well.</i></div></article>
+</main>
+<footer>Vallensian Collection · The Lapidarium, Porta Aquae · Open Wednesday to Sunday, 10–17 · Free</footer>
+<script>
+(() => {
+  document.querySelectorAll(".cap button").forEach((b) => b.addEventListener("click", () => { const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(on)); document.getElementById(b.dataset.s).classList.toggle("show", on); }));
+  // raking light: the shadow in each groove falls away from the pointer
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  let q = null;
+  addEventListener("pointermove", (e) => { q = e; requestAnimationFrame(() => { if (!q) return;
+    document.querySelectorAll(".stone").forEach((s) => { const r = s.getBoundingClientRect(), dx = (q.clientX - (r.left + r.width / 2)) / r.width, dy = (q.clientY - (r.top + r.height / 2)) / r.height, m = Math.hypot(dx, dy) || 1;
+      s.style.setProperty("--lx", (dx / m).toFixed(2)); s.style.setProperty("--ly", (dy / m).toFixed(2)); }); q = null; }); });
+})();
+</script>
+</body>
+</html>

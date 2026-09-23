@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marquetry Inlay · Centiform</title>
+<style>
+/* @fonts: Forum:400:block; Proza Libre:400,600,400i:swap */
+@font-face{font-family:"Forum";font-style:normal;font-weight:400;font-display:block;src:url(fonts/forum-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Proza Libre";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/proza-libre-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Proza Libre";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/proza-libre-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Proza Libre";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/proza-libre-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #b07a4a;          /* mahogany ground */
+  --ink: #2b1a10;         /* ebony stringing, and the text */
+  --accent-1: #e9d3b0;    /* satinwood and boxwood */
+  --accent-2: #5a3620;    /* walnut */
+  --tulip: #c9925e;
+  --u: 8px;
+  --string: 3px;          /* boxwood stringing */
+  /* scale: 1.25 on 17px */
+  --t-1: 13.6px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: clamp(44px, 5.6vw, 88px);
+  --disp: "Forum", Georgia, serif;
+  --text: "Proza Libre", "Gill Sans", sans-serif;
+  --fig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='500'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='.004 .09' numOctaves='4' seed='5' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .17 0 0 0 0 .1 0 0 0 0 .06 0 0 0 .75 -.15'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  --cube: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='104'><path d='M30 0 L60 17 L30 35 L0 17Z' fill='%23e9d3b0'/><path d='M0 17 L30 35 V69 L0 52Z' fill='%235a3620'/><path d='M60 17 L30 35 V69 L60 52Z' fill='%23b07a4a'/><path d='M30 69 L60 87 L30 104 L0 87Z' fill='%23e9d3b0'/><path d='M0 52 L0 87 L30 104 V69Z' fill='%23b07a4a' opacity='0'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { margin: 0; display: flow-root; color: var(--ink); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden;
+  background: var(--fig) 0 0 / 500px 500px, repeating-linear-gradient(88deg, rgba(43,26,16,.0) 0 7px, rgba(43,26,16,.12) 7px 9px, rgba(255,220,180,.05) 9px 14px), var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 3px; }
+/* veneer: a flitch of figured wood, book-matched about the centre */
+.veneer { position: relative; background: var(--fig) 0 0 / 500px 500px, repeating-linear-gradient(var(--ga, 90deg), rgba(0,0,0,0) 0 5px, rgba(0,0,0,.1) 5px 6px, rgba(255,230,190,.06) 6px 11px), var(--w, var(--accent-2)); }
+.veneer.match::after { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: rgba(0,0,0,.25); }
+/* crossbanding then boxwood stringing then the panel */
+.band { padding: 18px; background: repeating-linear-gradient(45deg, #a46c3d 0 6px, #b88050 6px 10px, #9a6436 10px 14px); box-shadow: inset 0 0 0 var(--string) var(--accent-1), inset 0 0 0 calc(var(--string) + 1px) var(--ink), 0 12px 24px -12px rgba(0,0,0,.6); }
+.band > .veneer { box-shadow: 0 0 0 var(--string) var(--accent-1), 0 0 0 calc(var(--string) + 2px) var(--ink); }
+.inlay { position: relative; z-index: 1; background: var(--fig) 0 0 / 700px 700px, repeating-linear-gradient(0deg, rgba(0,0,0,0) 0 9px, rgba(120,80,40,.07) 9px 10px), var(--accent-1); box-shadow: 0 0 0 2px var(--ink); padding: calc(var(--u) * 2.5) calc(var(--u) * 3); }
+header.top { margin: calc(var(--u) * 4); }
+header.top .veneer { --w: #5a3620; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: calc(var(--u) * 4); padding: calc(var(--u) * 5); align-items: center; }
+.rose { width: 140px; height: 140px; }
+header .inlay h1 { margin: 0; font: 400 var(--t4)/1 var(--disp); letter-spacing: .02em; }
+header .inlay p { margin: var(--u) 0 0; max-width: 60ch; }
+.parquet { height: 70px; margin: calc(var(--u) * 5) calc(var(--u) * 4) calc(var(--u) * 3); background: var(--cube) 0 0 / 30px 52px; box-shadow: 0 0 0 3px var(--accent-1), 0 0 0 5px var(--ink); display: flex; align-items: center; justify-content: center; }
+.parquet h2 { margin: 0; background: var(--accent-1); padding: 4px 22px; font: 400 var(--t2)/1.2 var(--disp); box-shadow: 0 0 0 2px var(--ink); letter-spacing: .08em; }
+.parquet.herring { background: repeating-linear-gradient(45deg, #b07a4a 0 14px, #e9d3b0 14px 16px, #5a3620 16px 30px, #e9d3b0 30px 32px) 0 0 / 64px 64px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 4); margin: 0 calc(var(--u) * 4); }
+.grid .veneer { padding: calc(var(--u) * 4) calc(var(--u) * 3); min-height: 320px; display: flex; flex-direction: column; justify-content: flex-end; }
+.grid h3 { margin: 0 0 6px; font: 400 var(--t2)/1.1 var(--disp); }
+.grid p { margin: 0 0 var(--u); font-size: 16px; }
+.grid .pr { font: 600 var(--t-1)/1 var(--text); letter-spacing: .1em; text-transform: uppercase; display: flex; justify-content: space-between; border-top: 1px solid rgba(43,26,16,.35); padding-top: var(--u); }
+.fan { position: absolute; top: 18px; left: 50%; width: 110px; height: 60px; margin-left: -55px; }
+.note { margin: calc(var(--u) * 5) calc(var(--u) * 4); }
+.note .inlay { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 3); }
+.note b { font: 400 var(--t1)/1.2 var(--disp); display: block; }
+footer { text-align: center; color: var(--accent-1); padding: 0 calc(var(--u) * 3) calc(var(--u) * 5); font-size: var(--t-1); letter-spacing: .12em; }
+@media (prefers-reduced-motion: no-preference) {
+  .grid .veneer::before { content: ""; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgba(255,240,210,.18) 45%, transparent 60%) -200% 0 / 200% 100% no-repeat; transition: background-position 1.2s ease; pointer-events: none; }
+  .grid .veneer:hover::before, .grid .veneer:focus-within::before { background-position: 200% 0; }
+}
+@media (max-width: 1000px) { .grid { grid-template-columns: minmax(0, 1fr); } .note .inlay { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 640px) {
+  header.top, .grid, .note { margin-left: calc(var(--u) * 1.5); margin-right: calc(var(--u) * 1.5); }
+  header.top .veneer { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2.5); }
+  .rose { width: 90px; height: 90px; }
+  .band { padding: 10px; }
+  .parquet { margin-left: calc(var(--u) * 1.5); margin-right: calc(var(--u) * 1.5); }
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="band"><div class="veneer match" style="--ga: 92deg">
+  <svg class="rose" viewBox="-70 -70 140 140" aria-hidden="true"><circle r="66" fill="#e9d3b0" stroke="#2b1a10" stroke-width="3"/><g id="petals"></g><circle r="14" fill="#2b1a10"/><circle r="8" fill="#b07a4a"/></svg>
+  <div class="inlay"><h1>Pellow &amp; Daughter</h1><p>Cabinetmakers and restorers of veneered furniture, Bath, since 1924. We lift what has lifted, cut in what is missing, and match the figure so that you cannot find the repair.</p></div>
+</div></div></header>
+
+<div class="parquet" role="presentation"><h2>In the Workshop</h2></div>
+<main class="grid">
+  <article class="band" tabindex="0"><div class="veneer match" style="--w: #7a4a2a; --ga: 88deg"><svg class="fan" viewBox="0 0 110 60" aria-hidden="true"><path d="M5 58 A50 50 0 0 1 105 58Z" fill="#e9d3b0" stroke="#2b1a10" stroke-width="2"/><path d="M55 58 L10 40 M55 58 L22 18 M55 58 L42 8 M55 58 L68 8 M55 58 L88 18 M55 58 L100 40" stroke="#2b1a10" stroke-width="1.5"/></svg>
+    <div class="inlay"><h3>Sheraton card table</h3><p>Satinwood, c. 1795, with a fan patera and tulipwood crossbanding. Six stringing lines replaced; the top lifted and relaid on hide glue.</p><div class="pr"><span>Restored · for sale</span><span>£6,400</span></div></div></div></article>
+  <article class="band" tabindex="0"><div class="veneer match" style="--w: #5a3620; --ga: 91deg"><svg class="fan" viewBox="0 0 110 60" aria-hidden="true"><rect x="30" y="4" width="50" height="50" fill="#e9d3b0" stroke="#2b1a10" stroke-width="2" transform="rotate(45 55 29)"/><rect x="45" y="19" width="20" height="20" fill="#b07a4a" stroke="#2b1a10" stroke-width="2" transform="rotate(45 55 29)"/></svg>
+    <div class="inlay"><h3>Veneer repair</h3><p>Blisters flattened, chips filled from our stock of 1,100 old veneers sorted by species and decade. Most pieces are back in three weeks.</p><div class="pr"><span>Service</span><span>from £180</span></div></div></div></article>
+  <article class="band" tabindex="0"><div class="veneer match" style="--w: #8a5a33; --ga: 89deg"><svg class="fan" viewBox="0 0 110 60" aria-hidden="true"><path d="M55 4 C70 20 70 40 55 56 C40 40 40 20 55 4Z M20 30 C35 20 45 28 55 30 C45 32 35 40 20 30Z M90 30 C75 20 65 28 55 30 C65 32 75 40 90 30Z" fill="#e9d3b0" stroke="#2b1a10" stroke-width="1.5"/></svg>
+    <div class="inlay"><h3>Marquetry recut</h3><p>Missing flowers and scrolls recut by knife and fret-saw, shaded in hot sand, and set into the old ground. Patterns from your photographs.</p><div class="pr"><span>Service</span><span>by quotation</span></div></div></div></article>
+</main>
+
+<div class="parquet herring" role="presentation"><h2>Terms</h2></div>
+<section class="note"><div class="band"><div class="inlay">
+  <div><b>Collection</b>Free within twenty miles of Bath. Blanket-wrapped, never strapped.</div>
+  <div><b>Finishes</b>French polish in shellac only. We will not spray a piece older than you are.</div>
+  <div><b>Visits</b>Walcot Street, Tuesday to Saturday. The glue pot is on from eight.</div>
+</div></div></section>
+<footer>Pellow &amp; Daughter · 88 Walcot Street · Bath · Member of the British Antique Furniture Restorers’ Association</footer>
+<script>
+(() => {
+  // the compass rose inlaid in the fascia: sixteen segments of light and dark wood
+  let p = ""; for (let i = 0; i < 16; i++) p += `<path d="M0 0 L${(Math.cos(i * Math.PI / 8) * 60).toFixed(1)} ${(Math.sin(i * Math.PI / 8) * 60).toFixed(1)} L${(Math.cos((i + 1) * Math.PI / 8) * 60).toFixed(1)} ${(Math.sin((i + 1) * Math.PI / 8) * 60).toFixed(1)}Z" fill="${i % 2 ? "#5a3620" : "#c9925e"}" stroke="#2b1a10" stroke-width=".8"/>`;
+  document.getElementById("petals").innerHTML = p;
+})();
+</script>
+</body>
+</html>

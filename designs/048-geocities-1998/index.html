@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geocities 1998 · Centiform</title>
+<style>
+/* @fonts: Comic Neue:400,700:swap; Tinos:400,700,400i:swap */
+@font-face{font-family:"Comic Neue";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/comic-neue-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Comic Neue";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/comic-neue-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tinos";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tinos-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tinos";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/tinos-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tinos";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/tinos-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #000080;          /* navy, the only background colour a 1998 page needed */
+  --ink: #ffff00;         /* yellow body text */
+  --accent-1: #00ff00;    /* visited-link green */
+  --accent-2: #ff00ff;    /* magenta headings */
+  --cyan: #00ffff;
+  --silver: #c0c0c0;
+  --u: 8px;               /* spacing in cellpadding steps */
+  /* scale: the old font size="1" to size="7" steps */
+  --s1: 13px; --s2: 16px; --s3: 18px; --s4: 22px; --s5: 28px; --s6: 36px; --s7: clamp(38px, 5vw, 56px);
+  --comic: "Comic Neue", "Comic Sans MS", cursive;
+  --times: "Tinos", "Times New Roman", serif;
+  --stars: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='96'><rect width='96' height='96' fill='%23000080'/><g fill='%23ffffff'><rect x='12' y='20' width='2' height='2'/><rect x='70' y='8' width='1' height='1'/><rect x='44' y='60' width='2' height='2'/><rect x='84' y='74' width='1' height='1'/><rect x='24' y='84' width='1' height='1'/><rect x='58' y='34' width='1' height='1'/></g><path d='M78 44 l2 5 l5 0 l-4 3 l2 5 l-5 -3 l-5 3 l2 -5 l-4 -3 l5 0z' fill='%23ffff00'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--stars) 0 0 / 96px 96px; font: 400 var(--s3)/1.4 var(--times); overflow-x: hidden; }
+a { color: var(--cyan); }
+a:visited { color: var(--accent-1); }
+:focus-visible { outline: 2px dotted #ffffff; outline-offset: 2px; }
+/* frames: a nav frame on the left, the page on the right */
+.frames { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
+.navframe { background: #000040; border-right: 6px ridge var(--silver); padding: calc(var(--u) * 2); font-family: var(--comic); position: sticky; top: 0; height: 100vh; overflow: auto; }
+.navframe h2 { margin: 0 0 var(--u); font: 700 var(--s4)/1.1 var(--comic); color: var(--accent-2); text-align: center; }
+.navframe a.btn { display: block; margin: 6px 0; padding: 5px 8px; text-align: center; background: var(--silver); color: #000; text-decoration: none; border: 3px outset #ffffff; font: 700 var(--s2)/1.2 var(--comic); }
+.navframe a.btn:active { border-style: inset; }
+.navframe .small { font-size: var(--s1); color: var(--silver); text-align: center; margin-top: calc(var(--u) * 2); }
+.page { padding: calc(var(--u) * 2); }
+table.wrap { width: min(780px, 100%); margin: 0 auto; border-collapse: collapse; table-layout: fixed; }
+.center { text-align: center; }
+h1 { font: 700 var(--s7)/1.05 var(--comic); color: var(--accent-2); margin: calc(var(--u) * 2) 0 var(--u); text-shadow: 3px 3px 0 #000; }
+h1 span { color: var(--accent-1); }
+h2.sec { font: 700 var(--s5)/1.2 var(--comic); color: var(--accent-1); margin: calc(var(--u) * 2) 0 var(--u); text-decoration: underline; }
+hr.rain { border: 0; height: 6px; background: linear-gradient(90deg, #ff0000, #ff8000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff); margin: calc(var(--u) * 3) 0; }
+hr.plain { border: 0; border-top: 2px groove var(--silver); }
+.marquee { overflow: hidden; white-space: nowrap; border: 2px inset var(--silver); background: #000; color: var(--accent-1); font: 700 var(--s3)/1.8 var(--comic); }
+.marquee span { display: inline-block; padding-left: 100%; }
+.construct { display: flex; align-items: center; gap: var(--u); justify-content: center; padding: 6px; background: repeating-linear-gradient(45deg, #ffff00 0 14px, #000 14px 28px); border: 2px solid #000; margin: calc(var(--u) * 2) 0; }
+.construct b { background: #ffff00; color: #000; font: 700 var(--s3)/1.2 var(--comic); padding: 2px 10px; }
+.construct svg { width: 40px; height: 40px; background: #ffff00; }
+table.eps { width: 100%; border: 3px ridge var(--silver); border-collapse: separate; border-spacing: 2px; background: #000060; font-size: var(--s2); }
+table.eps th { background: #800080; color: #ffffff; font-family: var(--comic); padding: 4px; }
+table.eps td { border: 1px solid #4040a0; padding: 4px 6px; vertical-align: top; }
+table.eps td.n { color: var(--cyan); text-align: center; font-variant-numeric: tabular-nums; }
+.star { color: var(--accent-1); }
+.counter { display: inline-flex; gap: 2px; background: #000; padding: 4px; border: 3px inset var(--silver); }
+.counter i { font: 700 22px/1 "Courier New", monospace; font-style: normal; background: linear-gradient(#222 0 50%, #000 50%); color: var(--accent-1); width: 20px; text-align: center; padding: 3px 0; }
+.ring { border: 4px double var(--accent-2); background: #000040; padding: calc(var(--u) * 1.5); text-align: center; font-family: var(--comic); margin: calc(var(--u) * 3) auto; max-width: 480px; }
+.ring b { color: var(--accent-2); display: block; font-size: var(--s4); }
+.ring a { font-weight: 700; margin: 0 6px; }
+form.gb { background: #c0c0c0; color: #000; border: 3px outset #ffffff; padding: var(--u); font: 400 var(--s2)/1.4 var(--times); max-width: 480px; margin: 0 auto; text-align: left; }
+form.gb input, form.gb textarea { width: 100%; font: 400 15px var(--times); }
+.blink { color: #ff0000; font-weight: 700; }
+.badges { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin: calc(var(--u) * 2) 0; }
+.badge { width: 88px; height: 31px; border: 1px solid #fff; font: 700 10px/1.1 Verdana, sans-serif; display: grid; place-items: center; text-align: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .marquee span { animation: mq 16s linear infinite; }
+  @keyframes mq { to { transform: translateX(-100%); } }
+  .blink { animation: bl 1s steps(1) infinite; }
+  @keyframes bl { 50% { visibility: hidden; } }
+}
+@media (max-width: 760px) {
+  .frames { grid-template-columns: minmax(0, 1fr); }
+  .navframe { position: static; height: auto; border-right: 0; border-bottom: 6px ridge var(--silver); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+  .navframe h2, .navframe .small { grid-column: 1 / -1; }
+  .navframe a.btn { margin: 0; font-size: 14px; }
+  table.eps .hide-m { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="frames">
+  <nav class="navframe" aria-label="Site">
+    <h2>~ MENU ~</h2>
+    <a class="btn" href="#home">Home</a>
+    <a class="btn" href="#eps">Episode Guide</a>
+    <a class="btn" href="#crew">The Crew</a>
+    <a class="btn" href="#fic">Fan Fiction</a>
+    <a class="btn" href="#links">Links</a>
+    <a class="btn" href="#guest">Guestbook</a>
+    <p class="small">This site is best viewed at 800 x 600 in Netscape Navigator 4.0 or higher</p>
+  </nav>
+  <div class="page">
+    <table class="wrap" role="presentation"><tr><td>
+      <div class="center" id="home">
+        <h1>Welcome 2 my <span>NEBULA PATROL</span> Shrine!!!</h1>
+        <p>You are now entering the #1 fan site for the best TV show in the galaxy. Beam aboard!!</p>
+        <div class="marquee" aria-hidden="true"><span>*** NEW!!! Season 3 episode guide is UP *** Sign my guestbook *** Commander Voss 4 ever *** No stealing my graphics please, ask first ***</span></div>
+        <div class="construct"><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M20 4 L32 36 H8Z" fill="#ff8000" stroke="#000" stroke-width="2"/><path d="M13 22 H27 M11 28 H29" stroke="#fff" stroke-width="3"/></svg><b>UNDER CONSTRUCTION</b><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="10" r="6" fill="#ffcc99" stroke="#000"/><path d="M12 8 q8 -8 16 0z" fill="#ffff00" stroke="#000"/><path d="M20 16 V30 M20 20 L10 26 M20 20 L32 14 M20 30 L14 38 M20 30 L26 38" stroke="#000" stroke-width="3"/><path d="M30 10 L34 18" stroke="#666" stroke-width="3"/></svg><b>SORRY!!</b></div>
+        <p>Last updated: <b>Saturday, March 14, 1998</b> <span class="blink">NEW!</span></p>
+      </div>
+      <hr class="rain">
+      <h2 class="sec" id="eps">Episode Guide (Season 2)</h2>
+      <table class="eps">
+        <thead><tr><th>#</th><th>Title</th><th class="hide-m">Aired</th><th>My Rating</th></tr></thead>
+        <tbody>
+          <tr><td class="n">2.01</td><td><b>The Long Orbit</b><br>The Meridian is stuck circling a dead star. Voss makes a deal with the Quorra. Bad idea!!</td><td class="hide-m">Sep 22, 1997</td><td class="star">*****</td></tr>
+          <tr><td class="n">2.02</td><td><b>Signal from Tethys</b><br>Lieutenant Adaeze hears her dead brother on the radio. Creepy!!!</td><td class="hide-m">Sep 29, 1997</td><td class="star">****</td></tr>
+          <tr><td class="n">2.03</td><td><b>Dust Planet</b><br>The one with the sand worms. Special effects not so good but the ending is SO sad.</td><td class="hide-m">Oct 6, 1997</td><td class="star">***</td></tr>
+          <tr><td class="n">2.04</td><td><b>Mirror Crew</b><br>Evil twins!! Evil Voss has a beard. Best episode EVER.</td><td class="hide-m">Oct 13, 1997</td><td class="star">*****</td></tr>
+        </tbody>
+      </table>
+      <hr class="rain">
+      <h2 class="sec" id="crew">The Crew of the Meridian</h2>
+      <p><b>Commander Ilya Voss</b> (played by Martin Kowalczyk) &ndash; the best captain on TV, sorry Trekkies!! <br><b>Lt. Ngozi Adaeze</b> &ndash; comms officer, speaks 14 alien languages. <br><b>Doc Petra Lund</b> &ndash; grumpy but always right. <br><b>BEEP-7</b> &ndash; the robot. Everybody loves BEEP-7.</p>
+      <h2 class="sec" id="fic">Fan Fiction</h2>
+      <p><a href="#fic">"The Quorra Accord" chapter 1&ndash;6</a> by me (Kira)<br><a href="#fic">"Voss Remembers"</a> by StarGazer77 <i>(PG-13!!)</i></p>
+      <hr class="plain">
+      <div class="ring" id="links"><b>&laquo; The NEBULA PATROL Web Ring &raquo;</b>This site is owned by <b style="display:inline;font-size:inherit;color:#00ff00">Kira_N</b><br><a href="#links">&lt;&lt; Prev</a> <a href="#links">Random</a> <a href="#links">List Sites</a> <a href="#links">Next &gt;&gt;</a></div>
+      <div class="badges" aria-label="Badges"><span class="badge" style="background:#000;color:#0f0">MADE WITH<br>NOTEPAD</span><span class="badge" style="background:#fff;color:#000080">NETSCAPE<br>NOW!</span><span class="badge" style="background:#800080;color:#ff0">META PEOPLE<br>FAN CLUB</span><span class="badge" style="background:#008080;color:#fff">NO FRAMES?<br>CLICK HERE</span></div>
+      <h2 class="sec" id="guest">Sign My Guestbook!!</h2>
+      <form class="gb" onsubmit="event.preventDefault(); this.querySelector('p').textContent = 'Thank you!!! Your entry will appear after Kira checks it (usually on the weekend).';">
+        <label>Your name:<br><input type="text" name="n"></label><br>
+        <label>Your homepage:<br><input type="url" name="u" placeholder="http://"></label><br>
+        <label>Favourite episode:<br><textarea rows="3" name="m"></textarea></label><br>
+        <input type="submit" value="Sign it!" style="width:auto"> <input type="reset" value="Clear" style="width:auto">
+        <p></p>
+      </form>
+      <hr class="rain">
+      <p class="center">You are visitor number <span class="counter" id="count" aria-label="visitor number 004217"></span> since November 1997</p>
+      <p class="center" style="font-size:13px">&copy; 1998 Kira N. &middot; Nebula Patrol is &trade; and &copy; Westmark Television. This is a fan site, not affiliated!!! &middot; <a href="#home">Back to top</a></p>
+    </td></tr></table>
+  </div>
+</div>
+<script>
+(() => {
+  const n = String(4217 + (new Date().getDate() % 9)).padStart(6, "0");
+  document.getElementById("count").innerHTML = [...n].map((d) => `<i>${d}</i>`).join("");
+})();
+</script>
+</body>
+</html>

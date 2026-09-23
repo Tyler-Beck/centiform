@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shan Shui Scroll · Centiform</title>
+<style>
+/* @fonts: Ma Shan Zheng:400:block; Noto Serif SC:400,700:swap:latin */
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-111-400-normal.woff2) format("woff2");unicode-range:U+4e4c,U+4e88,U+4ea1,U+4ea6,U+4ed3-4ed4,U+4eff,U+4f30,U+4fa7,U+4fc4,U+4fd7,U+500d,U+504f,U+5076-5077,U+517d,U+5192,U+51c9,U+51ef,U+5238,U+5251,U+526a,U+52c7,U+52df,U+52ff,U+53a6,U+53a8,U+53ec,U+5410,U+559d,U+55b7,U+5634,U+573e,U+5783,U+585e,U+586b,U+58a8,U+5999,U+59d3,U+5a1c,U+5a46,U+5b54-5b55,U+5b85,U+5b8b,U+5b8f,U+5bbf,U+5bd2,U+5c16,U+5c24,U+5e05,U+5e45,U+5e7c,U+5e84,U+5f03,U+5f1f,U+5f31,U+5f84,U+5f90,U+5fbd,U+5fc6,U+5fd9,U+5fe7,U+6052,U+6062,U+6089,U+60a3,U+60d1,U+6167,U+622a,U+6234,U+624e,U+6269,U+626c,U+62b5,U+62d2,U+6325,U+63e1,U+643a,U+6446,U+6562,U+656c,U+65e2,U+65fa,U+660c,U+6628,U+6652,U+6668,U+6676,U+66fc,U+66ff,U+6717,U+676d,U+67aa,U+67d4,U+6843,U+6881,U+68d2,U+695a,U+69fd,U+6a2a,U+6b8a,U+6c60,U+6c64,U+6c9f,U+6caa,U+6cc9,U+6ce1,U+6cfd,U+6d1b,U+6d1e,U+6d6e,U+6de1,U+6e10,U+6e7f,U+6f5c,U+704c,U+7070,U+7089,U+70b8,U+718a,U+71c3,U+723d,U+732a,U+73cd,U+7518,U+756a,U+75af,U+75be,U+75c7,U+76d2,U+76d7,U+7763,U+78e8,U+795d,U+79df,U+7c4d,U+7d2f,U+7ee9,U+7f13,U+7f8a,U+8000,U+8010,U+80af,U+80f6,U+80f8,U+8212,U+8273,U+82f9,U+83ab,U+83b1,U+83f2,U+8584,U+871c,U+8861,U+888b,U+88c1,U+88e4,U+8bd1,U+8bf1,U+8c31,U+8d5a,U+8d75-8d76,U+8de8,U+8f85,U+8fa3,U+8fc5,U+9006,U+903c,U+904d,U+9075,U+9178,U+9274,U+950b,U+9526,U+95ea,U+9636,U+9686,U+978b,U+987f,U+9a7e,U+9b42,U+9e1f,U+9ea6,U+9f13,U+9f84,U+ff5e;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-112-400-normal.woff2) format("woff2");unicode-range:U+23,U+3d,U+4e01,U+4e39,U+4e73,U+4ecd,U+4ed9,U+4eea,U+4f0a,U+4f1f,U+4f5b,U+4fa0,U+4fc3,U+501f,U+50a8,U+515a,U+5175,U+51a0,U+51c0,U+51e1,U+51e4,U+5200,U+520a,U+5224,U+523a,U+52aa,U+52b1,U+52b3,U+5348,U+5353,U+5360,U+5371,U+5377,U+539a,U+541b,U+5434,U+547c,U+54e6,U+5510,U+5531,U+5609,U+56f0,U+56fa,U+5733,U+574f,U+5851,U+5854,U+5899,U+58c1,U+592e,U+5939,U+5976,U+5986,U+59bb,U+5a18,U+5a74,U+5b59,U+5b87,U+5b97,U+5ba0,U+5bab,U+5bbd-5bbe,U+5bf8,U+5c0a,U+5c3a,U+5c4a,U+5e16,U+5e1d,U+5e2d,U+5e8a,U+6015,U+602a,U+6050,U+6069,U+6162,U+61c2,U+6293,U+6297,U+62b1,U+62bd,U+62df,U+62fc,U+6302,U+635f,U+638c,U+63ed,U+6458,U+6469,U+6563,U+6620,U+6653,U+6696-6697,U+66dd,U+675f,U+676f-6770,U+67d0,U+67d3,U+684c,U+6865,U+6885,U+68b0,U+68ee,U+690d,U+6b23,U+6b32,U+6bd5,U+6c89,U+6d01,U+6d25,U+6d89,U+6da6,U+6db2,U+6df7,U+6ed1,U+6f02,U+70c8,U+70df,U+70e7,U+7126,U+7236,U+7259,U+731c,U+745e,U+74e3,U+751a,U+751c,U+7532,U+7545,U+75db,U+7761,U+7a0d,U+7b51,U+7ca4,U+7cd6,U+7d2b,U+7ea0,U+7eb9,U+7ed8,U+7f18,U+7f29,U+8033,U+804a,U+80a4-80a5,U+80e1,U+817f,U+829d,U+82e6,U+8336,U+840c,U+8499,U+864e,U+8651,U+865a,U+88ad,U+89e6,U+8bd7,U+8bfa,U+8c37,U+8d25,U+8d38,U+8ddd,U+8fea,U+9010,U+9012,U+906d,U+907f-9080,U+90d1,U+9177,U+91ca,U+94fa,U+9501,U+9634-9635,U+9694,U+9707,U+9738,U+9769,U+9a7b,U+9a97,U+9aa8,U+9b3c,U+9c81,U+9ed8;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-113-400-normal.woff2) format("woff2");unicode-range:U+26,U+3c,U+d7,U+4e4e,U+4e61,U+4e71,U+4ebf,U+4f26,U+5012,U+51ac,U+51b0,U+51b2,U+51b7,U+5218,U+521a,U+5220,U+5237,U+523b,U+526f,U+5385,U+53bf,U+53e5,U+53eb,U+53f3,U+53f6,U+5409,U+5438,U+54c8,U+54e5,U+552f,U+5584,U+5706,U+5723,U+5750,U+575a,U+5987-5988,U+59b9,U+59d0,U+59d4,U+5b88,U+5b9c,U+5bdf,U+5bfb,U+5c01,U+5c04,U+5c3e,U+5c4b,U+5c4f,U+5c9b,U+5cf0,U+5ddd,U+5de6,U+5de8,U+5e01,U+5e78,U+5e7b,U+5e9c,U+5ead,U+5ef6,U+5f39,U+5fd8,U+6000,U+6025,U+604b,U+6076,U+613f,U+6258,U+6263,U+6267,U+6298,U+62a2,U+62e5,U+62ec,U+6311,U+6377,U+6388-6389,U+63a2,U+63d2,U+641e,U+642d,U+654f,U+6551,U+6597,U+65cf,U+65d7,U+65e7,U+6682,U+66f2,U+671d,U+672b,U+6740,U+6751,U+6768,U+6811,U+6863,U+6982,U+6bd2,U+6cf0,U+6d0b,U+6d17,U+6d59,U+6dd8,U+6dfb,U+6e7e,U+6f6e,U+6fb3,U+706f,U+719f,U+72af,U+72d0,U+72d7,U+732b,U+732e,U+7389,U+73e0,U+7530,U+7687,U+76d6,U+76db,U+7840,U+786c,U+79cb,U+79d2,U+7a0e,U+7a33,U+7a3f,U+7a97,U+7ade-7adf,U+7b26,U+7e41,U+7ec3,U+7f3a,U+8089,U+80dc,U+811a,U+8131,U+8138,U+821e,U+8349,U+83dc,U+8457,U+867d,U+86cb,U+8a89,U+8ba8,U+8bad,U+8bef,U+8bfe,U+8c6a,U+8d1d,U+8d4f,U+8d62,U+8dd1,U+8df3,U+8f6e,U+8ff9,U+900f,U+9014,U+9057,U+9192,U+91ce,U+9488,U+94a2,U+9547,U+955c,U+95f2,U+9644,U+964d,U+96c4-96c5,U+96e8,U+96f6-96f7,U+9732,U+9759,U+9760,U+987a,U+989c,U+9910,U+996d-996e,U+9b54,U+9e21,U+9ebb,U+9f50;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-114-400-normal.woff2) format("woff2");unicode-range:U+7e,U+2026,U+4e03,U+4e25,U+4e30,U+4e34,U+4e45,U+4e5d,U+4e89,U+4eae,U+4ed8,U+4f11,U+4f19,U+4f24,U+4f34,U+4f59,U+4f73,U+4f9d,U+4fb5,U+5047,U+505c,U+5170,U+519c,U+51cf,U+5267,U+5356,U+5374,U+5382,U+538b,U+53e6,U+5426,U+542b,U+542f,U+5462,U+5473,U+554a,U+5566,U+5708,U+571f,U+5757,U+57df,U+57f9,U+5802,U+590f,U+591c,U+591f,U+592b,U+5965,U+5979,U+5a01,U+5a5a,U+5b63,U+5b69,U+5b81,U+5ba1,U+5ba3,U+5c3c,U+5c42,U+5c81,U+5de7,U+5dee,U+5e0c,U+5e10,U+5e55,U+5e86,U+5e8f,U+5ea7,U+5f02,U+5f52,U+5f81,U+5ff5,U+60ca,U+60e0,U+6279,U+62c5,U+62ff,U+63cf,U+6444,U+64cd,U+653b,U+65bd,U+65e9,U+665a,U+66b4,U+66fe,U+6728,U+6742,U+677e,U+67b6,U+680f,U+68a6,U+68c0,U+699c,U+6b4c,U+6b66,U+6b7b,U+6bcd,U+6bdb,U+6c38,U+6c47,U+6c49,U+6cb3,U+6cb9,U+6ce2,U+6d32,U+6d3e,U+6d4f,U+6e56,U+6fc0,U+7075,U+7206,U+725b,U+72c2,U+73ed,U+7565,U+7591,U+7597,U+75c5,U+76ae,U+76d1,U+76df,U+7834,U+7968,U+7981,U+79c0,U+7a7f,U+7a81,U+7ae5,U+7b14,U+7c89,U+7d27,U+7eaf,U+7eb3,U+7eb8,U+7ec7,U+7ee7,U+7eff,U+7f57,U+7ffb,U+805a,U+80a1,U+822c,U+82cf,U+82e5,U+8363,U+836f,U+84dd,U+878d,U+8840,U+8857,U+8863,U+8865,U+8b66,U+8bb2,U+8bda,U+8c01,U+8c08,U+8c46,U+8d1f,U+8d35,U+8d5b,U+8d5e,U+8da3,U+8ddf,U+8f93,U+8fdd,U+8ff0,U+8ff7,U+8ffd,U+9000,U+9047,U+9152,U+949f,U+94c1,U+94f6,U+9646,U+9648,U+9669,U+969c,U+96ea,U+97e9,U+987b,U+987e,U+989d,U+9970,U+9986,U+9c7c,U+9c9c;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-116-400-normal.woff2) format("woff2");unicode-range:U+2b,U+40,U+3000,U+300a-300b,U+4e16,U+4e66,U+4e70,U+4e91-4e92,U+4e94,U+4e9b,U+4ec0,U+4eca,U+4f01,U+4f17-4f18,U+4f46,U+4f4e,U+4f9b,U+4fee,U+503c,U+5065,U+50cf,U+513f,U+5148,U+518d,U+51c6,U+51e0,U+5217,U+529e-529f,U+5341,U+534f,U+5361,U+5386,U+53c2,U+53c8,U+53cc,U+53d7-53d8,U+53ea,U+5404,U+5411,U+5417,U+5427,U+5468,U+559c,U+5668,U+56e0,U+56e2,U+56ed,U+5740,U+57fa,U+58eb,U+5904,U+592a,U+59cb,U+5a31,U+5b58,U+5b9d,U+5bc6,U+5c71,U+5dde,U+5df1,U+5e08,U+5e26,U+5e2e,U+5e93,U+5e97,U+5eb7,U+5f15,U+5f20,U+5f3a,U+5f62,U+5f69,U+5f88,U+5f8b,U+5fc5,U+600e,U+620f,U+6218,U+623f,U+627e,U+628a,U+62a4,U+62db,U+62e9,U+6307,U+6362,U+636e,U+64ad,U+6539,U+653f,U+6548,U+6574,U+6613,U+6625,U+663e,U+666f,U+672a,U+6750,U+6784,U+6a21,U+6b3e,U+6b65,U+6bcf,U+6c11,U+6c5f,U+6df1,U+706b,U+7167,U+724c,U+738b,U+73a9,U+73af,U+7403,U+7537,U+754c,U+7559,U+767d,U+7740,U+786e,U+795e,U+798f,U+79f0,U+7aef,U+7b7e,U+7bb1,U+7ea2,U+7ea6,U+7ec4,U+7ec6,U+7ecd,U+7edc,U+7ef4,U+8003,U+80b2,U+81f3-81f4,U+822a,U+827a,U+82f1,U+83b7,U+8425,U+89c2,U+89c8,U+8ba9,U+8bb8,U+8bc6,U+8bd5,U+8be2,U+8be5,U+8bed,U+8c03,U+8d23,U+8d2d,U+8d34,U+8d70,U+8db3,U+8fbe,U+8fce,U+8fd1,U+8fde,U+9001,U+901f-9020,U+90a3,U+914d,U+91c7,U+94fe,U+9500,U+952e,U+9605,U+9645,U+9662,U+9664,U+9700,U+9752,U+975e,U+97f3,U+9879,U+9886,U+98df,U+9a6c,U+9a8c,U+9ed1,U+9f99;}
+@font-face{font-family:"Ma Shan Zheng";font-style:normal;font-weight:400;font-display:block;src:url(fonts/ma-shan-zheng-118-400-normal.woff2) format("woff2");unicode-range:U+d,U+3e,U+5f,U+7c,U+a0,U+a9,U+4e09-4e0b,U+4e0d-4e0e,U+4e13,U+4e1a,U+4e2a,U+4e3a-4e3b,U+4e4b,U+4e86,U+4e8e,U+4ea7,U+4eba,U+4ee4-4ee5,U+4eec,U+4f1a,U+4f4d,U+4f53,U+4f5c,U+4f60,U+4fe1,U+5165,U+5168,U+516c,U+5173,U+5176,U+5185,U+51fa,U+5206,U+5230,U+5236,U+524d,U+529b,U+52a0-52a1,U+52a8,U+5316,U+533a,U+53cb,U+53d1,U+53ef,U+53f7-53f8,U+5408,U+540c-540e,U+544a,U+548c,U+54c1,U+56de,U+56fd-56fe,U+5728,U+5730,U+5907,U+5916,U+591a,U+5927,U+5929,U+597d,U+5982,U+5b50,U+5b66,U+5b89,U+5b9a,U+5b9e,U+5ba2,U+5bb6,U+5bf9,U+5c0f,U+5de5,U+5e02,U+5e73-5e74,U+5e7f,U+5ea6,U+5f00,U+5f0f,U+5f53,U+5f55,U+5fae,U+5fc3,U+6027,U+606f,U+60a8,U+60c5,U+610f,U+6210-6211,U+6237,U+6240,U+624b,U+6280,U+62a5,U+63a5,U+63a8,U+63d0,U+6536,U+6570,U+6587,U+65b9,U+65e0,U+65f6,U+660e,U+662d,U+662f,U+66f4,U+6700,U+670d,U+672c,U+673a,U+6743,U+6765,U+679c,U+682a,U+6b21,U+6b63,U+6cbb,U+6cd5,U+6ce8,U+6d3b,U+70ed,U+7247-7248,U+7269,U+7279,U+73b0,U+7406,U+751f,U+7528,U+7535,U+767b,U+76f8,U+770b,U+77e5,U+793e,U+79d1,U+7ad9,U+7b49,U+7c7b,U+7cfb,U+7ebf,U+7ecf,U+7f8e,U+8005,U+8054,U+80fd,U+81ea,U+85cf,U+884c,U+8868,U+8981,U+89c6,U+8bba,U+8bdd,U+8bf4,U+8bf7,U+8d44,U+8fc7,U+8fd8-8fd9,U+8fdb,U+901a,U+9053,U+90e8,U+91d1,U+957f,U+95e8,U+95ee,U+95f4,U+9762,U+9875,U+9898,U+9996,U+9ad8,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Noto Serif SC";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/noto-serif-sc-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Noto Serif SC";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/noto-serif-sc-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f1ebdd;          /* aged xuan paper */
+  --ink: #1f1f1f;         /* pine-soot ink */
+  --accent-1: #b8292a;    /* cinnabar seal paste */
+  --accent-2: #9aa29a;    /* mist, the thinnest wash */
+  --silk: #5f6b5c;        /* mounting silk */
+  --brocade: #8a7a52;
+  --roller: #3b2a1e;
+  --u: 8px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(72px, 12vh, 150px);
+  --brush: "Ma Shan Zheng", serif;
+  --text: "Noto Serif SC", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-variant-east-asian: proportional-width; font-feature-settings: "pwid"; color: var(--ink); background: #2a2622; font: 400 var(--t0)/1.65 var(--text); display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+.head { display: flex; justify-content: space-between; align-items: center; padding: calc(var(--u) * 1.5) calc(var(--u) * 4); color: #d8d0bf; font-size: var(--t-1); gap: calc(var(--u) * 2); flex-wrap: wrap; }
+.head b { font-weight: 700; letter-spacing: .1em; }
+/* the handscroll: silk borders top and bottom, paper between, read right to left */
+.scroll { position: relative; margin: 0 calc(var(--u) * 2); display: flex; flex-direction: column; min-height: 0; }
+.silk { height: calc(var(--u) * 3); background: repeating-linear-gradient(90deg, rgba(255,255,255,.06) 0 2px, transparent 2px 6px), var(--silk); border-top: 3px solid var(--brocade); border-bottom: 3px solid var(--brocade); }
+.paper { flex: 1; min-height: 0; display: flex; flex-direction: row-reverse; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; background: var(--bg); scrollbar-width: thin; scrollbar-color: var(--silk) var(--bg); }
+.scene { position: relative; flex: 0 0 100%; scroll-snap-align: center; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: stretch; padding: calc(var(--u) * 4) calc(var(--u) * 6); overflow: hidden; }
+.scene > svg.land { position: absolute; inset: 0; width: 100%; height: 100%; }
+.scene > *:not(svg) { position: relative; }
+.wash { transition: opacity 2.2s ease, filter 2.4s ease; }
+.scene:not(.seen) .wash { opacity: 0; filter: blur(14px); }
+/* the poem: title in a vertical brush column, English lines beside it */
+.poem { grid-column: 2; display: flex; flex-direction: row-reverse; gap: calc(var(--u) * 3); align-self: start; }
+.poem h2 { writing-mode: vertical-rl; margin: 0; font: 400 var(--t3)/1.2 var(--brush); letter-spacing: .12em; }
+.poem .en { max-width: 28ch; padding: calc(var(--u) * 2); background: radial-gradient(closest-side, rgba(241,235,221,.9) 65%, rgba(241,235,221,0)); }
+.poem .en h3 { margin: 0 0 var(--u); font: 700 var(--t0)/1.3 var(--text); }
+.poem .en p { margin: 0 0 var(--u); font-size: 17px; line-height: 1.7; }
+.poem .by { font-size: var(--t-1); color: #5b5750; }
+.seal { display: inline-grid; grid-template-columns: 1fr 1fr; place-items: center; width: 52px; height: 52px; background: var(--accent-1); color: var(--bg); font: 400 20px/1 var(--brush); border-radius: 3px; padding: 4px; box-shadow: inset 0 0 0 2px var(--bg), inset 0 0 0 4px var(--accent-1); opacity: .92; transform: rotate(var(--sr, 1deg)); }
+.seal.w { background: transparent; color: var(--accent-1); box-shadow: inset 0 0 0 3px var(--accent-1); }
+.seal.round { border-radius: 50%; grid-template-columns: 1fr; width: 40px; height: 40px; font-size: 22px; }
+.front { grid-column: 1 / -1; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: calc(var(--u) * 6); }
+.front .big { writing-mode: vertical-rl; font: 400 var(--t4)/1 var(--brush); letter-spacing: .1em; }
+.front .intro { max-width: 40ch; justify-self: center; padding: calc(var(--u) * 3); background: radial-gradient(closest-side, rgba(241,235,221,.92) 60%, rgba(241,235,221,0)); }
+.front .intro h1 { margin: 0 0 var(--u); font: 700 var(--t2)/1.25 var(--text); }
+.front .intro p { margin: 0 0 calc(var(--u) * 1.5); }
+.seals { display: flex; flex-direction: column; gap: calc(var(--u) * 2); align-items: center; }
+.colo { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, auto); justify-content: center; align-content: center; gap: calc(var(--u) * 6); }
+.colo div { writing-mode: vertical-rl; font-size: var(--t0); line-height: 2; max-height: 60vh; }
+.colo div b { font: 400 var(--t2)/1.4 var(--brush); }
+.roll { display: flex; justify-content: space-between; align-items: center; padding: calc(var(--u) * 1.5) calc(var(--u) * 4); color: #d8d0bf; font-size: var(--t-1); gap: calc(var(--u) * 2); }
+.roll button { background: transparent; color: #f1ebdd; border: 1px solid #8a7a52; padding: 8px 16px; font: 400 var(--t-1)/1 var(--text); cursor: pointer; }
+.roll button:hover { background: #3b2a1e; }
+.dots { display: flex; gap: 10px; }
+.dots i { width: 9px; height: 9px; border-radius: 50%; background: #5a534a; }
+.dots i.on { background: var(--accent-1); }
+@media (prefers-reduced-motion: reduce) { .scene:not(.seen) .wash { opacity: 1; filter: none; } .wash { transition: none; } }
+@media (max-width: 800px) {
+  .scene { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+  .poem { grid-column: 1; justify-self: end; }
+  .poem .en { max-width: 22ch; }
+  .poem .en p { font-size: 16px; }
+  .front { grid-template-columns: minmax(0, 1fr) auto; gap: calc(var(--u) * 2); }
+  .front .big { font-size: 52px; }
+  .front .intro { font-size: 16px; }
+  .front .seals { display: none; }
+  .colo { gap: calc(var(--u) * 3); }
+  .head { padding: var(--u) calc(var(--u) * 2); }
+  .scroll { margin: 0 var(--u); }
+}
+</style>
+</head>
+<body>
+<header class="head"><b>Qingyun Press</b><span>Handscroll edition · read from the right · 5 sections</span></header>
+<div class="scroll">
+  <div class="silk" aria-hidden="true"></div>
+  <main class="paper" id="paper" tabindex="0" aria-label="The scroll, read right to left">
+    <section class="scene seen" data-seed="3" aria-labelledby="t0">
+      <svg class="land" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="front">
+        <div class="seals"><span class="seal" lang="zh">九峰</span><span class="seal w round" lang="zh">云</span></div>
+        <div class="intro"><h1 id="t0">Nine Peaks: Poems from the Qingyun Hermitage</h1>
+          <p>Forty-one poems written on the walls, doors and rice jars of a mountain hermitage between 1612 and 1680, collected by the monk Huiming and translated here by Lin Shuwen.</p>
+          <p>Unroll to the left, one armʼs length at a time, as a scroll is meant to be read.</p></div>
+        <div class="big" lang="zh">九峰</div>
+      </div>
+    </section>
+    <section class="scene" data-seed="11" aria-labelledby="t1">
+      <svg class="land" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="poem"><h2 lang="zh">晨云</h2><div class="en"><h3 id="t1">Cloud at Dawn</h3>
+        <p>The mountain has taken off its face.<br>Only the pine at the gate remains,<br>and the sound of someone<br>splitting wood below.</p>
+        <p class="by">Wang Sheng, written on the kitchen door, 1631</p><span class="seal" lang="zh">王生</span></div></div>
+    </section>
+    <section class="scene" data-seed="27" aria-labelledby="t2">
+      <svg class="land" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="poem"><h2 lang="zh">过桥</h2><div class="en"><h3 id="t2">Crossing the Bridge</h3>
+        <p>Three planks, one of them rotten.<br>I cross with my eyes on the far bank,<br>the way the old abbot said<br>to read a difficult sutra.</p>
+        <p class="by">Anonymous, cut into the bridge rail</p><span class="seal w" lang="zh">无名</span></div></div>
+    </section>
+    <section class="scene" data-seed="44" aria-labelledby="t3">
+      <svg class="land" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="poem"><h2 lang="zh">夜雨</h2><div class="en"><h3 id="t3">Night Rain on the Ninth Peak</h3>
+        <p>The lamp is out of oil.<br>I count the rain by the bucket<br>under the broken tile:<br>one drop, one breath, one drop.</p>
+        <p class="by">Huiming, on a rice jar, 1668</p><span class="seal" lang="zh">慧明</span></div></div>
+    </section>
+    <section class="scene" data-seed="58" aria-labelledby="t4">
+      <svg class="land" viewBox="0 0 1600 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+      <div class="colo"><div><b>Colophon.</b><br> Printed on Jing county paper<br>in an edition of 300 scrolls.</div><div>Length unrolled: 7.2 metres.<br>Height: 31 centimetres.<br>Price: ¥2,400, in a paulownia box.</div><div>Collectorsʼ seals, top to bottom:<br><span class="seal" style="--sr:-2deg" lang="zh">九峰</span> <span class="seal w round" style="--sr:3deg" lang="zh">云</span></div></div>
+    </section>
+  </main>
+  <div class="silk" aria-hidden="true"></div>
+</div>
+<nav class="roll" aria-label="Unroll"><button type="button" id="back">Roll back</button><div class="dots" id="dots" aria-hidden="true"></div><button type="button" id="on">Unroll further</button></nav>
+<script>
+(() => {
+  const paper = document.getElementById("paper"), scenes = [...paper.querySelectorAll(".scene")];
+  // ink-wash mountains: layered ridges, each softened and bled at the edge
+  scenes.forEach((sc, k) => {
+    let seed = +sc.dataset.seed; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    const svg = sc.querySelector("svg.land"), id = "b" + k;
+    let o = `<defs><filter id="${id}" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".012 .03" numOctaves="4" seed="${k + 2}"/><feDisplacementMap in="SourceGraphic" scale="34"/><feGaussianBlur stdDeviation="3.2"/></filter>
+      <linearGradient id="g${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f1f1f" stop-opacity=".78"/><stop offset=".55" stop-color="#1f1f1f" stop-opacity=".22"/><stop offset="1" stop-color="#1f1f1f" stop-opacity="0"/></linearGradient></defs>`;
+    const layers = [[.3, 420, "#9aa29a", .45], [.5, 260, "#6d716b", .55], [.75, 330, `url(#g${k})`, 1]];
+    layers.forEach(([base, amp, fill, op], li) => {
+      let x = -40, d = `M-40 800 L-40 ${800 * base + 200}`; const peakX = 200 + rnd() * 900;
+      while (x < 1640) { x += 30 + rnd() * 40; const hump = Math.exp(-Math.pow((x - peakX) / (220 + li * 120), 2)) * amp; d += ` L${x.toFixed(0)} ${(800 * base + 200 - hump - rnd() * 40).toFixed(0)}`; }
+      d += ` L1640 800 Z`;
+      o += `<path class="wash" d="${d}" fill="${fill}" opacity="${op}" filter="url(#${id})" style="transition-delay:${li * .5}s"/>`;
+      // moss dots along the near ridge, laid on with the tip of the brush
+      if (li === 2) for (let p = 0; p < 26; p++) { const px = peakX - 360 + rnd() * 720, py = 800 * base + 200 - Math.exp(-Math.pow((px - peakX) / 460, 2)) * amp * .95 + rnd() * 30;
+        o += `<ellipse class="wash" style="transition-delay:1.4s" cx="${px.toFixed(0)}" cy="${py.toFixed(0)}" rx="${(3 + rnd() * 4).toFixed(1)}" ry="${(2 + rnd() * 2).toFixed(1)}" fill="#1f1f1f" opacity=".8"/>`; }
+    });
+    o += `<rect class="wash" x="0" y="${300 + (k % 3) * 60}" width="1600" height="70" fill="#f1ebdd" opacity=".75" filter="url(#${id})"/>`;
+    svg.innerHTML = o;
+  });
+  const dots = document.getElementById("dots"); dots.innerHTML = scenes.map(() => "<i></i>").join("");
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("seen"); const n = scenes.indexOf(e.target); [...dots.children].forEach((d, j) => d.classList.toggle("on", j === n)); } }), { root: paper, threshold: .55 });
+  scenes.forEach((s) => io.observe(s));
+  const move = (d) => paper.scrollBy({ left: -d * paper.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  document.getElementById("on").addEventListener("click", () => move(1));
+  document.getElementById("back").addEventListener("click", () => move(-1));
+  paper.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") { e.preventDefault(); move(1); } if (e.key === "ArrowRight") { e.preventDefault(); move(-1); } });
+  // a vertical wheel unrolls the scroll leftward; the page itself never scrolls sideways
+  let lock = false;
+  paper.addEventListener("wheel", (e) => { if (Math.abs(e.deltaY) < Math.abs(e.deltaX)) return; e.preventDefault(); if (lock) return; lock = true; move(e.deltaY > 0 ? 1 : -1); setTimeout(() => (lock = false), 650); }, { passive: false });
+})();
+</script>
+</body>
+</html>

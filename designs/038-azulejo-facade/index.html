@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Azulejo Facade · Centiform</title>
+<style>
+/* @fonts: Rozha One:400:block; Lusitana:400,700:swap */
+@font-face{font-family:"Rozha One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/rozha-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Lusitana";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/lusitana-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Lusitana";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/lusitana-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f8f7f2;          /* tin-white glaze */
+  --ink: #1b3a8a;         /* cobalt */
+  --accent-1: #6f8fcf;    /* cobalt, thinned */
+  --accent-2: #e3b95a;    /* antimony yellow */
+  --grout: #d9d5c8;
+  --biscuit: #e9dfcc;
+  /* one tile is 14 cm; at 8 px to the cm, 112 px */
+  --tile: min(112px, (100vw - 40px) / 3);
+  --u: 8px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(44px, 5.4vw, 84px);
+  --disp: "Rozha One", Georgia, serif;
+  --text: "Lusitana", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+/* the wall: a grid of whole tiles, grout lines between */
+.wall { display: grid; grid-template-columns: repeat(auto-fill, var(--tile)); grid-auto-rows: var(--tile); justify-content: center; gap: 0; padding: calc(var(--tile) / 2) 0; }
+.panel { grid-column: span var(--c, 2); grid-row: span var(--r, 2); position: relative; }
+.tiles { display: grid; grid-template-columns: repeat(var(--c, 2), 1fr); grid-template-rows: repeat(var(--r, 2), 1fr); width: 100%; height: 100%; cursor: pointer; border: 0; padding: 0; background: var(--grout); gap: 2px; }
+.tiles svg { width: 100%; height: 100%; display: block; }
+/* name panel: a painted cartouche set in plain white tiles */
+.name { --c: 8; --r: 3; background: repeating-linear-gradient(90deg, transparent 0 calc(var(--tile) - 2px), var(--grout) calc(var(--tile) - 2px) var(--tile)), repeating-linear-gradient(transparent 0 calc(var(--tile) - 2px), var(--grout) calc(var(--tile) - 2px) var(--tile)), var(--bg); display: grid; place-items: center; }
+.cart { width: calc(100% - var(--tile) / 2); height: calc(100% - var(--tile) / 2); border: 3px solid var(--ink); outline: 1px solid var(--accent-1); outline-offset: -9px; border-radius: 48% 48% 48% 48% / 20% 20% 20% 20%; display: grid; place-content: center; text-align: center; padding: 0 calc(var(--u) * 4); background: radial-gradient(ellipse at 50% 50%, rgba(111,143,207,.08), transparent 70%); }
+.cart h1 { margin: 0; font: 400 var(--t4)/1 var(--disp); letter-spacing: .01em; }
+.cart p { margin: var(--u) 0 0; font-size: var(--t0); font-style: normal; }
+.info { --c: 4; --r: 3; padding: calc(var(--tile) / 4); border: 2px solid var(--ink); background: var(--bg); display: flex; flex-direction: column; justify-content: center; }
+.info p { margin: 0 0 var(--u); }
+.info nav { display: flex; gap: calc(var(--u) * 2); flex-wrap: wrap; font-weight: 700; }
+.item { --c: 4; --r: 2; display: grid; grid-template-columns: calc(var(--tile) * 2) minmax(0, 1fr); }
+.item .tiles { --c: 2; --r: 2; }
+.label { padding: calc(var(--u) * 1.5) calc(var(--u) * 2); border: 2px solid var(--ink); border-left: 0; background: var(--bg); display: flex; flex-direction: column; }
+.label h2 { margin: 0; font: 400 var(--t1)/1.1 var(--disp); }
+.label .era { font-size: var(--t-1); color: #3d4f82; }
+.label p { margin: 6px 0 0; font-size: 15.5px; line-height: 1.45; }
+.label .price { margin-top: auto; font-weight: 700; font-variant-numeric: tabular-nums; font-size: var(--t-1); }
+.note { --c: 8; --r: 2; background: var(--ink); color: var(--bg); padding: calc(var(--tile) / 4); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 3); }
+.note b { display: block; font: 400 var(--t2)/1 var(--disp); color: var(--accent-2); margin-bottom: 6px; }
+.note span { font-size: 15.5px; }
+footer { text-align: center; padding: 0 calc(var(--u) * 2) calc(var(--u) * 5); font-size: var(--t-1); }
+.crack { fill: none; stroke: #8e8a80; stroke-width: .5; opacity: .45; }
+@media (prefers-reduced-motion: no-preference) { .tiles svg g.rot { transition: transform .5s cubic-bezier(.3,.7,.3,1); } }
+@media (max-width: 1400px) { .name { --c: 8; } .info { --c: 4; } .note { --c: 8; } }
+@media (max-width: 1000px) { .name, .note { --c: 6; } .info { --c: 6; --r: 3; } .note { --r: 3; } .note { grid-template-columns: minmax(0, 1fr); gap: var(--u); } }
+@media (max-width: 700px) {
+  .wall { padding: calc(var(--tile) / 4) 0; }
+  .name, .info, .note, .item { --c: 3; }
+  .name { --r: 2; }
+  .info { --r: 4; }
+  .note { --r: 4; }
+  .item { --r: 4; grid-template-columns: 1fr; grid-template-rows: calc(var(--tile) * 2) 1fr; }
+  .item .tiles { width: calc(var(--tile) * 2); justify-self: start; }
+  .label { border-left: 2px solid var(--ink); }
+  .cart { padding: 0 var(--u); }
+}
+</style>
+</head>
+<body>
+<main class="wall" id="wall">
+  <header class="panel name"><div class="cart"><h1>Oficina do Azul</h1><p>Azulejo restoration and remaking · Rua da Madre de Deus, Lisbon · since 1961</p></div></header>
+  <section class="panel info" aria-label="About the workshop">
+    <p>We remake missing tiles for façades, stairwells and kitchens: 14 by 14 cm, hand-painted in cobalt on tin glaze, fired twice at 980 °C.</p>
+    <p>Bring a broken piece. We match the blue by eye.</p>
+    <nav aria-label="Workshop"><a href="#cat">Patterns</a><a href="#prices">Prices</a></nav>
+  </section>
+  <div id="cat" style="display: contents"></div>
+  <section class="panel note" id="prices" aria-label="Prices and times">
+    <div><b>€38</b><span>per tile, any pattern in the book. Six or more: €31 each.</span></div>
+    <div><b>5 weeks</b><span>from sample approval to the second firing.</span></div>
+    <div><b>Façades</b><span>We survey and lift loose tiles for a day rate of €280. Nothing is thrown away.</span></div>
+  </section>
+</main>
+<footer>Oficina do Azul · Monday to Friday, 9:00–17:30 · Telephone 21 814 0932</footer>
+<script>
+(() => {
+  const B = "#1b3a8a", L = "#6f8fcf", Y = "#e3b95a", W = "#f8f7f2";
+  // each pattern is one tile; four of them meet to make the full motif
+  const P = [
+    { n: "Estrela", e: "Lisbon, c. 1870", d: "A six-point star with quarter-circles that bloom across the grout.", t: `<circle r="30" cx="0" cy="0" fill="${L}"/><circle r="30" cx="100" cy="0" fill="${L}"/><circle r="30" cx="0" cy="100" fill="${L}"/><circle r="30" cx="100" cy="100" fill="${L}"/><path d="M50 14 L59 36 L82 32 L68 50 L82 68 L59 64 L50 86 L41 64 L18 68 L32 50 L18 32 L41 36Z" fill="${B}"/><circle cx="50" cy="50" r="9" fill="${Y}"/><path d="M0 50 H14 M86 50 H100 M50 0 V10 M50 90 V100" stroke="${B}" stroke-width="3"/>` },
+    { n: "Camélia", e: "Porto, c. 1890", d: "A camellia in the middle; its sisters are split between four tiles.", t: `<g fill="${B}">${[0, 90, 180, 270].map((r) => `<ellipse cx="50" cy="32" rx="10" ry="16" transform="rotate(${r} 50 50)"/>`).join("")}${[45, 135, 225, 315].map((r) => `<ellipse cx="50" cy="34" rx="7" ry="12" transform="rotate(${r} 50 50)" fill="${L}"/>`).join("")}</g><circle cx="50" cy="50" r="7" fill="${Y}"/>${[[0, 0], [100, 0], [0, 100], [100, 100]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="18" fill="none" stroke="${B}" stroke-width="5"/><circle cx="${x}" cy="${y}" r="7" fill="${L}"/>`).join("")}` },
+    { n: "Enxaquetado", e: "17th century", d: "Plain blue and white tiles cut and set in a chequer. The oldest pattern we make.", t: `<rect width="50" height="50" fill="${B}"/><rect x="50" y="50" width="50" height="50" fill="${B}"/><rect x="50" y="0" width="50" height="50" fill="${W}"/><path d="M50 0 L100 50 L50 100 L0 50Z" fill="none" stroke="${L}" stroke-width="4"/>` },
+    { n: "Rede", e: "Setúbal, c. 1910", d: "A net of cobalt bands; the knots fall on the tile corners.", t: `<path d="M0 0 L100 100 M100 0 L0 100" stroke="${B}" stroke-width="10"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="${W}" stroke-width="3"/><circle cx="50" cy="50" r="12" fill="${Y}" stroke="${B}" stroke-width="4"/>${[[0, 0], [100, 0], [0, 100], [100, 100]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="14" fill="${B}"/>`).join("")}<path d="M50 0 Q60 25 50 50 Q40 75 50 100 M0 50 Q25 40 50 50 Q75 60 100 50" stroke="${L}" stroke-width="2.5" fill="none"/>` },
+    { n: "Folha", e: "Ovar, c. 1880", d: "A leaf turning at every tile, so the wall seems to move.", t: `<path d="M8 92 C8 40 40 8 92 8 C92 60 60 92 8 92Z" fill="${L}"/><path d="M8 92 C8 40 40 8 92 8 C92 60 60 92 8 92Z" fill="none" stroke="${B}" stroke-width="4"/><path d="M8 92 L92 8 M30 70 l-6 -18 M46 54 l-6 -20 M62 38 l-4 -18 M30 70 l18 6 M46 54 l20 6 M62 38 l18 4" stroke="${B}" stroke-width="2.5"/>`, rot: true },
+    { n: "Laço", e: "Lisbon, c. 1850", d: "Interlaced ribbons in yellow and blue, for grand staircases.", t: `<rect x="10" y="10" width="80" height="80" rx="40" fill="none" stroke="${Y}" stroke-width="9"/><rect x="10" y="10" width="80" height="80" rx="40" fill="none" stroke="${B}" stroke-width="2"/><path d="M50 0 V100 M0 50 H100" stroke="${B}" stroke-width="9"/><path d="M50 0 V100 M0 50 H100" stroke="${W}" stroke-width="3"/><rect x="38" y="38" width="24" height="24" transform="rotate(45 50 50)" fill="${B}"/>` }
+  ];
+  let seed = 38; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  // crazing: a fine net of cracks in the glaze, different on every tile
+  const craze = () => { let d = ""; for (let i = 0; i < 5; i++) { let x = rnd() * 100, y = rnd() * 100; d += `M${x.toFixed(0)} ${y.toFixed(0)}`; for (let k = 0; k < 4; k++) { x += (rnd() - .5) * 50; y += (rnd() - .5) * 50; d += ` L${x.toFixed(0)} ${y.toFixed(0)}`; } } return `<path class="crack" d="${d}"/>`; };
+  const tile = (p, r) => `<svg viewBox="0 0 100 100" aria-hidden="true"><defs><filter id="hp${seed}"><feTurbulence baseFrequency=".06" numOctaves="2" seed="${(seed % 97) | 0}"/><feDisplacementMap in="SourceGraphic" scale="2.4"/></filter></defs><rect width="100" height="100" fill="${W}"/><g class="rot" style="transform-origin:50px 50px;transform:rotate(${r}deg)" filter="url(#hp${seed})" opacity="${(.9 + rnd() * .1).toFixed(2)}">${p.t}</g>${craze()}</svg>`;
+  const cat = document.getElementById("cat");
+  cat.innerHTML = P.map((p, i) => `<article class="panel item"><button class="tiles" type="button" aria-label="Turn the tiles of ${p.n}" data-i="${i}">${[0, 1, 2, 3].map((k) => tile(p, p.rot ? [0, 90, 270, 180][k] : [0, 90, 270, 180][k])).join("")}</button>
+    <div class="label"><h2>${p.n}</h2><span class="era">${p.e}</span><p>${p.d}</p><span class="price">Ref. OA-${String(101 + i * 7)} · €38 a tile</span></div></article>`).join("");
+  document.querySelectorAll(".item .tiles").forEach((b) => { let turn = 0; b.addEventListener("click", () => { turn += 90; b.querySelectorAll("g.rot").forEach((g, k) => { g.style.transform = `rotate(${[0, 90, 270, 180][k] + turn * (k % 2 ? -1 : 1)}deg)`; }); }); });
+})();
+</script>
+</body>
+</html>

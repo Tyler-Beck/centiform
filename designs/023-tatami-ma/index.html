@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tatami Ma · Centiform</title>
+<style>
+/* @fonts: Shippori Mincho:500,700:block; Zen Kaku Gothic New:400,700:swap */
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-latin-ext-500-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-67-500-normal.woff2) format("woff2");unicode-range:U+2466,U+2600,U+4eab,U+4fe3,U+4ff5,U+51a5,U+51f0,U+536f,U+53d4,U+53f1,U+54a5,U+559d,U+55e3,U+58fa,U+5962,U+59ea,U+5c16,U+5cef,U+5d16,U+5f10,U+5fd6,U+6190,U+6216,U+634f,U+63bb,U+66d6,U+6756,U+6bc5,U+6e26,U+727d,U+731f,U+76f2,U+7729,U+7a7f,U+7aff,U+7c9f,U+818f,U+8236,U+82b9,U+8338,U+85aa,U+88b4,U+8b33,U+904d,U+93a7,U+96cc,U+96eb,U+9aed,U+9b8e,U+fa11;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-74-500-normal.woff2) format("woff2");unicode-range:U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-97-500-normal.woff2) format("woff2");unicode-range:U+7e,U+b4,U+25c6,U+2661,U+4e92,U+4eee,U+4ffa,U+5144,U+5237,U+5287,U+52b4,U+58c1,U+5bff,U+5c04,U+5c06,U+5e95,U+5f31,U+5f93,U+63c3,U+640d,U+6557,U+6614,U+662f,U+67d3,U+690d,U+6bba,U+6e6f,U+72af,U+732b,U+7518,U+7ae0,U+7ae5,U+7af6,U+822a,U+89e6,U+8a3a,U+8a98,U+8cb8,U+8de1,U+8e8d,U+95d8,U+961c,U+96a3,U+96ea,U+9bae,U+ff20,U+ff22,U+ff29,U+ff2b-ff2c;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-102-500-normal.woff2) format("woff2");unicode-range:U+3d,U+5e,U+25cf,U+4e0e,U+4e5d,U+4e73,U+4e94,U+4f3c,U+5009,U+5145,U+51ac,U+5238,U+524a,U+53f3,U+547c,U+5802,U+5922,U+5a66,U+5c0e,U+5de6,U+5fd8,U+5feb,U+6797,U+685c,U+6b7b,U+6c5f-6c60,U+6cc9,U+6ce2,U+6d17,U+6e21,U+7167,U+7642,U+76db,U+8001,U+821e,U+8857,U+89d2,U+8b1b,U+8b70,U+8cb4,U+8cde,U+8f03,U+8f2a,U+968e,U+9b54,U+9e7f,U+9ebb,U+ff05,U+ff33;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-105-500-normal.woff2) format("woff2");unicode-range:U+25,U+25a0,U+4e26,U+4f4e,U+5341,U+56f2,U+5bbf,U+5c45,U+5c55,U+5c5e,U+5dee,U+5e9c,U+5f7c,U+6255,U+627f,U+62bc,U+65cf,U+661f,U+666e,U+66dc,U+67fb,U+6975,U+6a4b,U+6b32,U+6df1,U+6e29,U+6fc0,U+738b,U+7686,U+7a76,U+7a81,U+7c73,U+7d75,U+7dd2,U+82e5,U+82f1,U+85ac,U+888b,U+899a,U+8a31,U+8a8c,U+8ab0,U+8b58,U+904a,U+9060,U+9280,U+95b2,U+984d,U+9ce5,U+ff18;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-113-500-normal.woff2) format("woff2");unicode-range:U+26,U+5f,U+2026,U+203b,U+4e09,U+4eac,U+4ed5,U+4fa1,U+5143,U+5199,U+5207,U+539f,U+53e3,U+53f7,U+5411,U+5473,U+5546,U+55b6,U+5929,U+597d,U+5bb9,U+5c11,U+5c4b,U+5ddd,U+5f97,U+5fc5,U+6295,U+6301,U+6307,U+671b,U+76f8,U+78ba,U+795e,U+7d30,U+7d39,U+7d9a,U+89e3,U+8a00,U+8a73,U+8a8d,U+8a9e,U+8aad,U+8abf,U+8cea,U+8eca,U+8ffd,U+904b,U+9650,U+ff11-ff12;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-116-500-normal.woff2) format("woff2");unicode-range:U+a9,U+3010-3011,U+30e2,U+4e0b,U+4eca,U+4ed6,U+4ed8,U+4f53,U+4f5c,U+4f7f,U+53d6,U+540d,U+54c1,U+5730,U+5916,U+5b50,U+5c0f,U+5f8c,U+624b,U+6570,U+6587,U+6599,U+691c,U+696d,U+6cd5,U+7269,U+7279,U+7406,U+767a-767b,U+77e5,U+7d04,U+7d22,U+8005,U+80fd,U+81ea,U+8868,U+8981,U+89a7,U+901a,U+9023,U+90e8,U+91d1,U+9332,U+958b,U+96c6,U+9ad8,U+ff1a,U+ff1f;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:500;font-display:block;src:url(fonts/shippori-mincho-117-500-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-67-700-normal.woff2) format("woff2");unicode-range:U+2466,U+2600,U+4eab,U+4fe3,U+4ff5,U+51a5,U+51f0,U+536f,U+53d4,U+53f1,U+54a5,U+559d,U+55e3,U+58fa,U+5962,U+59ea,U+5c16,U+5cef,U+5d16,U+5f10,U+5fd6,U+6190,U+6216,U+634f,U+63bb,U+66d6,U+6756,U+6bc5,U+6e26,U+727d,U+731f,U+76f2,U+7729,U+7a7f,U+7aff,U+7c9f,U+818f,U+8236,U+82b9,U+8338,U+85aa,U+88b4,U+8b33,U+904d,U+93a7,U+96cc,U+96eb,U+9aed,U+9b8e,U+fa11;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-74-700-normal.woff2) format("woff2");unicode-range:U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-97-700-normal.woff2) format("woff2");unicode-range:U+7e,U+b4,U+25c6,U+2661,U+4e92,U+4eee,U+4ffa,U+5144,U+5237,U+5287,U+52b4,U+58c1,U+5bff,U+5c04,U+5c06,U+5e95,U+5f31,U+5f93,U+63c3,U+640d,U+6557,U+6614,U+662f,U+67d3,U+690d,U+6bba,U+6e6f,U+72af,U+732b,U+7518,U+7ae0,U+7ae5,U+7af6,U+822a,U+89e6,U+8a3a,U+8a98,U+8cb8,U+8de1,U+8e8d,U+95d8,U+961c,U+96a3,U+96ea,U+9bae,U+ff20,U+ff22,U+ff29,U+ff2b-ff2c;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-102-700-normal.woff2) format("woff2");unicode-range:U+3d,U+5e,U+25cf,U+4e0e,U+4e5d,U+4e73,U+4e94,U+4f3c,U+5009,U+5145,U+51ac,U+5238,U+524a,U+53f3,U+547c,U+5802,U+5922,U+5a66,U+5c0e,U+5de6,U+5fd8,U+5feb,U+6797,U+685c,U+6b7b,U+6c5f-6c60,U+6cc9,U+6ce2,U+6d17,U+6e21,U+7167,U+7642,U+76db,U+8001,U+821e,U+8857,U+89d2,U+8b1b,U+8b70,U+8cb4,U+8cde,U+8f03,U+8f2a,U+968e,U+9b54,U+9e7f,U+9ebb,U+ff05,U+ff33;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-105-700-normal.woff2) format("woff2");unicode-range:U+25,U+25a0,U+4e26,U+4f4e,U+5341,U+56f2,U+5bbf,U+5c45,U+5c55,U+5c5e,U+5dee,U+5e9c,U+5f7c,U+6255,U+627f,U+62bc,U+65cf,U+661f,U+666e,U+66dc,U+67fb,U+6975,U+6a4b,U+6b32,U+6df1,U+6e29,U+6fc0,U+738b,U+7686,U+7a76,U+7a81,U+7c73,U+7d75,U+7dd2,U+82e5,U+82f1,U+85ac,U+888b,U+899a,U+8a31,U+8a8c,U+8ab0,U+8b58,U+904a,U+9060,U+9280,U+95b2,U+984d,U+9ce5,U+ff18;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-113-700-normal.woff2) format("woff2");unicode-range:U+26,U+5f,U+2026,U+203b,U+4e09,U+4eac,U+4ed5,U+4fa1,U+5143,U+5199,U+5207,U+539f,U+53e3,U+53f7,U+5411,U+5473,U+5546,U+55b6,U+5929,U+597d,U+5bb9,U+5c11,U+5c4b,U+5ddd,U+5f97,U+5fc5,U+6295,U+6301,U+6307,U+671b,U+76f8,U+78ba,U+795e,U+7d30,U+7d39,U+7d9a,U+89e3,U+8a00,U+8a73,U+8a8d,U+8a9e,U+8aad,U+8abf,U+8cea,U+8eca,U+8ffd,U+904b,U+9650,U+ff11-ff12;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-116-700-normal.woff2) format("woff2");unicode-range:U+a9,U+3010-3011,U+30e2,U+4e0b,U+4eca,U+4ed6,U+4ed8,U+4f53,U+4f5c,U+4f7f,U+53d6,U+540d,U+54c1,U+5730,U+5916,U+5b50,U+5c0f,U+5f8c,U+624b,U+6570,U+6587,U+6599,U+691c,U+696d,U+6cd5,U+7269,U+7279,U+7406,U+767a-767b,U+77e5,U+7d04,U+7d22,U+8005,U+80fd,U+81ea,U+8868,U+8981,U+89a7,U+901a,U+9023,U+90e8,U+91d1,U+9332,U+958b,U+96c6,U+9ad8,U+ff1a,U+ff1f;}
+@font-face{font-family:"Shippori Mincho";font-style:normal;font-weight:700;font-display:block;src:url(fonts/shippori-mincho-117-700-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-67-400-normal.woff2) format("woff2");unicode-range:U+2466,U+2600,U+4eab,U+4fe3,U+4ff5,U+51a5,U+51f0,U+536f,U+53d4,U+53f1,U+54a5,U+559d,U+55e3,U+58fa,U+5962,U+59ea,U+5c16,U+5cef,U+5d16,U+5f10,U+5fd6,U+6190,U+6216,U+634f,U+63bb,U+66d6,U+6756,U+6bc5,U+6e26,U+727d,U+731f,U+76f2,U+7729,U+7a7f,U+7aff,U+7c9f,U+818f,U+8236,U+82b9,U+8338,U+85aa,U+88b4,U+8b33,U+904d,U+93a7,U+96cc,U+96eb,U+9aed,U+9b8e,U+fa11;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-74-400-normal.woff2) format("woff2");unicode-range:U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-97-400-normal.woff2) format("woff2");unicode-range:U+7e,U+b4,U+25c6,U+2661,U+4e92,U+4eee,U+4ffa,U+5144,U+5237,U+5287,U+52b4,U+58c1,U+5bff,U+5c04,U+5c06,U+5e95,U+5f31,U+5f93,U+63c3,U+640d,U+6557,U+6614,U+662f,U+67d3,U+690d,U+6bba,U+6e6f,U+72af,U+732b,U+7518,U+7ae0,U+7ae5,U+7af6,U+822a,U+89e6,U+8a3a,U+8a98,U+8cb8,U+8de1,U+8e8d,U+95d8,U+961c,U+96a3,U+96ea,U+9bae,U+ff20,U+ff22,U+ff29,U+ff2b-ff2c;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-102-400-normal.woff2) format("woff2");unicode-range:U+3d,U+5e,U+25cf,U+4e0e,U+4e5d,U+4e73,U+4e94,U+4f3c,U+5009,U+5145,U+51ac,U+5238,U+524a,U+53f3,U+547c,U+5802,U+5922,U+5a66,U+5c0e,U+5de6,U+5fd8,U+5feb,U+6797,U+685c,U+6b7b,U+6c5f-6c60,U+6cc9,U+6ce2,U+6d17,U+6e21,U+7167,U+7642,U+76db,U+8001,U+821e,U+8857,U+89d2,U+8b1b,U+8b70,U+8cb4,U+8cde,U+8f03,U+8f2a,U+968e,U+9b54,U+9e7f,U+9ebb,U+ff05,U+ff33;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-105-400-normal.woff2) format("woff2");unicode-range:U+25,U+25a0,U+4e26,U+4f4e,U+5341,U+56f2,U+5bbf,U+5c45,U+5c55,U+5c5e,U+5dee,U+5e9c,U+5f7c,U+6255,U+627f,U+62bc,U+65cf,U+661f,U+666e,U+66dc,U+67fb,U+6975,U+6a4b,U+6b32,U+6df1,U+6e29,U+6fc0,U+738b,U+7686,U+7a76,U+7a81,U+7c73,U+7d75,U+7dd2,U+82e5,U+82f1,U+85ac,U+888b,U+899a,U+8a31,U+8a8c,U+8ab0,U+8b58,U+904a,U+9060,U+9280,U+95b2,U+984d,U+9ce5,U+ff18;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-113-400-normal.woff2) format("woff2");unicode-range:U+26,U+5f,U+2026,U+203b,U+4e09,U+4eac,U+4ed5,U+4fa1,U+5143,U+5199,U+5207,U+539f,U+53e3,U+53f7,U+5411,U+5473,U+5546,U+55b6,U+5929,U+597d,U+5bb9,U+5c11,U+5c4b,U+5ddd,U+5f97,U+5fc5,U+6295,U+6301,U+6307,U+671b,U+76f8,U+78ba,U+795e,U+7d30,U+7d39,U+7d9a,U+89e3,U+8a00,U+8a73,U+8a8d,U+8a9e,U+8aad,U+8abf,U+8cea,U+8eca,U+8ffd,U+904b,U+9650,U+ff11-ff12;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-116-400-normal.woff2) format("woff2");unicode-range:U+a9,U+3010-3011,U+30e2,U+4e0b,U+4eca,U+4ed6,U+4ed8,U+4f53,U+4f5c,U+4f7f,U+53d6,U+540d,U+54c1,U+5730,U+5916,U+5b50,U+5c0f,U+5f8c,U+624b,U+6570,U+6587,U+6599,U+691c,U+696d,U+6cd5,U+7269,U+7279,U+7406,U+767a-767b,U+77e5,U+7d04,U+7d22,U+8005,U+80fd,U+81ea,U+8868,U+8981,U+89a7,U+901a,U+9023,U+90e8,U+91d1,U+9332,U+958b,U+96c6,U+9ad8,U+ff1a,U+ff1f;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/zen-kaku-gothic-new-117-400-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-67-700-normal.woff2) format("woff2");unicode-range:U+2466,U+2600,U+4eab,U+4fe3,U+4ff5,U+51a5,U+51f0,U+536f,U+53d4,U+53f1,U+54a5,U+559d,U+55e3,U+58fa,U+5962,U+59ea,U+5c16,U+5cef,U+5d16,U+5f10,U+5fd6,U+6190,U+6216,U+634f,U+63bb,U+66d6,U+6756,U+6bc5,U+6e26,U+727d,U+731f,U+76f2,U+7729,U+7a7f,U+7aff,U+7c9f,U+818f,U+8236,U+82b9,U+8338,U+85aa,U+88b4,U+8b33,U+904d,U+93a7,U+96cc,U+96eb,U+9aed,U+9b8e,U+fa11;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-74-700-normal.woff2) format("woff2");unicode-range:U+2002,U+2025,U+4f8d,U+51e1,U+51f8,U+5507,U+5598,U+58f1,U+5983,U+59ac,U+5c3c,U+5de7,U+5e7d,U+5eca,U+5f61,U+606d,U+60f9,U+636e,U+64ec,U+67da,U+67ff,U+6813,U+68f2,U+693f,U+6b6a,U+6bbb,U+6ef4,U+7092,U+717d,U+7261,U+73c8,U+7432,U+7483,U+76fe,U+7709,U+78d0,U+81a3,U+81b3,U+82af,U+8305,U+8309,U+8870,U+88fe,U+8cd1,U+8d66,U+906e,U+971e,U+9812,U+ff79,U+ff90;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-97-700-normal.woff2) format("woff2");unicode-range:U+7e,U+b4,U+25c6,U+2661,U+4e92,U+4eee,U+4ffa,U+5144,U+5237,U+5287,U+52b4,U+58c1,U+5bff,U+5c04,U+5c06,U+5e95,U+5f31,U+5f93,U+63c3,U+640d,U+6557,U+6614,U+662f,U+67d3,U+690d,U+6bba,U+6e6f,U+72af,U+732b,U+7518,U+7ae0,U+7ae5,U+7af6,U+822a,U+89e6,U+8a3a,U+8a98,U+8cb8,U+8de1,U+8e8d,U+95d8,U+961c,U+96a3,U+96ea,U+9bae,U+ff20,U+ff22,U+ff29,U+ff2b-ff2c;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-102-700-normal.woff2) format("woff2");unicode-range:U+3d,U+5e,U+25cf,U+4e0e,U+4e5d,U+4e73,U+4e94,U+4f3c,U+5009,U+5145,U+51ac,U+5238,U+524a,U+53f3,U+547c,U+5802,U+5922,U+5a66,U+5c0e,U+5de6,U+5fd8,U+5feb,U+6797,U+685c,U+6b7b,U+6c5f-6c60,U+6cc9,U+6ce2,U+6d17,U+6e21,U+7167,U+7642,U+76db,U+8001,U+821e,U+8857,U+89d2,U+8b1b,U+8b70,U+8cb4,U+8cde,U+8f03,U+8f2a,U+968e,U+9b54,U+9e7f,U+9ebb,U+ff05,U+ff33;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-105-700-normal.woff2) format("woff2");unicode-range:U+25,U+25a0,U+4e26,U+4f4e,U+5341,U+56f2,U+5bbf,U+5c45,U+5c55,U+5c5e,U+5dee,U+5e9c,U+5f7c,U+6255,U+627f,U+62bc,U+65cf,U+661f,U+666e,U+66dc,U+67fb,U+6975,U+6a4b,U+6b32,U+6df1,U+6e29,U+6fc0,U+738b,U+7686,U+7a76,U+7a81,U+7c73,U+7d75,U+7dd2,U+82e5,U+82f1,U+85ac,U+888b,U+899a,U+8a31,U+8a8c,U+8ab0,U+8b58,U+904a,U+9060,U+9280,U+95b2,U+984d,U+9ce5,U+ff18;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-113-700-normal.woff2) format("woff2");unicode-range:U+26,U+5f,U+2026,U+203b,U+4e09,U+4eac,U+4ed5,U+4fa1,U+5143,U+5199,U+5207,U+539f,U+53e3,U+53f7,U+5411,U+5473,U+5546,U+55b6,U+5929,U+597d,U+5bb9,U+5c11,U+5c4b,U+5ddd,U+5f97,U+5fc5,U+6295,U+6301,U+6307,U+671b,U+76f8,U+78ba,U+795e,U+7d30,U+7d39,U+7d9a,U+89e3,U+8a00,U+8a73,U+8a8d,U+8a9e,U+8aad,U+8abf,U+8cea,U+8eca,U+8ffd,U+904b,U+9650,U+ff11-ff12;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-116-700-normal.woff2) format("woff2");unicode-range:U+a9,U+3010-3011,U+30e2,U+4e0b,U+4eca,U+4ed6,U+4ed8,U+4f53,U+4f5c,U+4f7f,U+53d6,U+540d,U+54c1,U+5730,U+5916,U+5b50,U+5c0f,U+5f8c,U+624b,U+6570,U+6587,U+6599,U+691c,U+696d,U+6cd5,U+7269,U+7279,U+7406,U+767a-767b,U+77e5,U+7d04,U+7d22,U+8005,U+80fd,U+81ea,U+8868,U+8981,U+89a7,U+901a,U+9023,U+90e8,U+91d1,U+9332,U+958b,U+96c6,U+9ad8,U+ff1a,U+ff1f;}
+@font-face{font-family:"Zen Kaku Gothic New";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/zen-kaku-gothic-new-117-700-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+/* @fonts-end */
+:root {
+  --bg: #ede3cc;          /* sunned tatami */
+  --ink: #2f2a24;         /* sumi */
+  --accent-1: #6f7d4a;    /* heri, the cloth edge of a mat */
+  --accent-2: #a6402b;    /* one camellia, one seal */
+  --rush: #e2d4ae;
+  --rush-lo: #d6c69c;
+  --paper: #f7f2e4;       /* shoji paper */
+  --wood: #b98f5c;        /* hinoki */
+  --wood-dk: #7d5a36;
+  /* one tatami = 2 x 1 units; the unit fits eight across and four down */
+  --k: min((100vw - 48px) / 8, (100vh - 120px) / 4);
+  --u: 8px;
+  /* scale: 1.414 (the ratio of the ken to half a ken, rounded) on 17px */
+  --t-1: 13px; --t0: 17px; --t1: 24px; --t2: 34px; --t3: 48px; --t4: clamp(36px, 3.4vw, 58px);
+  --min: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+  --goth: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.7 var(--goth); background: var(--bg); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+
+/* engawa: the veranda board you step onto */
+.engawa { height: calc(var(--u) * 9); display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 3); gap: calc(var(--u) * 2);
+  background: repeating-linear-gradient(90deg, var(--wood) 0 calc(var(--u) * 17), var(--wood-dk) calc(var(--u) * 17) calc(var(--u) * 17 + 1px)), var(--wood);
+  background-blend-mode: normal; color: #241c14; }
+.engawa b { font: 700 var(--t0)/1 var(--min); letter-spacing: .2em; }
+.engawa nav { display: flex; gap: calc(var(--u) * 3); font-size: var(--t-1); letter-spacing: .14em; }
+.engawa a { text-decoration: none; }
+.engawa a span { font-family: var(--min); margin-right: 6px; }
+
+/* the room: sixteen positions, one alcove */
+.room { display: grid; grid-template-columns: repeat(8, var(--k)); grid-template-rows: repeat(4, var(--k)); justify-content: center; padding: calc(var(--u) * 2) calc(var(--u) * 3) calc(var(--u) * 3); }
+.mat { grid-area: var(--d); position: relative; outline: 1px solid #c9b88c; outline-offset: -.5px; }
+.mat.h { background: repeating-linear-gradient(90deg, var(--rush) 0 3px, var(--rush-lo) 3px 4px), var(--rush); border-top: 7px solid var(--accent-1); border-bottom: 7px solid var(--accent-1); }
+.mat.v { background: repeating-linear-gradient(180deg, var(--rush) 0 3px, var(--rush-lo) 3px 4px), var(--rush); border-left: 7px solid var(--accent-1); border-right: 7px solid var(--accent-1); }
+.mat.sun { filter: brightness(1.04) saturate(.85); }
+.mat > * { position: relative; }
+.name { display: grid; align-content: center; padding: 0 calc(var(--u) * 3); }
+.name h1 { margin: 0; white-space: nowrap; font: 700 var(--t4)/1 var(--min); letter-spacing: .04em; }
+.name p { margin: var(--u) 0 0; font-size: var(--t-1); letter-spacing: .12em; }
+.say { padding: calc(var(--u) * 2) calc(var(--u) * 3); font-size: 16px; line-height: 1.6; display: grid; align-content: center; }
+.say p { margin: 0; }
+.vert { writing-mode: vertical-rl; display: grid; place-content: center; font: 500 var(--t2)/1.4 var(--min); letter-spacing: .3em; }
+.vert small { font-size: var(--t-1); letter-spacing: .2em; font-family: var(--goth); margin-top: calc(var(--u) * 2); }
+.toko { grid-area: var(--d); background: linear-gradient(180deg, #d9c7a4 0 78%, var(--wood) 78% 81%, #8a6640 81% 83%, #cdb68d 83%); box-shadow: inset 10px 0 0 var(--wood-dk), inset -4px 0 0 var(--wood); display: grid; justify-items: center; padding-top: calc(var(--u) * 2); }
+.scroll { width: 38%; height: 70%; background: #efe6cf; border-top: 10px solid #5d4a36; border-bottom: 14px solid #5d4a36; box-shadow: 0 0 0 5px #b6a07a, 0 8px 12px -6px rgba(0,0,0,.35); writing-mode: vertical-rl; display: grid; place-content: center; font: 500 var(--t3)/1 var(--min); position: relative; }
+.scroll i { position: absolute; bottom: 12%; left: 22%; width: 14px; height: 14px; background: var(--accent-2); }
+.toko svg { position: absolute; }
+
+/* rooms behind shoji */
+.hall { position: relative; margin: calc(var(--u) * 6) auto; width: min(100% - 48px, calc(var(--k) * 8)); min-height: calc(var(--k) * 3); overflow: hidden; background: var(--bg); }
+.inner { display: grid; grid-template-columns: var(--k) minmax(0, 1fr) minmax(0, 1fr); gap: 0 calc(var(--u) * 5); padding: calc(var(--u) * 6) calc(var(--u) * 5); min-height: calc(var(--k) * 3); border-top: 7px solid var(--accent-1); border-bottom: 7px solid var(--accent-1);
+  background: repeating-linear-gradient(90deg, var(--rush) 0 3px, var(--rush-lo) 3px 4px); }
+.inner h2 { writing-mode: vertical-rl; margin: 0; font: 700 var(--t3)/1.2 var(--min); letter-spacing: .3em; grid-row: 1 / 4; }
+.inner h2 small { font: 400 var(--t-1)/1 var(--goth); letter-spacing: .3em; margin-top: calc(var(--u) * 3); text-transform: uppercase; }
+.inner p { margin: 0 0 calc(var(--u) * 2); max-width: 36em; }
+.inner .lead { font: 500 var(--t1)/1.5 var(--min); grid-column: 2 / 4; margin-bottom: calc(var(--u) * 3); }
+table { border-collapse: collapse; width: 100%; font-size: 16px; font-variant-numeric: tabular-nums; }
+td, th { text-align: left; padding: 6px 0; border-bottom: 1px solid #c9b88c; vertical-align: baseline; }
+th { font: 700 var(--t0)/1.3 var(--min); }
+td:last-child { text-align: right; }
+dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px calc(var(--u) * 2); font-size: 16px; }
+dt { font-family: var(--min); font-weight: 700; }
+dd { margin: 0; }
+ol.courses { margin: 0; padding: 0; list-style: none; counter-reset: c; font-size: 16px; }
+ol.courses li { counter-increment: c; display: grid; grid-template-columns: calc(var(--u) * 5) 1fr; padding: 4px 0; border-bottom: 1px solid #c9b88c; }
+ol.courses li::before { content: counter(c, cjk-decimal); font-family: var(--min); color: var(--accent-2); }
+
+.shoji { position: absolute; inset: 0; display: flex; pointer-events: none; }
+.shoji span { flex: 1; background:
+  linear-gradient(90deg, var(--wood) 0 5px, transparent 5px) 0 0 / calc(100% / 3) 100%,
+  linear-gradient(180deg, var(--wood) 0 5px, transparent 5px) 0 0 / 100% calc(100% / 6),
+  var(--paper);
+  box-shadow: inset 0 0 0 10px var(--wood), inset 0 0 0 11px var(--wood-dk); }
+.hall.open .shoji span:first-child { transform: translateX(-94%); }
+.hall.open .shoji span:last-child { transform: translateX(94%); }
+.pull { position: absolute; z-index: 2; right: calc(var(--u) * 2); top: calc(var(--u) * 2); font: 700 var(--t-1)/1 var(--goth); letter-spacing: .14em; background: var(--paper); color: var(--ink); border: 1px solid var(--wood-dk); padding: 10px 14px; cursor: pointer; }
+.hall.open .pull { background: var(--bg); }
+footer { width: min(100% - 48px, calc(var(--k) * 8)); margin: 0 auto calc(var(--u) * 6); display: flex; justify-content: space-between; gap: calc(var(--u) * 2); font-size: var(--t-1); letter-spacing: .1em; flex-wrap: wrap; }
+@media (prefers-reduced-motion: no-preference) {
+  .shoji span { transition: transform 1.4s cubic-bezier(.5,0,.2,1); }
+}
+@media (max-width: 760px) {
+  :root { --k: calc((100vw - 32px) / 4); --t4: 25px; --t2: 24px; --t3: 32px; }
+  .engawa { padding: 0 calc(var(--u) * 2); }
+  .engawa nav { gap: calc(var(--u) * 1.5); }
+  .engawa nav a span { display: none; }
+  .engawa b { display: none; }
+  .room { grid-template-columns: repeat(4, var(--k)); grid-template-rows: repeat(8, var(--k)); padding: calc(var(--u) * 2); }
+  .mat, .toko { grid-area: var(--m); }
+  .mat.mh { background: repeating-linear-gradient(90deg, var(--rush) 0 3px, var(--rush-lo) 3px 4px), var(--rush); border: 0; border-top: 6px solid var(--accent-1); border-bottom: 6px solid var(--accent-1); }
+  .mat.mv { background: repeating-linear-gradient(180deg, var(--rush) 0 3px, var(--rush-lo) 3px 4px), var(--rush); border: 0; border-left: 6px solid var(--accent-1); border-right: 6px solid var(--accent-1); }
+  .name, .say { padding: var(--u) calc(var(--u) * 1.5); }
+  .say { font-size: 13px; line-height: 1.45; }
+  .hall { width: calc(100% - 32px); margin: calc(var(--u) * 4) auto; }
+  .inner { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 7) calc(var(--u) * 2.5) calc(var(--u) * 4); }
+  .inner h2 { writing-mode: horizontal-tb; grid-row: auto; font-size: var(--t2); margin-bottom: calc(var(--u) * 2); }
+  .inner h2 small { margin: 0 0 0 calc(var(--u) * 2); }
+  .inner .lead { grid-column: auto; font-size: 20px; }
+  footer { width: calc(100% - 32px); }
+}
+</style>
+</head>
+<body>
+<header class="engawa">
+  <b>雫屋 · SHIZUKU-YA</b>
+  <nav aria-label="Inn"><a href="#rooms"><span>部屋</span>Rooms</a><a href="#bath"><span>湯</span>Bath</a><a href="#table"><span>膳</span>Table</a><a href="#stay"><span>宿</span>Stay</a></nav>
+</header>
+
+<main>
+<section class="room" aria-label="The eight-mat room">
+  <div class="mat h" style="--d: 1/1/2/3; --m: 1/1/2/3" aria-hidden="true"></div>
+  <div class="mat v vert" style="--d: 1/3/3/4; --m: 2/1/4/2">星川温泉<small>HOSHIKAWA</small></div>
+  <div class="mat h sun" style="--d: 1/4/2/6; --m: 1/3/2/5" aria-hidden="true"></div>
+  <div class="mat v" style="--d: 1/6/3/7; --m: 2/4/4/5" aria-hidden="true"></div>
+  <div class="mat h sun mv" style="--d: 1/7/2/9; --m: 7/1/9/2" aria-hidden="true"></div>
+  <div class="mat v" style="--d: 2/1/4/2; --m: 4/3/6/4" aria-hidden="true"></div>
+  <div class="mat v" style="--d: 2/2/4/3; --m: 4/4/6/5" aria-hidden="true"></div>
+  <div class="mat h name mh" style="--d: 2/4/3/6; --m: 2/2/3/4"><h1>Shizuku-ya</h1><p>An inn of nine rooms, 1884</p></div>
+  <div class="mat v mh" style="--d: 3/3/5/4; --m: 6/1/7/3" aria-hidden="true"></div>
+  <div class="mat h say mh" style="--d: 3/4/4/6; --m: 3/2/4/4"><p>One bath fed by the river spring. Dinner comes to your room at half past six.</p></div>
+  <div class="mat v mh" style="--d: 3/6/5/7; --m: 6/3/7/5" aria-hidden="true"></div>
+  <div class="mat h" style="--d: 4/1/5/3; --m: 7/2/8/4" aria-hidden="true"></div>
+  <div class="mat h sun mv" style="--d: 4/4/5/6; --m: 7/4/9/5" aria-hidden="true"></div>
+  <div class="mat h" style="--d: 4/7/5/9; --m: 8/2/9/4" aria-hidden="true"></div>
+  <div class="toko" style="--d: 2/7/4/9; --m: 4/1/6/3">
+    <div class="scroll" role="img" aria-label="Hanging scroll with the character for the space between things">間<i></i></div>
+  </div>
+</section>
+
+<section class="hall" id="rooms" aria-labelledby="rooms-h">
+  <div class="inner">
+    <h2 id="rooms-h">部屋<small>Rooms</small></h2>
+    <p class="lead">Nine rooms, each named for the plant outside its window. The mats were re-covered in March with rush from Yatsushiro.</p>
+    <table>
+      <tbody>
+        <tr><th>Kikyō</th><td>8 mats, moss garden</td><td>¥48,000</td></tr>
+        <tr><th>Susuki</th><td>6 mats, river side</td><td>¥41,000</td></tr>
+        <tr><th>Nanten</th><td>6 mats, corner</td><td>¥41,000</td></tr>
+        <tr><th>Tsubaki</th><td>10 mats, two rooms</td><td>¥62,000</td></tr>
+      </tbody>
+    </table>
+    <div><p>Prices are per guest, per night, with dinner and breakfast. Futon are laid while you are at the bath.</p><p>There is no television. There is a radio in the cedar box.</p></div>
+  </div>
+  <div class="shoji" aria-hidden="true"><span></span><span></span></div>
+  <button class="pull" type="button" aria-expanded="false">Slide open</button>
+</section>
+
+<section class="hall" id="bath" aria-labelledby="bath-h">
+  <div class="inner">
+    <h2 id="bath-h">湯<small>Bath</small></h2>
+    <p class="lead">The spring rises under the stone floor at 44 °C. We let it cool in a cedar channel before it reaches you.</p>
+    <dl>
+      <dt>Water</dt><dd>Simple alkaline spring, pH 8.9</dd>
+      <dt>Heat</dt><dd>41.5 °C in the tub</dd>
+      <dt>Hours</dt><dd>15:00 to 01:00, 05:30 to 10:00</dd>
+      <dt>Private</dt><dd>The small bath locks from inside, 40 minutes</dd>
+    </dl>
+    <p>Wash at the low stools first. Towels stay out of the water. The bell by the door rings once when the bath is cleaned at ten.</p>
+  </div>
+  <div class="shoji" aria-hidden="true"><span></span><span></span></div>
+  <button class="pull" type="button" aria-expanded="false">Slide open</button>
+</section>
+
+<section class="hall" id="table" aria-labelledby="table-h">
+  <div class="inner">
+    <h2 id="table-h">膳<small>Table</small></h2>
+    <p class="lead">November dinner, cooked by Okami Tae Muraoka and her son Ren.</p>
+    <ol class="courses">
+      <li>Chestnut tofu, yuzu miso</li>
+      <li>Clear soup with matsutake</li>
+      <li>Sashimi of river trout</li>
+      <li>Persimmon and chrysanthemum leaf</li>
+      <li>Sweetfish grilled on a salt bed</li>
+      <li>Rice from the hill field, pickles</li>
+    </ol>
+    <p>Tell us about allergies when you book. We cook without meat on request, with a day's notice. Breakfast is served in the long room at 7:30 or 8:30.</p>
+  </div>
+  <div class="shoji" aria-hidden="true"><span></span><span></span></div>
+  <button class="pull" type="button" aria-expanded="false">Slide open</button>
+</section>
+
+<section class="hall" id="stay" aria-labelledby="stay-h">
+  <div class="inner">
+    <h2 id="stay-h">宿<small>Stay</small></h2>
+    <p class="lead">Arrive after three. Leave by ten. Between those hours, nothing is required of you.</p>
+    <dl>
+      <dt>Station</dt><dd>Hoshikawa, 6 minutes on foot over the red bridge</dd>
+      <dt>Telephone</dt><dd>0265 44 1207, 9:00 to 20:00</dd>
+      <dt>Letter</dt><dd>Shizuku-ya, 3 Kawabata, Hoshikawa</dd>
+    </dl>
+    <p>We keep the gate lamp lit until the last guest is in.</p>
+  </div>
+  <div class="shoji" aria-hidden="true"><span></span><span></span></div>
+  <button class="pull" type="button" aria-expanded="false">Slide open</button>
+</section>
+</main>
+<footer><span>Shizuku-ya, Hoshikawa Onsen</span><span>Closed for the mat change, 1 to 9 March</span></footer>
+<script>
+(() => {
+  const halls = document.querySelectorAll(".hall");
+  const set = (h, open) => { h.classList.toggle("open", open); const b = h.querySelector(".pull"); b.setAttribute("aria-expanded", String(open)); b.textContent = open ? "Slide closed" : "Slide open"; };
+  halls.forEach((h) => h.querySelector(".pull").addEventListener("click", () => set(h, !h.classList.contains("open"))));
+  if (!("IntersectionObserver" in window) || matchMedia("(prefers-reduced-motion: reduce)").matches) { halls.forEach((h) => set(h, true)); return; }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { set(e.target, true); io.unobserve(e.target); } }), { threshold: .45 });
+  halls.forEach((h) => io.observe(h));
+})();
+</script>
+</body>
+</html>

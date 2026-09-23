@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kanga Proverb · Centiform</title>
+<style>
+/* @fonts: Rammetto One:400:block; Ubuntu:400,500,700:swap */
+@font-face{font-family:"Rammetto One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/rammetto-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Ubuntu";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ubuntu-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Ubuntu";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/ubuntu-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Ubuntu";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/ubuntu-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fdf6e3;          /* unprinted cotton */
+  --ink: #141414;         /* black print */
+  --accent-1: #e2532b;    /* chilli orange */
+  --accent-2: #1f8a70;    /* coast green */
+  --gold: #f2b631;
+  --u: 8px;
+  --pindo: clamp(40px, 6vw, 88px);
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(48px, 7vw, 120px);
+  --disp: "Rammetto One", "Arial Black", sans-serif;
+  --text: "Ubuntu", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+/* a kanga: pindo (border) around mji (centre), jina (the saying) along the bottom of the centre */
+.kanga { min-height: 100vh; padding: var(--pindo); background: var(--pb); position: relative; display: flex; }
+.kanga + .kanga { border-top: 6px solid var(--bg); }
+.mji { flex: 1; position: relative; display: grid; grid-template-rows: 1fr auto; background: var(--mb); color: var(--mc, var(--ink)); box-shadow: 0 0 0 6px var(--bg), 0 0 0 10px var(--ink); overflow: hidden; }
+.mji > svg.motif { position: absolute; inset: 0; width: 100%; height: 100%; }
+.body { position: relative; padding: calc(var(--u) * 6); display: grid; align-content: center; }
+.jina { position: relative; background: var(--jb, var(--bg)); color: var(--jc, var(--ink)); text-align: center; padding: calc(var(--u) * 2.5) calc(var(--u) * 3); border-top: 4px solid var(--ink); }
+.jina q { display: block; font: 400 var(--t2)/1.2 var(--disp); text-transform: uppercase; letter-spacing: .02em; quotes: none; }
+.jina span { display: block; font: 500 var(--t-1)/1.4 var(--text); letter-spacing: .1em; margin-top: 6px; }
+/* pindo patterns: dots, zigzag, cashew stripes */
+.k1 { --pb: radial-gradient(circle, var(--bg) 0 7px, transparent 8px) 0 0 / 28px 28px, radial-gradient(circle, var(--gold) 0 4px, transparent 5px) 14px 14px / 28px 28px, var(--ink); --mb: var(--accent-1); }
+.k2 { --pb: linear-gradient(135deg, var(--accent-2) 25%, transparent 25%) -16px 0 / 32px 32px, linear-gradient(225deg, var(--accent-2) 25%, transparent 25%) -16px 0 / 32px 32px, linear-gradient(315deg, var(--accent-2) 25%, transparent 25%) 0 0 / 32px 32px, linear-gradient(45deg, var(--accent-2) 25%, transparent 25%) 0 0 / 32px 32px, var(--gold); --mb: var(--bg); }
+.k3 { --pb: repeating-linear-gradient(90deg, var(--accent-1) 0 14px, var(--ink) 14px 20px, var(--bg) 20px 26px, var(--ink) 26px 32px); --mb: var(--accent-2); --mc: var(--bg); }
+.k4 { --pb: radial-gradient(circle at 50% 50%, var(--accent-1) 0 9px, var(--ink) 10px 13px, transparent 14px) 0 0 / 34px 34px, var(--bg); --mb: var(--ink); --mc: var(--bg); }
+.brand { font: 400 var(--t4)/.95 var(--disp); margin: 0; max-width: 11ch; }
+.lede { font-size: var(--t1); max-width: 34ch; margin: calc(var(--u) * 3) 0 0; font-weight: 500; }
+nav.tags { display: flex; gap: var(--u); flex-wrap: wrap; margin-top: calc(var(--u) * 4); }
+nav.tags a { background: var(--ink); color: var(--bg); padding: 10px 16px; font: 700 var(--t-1)/1 var(--text); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; }
+nav.tags a:hover { background: var(--accent-2); }
+h2 { margin: 0 0 calc(var(--u) * 3); font: 400 var(--t3)/1.1 var(--disp); }
+.pieces { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 3); }
+.piece { background: var(--bg); color: var(--ink); border: 4px solid var(--ink); }
+.piece .sw { height: 120px; border-bottom: 4px solid var(--ink); }
+.piece div.t { padding: calc(var(--u) * 1.5) calc(var(--u) * 2); }
+.piece b { display: block; font: 700 var(--t0)/1.3 var(--text); }
+.piece i { font-style: normal; font-size: var(--t-1); display: block; }
+.piece .pr { font: 400 var(--t1)/1.3 var(--disp); color: var(--accent-1); font-variant-numeric: tabular-nums; }
+.parts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 4); max-width: 1100px; }
+.parts div { border-top: 4px solid var(--gold); padding-top: calc(var(--u) * 2); }
+.parts b { display: block; font: 400 var(--t2)/1.1 var(--disp); color: var(--gold); margin-bottom: var(--u); }
+.visit { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 5); max-width: 1100px; }
+.visit dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: calc(var(--u) * 1) calc(var(--u) * 3); }
+.visit dt { font-weight: 700; color: var(--gold); }
+.visit dd { margin: 0; }
+@media (max-width: 900px) {
+  .body { padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+  .pieces, .parts, .visit { grid-template-columns: minmax(0, 1fr); }
+  .jina q { font-size: var(--t1); }
+  .kanga { min-height: 0; }
+  .kanga.k1 { min-height: 100vh; }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="kanga k1" aria-labelledby="brand">
+    <div class="mji">
+      <svg class="motif" viewBox="0 0 800 500" preserveAspectRatio="xMaxYMid slice" aria-hidden="true" id="m1"></svg>
+      <div class="body">
+        <h1 class="brand" id="brand">Nyumba ya Kanga Makadara</h1>
+        <p class="lede">Printed cotton from Mombasa since 1958. Every cloth sold in pairs, every cloth saying something.</p>
+        <nav class="tags" aria-label="Sections"><a href="#new">New sayings</a><a href="#parts">How to read one</a><a href="#visit">Find the shop</a></nav>
+      </div>
+      <div class="jina"><q lang="sw">Haba na haba hujaza kibaba</q><span>Little by little fills the measure</span></div>
+    </div>
+  </section>
+
+  <section class="kanga k2" id="new" aria-labelledby="new-h">
+    <div class="mji">
+      <div class="body">
+        <h2 id="new-h">This season’s pairs</h2>
+        <div class="pieces">
+          <article class="piece"><div class="sw" style="background: radial-gradient(circle, #f2b631 0 10px, transparent 11px) 0 0 / 40px 40px, #e2532b"></div><div class="t"><b>Korosho</b><i lang="sw">“Pole pole ndio mwendo”</i><i>Slowly is the way to go</i><span class="pr">KSh 1,800</span></div></article>
+          <article class="piece"><div class="sw" style="background: repeating-linear-gradient(45deg, #1f8a70 0 12px, #fdf6e3 12px 18px, #141414 18px 22px)"></div><div class="t"><b>Mnazi</b><i lang="sw">“Umoja ni nguvu”</i><i>Unity is strength</i><span class="pr">KSh 1,650</span></div></article>
+          <article class="piece"><div class="sw" style="background: radial-gradient(circle at 50% 50%, #141414 0 14px, #f2b631 15px 22px, transparent 23px) 0 0 / 56px 56px, #1f8a70"></div><div class="t"><b>Jua</b><i lang="sw">“Mwenye pupa hadiriki kula tamu”</i><i>The hasty one misses the sweetest food</i><span class="pr">KSh 2,100</span></div></article>
+        </div>
+      </div>
+      <div class="jina" style="--jb: #141414; --jc: #fdf6e3"><q lang="sw">Mgeni njoo mwenyeji apone</q><span>Let the guest come, so the host may prosper</span></div>
+    </div>
+  </section>
+
+  <section class="kanga k3" id="parts" aria-labelledby="parts-h">
+    <div class="mji">
+      <svg class="motif" viewBox="0 0 800 500" preserveAspectRatio="xMidYMid slice" aria-hidden="true" id="m3"></svg>
+      <div class="body">
+        <h2 id="parts-h">How to read a kanga</h2>
+        <div class="parts">
+          <div><b>Pindo</b>The border on all four sides. It frames the cloth and tells the printer where to fold.</div>
+          <div><b>Mji</b>The centre, the town. One large motif: a cashew, a coconut palm, a sun.</div>
+          <div><b>Jina</b>The name: a saying printed in a band. People choose a kanga for what it says as much as for how it looks.</div>
+        </div>
+      </div>
+      <div class="jina" style="--jb: #f2b631"><q lang="sw">Asiyesikia la mkuu huvunjika guu</q><span>Who will not hear the elder breaks a leg</span></div>
+    </div>
+  </section>
+
+  <section class="kanga k4" id="visit" aria-labelledby="visit-h">
+    <div class="mji">
+      <div class="body">
+        <div class="visit">
+          <div><h2 id="visit-h">Find the shop</h2><p>Biashara Street, three doors past the spice seller, under the green awning. Ask for Mama Rehema; she has chosen sayings for three generations of brides.</p></div>
+          <dl><dt>Open</dt><dd>Mon–Sat, 8:30–18:00</dd><dt>Pair</dt><dd>Two cloths, 110 × 160 cm each</dd><dt>Post</dt><dd>Anywhere in East Africa, KSh 400</dd><dt>Phone</dt><dd>+254 41 222 0958</dd></dl>
+        </div>
+      </div>
+      <div class="jina" style="--jb: #e2532b"><q lang="sw">Kwaheri ya kuonana</q><span>Goodbye, until we meet again</span></div>
+    </div>
+  </section>
+</main>
+<script>
+(() => {
+  // mji motifs: a large cashew (korosho) with dotted fill, and a rayed sun
+  const cashew = (x, y, s, r, fill, dot) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0 -100 C70 -100 110 -40 90 20 C70 80 10 100 -20 70 C-40 50 -20 20 0 10 C20 0 20 -30 -10 -40 C-40 -50 -60 -100 0 -100Z" fill="${fill}" stroke="#141414" stroke-width="8"/>${Array.from({ length: 12 }, (_, i) => { const a = i / 12 * Math.PI * 2; return `<circle cx="${(30 + Math.cos(a) * 36).toFixed(0)}" cy="${(-20 + Math.sin(a) * 36).toFixed(0)}" r="7" fill="${dot}"/>`; }).join("")}<circle cx="30" cy="-20" r="16" fill="${dot}"/></g>`;
+  document.getElementById("m1").innerHTML = cashew(610, 230, 1.9, 20, "#f2b631", "#141414") + cashew(760, 60, .8, 200, "#141414", "#fdf6e3") + cashew(470, 440, .7, -30, "#141414", "#f2b631");
+  let sun = `<g transform="translate(640 220)">`;
+  for (let i = 0; i < 24; i++) sun += `<path d="M-14 -120 L0 -210 L14 -120Z" fill="${i % 2 ? "#f2b631" : "#141414"}" transform="rotate(${i * 15})"/>`;
+  sun += `<circle r="110" fill="#f2b631" stroke="#141414" stroke-width="10"/><circle r="70" fill="#e2532b"/><circle r="30" fill="#141414"/></g>`;
+  document.getElementById("m3").innerHTML = sun;
+})();
+</script>
+</body>
+</html>

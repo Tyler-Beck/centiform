@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miniature Folio · Centiform</title>
+<style>
+/* @fonts: Lalezar:400:block; Vazirmatn:400,600:swap */
+@font-face{font-family:"Lalezar";font-style:normal;font-weight:400;font-display:block;src:url(fonts/lalezar-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Lalezar";font-style:normal;font-weight:400;font-display:block;src:url(fonts/lalezar-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/vazirmatn-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/vazirmatn-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/vazirmatn-arabic-600-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/vazirmatn-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f2e6c9;          /* burnished, sized paper */
+  --ink: #1d2a5c;         /* lapis */
+  --accent-1: #d2452f;    /* vermilion */
+  --accent-2: #c49a3a;    /* shell gold */
+  --margin: #e9d8b0;      /* coloured margin paper */
+  --table: #2a2320;
+  --green: #3f6b52;
+  --u: 8px;
+  /* scale: 1.2 on 17px */
+  --t-1: 14px; --t0: 17px; --t1: 20.5px; --t2: 24.5px; --t3: 29.5px; --t4: clamp(40px, 4.2vw, 64px);
+  --disp: "Lalezar", serif;
+  --text: "Vazirmatn", "Tahoma", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--table); }
+body { margin: 0; min-height: 100vh; color: var(--ink); background: radial-gradient(ellipse at 50% 40%, #3b302a, var(--table) 70%); font: 400 var(--t0)/1.6 var(--text); display: grid; grid-template-rows: auto 1fr auto; overflow-x: hidden; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+.top { display: flex; justify-content: space-between; align-items: center; padding: calc(var(--u) * 2) calc(var(--u) * 4); color: #e9d8b0; font-size: var(--t-1); letter-spacing: .08em; gap: calc(var(--u) * 2); flex-wrap: wrap; }
+.top b { font: 400 var(--t1)/1 var(--disp); letter-spacing: .02em; color: var(--accent-2); }
+/* the open book: right-hand page is read first */
+.book { position: relative; align-self: center; justify-self: center; width: min(1320px, 96vw); aspect-ratio: 1.46; perspective: 2400px; direction: rtl; display: grid; grid-template-columns: 1fr 1fr; filter: drop-shadow(0 24px 30px rgba(0,0,0,.5)); max-height: calc(100vh - 150px); }
+.page { direction: ltr; position: relative; background: radial-gradient(circle, #c49a3a 0 1px, transparent 1.6px) 0 0 / 37px 53px, radial-gradient(circle, #d8b458 0 1.4px, transparent 2px) 11px 19px / 71px 43px, radial-gradient(circle, #c49a3a 0 .8px, transparent 1.2px) 23px 7px / 29px 31px, var(--margin); padding: 5.2% 6.4%; overflow: hidden; }
+.page.r { border-radius: 2px 6px 6px 2px; box-shadow: inset 18px 0 22px -18px rgba(60,40,20,.55); }
+.page.l { border-radius: 6px 2px 2px 6px; box-shadow: inset -18px 0 22px -18px rgba(60,40,20,.55); }
+.illum { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+/* the text block with its gold, lapis and red rules */
+.block { position: relative; height: 100%; background: var(--bg); padding: 5% 6%; border: 3px solid var(--accent-2); outline: 1px solid var(--ink); outline-offset: 3px; box-shadow: 0 0 0 7px var(--margin), 0 0 0 8px var(--accent-1); display: flex; flex-direction: column; }
+.sarlawh { text-align: center; padding: 3% 4%; margin-bottom: 4%; background: var(--ink); color: var(--accent-2); border: 2px solid var(--accent-2); position: relative; }
+.sarlawh .fa { font: 400 var(--t4)/1.3 var(--disp); }
+.sarlawh .en { font: 600 var(--t-1)/1.4 var(--text); letter-spacing: .24em; text-transform: uppercase; color: #efe0bb; }
+h2 { font: 400 var(--t2)/1.2 var(--disp); color: var(--accent-1); margin: 0 0 3%; text-align: center; }
+h2 small { display: block; font: 400 var(--t-1)/1.4 var(--text); color: var(--ink); direction: rtl; }
+/* verse set in columns with gold rules between hemistichs */
+.verse { display: grid; grid-template-columns: 1fr 1fr; column-gap: 0; border-top: 1px solid var(--accent-2); border-bottom: 1px solid var(--accent-2); flex: 1; align-content: start; }
+.verse p { margin: 0; padding: 2.2% 6%; font-size: var(--t0); line-height: 1.55; border-bottom: 1px solid rgba(196,154,58,.5); text-align: center; }
+.verse p:nth-child(odd) { border-right: 3px double var(--accent-2); }
+.prose p { margin: 0 0 3%; max-width: 44ch; }
+.prose dl { display: grid; grid-template-columns: auto 1fr; gap: 1% 6%; margin: 2% 0 0; font-size: var(--t-1); font-variant-numeric: tabular-nums; }
+.prose dt { color: var(--accent-1); font-weight: 600; }
+.prose dd { margin: 0; }
+.mini { flex: 1; min-height: 0; border: 3px solid var(--accent-2); }
+.mini svg { width: 100%; height: 100%; display: block; }
+.cap { text-align: center; font-size: var(--t-1); margin-top: 2%; }
+.folio { position: absolute; bottom: 1.6%; font-size: 12.5px; color: #7a6a4a; font-variant-numeric: tabular-nums; }
+.page.r .folio { right: 6%; } .page.l .folio { left: 6%; }
+/* the turning leaf */
+.leaf { position: absolute; top: 0; left: 0; width: 50%; height: 100%; transform-origin: 100% 50%; transform-style: preserve-3d; z-index: 5; display: none; }
+.leaf .face { position: absolute; inset: 0; backface-visibility: hidden; }
+.leaf .back { transform: rotateY(180deg); }
+.leaf.go { display: block; animation: turn .9s cubic-bezier(.4,.1,.3,1) forwards; }
+.leaf.back-go { display: block; animation: turnb .9s cubic-bezier(.4,.1,.3,1) forwards; left: 50%; transform-origin: 0 50%; }
+@keyframes turn { to { transform: rotateY(180deg); } }
+@keyframes turnb { to { transform: rotateY(-180deg); } }
+.nav { display: flex; justify-content: center; gap: calc(var(--u) * 2); padding: calc(var(--u) * 2); align-items: center; color: #e9d8b0; font-size: var(--t-1); }
+.nav button { font: 400 var(--t0)/1 var(--disp); background: var(--ink); color: var(--accent-2); border: 2px solid var(--accent-2); padding: 10px 18px; cursor: pointer; }
+.nav button:disabled { opacity: .4; cursor: default; }
+@media (max-width: 900px) {
+  .book { grid-template-columns: 1fr; aspect-ratio: auto; width: calc(100vw - 16px); max-height: none; }
+  .page { min-height: 118vw; padding: 7%; }
+  .page.l { order: 2; }
+  .leaf { display: none !important; }
+  .top { padding: var(--u) calc(var(--u) * 2); }
+}
+</style>
+</head>
+<body>
+<header class="top"><b>Golestan Press</b><span>The Book of Kings · Folio edition in nine colours and shell gold · Read from the right</span></header>
+<main class="book" id="book" aria-live="polite">
+  <section class="page r" id="R"></section>
+  <section class="page l" id="L"></section>
+  <div class="leaf" id="leaf" aria-hidden="true"><div class="face front page l"></div><div class="face back page r"></div></div>
+</main>
+<nav class="nav" aria-label="Turn the folio"><button type="button" id="prev">Previous</button><span id="count">Folio 1 of 3</span><button type="button" id="next">Next folio</button></nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="flower"><circle r="5" fill="#d2452f"/><circle r="5" cx="7" fill="#c49a3a" opacity=".9"/><circle r="5" cx="-7" fill="#c49a3a" opacity=".9"/><circle r="5" cy="7" fill="#c49a3a" opacity=".9"/><circle r="5" cy="-7" fill="#c49a3a" opacity=".9"/><circle r="3" fill="#1d2a5c"/></g>
+  </defs>
+</svg>
+<script>
+(() => {
+  const SAR = `<div class="sarlawh"><div class="fa" lang="fa" dir="rtl">شاهنامه</div><div class="en">The Book of Kings · Golestan Folio</div></div>`;
+  const P = [
+    [ // spread 1
+      `<div class="block">${SAR}<h2>The Opening<small lang="fa">آغاز</small></h2><div class="verse">
+        <p>In the name of the Maker</p><p>of wisdom and the soul,</p><p>beyond whom no thought</p><p>has ever found a road.</p>
+        <p>Of kings who ruled the world</p><p>for fifty thousand years,</p><p>I set these tales in verse</p><p>so that the dead might speak.</p></div></div>`,
+      `<div class="block prose"><h2>This Edition<small lang="fa">این چاپ</small></h2>
+        <p>Sixty-four miniatures by Nasrin Aghili, painted at folio size in gouache and shell gold, then printed in nine colours from hand-separated plates.</p>
+        <p>The English follows the rhythm of the couplets, two half-lines to a row, as the scribes laid them out: four columns to the page, gold rules between.</p>
+        <svg viewBox="-60 -60 120 120" style="width:34%;margin:2% auto 4%;display:block" aria-hidden="true"><circle r="56" fill="#1d2a5c" stroke="#c49a3a" stroke-width="3"/><g fill="#c49a3a">${Array.from({length:16},(_, k)=>`<path d="M0 -54 Q8 -40 0 -28 Q-8 -40 0 -54Z" transform="rotate(${k*22.5})"/>`).join("")}</g><circle r="26" fill="#f2e6c9" stroke="#c49a3a" stroke-width="2"/><use href="#flower" transform="scale(1.8)"/></svg><dl><dt>Pages</dt><dd>612, sewn in sections of eight</dd><dt>Size</dt><dd>38 × 26 cm</dd><dt>Paper</dt><dd>Burnished, sized with starch</dd><dt>Copies</dt><dd>400, numbered</dd></dl></div>`
+    ],
+    [
+      `<div class="block"><h2>The Simorgh Takes the Child<small lang="fa">سیمرغ و زال</small></h2><div class="verse">
+        <p>They left him on the mountain,</p><p>white of hair, a newborn,</p><p>and the great bird circled</p><p>once above the stones.</p>
+        <p>She did not take him as food;</p><p>she took him as a son.</p><p>On Alborz, in a nest of ebony</p><p>and sandalwood, he grew.</p>
+        <p>She gave him one feather:</p><p>burn it, and I will come.</p></div></div>`,
+      `<div class="block"><div class="mini"><svg viewBox="0 0 400 420" role="img" aria-label="Miniature: pink rock mountains, a gold sky, a cypress, and a great nest on the peak">
+        <rect width="400" height="420" fill="#c49a3a"/><path d="M0 0H400V120Q340 90 290 120Q250 70 200 110Q150 60 110 100Q60 70 0 110Z" fill="#1d2a5c"/>
+        <g fill="#e3c9d0" stroke="#8a5a6a" stroke-width="2"><path d="M40 420 Q30 300 90 250 Q70 200 130 170 Q160 110 200 150 Q250 100 280 170 Q340 190 320 260 Q380 300 370 420Z"/><path d="M90 250 q20 -10 30 10 M130 170 q24 -6 30 14 M280 170 q-20 10 -16 30 M320 260 q-24 0 -30 16" fill="none"/></g>
+        <g fill="#b8a0b8" stroke="#6a4a6a" stroke-width="2"><path d="M160 420 Q150 330 200 300 Q260 320 250 420Z"/></g>
+        <path d="M168 150 q32 -24 64 0 q-10 16 -32 16 q-22 0 -32 -16z" fill="#6b4a2a" stroke="#3a2415" stroke-width="2"/>
+        <path d="M210 150 C240 90 300 60 350 70 C320 84 300 96 290 110 C320 106 340 112 356 124 C320 124 290 128 262 140 C246 146 226 150 210 150Z" fill="#3f6b52" stroke="#1d2a5c" stroke-width="2"/>
+        <path d="M290 110 c20 -2 40 4 56 14 M262 140 c24 -8 50 -8 80 -2" stroke="#d2452f" stroke-width="3" fill="none"/>
+        <circle cx="222" cy="140" r="4" fill="#d2452f"/>
+        <g><path d="M60 420 V300 Q70 250 76 230 Q82 250 92 300 V420Z" fill="#2c5540" stroke="#1d2a5c" stroke-width="2"/><rect x="72" y="400" width="8" height="20" fill="#6b4a2a"/></g>
+        <g transform="translate(330 360)"><path d="M0 60 V0" stroke="#6b4a2a" stroke-width="4"/><use href="#flower" y="-10"/><use href="#flower" x="-18" y="8"/><use href="#flower" x="16" y="14"/></g>
+        <path d="M0 390 Q100 370 200 392 T400 386 V420 H0Z" fill="#7aa3c8" opacity=".9"/><path d="M20 400 q20 -6 40 0 M120 396 q20 -6 40 0 M260 400 q20 -6 40 0" stroke="#f2e6c9" stroke-width="2" fill="none"/>
+      </svg></div><p class="cap">Folio 37 verso · after the Tabriz manner</p></div>`
+    ],
+    [
+      `<div class="block"><h2>Rostam Chooses Rakhsh<small lang="fa">رستم و رخش</small></h2><div class="verse">
+        <p>He pressed his hand on every back;</p><p>each horse bent to the ground.</p><p>Then came a mare, and after her</p><p>a colt the colour of rose petals</p>
+        <p>on saffron, with a lion’s chest</p><p>and ears like two sharp daggers.</p><p>The herdsman said: his price</p><p>is the land of Iran itself.</p></div></div>`,
+      `<div class="block prose"><h2>Subscribe<small lang="fa">پیش‌خرید</small></h2>
+        <p>Subscribers receive the book in a slipcase of lapis cloth, and a loose print of the Simorgh folio signed by the painter.</p>
+        <dl><dt>Price</dt><dd>£1,480, or three payments of £500</dd><dt>Ships</dt><dd>Nowruz, 20 March 2027</dd><dt>Write to</dt><dd>Golestan Press, 9 Cypress Yard, Oxford</dd></dl>
+        <p style="margin-top:4%">Copies 1 to 40 are bound in goatskin with gold-tooled doublures, by quotation.</p></div>`
+    ]
+  ];
+  const R = document.getElementById("R"), L = document.getElementById("L"), leaf = document.getElementById("leaf");
+  let i = 0, busy = false;
+  // floral illumination in the margins: a gold vine with lapis and vermilion flowers
+  const vine = () => { let v = `<svg class="illum" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">`;
+    [2.6, 97.4].forEach((x, side) => {
+      let d = `M${x} 3`; for (let y = 3; y < 137; y += 8) d += ` Q${x + (y % 16 ? 1.4 : -1.4)} ${y + 4} ${x} ${y + 8}`;
+      v += `<path d="${d}" stroke="#c49a3a" stroke-width=".45" fill="none"/>`;
+      for (let y = 7, k = 0; y < 134; y += 8, k++) {
+        const dir = k % 2 ? 1 : -1, cx = x + dir * 1.3;
+        v += `<ellipse cx="${cx}" cy="${y}" rx=".55" ry="1.5" fill="#3f6b52" transform="rotate(${dir * 35} ${cx} ${y})"/>`;
+        if (k % 3 === side) v += `<circle cx="${x}" cy="${y + 4}" r="1.2" fill="${k % 2 ? "#d2452f" : "#1d2a5c"}" stroke="#c49a3a" stroke-width=".3"/>`;
+      }
+    });
+    return v + `</svg>`; };
+  const fill = (el, html, n) => { el.innerHTML = vine() + html + `<span class="folio">${n}</span>`; };
+  const show = () => { fill(R, P[i][0], (i * 2 + 1) + "r"); fill(L, P[i][1], (i * 2 + 1) + "v");
+    document.getElementById("count").textContent = "Folio " + (i + 1) + " of " + P.length;
+    document.getElementById("prev").disabled = i === 0; document.getElementById("next").disabled = i === P.length - 1; };
+  const reduce = () => matchMedia("(prefers-reduced-motion: reduce)").matches || innerWidth <= 900;
+  function go(d) {
+    const n = i + d; if (busy || n < 0 || n >= P.length) return;
+    if (reduce()) { i = n; show(); return; }
+    busy = true;
+    const f = leaf.querySelector(".front"), b = leaf.querySelector(".back");
+    if (d > 0) { f.innerHTML = L.innerHTML; b.innerHTML = vine() + P[n][0]; L.innerHTML = vine() + P[n][1]; leaf.className = "leaf go"; }
+    else { f.innerHTML = R.innerHTML; b.innerHTML = vine() + P[n][1]; R.innerHTML = vine() + P[n][0]; leaf.className = "leaf back-go"; b.className = "face back page l"; f.className = "face front page r"; }
+    leaf.addEventListener("animationend", () => { leaf.className = "leaf"; f.className = "face front page l"; b.className = "face back page r"; i = n; show(); busy = false; }, { once: true });
+  }
+  document.getElementById("next").addEventListener("click", () => go(1));
+  document.getElementById("prev").addEventListener("click", () => go(-1));
+  addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") go(1); if (e.key === "ArrowRight") go(-1); });
+  show();
+})();
+</script>
+</body>
+</html>

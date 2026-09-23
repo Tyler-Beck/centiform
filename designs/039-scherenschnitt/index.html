@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scherenschnitt · Centiform</title>
+<style>
+/* @fonts: Pirata One:400:block; Alice:400:swap */
+@font-face{font-family:"Pirata One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/pirata-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alice";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/alice-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f4eee1;          /* cream laid paper */
+  --ink: #111111;         /* black silhouette paper */
+  --accent-1: #3d6b4a;    /* fir-green mount card */
+  --accent-2: #d8cdb4;    /* the fold's shadow, the card edge */
+  --u: 8px;
+  /* scale: 1.333 on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 42px; --t4: clamp(52px, 7vw, 112px);
+  --black: "Pirata One", serif;
+  --text: "Alice", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden; text-align: center;
+  background: linear-gradient(90deg, transparent calc(50% - 1px), rgba(17,17,17,.14) calc(50% - 1px) 50%, rgba(255,255,255,.7) 50% calc(50% + 1px), transparent calc(50% + 1px)), linear-gradient(90deg, rgba(216,205,180,.35), transparent 30% 70%, rgba(216,205,180,.35)), var(--bg); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 4px; }
+header { padding: calc(var(--u) * 5) calc(var(--u) * 3) calc(var(--u) * 2); }
+.over { font-size: var(--t-1); letter-spacing: .3em; text-transform: uppercase; }
+h1 { margin: calc(var(--u) * 1) 0 0; font: 400 var(--t4)/.95 var(--black); }
+.orn { width: min(420px, 80%); height: 34px; display: block; margin: calc(var(--u) * 2) auto 0; }
+nav { display: flex; justify-content: center; gap: calc(var(--u) * 4); margin-top: calc(var(--u) * 2); font-size: var(--t-1); letter-spacing: .14em; text-transform: uppercase; flex-wrap: wrap; }
+nav a { text-decoration: none; }
+nav a:hover { color: var(--accent-1); }
+/* each tale: one sheet folded down the middle and cut through both layers */
+.tale { margin: calc(var(--u) * 3) auto calc(var(--u) * 8); width: min(900px, calc(100% - 32px)); }
+.sheet { position: relative; perspective: 1600px; background: var(--accent-1); padding: clamp(10px, 2.2vw, 28px); box-shadow: 0 1px 0 var(--accent-2), 0 18px 30px -18px rgba(17,17,17,.5); }
+.sheet .cut { display: flex; }
+.sheet .half { flex: 1; aspect-ratio: 200 / 250; }
+.sheet .half svg { width: 100%; height: 100%; display: block; }
+.sheet .half.r { transform-origin: 0 50%; }
+.sheet::after { content: ""; position: absolute; top: 6px; bottom: 6px; left: 50%; width: 1px; background: rgba(244,238,225,.25); }
+.tale h2 { margin: calc(var(--u) * 3) 0 var(--u); font: 400 var(--t3)/1 var(--black); }
+.tale p { margin: 0 auto calc(var(--u) * 1.5); max-width: 52ch; }
+.tale .src { font-size: var(--t-1); letter-spacing: .12em; text-transform: uppercase; color: #4b4638; }
+footer { padding: calc(var(--u) * 2) calc(var(--u) * 3) calc(var(--u) * 7); font-size: var(--t-1); }
+footer b { font: 400 var(--t2)/1.2 var(--black); display: block; }
+@media (prefers-reduced-motion: no-preference) {
+  .sheet .half.r { transform: rotateY(-178deg); transition: transform 1.6s cubic-bezier(.6,.05,.2,1); }
+  .tale.open .sheet .half.r { transform: rotateY(0); }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="over">Gantrisch Folk-Tale Society · Winter Reading 2026</div>
+  <h1>Three Tales Cut<br>from One Sheet</h1>
+  <svg class="orn" viewBox="0 0 420 34" aria-hidden="true"><g fill="#111"><path d="M210 2 C200 14 196 18 180 17 C194 22 200 26 210 32 C220 26 226 22 240 17 C224 18 220 14 210 2Z"/><circle cx="160" cy="17" r="4"/><circle cx="260" cy="17" r="4"/><circle cx="140" cy="17" r="2.5"/><circle cx="280" cy="17" r="2.5"/><path d="M0 17 H124 M296 17 H420" stroke="#111" stroke-width="1.5"/></g></svg>
+  <nav aria-label="Tales"><a href="#alp">The Ascent</a><a href="#chalet">Seven Winters</a><a href="#moon">The Chamois</a></nav>
+</header>
+<main>
+  <article class="tale" id="alp" aria-labelledby="t1">
+    <div class="sheet"><div class="cut" data-scene="alp" role="img" aria-label="Papercut: a line of cows climbing between fir trees toward a sun, mirrored left and right"></div></div>
+    <h2 id="t1">The Cowherd’s Ascent</h2>
+    <p>On the first warm Sunday in June, Ueli drove forty cows to the high pasture, bells tuned so that no two rang alike. The last cow would not climb until he sang the song his mother sang, and he had forgotten half of it.</p>
+    <p class="src">Told by Rosa Wenger, Rüschegg, 1931 · cut by Hanna Lüthi</p>
+  </article>
+  <article class="tale" id="chalet" aria-labelledby="t2">
+    <div class="sheet"><div class="cut" data-scene="chalet" role="img" aria-label="Papercut: a chalet with a heart window, dancers and trees, mirrored"></div></div>
+    <h2 id="t2">The Chalet of Seven Winters</h2>
+    <p>A carpenter built a house with one window shaped like a heart, and promised it would stand seven winters. It stood seventy. On the seventh winter the village danced in front of it anyway, in case.</p>
+    <p class="src">Told by Fritz Zbinden, Plaffeien, 1948 · cut by Hanna Lüthi</p>
+  </article>
+  <article class="tale" id="moon" aria-labelledby="t3">
+    <div class="sheet"><div class="cut" data-scene="moon" role="img" aria-label="Papercut: two chamois on rocks beneath a moon and stars, mirrored"></div></div>
+    <h2 id="t3">The Chamois Who Wanted the Moon</h2>
+    <p>Every night the chamois climbed one rock higher, and every night the moon moved one rock further. By autumn she stood on the Gantrisch summit, and decided the view was the better prize.</p>
+    <p class="src">Told by Marie Hostettler, Guggisberg, 1925 · cut by Beat Stucki</p>
+  </article>
+</main>
+<footer><b>Readings at the Schwarzenburg Library</b>Thursdays in December, 19:30 · Cut-paper evening on the 18th: bring small scissors</footer>
+<script>
+(() => {
+  const K = "#111111";
+  // left halves only; the right half is the same cut, unfolded
+  const frame = `<path d="M0 0 H200 V250 H0Z M8 8 V242 H200 V8Z" fill="${K}" fill-rule="evenodd"/>${Array.from({ length: 16 }, (_, i) => `<circle cx="${14 + i * 12}" cy="16" r="3" fill="${K}"/><circle cx="${14 + i * 12}" cy="234" r="3" fill="${K}"/>`).join("")}${Array.from({ length: 18 }, (_, i) => `<circle cx="16" cy="${28 + i * 11.5}" r="3" fill="${K}"/>`).join("")}`;
+  const fir = (x, y, s) => `<path d="M${x} ${y - 60 * s} L${x + 12 * s} ${y - 40 * s} H${x + 6 * s} L${x + 18 * s} ${y - 22 * s} H${x + 10 * s} L${x + 24 * s} ${y} H${x + 3 * s} V${y + 10 * s} H${x - 3 * s} V${y} H${x - 24 * s} L${x - 10 * s} ${y - 22 * s} H${x - 18 * s} L${x - 6 * s} ${y - 40 * s} H${x - 12 * s} Z" fill="${K}"/>`;
+  const cow = (x, y) => `<path d="M${x} ${y} h34 q6 0 8 -6 l6 -4 l2 -6 h4 l-1 7 q4 2 3 8 l-6 3 q-2 4 -8 4 v14 h-4 v-12 h-20 v12 h-4 v-14 q-6 -2 -8 0 v14 h-4 v-16 q-4 -6 0 -10z" fill="${K}"/><circle cx="${x + 22}" cy="${y + 20}" r="3" fill="${K}"/>`;
+  const bird = (x, y) => `<path d="M${x} ${y} q8 -8 16 -2 q6 -8 14 -6 q-8 2 -10 10 q-8 6 -20 -2z" fill="${K}"/>`;
+  const ground = `<path d="M8 214 Q30 204 52 212 T100 208 T150 212 T200 206 V242 H8Z" fill="${K}"/>${[30, 70, 110, 150, 190].map((x) => `<circle cx="${x}" cy="228" r="4" fill="#f4eee1"/>`).join("")}`;
+  const S = {
+    alp: frame + ground + `<path d="M200 60 A40 40 0 0 0 160 100 H200Z" fill="${K}"/>${Array.from({ length: 9 }, (_, i) => { const a = (i / 8) * Math.PI / 2 + Math.PI; return `<path d="M${200 + Math.cos(a) * 48} ${100 + Math.sin(a) * 48} L${200 + Math.cos(a - .08) * 64} ${100 + Math.sin(a - .08) * 64} L${200 + Math.cos(a + .08) * 64} ${100 + Math.sin(a + .08) * 64}Z" fill="${K}"/>`; }).join("")}
+      <path d="M8 152 L60 110 L90 136 L120 100 L160 142 L200 124 V152Z" fill="${K}"/><path d="M52 120 l8 -10 l8 10 l-4 -2 l-4 4 l-4 -4z M112 110 l8 -10 l8 10 l-4 -2 l-4 4 l-4 -4z" fill="#f4eee1"/>` + fir(34, 206, .9) + fir(176, 200, .7) + cow(62, 180) + cow(116, 176) + bird(40, 60) + bird(92, 44),
+    chalet: frame + ground + `<path d="M200 40 L110 110 H122 V204 H200Z" fill="${K}"/><path d="M200 40 L96 118 L104 124 L200 52Z" fill="${K}"/>
+      <path d="M200 120 C192 108 176 112 178 126 C180 136 192 142 200 150Z" fill="#f4eee1"/><rect x="138" y="130" width="22" height="26" fill="#f4eee1"/><rect x="138" y="170" width="22" height="34" fill="#f4eee1"/><path d="M149 130 V156 M138 143 H160" stroke="${K}" stroke-width="3"/>
+      <path d="M170 90 h20 v4 h-20z M160 100 h40 v3 h-40z" fill="#f4eee1"/>` + fir(40, 206, 1.1) + fir(82, 206, .7) + `<g fill="${K}"><circle cx="100" cy="160" r="7"/><path d="M92 168 h16 l8 26 h-10 v12 h-4 v-12 h-4 v12 h-4 v-12 h-10z M108 172 l14 -10 l2 3 l-14 10z"/></g>` + bird(30, 50) + `<path d="M60 30 l3 8 l8 0 l-6 5 l2 8 l-7 -5 l-7 5 l2 -8 l-6 -5 l8 0z" fill="${K}"/>`,
+    moon: frame + `<path d="M8 242 V180 L40 150 L70 170 L100 120 L130 150 L160 130 L200 160 V242Z" fill="${K}"/><path d="M96 128 l4 -6 l6 10 l-6 -2z M126 146 l4 -4 l6 8 z" fill="#f4eee1"/>
+      <path d="M200 30 A34 34 0 1 0 200 98 A26 26 0 1 1 200 30Z" fill="${K}" transform="translate(-30 0)"/>
+      ${[[40, 40], [70, 76], [30, 110], [120, 30], [140, 70]].map(([x, y]) => `<path d="M${x} ${y - 7} l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 l5 -2z" fill="${K}"/>`).join("")}
+      <g fill="${K}"><path d="M84 118 q-4 -10 4 -16 l4 -12 l2 2 l-2 10 l6 -2 l2 -12 l2 2 l-1 12 q8 2 8 10 l20 2 q10 2 10 12 l-2 16 h-4 l0 -12 l-4 12 h-4 l2 -14 h-16 l-4 14 h-4 l2 -16 q-6 0 -8 -4z"/></g>` + fir(26, 206, .8) + fir(186, 214, .6)
+  };
+  document.querySelectorAll(".cut").forEach((c) => {
+    const svg = `<svg viewBox="0 0 200 250" aria-hidden="true"><rect width="200" height="250" fill="#f4eee1"/>${S[c.dataset.scene]}</svg>`;
+    c.innerHTML = `<div class="half l">${svg}</div><div class="half r">${svg.replace('<svg viewBox="0 0 200 250"', '<svg viewBox="0 0 200 250" style="transform:scaleX(-1)"')}</div>`;
+  });
+  // unfold each sheet the first time it comes into view
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("open"); io.unobserve(e.target); } }), { threshold: .35 });
+  document.querySelectorAll(".tale").forEach((t) => io.observe(t));
+})();
+</script>
+</body>
+</html>

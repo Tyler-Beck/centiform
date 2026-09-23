@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Engraved Score · Centiform</title>
+<style>
+/* @fonts: Libre Caslon Display:400:block; Noto Music:400:block */
+@font-face{font-family:"Libre Caslon Display";font-style:normal;font-weight:400;font-display:block;src:url(fonts/libre-caslon-display-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Noto Music";font-style:normal;font-weight:400;font-display:block;src:url(fonts/noto-music-music-400-normal.woff2) format("woff2");unicode-range:U+25CC,U+2669-266F,U+1D000-1D0F5,U+1D100-1D126,U+1D129-1D1EA,U+1D200-1D245;}
+@font-face{font-family:"Noto Music";font-style:normal;font-weight:400;font-display:block;src:url(fonts/noto-music-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fbfaf6;          /* engraved plate paper */
+  --ink: #141414;         /* music ink */
+  --accent-1: #9c2f2f;    /* the conductor's red pencil */
+  --accent-2: #8f8a80;    /* staff lines, second impression */
+  --u: 8px;
+  --sp: 10px;             /* one staff space in the SVG */
+  /* scale: 1.333 on 19px */
+  --t-1: 14.5px; --t0: 19px; --t1: 25px; --t2: 34px; --t3: 45px; --t4: clamp(52px, 6.6vw, 104px);
+  --caslon: "Libre Caslon Display", "Caslon", Georgia, serif;
+  --music: "Noto Music", serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.6 var(--caslon); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+.page { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: calc(var(--u) * 6) 0 calc(var(--u) * 8); }
+.head { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: end; gap: calc(var(--u) * 3); border-bottom: 1px solid var(--ink); padding-bottom: calc(var(--u) * 2); }
+.head .l { font-size: var(--t-1); line-height: 1.5; }
+.head .r { font-size: var(--t-1); line-height: 1.5; text-align: right; font-style: italic; }
+.head h1 { margin: 0; text-align: center; font: 400 var(--t4)/.95 var(--caslon); }
+.head h1 small { display: block; font-size: .3em; letter-spacing: .3em; text-transform: uppercase; margin-bottom: var(--u); }
+.dedic { text-align: center; font-style: italic; margin: calc(var(--u) * 2) 0 calc(var(--u) * 5); color: #4a463f; }
+/* a movement: tempo marking, a system of four staves, then the notes as text underlay */
+.mvt { margin-bottom: calc(var(--u) * 7); }
+.mvt .tempo { display: flex; align-items: baseline; gap: calc(var(--u) * 2); flex-wrap: wrap; }
+.mvt h2 { margin: 0; font: 400 var(--t2)/1.1 var(--caslon); }
+.mvt .mm { font: 400 var(--t1)/1 var(--music); }
+.mvt .mm span { font-family: var(--caslon); font-size: var(--t0); }
+.mvt .dur { margin-left: auto; font-size: var(--t-1); font-style: italic; color: #4a463f; }
+.system { width: 100%; height: auto; display: block; margin: calc(var(--u) * 2) 0; overflow: visible; }
+.system .st { stroke: var(--accent-2); stroke-width: 1; }
+.system .bar { stroke: var(--ink); stroke-width: 1.4; }
+.system .note { fill: var(--ink); transition: fill .15s; }
+.system .note.lit { fill: var(--accent-1); }
+.system .note.hollow { fill: none; stroke: var(--ink); }
+.system .note.hollow.lit { fill: none; stroke: var(--accent-1); }
+.system .stem { stroke: var(--ink); stroke-width: 1.3; }
+.system text.dyn { font: italic 700 15px Georgia, serif; fill: var(--accent-1); }
+.system text.cl { font-family: var(--music); fill: var(--ink); }
+.system text.nm { font: 400 13px var(--caslon); fill: #4a463f; }
+.cols { columns: 2 22em; column-gap: calc(var(--u) * 6); }
+.cols p { margin: 0 0 calc(var(--u) * 2); }
+.players { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 3); border-top: 3px double var(--ink); border-bottom: 3px double var(--ink); padding: calc(var(--u) * 2) 0; margin: calc(var(--u) * 5) 0; }
+.players div { font-size: var(--t-1); }
+.players b { display: block; font: 400 var(--t1)/1.2 var(--caslon); }
+footer { text-align: center; font-size: var(--t-1); color: #4a463f; }
+footer .fine { font: italic 400 var(--t1)/1 var(--caslon); color: var(--ink); display: block; margin-bottom: var(--u); }
+@media (max-width: 800px) { .head { grid-template-columns: minmax(0, 1fr); text-align: center; } .head .r { text-align: center; } .players { grid-template-columns: repeat(2, minmax(0, 1fr)); } .page { width: calc(100% - 32px); } }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="head">
+    <div class="l">The Queen’s Rooms, Albany Street<br>Thursday 19 November 2026, 19:30</div>
+    <h1><small>First performance</small>Littoral</h1>
+    <div class="r">String Quartet No. 2<br>by Maren Holt (b. 1984)</div>
+  </header>
+  <p class="dedic">for the Albany Street Quartet, and for the tide at Saltcote, which set the tempo</p>
+  <main id="mvts"></main>
+  <section class="players" aria-label="Performers">
+    <div><b>Iona Reid</b>violin I · Guadagnini, 1762</div>
+    <div><b>Kofi Mensah</b>violin II</div>
+    <div><b>Beata Wróbel</b>viola</div>
+    <div><b>Tomás Lyle</b>cello</div>
+  </section>
+  <footer><span class="fine">Fine</span>Running time about 31 minutes, played without a break between III and IV · Please hold applause until the last bar line</footer>
+</div>
+<script>
+(() => {
+  const M = [
+    { n: "I. Allegro moderato", sub: "Tide tables", bpm: 112, dur: "9 min", ts: ["4", "4"],
+      notes: [[4, 1], [5, 1], [7, 2], [6, 1], [4, 1], [2, 2], [3, 1], [4, 1], [5, 1], [7, 1], [9, 4]], dyn: [[0, "mp"], [6, "cresc."], [10, "f"]],
+      t: ["The quartet opens on a low tide: the cello alone, walking the same four notes up and down like someone reading a timetable. The others enter one at a time as the water comes in.", "Holt wrote the movement on the harbour wall at Saltcote, timing the phrases against the tide gauge. The climax arrives exactly six hours and twelve minutes in, if you slow it down enough."] },
+    { n: "II. Adagio", sub: "Salt hymn", bpm: 52, dur: "11 min", ts: ["3", "2"],
+      notes: [[2, 2], [4, 2], [3, 4], [2, 2], [1, 2], [0, 4], [2, 2], [4, 2], [6, 4]], dyn: [[0, "pp"], [4, "espress."], [8, "ppp"]],
+      t: ["A hymn tune sung, Holt says, by fishermen’s wives while mending nets, collected in 1911 and never printed. It appears only in the viola, and only once complete.", "Listen for the bar of silence before the last phrase. It is written out: a full bar’s rest with a fermata."] },
+    { n: "III. Scherzo", sub: "Gulls", bpm: 168, dur: "5 min", ts: ["6", "8"],
+      notes: [[9, 1], [8, 1], [9, 1], [11, 1], [9, 1], [7, 1], [8, 1], [6, 1], [8, 1], [10, 2], [4, 1], [9, 2]], dyn: [[0, "ff"], [5, "sfz"], [10, "pizz."]],
+      t: ["Short, loud, and rude. The violins argue over something in high harmonics while the cello plays the part of a fish.", "The movement runs straight into the finale; please keep still."] },
+    { n: "IV. Finale", sub: "Slack water", bpm: 76, dur: "6 min", ts: ["4", "4"],
+      notes: [[4, 2], [4, 2], [5, 2], [3, 2], [4, 4], [2, 2], [4, 2], [4, 4]], dyn: [[0, "p"], [4, "dim."], [7, "niente"]],
+      t: ["Slack water is the still moment between tides. Everything slows and holds on a single chord for forty bars, each player bowing as slowly as the bow allows.", "The last sound is the cello’s open C, fading to nothing. The score marks it: until the sea is quiet."] }
+  ];
+  const SP = 10, W = 1180, staffTop = (i) => 20 + i * 70;
+  const sys = (m, idx) => {
+    let o = `<svg class="system" viewBox="0 0 ${W} 300" role="img" aria-label="Opening bars of ${m.n}, for four instruments">`;
+    const inst = ["Vln. I", "Vln. II", "Vla.", "Vc."];
+    inst.forEach((nm, s) => { const y0 = staffTop(s); for (let k = 0; k < 5; k++) o += `<line class="st" x1="70" x2="${W - 4}" y1="${y0 + k * SP}" y2="${y0 + k * SP}"/>`;
+      o += `<text class="nm" x="0" y="${y0 + 25}">${nm}</text>`;
+      o += s < 2 ? `<text class="cl" x="74" y="${y0 + 32}" font-size="44">𝄞</text>` : s === 2 ? `<text class="cl" x="74" y="${y0 + 30}" font-size="40">𝄡</text>` : `<text class="cl" x="74" y="${y0 + 22}" font-size="36">𝄢</text>`;
+      o += `<text x="118" y="${y0 + 18}" font-size="21" font-weight="700" font-family="Georgia">${m.ts[0]}</text><text x="118" y="${y0 + 38}" font-size="21" font-weight="700" font-family="Georgia">${m.ts[1]}</text>`; });
+    o += `<line class="bar" x1="70" x2="70" y1="${staffTop(0)}" y2="${staffTop(3) + 40}"/><path d="M62 ${staffTop(0)} q-6 60 0 ${staffTop(3) + 40 - staffTop(0)}" fill="none" stroke="#141414" stroke-width="3"/>`;
+    // the lead voice in its staff; the others hold long notes under it
+    const lead = idx === 1 ? 2 : idx === 2 ? 0 : idx === 0 ? 3 : 3;
+    let x = 160; const total = m.notes.reduce((a, [, d]) => a + d, 0), unit = (W - 190) / total;
+    m.notes.forEach(([step, d], i) => { const y0 = staffTop(lead), y = y0 + 40 - step * SP / 2, open = d >= 4, half = d >= 2 && d < 4;
+      o += `<ellipse class="note${open || half ? " hollow" : ""}" data-i="${i}" cx="${x + 8}" cy="${y}" rx="6.8" ry="5" transform="rotate(-20 ${x + 8} ${y})" ${open || half ? 'fill="none" stroke="#141414" stroke-width="2"' : ""}/>`;
+      if (!open) o += `<line class="stem" x1="${x + 14}" y1="${y}" x2="${x + 14}" y2="${y - 34}"/>`;
+      if (step < 0 || step > 8) for (let l = step < 0 ? -2 : 10; step < 0 ? l >= step : l <= step; l += step < 0 ? -2 : 2) o += `<line class="st" x1="${x}" x2="${x + 17}" y1="${y0 + 40 - l * SP / 2}" y2="${y0 + 40 - l * SP / 2}"/>`;
+      const dy = m.dyn.find(([k]) => k === i); if (dy) o += `<text class="dyn" x="${x}" y="${y0 + 64}">${dy[1]}</text>`;
+      x += d * unit; });
+    [0, 1, 2, 3].filter((s) => s !== lead).forEach((s, k) => { const y0 = staffTop(s); for (let b = 0; b < 3; b++) { const bx = 170 + b * (W - 190) / 3, y = y0 + 40 - (3 + k * 2 + b) * SP / 2; o += `<ellipse cx="${bx + 8}" cy="${y}" rx="6.8" ry="5" fill="none" stroke="#141414" stroke-width="2" transform="rotate(-20 ${bx + 8} ${y})"/>`; } });
+    for (let b = 1; b <= 3; b++) { const bx = 160 + b * (W - 190) / 3 - 6; o += `<line class="bar" x1="${bx}" x2="${bx}" y1="${staffTop(0)}" y2="${staffTop(3) + 40}"/>`; }
+    o += `<path d="M${W - 700} ${staffTop(lead) + 58} L${W - 540} ${staffTop(lead) + 52} L${W - 700} ${staffTop(lead) + 46}" fill="none" stroke="#9c2f2f" stroke-width="1.5"/>`;
+    return o + `</svg>`;
+  };
+  document.getElementById("mvts").innerHTML = M.map((m, i) => `<section class="mvt" aria-labelledby="m${i}"><div class="tempo"><h2 id="m${i}">${m.n} · <i>${m.sub}</i></h2><span class="mm" aria-label="crotchet equals ${m.bpm}">♩<span> = ${m.bpm}</span></span><span class="dur">${m.dur}</span></div>${sys(m, i)}<div class="cols">${m.t.map((p) => `<p>${p}</p>`).join("")}</div></section>`).join("");
+  // follow the lead voice at the marked tempo, one system at a time
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  const systems = [...document.querySelectorAll(".system")];
+  systems.forEach((s, i) => { const notes = [...s.querySelectorAll(".note")], m = M[i]; let k = 0, t0 = 0, on = false;
+    const io = new IntersectionObserver((es) => { const was = on; on = es[0].isIntersecting; if (on && !was) requestAnimationFrame(step); }, { threshold: .6 });
+    const step = (t) => { if (!on) return; if (!document.hidden) { if (!t0) t0 = t; const beat = 60000 / m.bpm; let acc = 0, idx = 0; const el = (t - t0) % (m.notes.reduce((a, [, d]) => a + d, 0) * beat);
+      for (; idx < m.notes.length; idx++) { acc += m.notes[idx][1] * beat; if (el < acc) break; }
+      if (idx !== k) { notes.forEach((n, j) => n.classList.toggle("lit", j === idx)); k = idx; } } requestAnimationFrame(step); };
+    io.observe(s); });
+})();
+</script>
+</body>
+</html>

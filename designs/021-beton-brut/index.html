@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beton Brut · Centiform</title>
+<style>
+/* @fonts: Big Shoulders Display:800,900:block; Public Sans:400,600:swap */
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:800;font-display:block;src:url(fonts/big-shoulders-display-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Big Shoulders Display";font-style:normal;font-weight:900;font-display:block;src:url(fonts/big-shoulders-display-latin-900-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/public-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Public Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/public-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #b9b6b0;          /* poured concrete, dry */
+  --ink: #262626;         /* shadow in the reveals */
+  --accent-1: #8c8a85;    /* concrete, weathered */
+  --accent-2: #d94f30;    /* the one painted thing: signage and doors */
+  --wet: #a3a09a;         /* concrete in shade */
+  --void: #1b1b1a;        /* cutout depth */
+  --lamp: #f1e6cf;        /* foyer light through a slot */
+  --u: 8px;               /* formwork unit: one board is 3u tall */
+  --board: 24px;
+  --sx: 18px;             /* sun offset, set by scroll */
+  /* scale: perfect fourth, 1.333 on 17px */
+  --t-1: 13px; --t0: 17px; --t1: 23px; --t2: 30px; --t3: 40px; --t4: 54px;
+  --t5: clamp(64px, 12.5vw, 220px);
+  --cast: "Big Shoulders Display", "Arial Narrow", sans-serif;
+  --sans: "Public Sans", Arial, sans-serif;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='360' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.006 .42' numOctaves='3' seed='7'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .1 0 0 0 0 .09 0 0 0 .5 -.08'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --pores: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='p'><feTurbulence type='turbulence' baseFrequency='.8' numOctaves='1' seed='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 5.2'/></filter><rect width='100%' height='100%' filter='url(%23p)' opacity='.35'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: #9d9a94; }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.55 var(--sans); background: #9d9a94; overflow-x: hidden; }
+
+/* board-formed concrete: grain, board seams, tie holes */
+.conc {
+  position: relative;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 50% 50%, #3a3936 0 3px, #6d6b67 3.5px 5px, transparent 5.5px),
+    repeating-linear-gradient(180deg, transparent 0 calc(var(--board) - 2px), rgba(38,38,38,.16) calc(var(--board) - 2px) calc(var(--board) - 1px), rgba(255,255,255,.18) calc(var(--board) - 1px) var(--board)),
+    var(--pores), var(--grain);
+  background-size: calc(var(--u) * 18) calc(var(--board) * 5), auto, 200px 200px, 360px 240px;
+  background-position: calc(var(--u) * 9) calc(var(--board) * 2.5 - 12px), 0 0, 0 0, 0 0;
+}
+.conc.shade { background-color: var(--wet); }
+.mass { box-shadow: var(--sx) calc(var(--u) * 4) 0 -4px rgba(27,27,26,.45); }
+
+/* site */
+.site { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0; padding: calc(var(--u) * 3) calc(var(--u) * 3) 0; align-content: start; }
+.plaque { grid-column: 1 / -1; display: flex; justify-content: space-between; gap: calc(var(--u) * 2); font: 600 var(--t-1)/1.2 var(--sans); letter-spacing: .16em; text-transform: uppercase; padding-bottom: calc(var(--u) * 2); flex-wrap: wrap; }
+.plaque nav { display: flex; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+a { color: inherit; }
+.plaque a { text-decoration: none; border-bottom: 2px solid transparent; }
+.plaque a:hover { border-color: var(--accent-2); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+
+/* the upper block: name cast into the face */
+.upper { grid-column: 1 / -1; min-height: 60vh; padding: calc(var(--u) * 5) calc(var(--u) * 5) calc(var(--u) * 4); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: end; column-gap: calc(var(--u) * 3); z-index: 2; }
+.upper h1 { grid-column: 1 / 9; margin: 0; font: 900 var(--t5)/.8 var(--cast); text-transform: uppercase; letter-spacing: -.01em; color: #2e2d2b; text-shadow: 0 2px 0 rgba(255,255,255,.35), 0 -2px 1px rgba(0,0,0,.35); }
+.upper h1 small { display: block; font-size: .34em; letter-spacing: .08em; line-height: 1.05; color: var(--ink); margin-bottom: calc(var(--u) * 2); }
+
+/* a cutout: a hole punched through the mass */
+.cut { position: relative; background: var(--void); color: var(--lamp); box-shadow: inset 14px 18px 0 rgba(0,0,0,.55), inset -2px -2px 0 rgba(255,255,255,.08); padding: calc(var(--u) * 3); transition: background-color .5s; }
+.cut::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 90% at 70% 100%, rgba(241,230,207,.16), transparent 60%); opacity: 0; transition: opacity .6s; pointer-events: none; }
+.cut:hover::before, .cut:focus-within::before { opacity: 1; }
+.tonight { grid-column: 9 / 13; align-self: stretch; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
+.tonight .k { font: 600 var(--t-1)/1.2 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: #bdb4a2; }
+.tonight h2 { font: 800 var(--t3)/.95 var(--cast); text-transform: uppercase; margin: calc(var(--u) * 2) 0 var(--u); }
+.tonight p { margin: 0; font-size: var(--t0); color: #d9d0bd; }
+.door { display: inline-block; margin-top: calc(var(--u) * 3); background: var(--accent-2); color: #1b1b1a; font: 800 var(--t1)/1 var(--cast); letter-spacing: .06em; text-transform: uppercase; padding: calc(var(--u) * 2) calc(var(--u) * 3); text-decoration: none; align-self: start; }
+.door:hover { background: #e8623f; }
+
+/* the columns and the cantilever */
+.under { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); height: calc(var(--u) * 9); position: relative; }
+.pilotis { grid-column: 2 / 3; width: calc(var(--u) * 6); justify-self: center; }
+.pilotis.b { grid-column: 6 / 7; }
+.under p { grid-column: 8 / 13; align-self: center; margin: 0; font: 600 var(--t-1)/1.5 var(--sans); letter-spacing: .12em; text-transform: uppercase; }
+.lever { margin-left: calc((100% - var(--u) * 6) / 6 + var(--u) * 3); padding: calc(var(--u) * 5) calc(var(--u) * 6) calc(var(--u) * 5) calc(var(--u) * 5); z-index: 2; }
+.lever h2, .base h2 { margin: 0 0 calc(var(--u) * 3); font: 900 var(--t4)/.9 var(--cast); text-transform: uppercase; }
+.slots { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: calc(var(--u) * 2); }
+.slots .cut { min-height: 250px; display: flex; flex-direction: column; gap: var(--u); }
+.slots time { font: 800 var(--t2)/1 var(--cast); color: var(--lamp); }
+.slots h3 { margin: 0; font: 800 var(--t1)/1.05 var(--cast); text-transform: uppercase; letter-spacing: .02em; }
+.slots p { margin: 0; font-size: 15px; line-height: 1.45; color: #cfc6b3; }
+.slots .price { margin-top: auto; font: 600 var(--t-1)/1 var(--sans); letter-spacing: .1em; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+
+/* stair core and the facts */
+.facts { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); padding: calc(var(--u) * 13) calc(var(--u) * 3) 0; }
+.core { grid-column: 1 / 5; padding: calc(var(--u) * 5); min-height: 420px; }
+.core p { max-width: 38ch; margin: 0 0 calc(var(--u) * 2); }
+.core h2 { font: 900 var(--t4)/.9 var(--cast); text-transform: uppercase; margin: 0 0 calc(var(--u) * 3); }
+.numbers { grid-column: 5 / 13; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-content: end; margin-left: calc(var(--u) * -2); }
+.numbers div { padding: calc(var(--u) * 3); border-left: 2px solid rgba(38,38,38,.4); }
+.numbers b { display: block; font: 900 var(--t4)/.9 var(--cast); font-variant-numeric: tabular-nums; }
+.numbers span { font-size: 15px; }
+
+.base { margin: calc(var(--u) * 10) calc(var(--u) * 3) 0; padding: calc(var(--u) * 5); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: calc(var(--u) * 3); }
+.base > div { grid-column: span 4; }
+.base .counter { grid-column: 5 / 13; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 2); }
+.counter .cut { font-size: 15px; color: #d9d0bd; }
+.counter b { display: block; font: 800 var(--t1)/1.1 var(--cast); color: var(--lamp); text-transform: uppercase; margin-bottom: var(--u); }
+.ground { height: calc(var(--u) * 6); margin-top: 0; background: repeating-linear-gradient(90deg, #7c7a75 0 calc(var(--u) * 12), #75736e calc(var(--u) * 12) calc(var(--u) * 12 + 2px)); }
+footer { padding: calc(var(--u) * 3); font: 600 var(--t-1)/1.5 var(--sans); letter-spacing: .1em; text-transform: uppercase; display: flex; justify-content: space-between; gap: calc(var(--u) * 2); flex-wrap: wrap; background: #7c7a75; color: #1b1b1a; }
+
+@media (max-width: 1100px) {
+  .slots { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .numbers { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  :root { --t5: clamp(58px, 21vw, 120px); --t4: 42px; }
+  .site { padding: calc(var(--u) * 2) calc(var(--u) * 2) 0; }
+  .upper { padding: calc(var(--u) * 3) calc(var(--u) * 2) calc(var(--u) * 2); min-height: 0; row-gap: calc(var(--u) * 3); }
+  .upper h1, .tonight { grid-column: 1 / -1; }
+  .tonight { min-height: 0; }
+  .under { height: calc(var(--u) * 8); }
+  .under p { display: none; }
+  .lever { margin-left: calc(var(--u) * 5); padding: calc(var(--u) * 3) calc(var(--u) * 2); }
+  .slots { grid-template-columns: minmax(0, 1fr); }
+  .slots .cut { min-height: 0; }
+  .facts { padding: calc(var(--u) * 8) calc(var(--u) * 2) 0; }
+  .core, .numbers { grid-column: 1 / -1; margin-left: 0; }
+  .core { min-height: 0; padding: calc(var(--u) * 3); }
+  .base { margin: calc(var(--u) * 6) calc(var(--u) * 2) 0; padding: calc(var(--u) * 3); }
+  .base > div, .base .counter { grid-column: 1 / -1; }
+  .base .counter { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mass { transition: box-shadow .2s linear; }
+}
+</style>
+</head>
+<body>
+<div class="site">
+  <header class="plaque">
+    <span>Aldmoor Civic Concert Hall · Cast 1969–1971</span>
+    <nav aria-label="Hall"><a href="#season">Season</a><a href="#building">Building</a><a href="#tickets">Box office</a></nav>
+  </header>
+
+  <section class="upper conc mass" aria-labelledby="name">
+    <h1 id="name"><small>Aldmoor</small>Concert<br>Hall</h1>
+    <div class="cut tonight">
+      <div>
+        <span class="k">Tonight · Main Hall · 19:30</span>
+        <h2>Mahler Six</h2>
+        <p>Aldmoor Philharmonic, conducted by Ines Varga. The hammer falls twice, and the concrete hears it.</p>
+      </div>
+      <a class="door" href="#tickets">214 seats left</a>
+    </div>
+  </section>
+
+  <div class="under" aria-hidden="true">
+    <div class="pilotis conc shade"></div>
+    <div class="pilotis conc shade b"></div>
+  </div>
+</div>
+
+<section class="lever conc mass" id="season" aria-labelledby="season-h">
+  <h2 id="season-h">Season 26/27</h2>
+  <div class="slots">
+    <article class="cut" tabindex="0"><time datetime="2026-10-03">03 Oct</time><h3>Mahler 6</h3><p>Aldmoor Philharmonic. Ines Varga, conductor.</p><span class="price">£14–£58</span></article>
+    <article class="cut" tabindex="0"><time datetime="2026-10-17">17 Oct</time><h3>Xenakis in the Foyer</h3><p>Percussion ensemble Rohbau, placed on all four stair landings.</p><span class="price">£12</span></article>
+    <article class="cut" tabindex="0"><time datetime="2026-11-07">07 Nov</time><h3>Bruckner 8</h3><p>Seventy-nine minutes. The long reverb was built for this.</p><span class="price">£14–£58</span></article>
+    <article class="cut" tabindex="0"><time datetime="2026-11-28">28 Nov</time><h3>Organ Recital</h3><p>Tomasz Pelc plays the 1972 Harwell organ, 4,212 pipes.</p><span class="price">£10</span></article>
+    <article class="cut" tabindex="0"><time datetime="2026-12-12">12 Dec</time><h3>Messiah, Sung Along</h3><p>Scores on loan at the cloakroom. Bring a pencil.</p><span class="price">£8–£22</span></article>
+    <article class="cut" tabindex="0"><time datetime="2027-01-23">23 Jan</time><h3>Pärt &amp; Górecki</h3><p>Aldmoor Chamber Choir. No interval. No applause between.</p><span class="price">£16–£40</span></article>
+  </div>
+</section>
+
+<section class="facts" id="building" aria-labelledby="building-h">
+  <div class="core conc shade mass">
+    <h2 id="building-h">The Pour</h2>
+    <p>The hall was cast in place between March 1969 and June 1971, in lifts of 1.2 metres, against rough-sawn Douglas fir boards. Every board left its grain in the wall. You can still find the knots.</p>
+    <p>Ove Karsten wanted a room with no decoration except the way it was made. The only paint in the building is the red on the doors.</p>
+  </div>
+  <div class="numbers">
+    <div><b>1,840</b><span>seats in the main hall, none more than 34 m from the stage</span></div>
+    <div><b>2.1 s</b><span>mid-frequency reverberation, occupied</span></div>
+    <div><b>11,400</b><span>cubic metres of concrete, poured in 212 lifts</span></div>
+    <div><b>9.6 m</b><span>cantilever of the foyer over Tannery Street</span></div>
+  </div>
+</section>
+
+<section class="base conc mass" id="tickets" aria-labelledby="tickets-h">
+  <div>
+    <h2 id="tickets-h">Box Office</h2>
+    <p>Level 0, under the cantilever. Open Monday to Saturday, 10:00 to 18:00, and until the downbeat on concert nights.</p>
+  </div>
+  <div class="counter">
+    <div class="cut"><b>Window 1</b>Tickets for the season. Students and under-26s pay £6 for any seat left at 18:00.</div>
+    <div class="cut"><b>Window 2</b>Returns and exchanges. Up to 48 hours before the concert, no fee.</div>
+    <div class="cut"><b>Telephone</b>0117 440 2190. Hearing loop in all windows and the Main Hall.</div>
+  </div>
+</section>
+<div class="ground" aria-hidden="true"></div>
+<footer><span>Tannery Street, Aldmoor AL4 7QD</span><span>Karsten &amp; Partners, architects · Grade II* listed 1998</span></footer>
+
+<script>
+(() => {
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  // the sun moves west as you walk down the building: cast shadows swing with it
+  const root = document.documentElement;
+  let queued = false;
+  const set = () => {
+    queued = false;
+    const max = document.documentElement.scrollHeight - innerHeight || 1;
+    const p = Math.min(1, scrollY / max);
+    root.style.setProperty("--sx", Math.round(18 - p * 40) + "px");
+  };
+  addEventListener("scroll", () => { if (!queued && !document.hidden) { queued = true; requestAnimationFrame(set); } }, { passive: true });
+  set();
+})();
+</script>
+</body>
+</html>

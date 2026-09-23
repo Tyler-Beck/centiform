@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celadon Glaze · Centiform</title>
+<style>
+/* @fonts: Hahmlet:400,600:block; Gothic A1:400,600:swap */
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:400;font-display:block;src:url(fonts/hahmlet-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:400;font-display:block;src:url(fonts/hahmlet-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:400;font-display:block;src:url(fonts/hahmlet-117-400-normal.woff2) format("woff2");unicode-range:U+d,U+48,U+7c,U+ac10,U+ac15,U+ac74,U+ac80,U+ac83,U+acc4,U+ad11,U+ad50,U+ad6d,U+adfc,U+ae00,U+ae08,U+ae4c,U+b0a8,U+b124,U+b144,U+b178,U+b274,U+b2a5,U+b2e8,U+b2f9,U+b354,U+b370,U+b418,U+b41c,U+b4f1,U+b514,U+b798,U+b808,U+b824-b825,U+b8cc,U+b978,U+b9d0,U+b9e4,U+baa9,U+bb3c,U+bc18,U+bc1c,U+bc30,U+bc84,U+bcf5,U+bcf8,U+bd84,U+be0c,U+be14,U+c0b0,U+c0c9,U+c0dd,U+c124,U+c2dd,U+c2e4,U+c2ec,U+c54c,U+c57c-c57d,U+c591,U+c5c5-c5c6,U+c5ed,U+c608,U+c640,U+c6b8,U+c6d4,U+c784,U+c7ac,U+c800-c801,U+c9c1,U+c9d1,U+cc28,U+cc98,U+cc9c,U+ccad,U+cd5c,U+cd94,U+cd9c,U+cde8,U+ce68,U+cf54,U+d0dc,U+d14c,U+d1a0,U+d1b5,U+d2f0,U+d30c,U+d310,U+d398,U+d45c,U+d50c,U+d53c,U+d560,U+d568,U+d589,U+d604,U+d6c4,U+d788;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:400;font-display:block;src:url(fonts/hahmlet-118-400-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:600;font-display:block;src:url(fonts/hahmlet-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:600;font-display:block;src:url(fonts/hahmlet-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:600;font-display:block;src:url(fonts/hahmlet-117-600-normal.woff2) format("woff2");unicode-range:U+d,U+48,U+7c,U+ac10,U+ac15,U+ac74,U+ac80,U+ac83,U+acc4,U+ad11,U+ad50,U+ad6d,U+adfc,U+ae00,U+ae08,U+ae4c,U+b0a8,U+b124,U+b144,U+b178,U+b274,U+b2a5,U+b2e8,U+b2f9,U+b354,U+b370,U+b418,U+b41c,U+b4f1,U+b514,U+b798,U+b808,U+b824-b825,U+b8cc,U+b978,U+b9d0,U+b9e4,U+baa9,U+bb3c,U+bc18,U+bc1c,U+bc30,U+bc84,U+bcf5,U+bcf8,U+bd84,U+be0c,U+be14,U+c0b0,U+c0c9,U+c0dd,U+c124,U+c2dd,U+c2e4,U+c2ec,U+c54c,U+c57c-c57d,U+c591,U+c5c5-c5c6,U+c5ed,U+c608,U+c640,U+c6b8,U+c6d4,U+c784,U+c7ac,U+c800-c801,U+c9c1,U+c9d1,U+cc28,U+cc98,U+cc9c,U+ccad,U+cd5c,U+cd94,U+cd9c,U+cde8,U+ce68,U+cf54,U+d0dc,U+d14c,U+d1a0,U+d1b5,U+d2f0,U+d30c,U+d310,U+d398,U+d45c,U+d50c,U+d53c,U+d560,U+d568,U+d589,U+d604,U+d6c4,U+d788;}
+@font-face{font-family:"Hahmlet";font-style:normal;font-weight:600;font-display:block;src:url(fonts/hahmlet-118-600-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gothic-a1-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gothic-a1-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gothic-a1-117-400-normal.woff2) format("woff2");unicode-range:U+d,U+48,U+7c,U+ac10,U+ac15,U+ac74,U+ac80,U+ac83,U+acc4,U+ad11,U+ad50,U+ad6d,U+adfc,U+ae00,U+ae08,U+ae4c,U+b0a8,U+b124,U+b144,U+b178,U+b274,U+b2a5,U+b2e8,U+b2f9,U+b354,U+b370,U+b418,U+b41c,U+b4f1,U+b514,U+b798,U+b808,U+b824-b825,U+b8cc,U+b978,U+b9d0,U+b9e4,U+baa9,U+bb3c,U+bc18,U+bc1c,U+bc30,U+bc84,U+bcf5,U+bcf8,U+bd84,U+be0c,U+be14,U+c0b0,U+c0c9,U+c0dd,U+c124,U+c2dd,U+c2e4,U+c2ec,U+c54c,U+c57c-c57d,U+c591,U+c5c5-c5c6,U+c5ed,U+c608,U+c640,U+c6b8,U+c6d4,U+c784,U+c7ac,U+c800-c801,U+c9c1,U+c9d1,U+cc28,U+cc98,U+cc9c,U+ccad,U+cd5c,U+cd94,U+cd9c,U+cde8,U+ce68,U+cf54,U+d0dc,U+d14c,U+d1a0,U+d1b5,U+d2f0,U+d30c,U+d310,U+d398,U+d45c,U+d50c,U+d53c,U+d560,U+d568,U+d589,U+d604,U+d6c4,U+d788;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gothic-a1-118-400-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/gothic-a1-latin-ext-600-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/gothic-a1-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/gothic-a1-117-600-normal.woff2) format("woff2");unicode-range:U+d,U+48,U+7c,U+ac10,U+ac15,U+ac74,U+ac80,U+ac83,U+acc4,U+ad11,U+ad50,U+ad6d,U+adfc,U+ae00,U+ae08,U+ae4c,U+b0a8,U+b124,U+b144,U+b178,U+b274,U+b2a5,U+b2e8,U+b2f9,U+b354,U+b370,U+b418,U+b41c,U+b4f1,U+b514,U+b798,U+b808,U+b824-b825,U+b8cc,U+b978,U+b9d0,U+b9e4,U+baa9,U+bb3c,U+bc18,U+bc1c,U+bc30,U+bc84,U+bcf5,U+bcf8,U+bd84,U+be0c,U+be14,U+c0b0,U+c0c9,U+c0dd,U+c124,U+c2dd,U+c2e4,U+c2ec,U+c54c,U+c57c-c57d,U+c591,U+c5c5-c5c6,U+c5ed,U+c608,U+c640,U+c6b8,U+c6d4,U+c784,U+c7ac,U+c800-c801,U+c9c1,U+c9d1,U+cc28,U+cc98,U+cc9c,U+ccad,U+cd5c,U+cd94,U+cd9c,U+cde8,U+ce68,U+cf54,U+d0dc,U+d14c,U+d1a0,U+d1b5,U+d2f0,U+d30c,U+d310,U+d398,U+d45c,U+d50c,U+d53c,U+d560,U+d568,U+d589,U+d604,U+d6c4,U+d788;}
+@font-face{font-family:"Gothic A1";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/gothic-a1-118-600-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+/* @fonts-end */
+:root {
+  --bg: #dfe8df;          /* the room, lit through paper */
+  --ink: #26352d;         /* iron slip, the black of the inlay */
+  --accent-1: #8fb29a;    /* the glaze, kingfisher-jade */
+  --accent-2: #f6f3ea;    /* white slip, the inlay */
+  --glaze-hi: #b9d1bf;
+  --glaze-lo: #6f9580;
+  --u: 8px;
+  /* scale: 1.25 on 17px */
+  --t-1: 13.6px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: clamp(34px, 3.8vw, 58px);
+  --serif: "Hahmlet", serif;
+  --sans: "Gothic A1", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: radial-gradient(ellipse at 50% 20%, #eef3ee, var(--bg) 60%, #d3ded4); font: 400 var(--t0)/1.65 var(--sans); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+nav.top { display: flex; justify-content: space-between; align-items: center; padding: calc(var(--u) * 3) calc(var(--u) * 5); font-size: var(--t-1); letter-spacing: .14em; flex-wrap: wrap; gap: var(--u); }
+nav.top b { font: 600 var(--t1)/1 var(--serif); letter-spacing: .06em; }
+nav.top a { text-decoration: none; margin-left: calc(var(--u) * 3); }
+/* a vessel: the silhouette is the container, the text lives in its belly */
+.vessel { position: relative; margin: 0 auto; }
+.vessel > svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.vessel .belly { position: absolute; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+.hero { width: min(560px, 86vw); aspect-ratio: 400 / 600; margin-top: calc(var(--u) * 1); }
+.hero .belly { left: 16%; right: 16%; top: 24%; bottom: 36%; }
+.hero .ko { font: 600 var(--t3)/1 var(--serif); letter-spacing: .3em; margin-bottom: var(--u); }
+.hero h1 { margin: 0; font: 600 var(--t4)/1 var(--serif); }
+.hero p { margin: calc(var(--u) * 1.5) 0 0; font-size: var(--t0); max-width: 26ch; }
+.shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 6); align-items: end; padding: calc(var(--u) * 10) calc(var(--u) * 5) 0; max-width: 1500px; margin: 0 auto; }
+.shelf .vessel { width: 100%; }
+.bowl { aspect-ratio: 500 / 320; }
+.bowl .belly { left: 12%; right: 12%; top: 16%; bottom: 30%; }
+.jar { aspect-ratio: 500 / 520; }
+.jar .belly { left: 17%; right: 17%; top: 22%; bottom: 20%; }
+.gourd { aspect-ratio: 340 / 560; width: 78% !important; }
+.gourd .belly { left: 14%; right: 14%; top: 50%; bottom: 12%; }
+.belly h2 { margin: 0 0 6px; font: 600 var(--t2)/1.1 var(--serif); }
+.belly p { margin: 0; font-size: 15.5px; line-height: 1.55; }
+.belly dl { margin: 6px 0 0; font-size: var(--t-1); display: grid; grid-template-columns: auto auto; gap: 0 12px; justify-content: center; }
+.belly dt { font-weight: 600; }
+.belly dd { margin: 0; }
+.plinth { height: 28px; background: linear-gradient(#cfd9d0, #b8c6ba); margin: -6px calc(var(--u) * 3) 0; border-radius: 2px; box-shadow: 0 12px 20px -12px rgba(38,53,45,.5); }
+footer { text-align: center; padding: calc(var(--u) * 6) calc(var(--u) * 3); font-size: var(--t-1); letter-spacing: .1em; }
+.crack path { fill: none; stroke: #3d5a48; stroke-width: .7; opacity: .35; }
+@media (prefers-reduced-motion: no-preference) {
+  .crack path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: ping 3s ease-out forwards; animation-delay: var(--d, 0s); }
+  @keyframes ping { to { stroke-dashoffset: 0; } }
+}
+@media (max-width: 900px) {
+  .shelf { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 6) calc(var(--u) * 3) 0; gap: calc(var(--u) * 8); }
+  .shelf .vessel { width: min(420px, 100%); }
+  .gourd { width: min(330px, 86%) !important; }
+  .hero .belly { top: 22%; }
+  .hero p { font-size: 15px; }
+  nav.top { padding: calc(var(--u) * 2); }
+  nav.top a { margin-left: calc(var(--u) * 1.5); }
+}
+</style>
+</head>
+<body>
+<nav class="top" aria-label="Studio"><b>Ondam Studio</b><span><a href="#glaze">Glaze</a><a href="#class">Classes</a><a href="#visit">Visit</a></span></nav>
+<main>
+  <header class="vessel hero" data-v="maebyeong">
+    <div class="belly"><div class="ko" lang="ko">청자</div><h1>Celadon from Icheon</h1><p>Inlaid stoneware in the Goryeo manner, thrown and carved by Yoon Seo-hee and fired twice in a wood kiln.</p></div>
+  </header>
+  <div class="plinth" style="width: min(360px, 60vw); margin: -8px auto 0" aria-hidden="true"></div>
+  <section class="shelf">
+    <article class="vessel bowl" id="glaze" data-v="bowl"><div class="belly"><h2>The Glaze</h2><p>A little iron in the ash glaze, fired in reduction at 1,250 °C. Too much air and it turns olive; too little and it greys.</p></div></article>
+    <article class="vessel jar" id="class" data-v="jar"><div class="belly"><h2>Sanggam Class</h2><p>Carve a crane into leather-hard clay, fill it with white and black slip, scrape back. Five Saturdays.</p><dl><dt>Fee</dt><dd>₩420,000</dd><dt>Firing</dt><dd>June kiln</dd></dl></div></article>
+    <article class="vessel gourd" id="visit" data-v="gourd"><div class="belly"><h2>Visit</h2><p>Sindun-myeon, Icheon. Open Thursday to Sunday, 10 to 6. Kiln openings are announced a week before.</p></div></article>
+  </section>
+  <div class="plinth" style="max-width: 1400px; margin: -4px auto 0" aria-hidden="true"></div>
+</main>
+<footer>Ondam Studio · 44 Gyeongchung-daero, Sindun-myeon, Icheon · The crackle keeps growing for a hundred years; that is not a fault</footer>
+<script>
+(() => {
+  const V = {
+    maebyeong: ["0 0 400 600", "M185 20 H215 V38 C215 60 250 70 300 100 C370 140 380 220 360 300 C340 400 290 500 275 580 H125 C110 500 60 400 40 300 C20 220 30 140 100 100 C150 70 185 60 185 38Z", "M178 12 H222 V24 H178Z"],
+    bowl: ["0 0 500 320", "M20 30 H480 C470 170 370 250 300 262 V300 H200 V262 C130 250 30 170 20 30Z", "M16 22 H484 V32 H16Z"],
+    jar: ["0 0 500 520", "M190 20 H310 V56 C420 80 480 170 474 270 C468 390 380 480 300 490 V510 H200 V490 C120 480 32 390 26 270 C20 170 80 80 190 56Z", "M182 12 H318 V24 H182Z"],
+    gourd: ["0 0 340 560", "M150 18 H190 V60 C250 70 270 150 230 200 C300 240 330 330 318 410 C300 520 230 546 170 546 C110 546 40 520 22 410 C10 330 40 240 110 200 C70 150 90 70 150 60Z", "M144 10 H196 V22 H144Z"]
+  };
+  let seed = 66; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const crane = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})" fill="#f6f3ea" stroke="#26352d" stroke-width="1.4"><path d="M0 0 C-20 -10 -40 -30 -60 -26 C-40 -16 -24 -4 -10 4 Z"/><path d="M0 0 C20 -14 44 -24 66 -18 C46 -8 26 2 8 6Z"/><path d="M-8 4 C0 10 8 14 30 12 L40 8" fill="none"/><circle cx="40" cy="8" r="2" fill="#26352d"/><path d="M-6 8 L-24 22" fill="none"/></g>`;
+  const cloud = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})" fill="none" stroke="#f6f3ea" stroke-width="3"><path d="M0 0 q8 -10 16 0 q8 -10 16 0 q-4 8 -12 6 M-4 2 q-6 6 0 10" /></g>`;
+  document.querySelectorAll(".vessel").forEach((el, n) => {
+    const [vb, body, lip] = V[el.dataset.v]; const [, , W, H] = vb.split(" ").map(Number);
+    let crack = ""; for (let i = 0; i < 26; i++) { let x = rnd() * W, y = H * .12 + rnd() * H * .8, d = `M${x.toFixed(0)} ${y.toFixed(0)}`; for (let k = 0; k < 5; k++) { x += (rnd() - .5) * 70; y += (rnd() - .5) * 70; d += ` L${x.toFixed(0)} ${y.toFixed(0)}`; } crack += `<path pathLength="1" style="--d:${(rnd() * 2.5).toFixed(2)}s" d="${d}"/>`; }
+    let inlay = "";
+    if (el.dataset.v === "maebyeong") inlay = crane(100, 160, .9) + crane(300, 470, .7) + cloud(260, 150, 1.2) + cloud(90, 450, 1) + `<path d="M60 205 H340" stroke="#f6f3ea" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/><path d="M110 520 H290" stroke="#26352d" stroke-width="1.5"/>`;
+    if (el.dataset.v === "bowl") inlay = `<path d="M40 60 H460" stroke="#f6f3ea" stroke-width="3" stroke-dasharray="10 6"/>` + cloud(80, 240, .8) + cloud(390, 238, .8);
+    if (el.dataset.v === "jar") inlay = crane(110, 90, .6) + crane(380, 440, .6) + `<path d="M60 100 Q250 70 440 100" stroke="#f6f3ea" stroke-width="2" fill="none"/>`;
+    if (el.dataset.v === "gourd") inlay = cloud(140, 110, .9) + crane(170, 250, .55);
+    const svg = `<svg viewBox="${vb}" aria-hidden="true"><defs><radialGradient id="gl${n}" cx=".38" cy=".3" r=".8"><stop offset="0" stop-color="#b9d1bf"/><stop offset=".45" stop-color="#8fb29a"/><stop offset="1" stop-color="#5f8670"/></radialGradient><clipPath id="cp${n}"><path d="${body}"/></clipPath></defs>
+      <ellipse cx="${W / 2}" cy="${H - 6}" rx="${W * .34}" ry="10" fill="rgba(38,53,45,.2)"/>
+      <path d="${body}" fill="url(#gl${n})"/><g clip-path="url(#cp${n})">${inlay}<g class="crack">${crack}</g><ellipse cx="${W * .3}" cy="${H * .28}" rx="${W * .08}" ry="${H * .14}" fill="#fff" opacity=".22"/></g>
+      <path d="${body}" fill="none" stroke="#4f7360" stroke-width="1.5"/><path d="${lip}" fill="#7da58c" stroke="#4f7360"/></svg>`;
+    el.insertAdjacentHTML("afterbegin", svg);
+  });
+})();
+</script>
+</body>
+</html>

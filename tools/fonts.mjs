@@ -97,14 +97,20 @@ async function syncDesign(dir) {
       const css = await get(url);
       if (!css) throw new Error(`no Fontsource css at ${url}`);
       const pkg = variable ? `@fontsource-variable/${id}` : `@fontsource/${id}`;
-      const faces = parseCss(css).filter((f) => {
-        if (flag === "latin" && !/-latin(-ext)?-/.test(f.file)) return false;
-        if (!f.range) return true;
-        return parseRange(f.range).some(([a, b]) => {
-          for (const c of used) if (c >= a && c <= b) return true;
-          return false;
+      // Named subsets (latin, latin-ext, ...) first, numbered CJK slices last; a file is kept
+      // only when it covers a used character that no earlier file already covers.
+      const covered = new Set();
+      const faces = parseCss(css)
+        .sort((a, b) => /-\d+-\d+-/.test(a.file) - /-\d+-\d+-/.test(b.file))
+        .filter((f) => {
+          if (flag === "latin" && !/-latin(-ext)?-/.test(f.file)) return false;
+          if (!f.range) return true;
+          const hit = [];
+          for (const [a, b] of parseRange(f.range)) for (const c of used) if (c >= a && c <= b) hit.push(c);
+          if (!hit.some((c) => !covered.has(c))) return false;
+          hit.forEach((c) => covered.add(c));
+          return true;
         });
-      });
       if (!faces.length) throw new Error(`${family} ${w}: no file covers the used text`);
       for (const f of faces) {
         const dest = path.join(fontsDir, f.file);

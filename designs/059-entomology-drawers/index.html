@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Entomology Drawers · Centiform</title>
+<style>
+/* @fonts: Gilda Display:400:block; Petrona:400,400i,600:swap */
+@font-face{font-family:"Gilda Display";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gilda-display-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Petrona";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/petrona-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Petrona";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/petrona-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Petrona";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/petrona-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #e8dcc3;          /* museum store room, tawny */
+  --ink: #2a2016;         /* label ink */
+  --accent-1: #7a2e1f;    /* mahogany and the red type-specimen label */
+  --accent-2: #3f6b4a;    /* tiger-beetle green */
+  --wood: #5b2a1a;
+  --tray: #f6f1e4;
+  --foam: #efe7d3;
+  --u: 8px;
+  /* scale: 1.25 on 17px */
+  --t-2: 10px; --t-1: 13.6px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: clamp(40px, 4.6vw, 66px);
+  --disp: "Gilda Display", Georgia, serif;
+  --text: "Petrona", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+header { display: flex; justify-content: space-between; align-items: end; gap: calc(var(--u) * 3); flex-wrap: wrap; padding: calc(var(--u) * 4) calc(var(--u) * 5) calc(var(--u) * 2); }
+h1 { margin: 0; font: 400 var(--t4)/1 var(--disp); }
+h1 small { display: block; font: 400 var(--t-1)/1.4 var(--text); letter-spacing: .16em; text-transform: uppercase; margin-bottom: var(--u); }
+.cab { display: flex; gap: 6px; }
+/* drawer fronts in the cabinet: brass label holder and a pull */
+.cab button { width: 140px; padding: 10px 10px 18px; background: linear-gradient(#6a321f, #4e2415); border: 2px solid #3a190e; color: #f3e6c8; cursor: pointer; position: relative; font: 400 var(--t-1)/1.2 var(--text); text-align: center; }
+.cab button span { display: block; background: #efe2c4; color: var(--ink); border: 3px solid #b88a3c; padding: 3px; font-variant-numeric: tabular-nums; }
+.cab button::after { content: ""; position: absolute; left: 50%; bottom: 5px; width: 34px; height: 7px; margin-left: -17px; border-radius: 4px; background: linear-gradient(#e0b35a, #8c6424); }
+.cab button[aria-pressed="true"] { outline: 3px solid var(--accent-2); outline-offset: 2px; }
+.room { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: calc(var(--u) * 4); padding: calc(var(--u) * 2) calc(var(--u) * 5) calc(var(--u) * 6); }
+/* the drawer: mahogany frame, glass lid, unit trays inside */
+.drawer { position: relative; padding: 22px; background: linear-gradient(135deg, #6a321f, var(--wood) 40%, #4a2114); box-shadow: inset 0 0 0 2px #3a190e, 0 22px 30px -18px rgba(42,32,22,.6); }
+.drawer .in { position: relative; background: #d9ccb0; padding: 10px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: minmax(110px, auto); grid-auto-flow: dense; gap: 8px; min-height: 60vh; }
+.drawer .glass { position: absolute; inset: 22px; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.28) 0 8%, transparent 8% 30%, rgba(255,255,255,.14) 30% 34%, transparent 34%); z-index: 2; }
+.tray { all: unset; box-sizing: border-box; position: relative; grid-column: span var(--c, 1); grid-row: span var(--r, 1); background: var(--foam); border: 1px solid #b9ab8c; box-shadow: inset 0 0 0 5px var(--tray), inset 0 0 0 6px #cdbf9f; display: grid; place-items: center; cursor: pointer; padding: 10px; }
+.tray[aria-pressed="true"] { box-shadow: inset 0 0 0 5px var(--tray), inset 0 0 0 7px var(--accent-2); }
+.tray .hdr { position: absolute; top: 8px; left: 10px; right: 10px; background: #fffdf6; border: 1px solid #cdbf9f; font: italic 400 var(--t-2)/1.3 var(--text); padding: 1px 4px; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tray svg { width: 100%; height: 100%; margin-top: 14px; }
+.pin { stroke: #7d7d7d; stroke-width: 1; }
+.card { background: var(--tray); border: 1px solid #b9ab8c; padding: calc(var(--u) * 2.5); position: sticky; top: calc(var(--u) * 2); align-self: start; }
+.card h2 { margin: 0; font: 400 var(--t3)/1 var(--disp); }
+.card .sci { font-style: italic; color: var(--accent-1); margin: 4px 0 calc(var(--u) * 2); }
+.card svg.big { width: 100%; height: 230px; display: block; background: var(--foam); border: 1px solid #cdbf9f; }
+.labels { margin: calc(var(--u) * 2) 0; display: grid; gap: 6px; }
+.labels div { background: #fffdf6; border: 1px solid #b9ab8c; font: 400 12.5px/1.35 var(--text); padding: 5px 8px; width: 90%; box-shadow: 1px 1px 0 #cdbf9f; }
+.labels div:nth-child(2) { margin-left: 5%; }
+.labels div.type { background: #f3d7cf; border-color: var(--accent-1); color: var(--accent-1); font-weight: 600; }
+.card p { margin: 0; font-size: 16px; }
+footer { padding: 0 calc(var(--u) * 5) calc(var(--u) * 4); font-size: var(--t-1); }
+@media (prefers-reduced-motion: no-preference) {
+  .drawer { animation: pull .9s cubic-bezier(.2,.8,.2,1) both; }
+  .drawer.again { animation: pull2 .9s cubic-bezier(.2,.8,.2,1) both; }
+  @keyframes pull { from { transform: translateY(-40px) scaleY(.96); opacity: .3; } }
+  @keyframes pull2 { from { transform: translateY(-40px) scaleY(.96); opacity: .3; } }
+}
+@media (max-width: 1000px) {
+  .room { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); }
+  .drawer { padding: 12px; }
+  .drawer .glass { inset: 12px; }
+  .drawer .in { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tray { grid-column: span 1; grid-row: span 1; }
+  header { padding: calc(var(--u) * 3) calc(var(--u) * 2) calc(var(--u) * 2); }
+  .cab button { width: 104px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1><small>Rennard Museum of Natural History · Entomology store, cabinet 7</small>The Drawers</h1>
+  <nav class="cab" aria-label="Drawers" id="cab"></nav>
+</header>
+<main class="room">
+  <section class="drawer" id="drawer" aria-label="Drawer contents"><div class="in" id="in"></div><div class="glass" aria-hidden="true"></div></section>
+  <aside class="card" aria-live="polite" id="card"></aside>
+</main>
+<footer>Drawers may be opened by appointment, Tuesdays and Thursdays. Gloves are provided. Please do not breathe on the moths.</footer>
+<script>
+(() => {
+  const beetle = (c, s = 1, long) => `<g transform="scale(${s})"><g stroke="#2a2016" stroke-width="1.6" fill="none"><path d="M-8 -10 L-22 -20 M8 -10 L22 -20 M-9 2 L-24 4 M9 2 L24 4 M-8 14 L-20 30 M8 14 L20 30"/><path d="M-4 -26 Q-10 -40 -16 ${long ? -62 : -44} M4 -26 Q10 -40 16 ${long ? -62 : -44}"/></g><ellipse cy="-24" rx="5" ry="5" fill="#2a2016"/><path d="M-9 -20 Q0 -24 9 -20 L10 -12 Q0 -9 -10 -12Z" fill="${c}" stroke="#2a2016"/><path d="M-11 -10 Q0 -13 11 -10 Q14 14 0 30 Q-14 14 -11 -10Z" fill="${c}" stroke="#2a2016"/><path d="M0 -12 V29" stroke="#2a2016" stroke-width=".8"/><path d="M-6 -4 Q-4 8 -3 20" stroke="rgba(255,255,255,.35)" stroke-width="1.5" fill="none"/></g>`;
+  const moth = (c1, c2, s = 1) => `<g transform="scale(${s})"><path d="M0 -14 C-20 -34 -52 -30 -50 -10 C-48 4 -18 2 0 -2Z M0 -14 C20 -34 52 -30 50 -10 C48 4 18 2 0 -2Z" fill="${c1}" stroke="#2a2016" stroke-width="1"/><path d="M0 -2 C-16 4 -34 18 -24 26 C-14 32 -4 14 0 6Z M0 -2 C16 4 34 18 24 26 C14 32 4 14 0 6Z" fill="${c2}" stroke="#2a2016" stroke-width="1"/><circle cx="-30" cy="-14" r="5" fill="#2a2016" opacity=".5"/><circle cx="30" cy="-14" r="5" fill="#2a2016" opacity=".5"/><ellipse rx="3.5" ry="16" cy="0" fill="#3a2a1a"/><path d="M-2 -15 Q-8 -28 -14 -30 M2 -15 Q8 -28 14 -30" stroke="#2a2016" fill="none"/></g>`;
+  const bee = (c, s = 1) => `<g transform="scale(${s})"><path d="M-2 -8 C-26 -30 -40 -16 -30 -6 C-22 2 -8 -2 -2 -4Z M2 -8 C26 -30 40 -16 30 -6 C22 2 8 -2 2 -4Z" fill="rgba(220,230,235,.8)" stroke="#2a2016" stroke-width=".8"/><circle cy="-16" r="6" fill="#2a2016"/><ellipse cy="-4" rx="7" ry="7" fill="#5a3a1a"/><ellipse cy="14" rx="9" ry="14" fill="${c}" stroke="#2a2016"/><path d="M-8 8 H8 M-9 14 H9 M-8 20 H8" stroke="#2a2016" stroke-width="2.5"/><path d="M-3 -21 Q-8 -30 -12 -30 M3 -21 Q8 -30 12 -30" stroke="#2a2016" fill="none"/></g>`;
+  const D = {
+    "114": { t: "Coleoptera: Carabidae", sp: [
+      { n: "Green tiger beetle", l: "Cicindela campestris", f: (s) => beetle("#3f6b4a", s), c: 2, r: 2, lab: ["GB: Surrey, Chobham Common, heathland. 12.v.1931", "leg. A. E. Rennard", "det. H. Dowsett 1932"], type: false, note: "Fast, sunlit, and all jaws. Twenty-eight specimens in this drawer, all from the same heath before it was ploughed." },
+      { n: "Violet ground beetle", l: "Carabus violaceus", f: (s) => beetle("#3e2f5a", s), c: 1, r: 2, lab: ["GB: Kent, Bedgebury, under log. 3.iv.1954", "leg. M. Pell"], note: "Night hunter; the violet edge only shows in lamplight." },
+      { n: "Bombardier beetle", l: "Brachinus crepitans", f: (s) => beetle("#b4552d", s * .8), c: 1, r: 1, lab: ["GB: Dorset, Portland, chalk. 9.vi.1962", "leg. R. Oakes"], note: "Fires boiling chemicals from its tail with an audible pop." },
+      { n: "Churchyard beetle", l: "Blaps mucronata", f: (s) => beetle("#1f1a14", s), c: 1, r: 1, lab: ["GB: London, Bow cellar. 22.x.1897", "leg. anon."], note: "From a cellar in Bow, 1897. The label is written on the back of a tram ticket." },
+      { n: "Longhorn, Rhagium", l: "Rhagium mordax", f: (s) => beetle("#8a7650", s * .9, true), c: 2, r: 1, lab: ["GB: Hants, New Forest, oak stump. 18.v.1976", "leg. J. Hale", "HOLOTYPE var. hale-i"], type: true, note: "The only specimen of a colour form that Mr Hale described and nobody has seen since." },
+      { n: "Oil beetle", l: "Meloe proscarabaeus", f: (s) => beetle("#1d2a40", s * 1.1), c: 1, r: 1, lab: ["GB: Cornwall, Lizard, cliff path. 1.iv.2003", "leg. S. Rennard"], note: "Leaks yellow oil when handled. It still stains the foam." } ] },
+    "212": { t: "Lepidoptera: Noctuidae", sp: [
+      { n: "Red underwing", l: "Catocala nupta", f: (s) => moth("#8a8274", "#7a2e1f", s), c: 2, r: 2, lab: ["GB: Essex, Epping, sugar. 30.viii.1948", "leg. D. Frame"], note: "Grey above, a flash of red below when it flies." },
+      { n: "Large yellow underwing", l: "Noctua pronuba", f: (s) => moth("#8f6b45", "#e0a82e", s), c: 2, r: 1, lab: ["GB: London, Kew, MV light. 7.vii.1986"], note: "The commonest moth at any light trap in July." },
+      { n: "Merveille du jour", l: "Griposia aprilina", f: (s) => moth("#a7c29a", "#9aa08a", s), c: 1, r: 1, lab: ["GB: Kent, Blean Woods. 14.x.1959"], note: "Lichen-green, invisible on oak bark." },
+      { n: "Angle shades", l: "Phlogophora meticulosa", f: (s) => moth("#9b7a6a", "#c9b39a", s), c: 1, r: 2, lab: ["GB: Sussex, Lewes garden. 2.xi.2011", "leg. T. Birch"], note: "Wings folded like a dry leaf when resting." },
+      { n: "Burnished brass", l: "Diachrysia chrysitis", f: (s) => moth("#b39a45", "#8f7f5a", s), c: 2, r: 1, lab: ["GB: Norfolk, Wheatfen. 19.vi.1970"], note: "Two bands of metallic brass that catch the light." } ] },
+    "305": { t: "Hymenoptera: Apidae", sp: [
+      { n: "Tawny mining bee", l: "Andrena fulva", f: (s) => bee("#c46a2a", s), c: 1, r: 1, lab: ["GB: Kent, garden lawn. 14.iv.2019"], note: "Nests in lawns; leaves little volcanoes of soil." },
+      { n: "Great yellow bumblebee", l: "Bombus distinguendus", f: (s) => bee("#d9b23a", s * 1.2), c: 2, r: 2, lab: ["GB: Orkney, machair. 3.viii.1935", "leg. A. E. Rennard", "Now absent from mainland"], note: "Once found across Britain; now only on the machair of the far north." },
+      { n: "Ivy bee", l: "Colletes hederae", f: (s) => bee("#b88a3c", s), c: 1, r: 1, lab: ["GB: Dorset, Swanage. 28.ix.2004", "First county record"], note: "Arrived in England in 2001 and has spread north every year since." },
+      { n: "Violet carpenter bee", l: "Xylocopa violacea", f: (s) => bee("#2a2440", s * 1.2), c: 2, r: 1, lab: ["GB: Cambs, Ely, in dead wood. 12.v.2007"], note: "Big, blue-black, loud. A rare vagrant in 2007." } ] }
+  };
+  const $ = (id) => document.getElementById(id);
+  let cur = "114";
+  // a unit tray holds a short series of the same species, pinned in rows
+  const pinned = (sp, c, r) => { const cols = c * 2, W = 120 * c, H = 150 * r; let o = "";
+    for (let j = 0; j < r; j++) for (let i = 0; i < cols; i++) { const x = (i + .5) * W / cols, y = 80 + j * 150, s = .42 + ((i + j) % 3) * .04;
+      o += `<g transform="translate(${x} ${y})"><line class="pin" x1="0" y1="-52" x2="0" y2="46"/>${sp.f(s)}<rect x="-14" y="30" width="28" height="7" fill="#fffdf6" stroke="#b9ab8c"/><rect x="-12" y="40" width="24" height="6" fill="#fffdf6" stroke="#b9ab8c"/><circle cx="0" cy="-52" r="2" fill="#2a2016"/></g>`; }
+    return `<svg viewBox="0 0 ${W} ${H}" aria-hidden="true">${o}</svg>`; };
+  function open(key, again) {
+    cur = key; const d = D[key];
+    $("in").innerHTML = d.sp.map((sp, i) => `<button type="button" class="tray" style="--c:${sp.c};--r:${sp.r}" data-i="${i}" aria-pressed="false" aria-label="${sp.n}, ${sp.l}"><span class="hdr">${sp.l}</span>${pinned(sp, sp.c, sp.r)}</button>`).join("");
+    document.querySelectorAll("#cab button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.k === key)));
+    const dr = $("drawer"); dr.classList.remove("again"); void dr.offsetWidth; if (again) dr.classList.add("again");
+    show(0);
+  }
+  function show(i) {
+    const sp = D[cur].sp[i];
+    $("card").innerHTML = `<h2>${sp.n}</h2><div class="sci">${sp.l}</div><svg class="big" viewBox="-70 -75 140 150" role="img" aria-label="${sp.n}, enlarged"><line class="pin" x1="0" y1="-70" x2="0" y2="70"/>${sp.f(1.5)}<circle cx="0" cy="-70" r="3" fill="#2a2016"/></svg>
+      <div class="labels">${sp.lab.map((l, k) => `<div class="${sp.type && k === sp.lab.length - 1 ? "type" : ""}">${l}</div>`).join("")}<div>RMNH ENT ${cur}.${String(i + 1).padStart(3, "0")}</div></div><p>${sp.note}</p>`;
+    document.querySelectorAll(".tray").forEach((t) => t.setAttribute("aria-pressed", String(+t.dataset.i === i)));
+  }
+  $("cab").innerHTML = Object.keys(D).map((k) => `<button type="button" data-k="${k}" aria-pressed="false"><span>Drawer ${k}</span>${D[k].t.split(":")[0]}</button>`).join("");
+  $("cab").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) open(b.dataset.k, true); });
+  $("in").addEventListener("click", (e) => { const t = e.target.closest(".tray"); if (t) show(+t.dataset.i); });
+  open("114");
+})();
+</script>
+</body>
+</html>

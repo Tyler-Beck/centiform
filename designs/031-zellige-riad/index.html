@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zellige Riad · Centiform</title>
+<style>
+/* @fonts: Aref Ruqaa:400,700:block; Amiri:400,400i,700:swap */
+@font-face{font-family:"Aref Ruqaa";font-style:normal;font-weight:400;font-display:block;src:url(fonts/aref-ruqaa-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Aref Ruqaa";font-style:normal;font-weight:400;font-display:block;src:url(fonts/aref-ruqaa-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Aref Ruqaa";font-style:normal;font-weight:700;font-display:block;src:url(fonts/aref-ruqaa-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Aref Ruqaa";font-style:normal;font-weight:700;font-display:block;src:url(fonts/aref-ruqaa-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/amiri-arabic-400-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/amiri-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Amiri";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/amiri-arabic-400-italic.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Amiri";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/amiri-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/amiri-arabic-700-normal.woff2) format("woff2");unicode-range:U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC,U+102E0-102FB,U+10E60-10E7E,U+10EC2-10EC4,U+10EFC-10EFF,U+1EE00-1EE03,U+1EE05-1EE1F,U+1EE21-1EE22,U+1EE24,U+1EE27,U+1EE29-1EE32,U+1EE34-1EE37,U+1EE39,U+1EE3B,U+1EE42,U+1EE47,U+1EE49,U+1EE4B,U+1EE4D-1EE4F,U+1EE51-1EE52,U+1EE54,U+1EE57,U+1EE59,U+1EE5B,U+1EE5D,U+1EE5F,U+1EE61-1EE62,U+1EE64,U+1EE67-1EE6A,U+1EE6C-1EE72,U+1EE74-1EE77,U+1EE79-1EE7C,U+1EE7E,U+1EE80-1EE89,U+1EE8B-1EE9B,U+1EEA1-1EEA3,U+1EEA5-1EEA9,U+1EEAB-1EEBB,U+1EEF0-1EEF1;}
+@font-face{font-family:"Amiri";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/amiri-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f3efe4;          /* white tin glaze and tadelakt */
+  --ink: #1f3b2d;         /* green glaze, the colour of the house */
+  --accent-1: #c98a2b;    /* honey glaze */
+  --accent-2: #2b2b2b;    /* black glaze, used for outlines */
+  --cedar: #7a4b2a;
+  --plaster: #ebe3d1;
+  --u: 8px;
+  /* scale: 1.25 on 19px (Amiri runs small) */
+  --t-1: 15px; --t0: 19px; --t1: 24px; --t2: 30px; --t3: 37px; --t4: clamp(44px, 5vw, 80px);
+  --ruqaa: "Aref Ruqaa", serif;
+  --text: "Amiri", Georgia, serif;
+  --band: 28px;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--accent-2); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+.band { display: block; width: 100%; height: var(--band); }
+/* the house: rooms around a courtyard */
+.house { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, min(78vh, 46vw)) minmax(0, 1fr); grid-template-rows: auto auto auto; gap: calc(var(--u) * 3); padding: calc(var(--u) * 3); }
+.cell { position: relative; background: var(--plaster); padding: calc(var(--band) + var(--u) * 3) calc(var(--band) + var(--u) * 3); }
+.cell > svg.frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cell > *:not(svg) { position: relative; }
+.name { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: calc(var(--u) * 4); padding-top: calc(var(--band) + var(--u) * 2); padding-bottom: calc(var(--band) + var(--u) * 2); }
+.name h1 { margin: 0; font: 700 var(--t4)/1 var(--ruqaa); color: var(--ink); }
+.name .ar { font: 400 var(--t3)/1 var(--ruqaa); color: var(--accent-1); }
+.name p { margin: 0; font-style: italic; }
+.court { grid-row: 2 / 4; grid-column: 2; aspect-ratio: 1; padding: 0; background: #d9d0bb; }
+.court svg { display: block; width: 100%; height: 100%; }
+h2 { margin: 0 0 calc(var(--u) * 2); font: 700 var(--t2)/1.1 var(--ruqaa); color: var(--ink); }
+.rooms ol { list-style: none; margin: 0; padding: 0; }
+.rooms li { padding: var(--u) 0; border-bottom: 1px solid #cfc3a8; }
+.rooms li b { display: flex; justify-content: space-between; font: 700 var(--t0)/1.3 var(--text); color: var(--ink); }
+.rooms li b span { font-variant-numeric: tabular-nums; color: var(--accent-2); font-weight: 400; }
+.rooms li i { font-size: var(--t-1); }
+.day p { margin: 0 0 calc(var(--u) * 1.5); max-width: 42ch; }
+.day dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px calc(var(--u) * 2); font-size: var(--t-1); font-variant-numeric: tabular-nums; }
+.day dt { font-weight: 700; color: var(--ink); }
+.day dd { margin: 0; }
+.book { display: grid; align-content: space-between; gap: calc(var(--u) * 2); }
+.book .btn { display: inline-block; background: var(--ink); color: var(--bg); padding: calc(var(--u) * 1.5) calc(var(--u) * 3); text-decoration: none; font: 700 var(--t0)/1 var(--text); border: 2px solid var(--ink); box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 5px var(--accent-1); }
+.book .btn:hover { background: #2a4f3d; }
+footer { padding: calc(var(--u) * 2) calc(var(--u) * 3) calc(var(--u) * 4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); font-size: var(--t-1); }
+.ripple { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .ripple { animation: ring 4.8s linear infinite; }
+  .ripple.b { animation-delay: -1.6s; } .ripple.c { animation-delay: -3.2s; }
+  @keyframes ring { from { transform: scale(.25); opacity: .8; } to { transform: scale(1); opacity: 0; } }
+}
+@media (max-width: 1000px) {
+  .house { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 1.5); gap: calc(var(--u) * 2); }
+  .court { grid-row: auto; grid-column: auto; }
+  .name { grid-template-columns: minmax(0, 1fr); gap: var(--u); text-align: center; }
+  .cell { padding: calc(var(--band) + var(--u) * 2) calc(var(--band) + var(--u)); }
+  :root { --band: 20px; }
+}
+</style>
+</head>
+<body>
+<main class="house">
+  <header class="cell name">
+    <svg class="frame" aria-hidden="true"></svg>
+    <span class="ar" lang="ar">دار النخلة</span>
+    <h1>Dar Nakhla</h1>
+    <p>A riad of six rooms in the Fes medina, Derb el Horra, since 1788</p>
+  </header>
+
+  <section class="cell rooms" aria-labelledby="rooms-h">
+    <svg class="frame" aria-hidden="true"></svg>
+    <h2 id="rooms-h">The rooms</h2>
+    <ol>
+      <li><b>Bab el Ward <span>€140</span></b><i>Ground floor, double doors of carved cedar onto the courtyard</i></li>
+      <li><b>Menzah <span>€165</span></b><i>The upper gallery, a painted ceiling from 1791</i></li>
+      <li><b>Dar Sghira <span>€120</span></b><i>Small and quiet, a window over the orange tree</i></li>
+    </ol>
+  </section>
+
+  <figure class="cell court" aria-label="The courtyard seen from the roof: zellige floor, fountain, four orange trees">
+    <svg id="court" viewBox="0 0 800 800" role="img" aria-label="Plan of the courtyard floor"></svg>
+  </figure>
+
+  <section class="cell rooms" aria-labelledby="more-h">
+    <svg class="frame" aria-hidden="true"></svg>
+    <h2 id="more-h">And upstairs</h2>
+    <ol>
+      <li><b>Nakhla <span>€190</span></b><i>The palm room, with its own terrace stair</i></li>
+      <li><b>Zitoun <span>€150</span></b><i>Twin beds, olive-green tadelakt bath</i></li>
+      <li><b>Stah <span>€210</span></b><i>On the roof, facing the Merinid tombs at sunset</i></li>
+    </ol>
+  </section>
+
+  <section class="cell day" aria-labelledby="day-h">
+    <svg class="frame" aria-hidden="true"></svg>
+    <h2 id="day-h">A day in the house</h2>
+    <p>Breakfast by the fountain: msemen, amlou, and oranges from the courtyard trees in winter.</p>
+    <p>The floor was cut by the Bennani workshop in 1954 from 11 colours of glaze. Please take your shoes off at the second step.</p>
+    <dl><dt>Hammam</dt><dd>18:00–21:00, by request</dd><dt>Dinner</dt><dd>Tagine for two, €38</dd><dt>Airport</dt><dd>Car from Fes-Saïss, €25</dd></dl>
+  </section>
+
+  <section class="cell book" aria-labelledby="book-h">
+    <svg class="frame" aria-hidden="true"></svg>
+    <div><h2 id="book-h">Finding us</h2><p>Someone from the house meets you at Bab Rcif with a handcart for the bags. The last 300 metres are too narrow for anything else.</p></div>
+    <a class="btn" href="#book-h">Write to Khadija</a>
+  </section>
+</main>
+<footer><span>Dar Nakhla, 14 Derb el Horra, Fes el Bali</span><span>Six rooms, open all year except the last ten days of Ramadan</span></footer>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  let seed = 31; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const G = ["#1f3b2d", "#24442f", "#1a3326", "#2a4a37", "#193022"], O = ["#c98a2b", "#bf7f22", "#d49636", "#b77a26"], W = ["#f3efe4", "#ede7d8", "#f6f2e8"], K = ["#2b2b2b", "#333129", "#262626"];
+  const pick = (a) => a[Math.floor(rnd() * a.length)];
+  const star = (cx, cy, R) => { const r = R * .7654, p = []; for (let i = 0; i < 16; i++) { const a = i * Math.PI / 8, d = i % 2 ? r * Math.cos(Math.PI / 8) / Math.cos(0) * .99 : R; p.push([cx + d * Math.cos(a), cy + d * Math.sin(a)]); } return p; };
+  const pts = (p) => p.map((q) => q[0].toFixed(1) + "," + q[1].toFixed(1)).join(" ");
+  // 8-fold stars on a square lattice; the gaps between them become crosses of honey glaze
+  function field(x0, y0, w, h, s) {
+    let out = `<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#e6dccb"/>`;
+    for (let y = y0; y < y0 + h + s; y += s) for (let x = x0; x < x0 + w + s; x += s) {
+      out += `<rect x="${(x - s * .16).toFixed(1)}" y="${(y - s * .16).toFixed(1)}" width="${(s * .32).toFixed(1)}" height="${(s * .32).toFixed(1)}" transform="rotate(45 ${x} ${y})" fill="${pick(O)}" stroke="#e6dccb" stroke-width="1.5"/>`;
+      const cx = x + s / 2, cy = y + s / 2;
+      out += `<polygon points="${pts(star(cx, cy, s * .47))}" fill="${pick(G)}" stroke="#e6dccb" stroke-width="1.8"/>`;
+      out += `<polygon points="${pts(star(cx, cy, s * .17))}" fill="${pick(W)}"/>`;
+    }
+    return out;
+  }
+  // courtyard: floor, fountain, four orange trees in beds
+  const court = document.getElementById("court");
+  let c = `<defs><clipPath id="cc"><rect x="0" y="0" width="800" height="800"/></clipPath></defs><g clip-path="url(#cc)">` + field(0, 0, 800, 800, 64) + `</g>`;
+  c += `<rect x="0" y="0" width="800" height="800" fill="none" stroke="#2b2b2b" stroke-width="10"/>`;
+  [[150, 150], [650, 150], [150, 650], [650, 650]].forEach(([x, y]) => { c += `<rect x="${x - 58}" y="${y - 58}" width="116" height="116" fill="#6e4a2e" stroke="#2b2b2b" stroke-width="4"/><circle cx="${x}" cy="${y}" r="70" fill="#3d6b3a" opacity=".92"/><circle cx="${x - 20}" cy="${y - 16}" r="40" fill="#4f8248"/>`;
+    for (let k = 0; k < 7; k++) { const a = k * .9 + x * .01; c += `<circle cx="${(x + Math.cos(a) * 44).toFixed(0)}" cy="${(y + Math.sin(a) * 38).toFixed(0)}" r="7" fill="#e88a1c" stroke="#8a4a10"/>`; } });
+  let oct = []; for (let i = 0; i < 8; i++) { const a = i * Math.PI / 4 + Math.PI / 8; oct.push([400 + 118 * Math.cos(a), 400 + 118 * Math.sin(a)]); }
+  c += `<polygon points="${pts(oct)}" fill="#f3efe4" stroke="#2b2b2b" stroke-width="5"/><circle cx="400" cy="400" r="92" fill="#4d8fa6"/><circle cx="400" cy="400" r="92" fill="none" stroke="#1f3b2d" stroke-width="6"/>`;
+  c += `<circle class="ripple" cx="400" cy="400" r="86" fill="none" stroke="#e8f3f6" stroke-width="3"/><circle class="ripple b" cx="400" cy="400" r="86" fill="none" stroke="#e8f3f6" stroke-width="3"/><circle class="ripple c" cx="400" cy="400" r="86" fill="none" stroke="#e8f3f6" stroke-width="3"/>`;
+  c += `<circle cx="400" cy="400" r="18" fill="#c98a2b" stroke="#2b2b2b" stroke-width="3"/>`;
+  court.innerHTML = c;
+  // tiled borders around every room: a band of small stars
+  document.querySelectorAll("svg.frame").forEach((svg) => {
+    const draw = () => {
+      const r = svg.getBoundingClientRect(), w = Math.round(r.width), h = Math.round(r.height), b = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--band")) || 28;
+      svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
+      seed = 31 + w;
+      let o = `<defs><mask id="m${w}x${h}"><rect width="${w}" height="${h}" fill="#fff"/><rect x="${b}" y="${b}" width="${w - 2 * b}" height="${h - 2 * b}" fill="#000"/></mask></defs><g mask="url(#m${w}x${h})">` + field(0, 0, w, h, b) + `</g>`;
+      o += `<rect x="${b - 3}" y="${b - 3}" width="${w - 2 * b + 6}" height="${h - 2 * b + 6}" fill="none" stroke="#2b2b2b" stroke-width="3"/><rect x="1.5" y="1.5" width="${w - 3}" height="${h - 3}" fill="none" stroke="#2b2b2b" stroke-width="3"/>`;
+      svg.innerHTML = o;
+    };
+    draw(); new ResizeObserver(draw).observe(svg.parentElement);
+  });
+})();
+</script>
+</body>
+</html>

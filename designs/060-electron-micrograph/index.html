@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electron Micrograph · Centiform</title>
+<style>
+/* @fonts: Hanken Grotesk:300,500:swap; Major Mono Display:400:block */
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/hanken-grotesk-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Hanken Grotesk";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/hanken-grotesk-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Major Mono Display";font-style:normal;font-weight:400;font-display:block;src:url(fonts/major-mono-display-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #0c0c0c;          /* the chamber, unlit */
+  --ink: #e6e6e6;         /* secondary-electron white */
+  --accent-1: #6f6f6f;    /* mid grey of the data strip */
+  --accent-2: #39ff88;    /* the instrument's green readout */
+  --u: 8px;
+  /* scale: 1.25 on 16px */
+  --t-1: 12.8px; --t0: 16px; --t1: 20px; --t2: 25px; --t3: 31px; --t4: clamp(36px, 4.4vw, 64px);
+  --sans: "Hanken Grotesk", "Helvetica Neue", sans-serif;
+  --mono: "Major Mono Display", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--bg); color: var(--ink); font: 300 var(--t0)/1.55 var(--sans); overflow: hidden; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+.frame { position: fixed; inset: 0; display: grid; grid-template-rows: minmax(0, 1fr) auto; }
+.view { position: relative; overflow: hidden; }
+canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: auto; }
+.scan { position: absolute; left: 0; right: 0; height: 2px; background: rgba(230,230,230,.9); box-shadow: 0 0 12px rgba(230,230,230,.6); top: var(--y, -4px); pointer-events: none; }
+/* the text sits on the image like an overlay on the instrument screen */
+.over { position: absolute; left: calc(var(--u) * 4); top: calc(var(--u) * 4); max-width: 420px; }
+.over h1 { margin: 0; font: 500 var(--t4)/1 var(--sans); letter-spacing: -.02em; }
+.over h1 small { display: block; font: 400 var(--t-1)/1.4 var(--mono); color: var(--accent-2); letter-spacing: .06em; margin-bottom: var(--u); }
+.over p { margin: calc(var(--u) * 2) 0 0; font-size: var(--t0); text-shadow: 0 1px 2px #000; }
+.over dl { margin: calc(var(--u) * 2) 0 0; display: grid; grid-template-columns: auto 1fr; gap: 2px calc(var(--u) * 2); font-size: var(--t-1); }
+.over dt { color: #9a9a9a; }
+.over dd { margin: 0; }
+.lib { position: absolute; right: calc(var(--u) * 3); top: calc(var(--u) * 3); display: grid; gap: 6px; }
+.lib button { width: 96px; height: 64px; padding: 0; border: 1px solid var(--accent-1); background: #000; cursor: pointer; position: relative; overflow: hidden; }
+.lib button canvas { position: absolute; inset: 0; }
+.lib button span { position: absolute; left: 4px; bottom: 2px; font: 400 10px/1 var(--mono); color: var(--ink); text-shadow: 0 0 3px #000; }
+.lib button[aria-pressed="true"] { border-color: var(--accent-2); box-shadow: 0 0 0 1px var(--accent-2); }
+/* the data strip under every micrograph */
+.strip { display: grid; grid-template-columns: repeat(6, auto) minmax(160px, 1fr); gap: 0; background: #1b1b1b; border-top: 1px solid var(--accent-1); font: 400 var(--t-1)/1 var(--mono); }
+.strip div { padding: 10px 16px; border-right: 1px solid #333; white-space: nowrap; }
+.strip div span { display: block; font: 500 10px/1.4 var(--sans); color: #8a8a8a; letter-spacing: .1em; text-transform: uppercase; }
+.strip div b { font-weight: 400; color: var(--ink); }
+.strip .bar { display: flex; align-items: center; gap: 12px; justify-content: flex-end; border-right: 0; }
+.strip .bar i { display: block; height: 6px; width: var(--bw, 120px); background: var(--ink); box-shadow: inset 0 0 0 1px #000; }
+.strip .ok { color: var(--accent-2); }
+@media (max-width: 800px) {
+  body { overflow: auto; }
+  .frame { position: static; min-height: 100vh; grid-template-rows: 62vh auto; }
+  .over { position: static; padding: calc(var(--u) * 2); max-width: none; }
+  .view .over { display: none; }
+  .lib { top: auto; bottom: 8px; right: 8px; grid-auto-flow: column; }
+  .lib button { width: 64px; height: 44px; }
+  .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .strip div { padding: 8px 10px; border-bottom: 1px solid #333; }
+  .strip .bar { grid-column: 1 / -1; }
+  .mobile-over { display: block !important; }
+}
+</style>
+</head>
+<body>
+<div class="frame">
+  <main class="view" aria-label="Scanning electron micrograph">
+    <canvas id="img" width="720" height="450" role="img" aria-label="Micrograph of a pollen grain"></canvas>
+    <div class="scan" id="scan" aria-hidden="true"></div>
+    <div class="over" id="over"></div>
+    <nav class="lib" id="lib" aria-label="Library"></nav>
+  </main>
+  <div class="over mobile-over" id="over2" style="display:none"></div>
+  <div class="strip" id="strip" aria-label="Instrument data"></div>
+</div>
+<script>
+(() => {
+  const S = [
+    { k: "echinate", n: "Helianthus annuus", c: "Sunflower", mag: 2500, bar: 10, kv: "5.00", wd: "8.2", d: "Echinate: a sphere set with conical spines, 32 µm across. Each spine is hollow at the base.", src: "Garden, Wenlock Road, August" },
+    { k: "tricolpate", n: "Quercus robur", c: "English oak", mag: 3500, bar: 10, kv: "3.00", wd: "6.9", d: "Tricolpate: three long furrows run pole to pole. The surface is granular, like fine sugar.", src: "Pollen trap 4, Bramhall Wood, April" },
+    { k: "reticulate", n: "Lilium martagon", c: "Martagon lily", mag: 1200, bar: 20, kv: "5.00", wd: "10.1", d: "Reticulate: a net of raised walls, each cell 3 to 5 µm. A single furrow on the far side.", src: "Botanic garden bed 22, June" },
+    { k: "saccate", n: "Pinus sylvestris", c: "Scots pine", mag: 1500, bar: 20, kv: "5.00", wd: "9.4", d: "Bisaccate: a central body with two air sacs, which carry the grain for tens of kilometres.", src: "Car windscreen, Aviemore, May" }
+  ];
+  let seed = 60; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  // height fields in unit coordinates, grain centred at 0,0
+  const fib = (n) => { const p = []; for (let i = 0; i < n; i++) { const y = 1 - (i / (n - 1)) * 2, r = Math.sqrt(1 - y * y), t = i * 2.39996; p.push([Math.cos(t) * r, y, Math.sin(t) * r]); } return p; };
+  const spikes = fib(120).filter((p) => p[2] > -.1);
+  const cells = Array.from({ length: 90 }, () => [rnd() * 2.4 - 1.2, rnd() * 1.8 - .9]);
+  const HF = {
+    echinate: (x, y) => { const R = .62, r2 = x * x + y * y; let h = r2 < R * R ? Math.sqrt(R * R - r2) : -1; if (h < 0) { h = -1; }
+      for (const [sx, sy, sz] of spikes) { const px = sx * R * 1.02, py = sy * R * 1.02; if (Math.abs(x - px) > .05 || Math.abs(y - py) > .05) continue; const d = Math.hypot(x - px, y - py), rr = .05 * (.4 + .6 * Math.max(0, sz)); if (d < rr) { const base = Math.sqrt(Math.max(0, R * R - px * px - py * py)); h = Math.max(h, base + (1 - d / rr) * .09 * Math.max(.2, sz)); } }
+      return h + (h > 0 ? (Math.sin(x * 97 + y * 31) * Math.sin(y * 113 - x * 17)) * .0012 : 0); },
+    tricolpate: (x, y) => { const a = .44, b = .66, e = (x * x) / (a * a) + (y * y) / (b * b); if (e > 1) return -1; let h = Math.sqrt(1 - e) * .45;
+      for (const cx of [-.23, .23]) { const d = Math.abs(x - cx * (1 - Math.abs(y) * .3)); if (Math.abs(y) < .55) h -= .08 * Math.exp(-d * d / .0015) * (1 - Math.abs(y) / .6); }
+      return h + (Math.sin(x * 190 + Math.cos(y * 170) * 2) * Math.sin(y * 210)) * .006; },
+    reticulate: (x, y) => { const a = .78, b = .5, e = (x * x) / (a * a) + (y * y) / (b * b); if (e > 1) return -1; let h = Math.sqrt(1 - e) * .38; let d1 = 9, d2 = 9;
+      for (const [cx, cy] of cells) { const d = Math.hypot(x - cx * .7, y - cy * .5); if (d < d1) { d2 = d1; d1 = d; } else if (d < d2) d2 = d; }
+      return h + (d2 - d1 < .012 ? .03 : 0) * Math.sqrt(1 - e); },
+    saccate: (x, y) => { let h = -1; const body = (x * x) / (.3 * .3) + (y * y) / (.4 * .4); if (body < 1) h = Math.sqrt(1 - body) * .3;
+      for (const cx of [-.42, .42]) { const e = ((x - cx) ** 2) / (.34 * .34) + ((y + .06) ** 2) / (.36 * .36); if (e < 1) { const s = Math.sqrt(1 - e) * .26 + (Math.sin(x * 90) * Math.sin(y * 95) > .6 ? .012 : 0); h = Math.max(h, s); } }
+      return h; }
+  };
+  function render(cv, k, W, H, progressive) {
+    const ctx = cv.getContext("2d"); cv.width = W; cv.height = H; const img = ctx.createImageData(W, H); const f = HF[k], sc = 1.6 / H;
+    const HM = new Float32Array((W + 1) * (H + 1));
+    for (let j = 0; j <= H; j++) for (let i = 0; i <= W; i++) HM[j * (W + 1) + i] = f((i - W / 2) * sc, (j - H / 2) * sc);
+    const hAt = (i, j) => HM[j * (W + 1) + i];
+    const rows = [];
+    for (let j = 0; j < H; j++) { const row = new Uint8ClampedArray(W * 4);
+      for (let i = 0; i < W; i++) { const h = hAt(i, j); let v;
+        if (h < 0) v = 22 + rnd() * 18;
+        else { const hx = hAt(i + 1, j), hy = hAt(i, j + 1); const dx = (hx < 0 ? h : hx) - h, dy = (hy < 0 ? h : hy) - h; const nx = -dx / sc, ny = -dy / sc, nz = 1, L = Math.hypot(nx, ny, nz);
+          const tilt = 1 - nz / L, lam = Math.max(0, (-nx * .5 - ny * .6 + nz * .6) / L); v = 50 + 150 * Math.pow(tilt, .7) + 70 * lam + (rnd() - .5) * 26; }
+        const q = i * 4; row[q] = row[q + 1] = row[q + 2] = Math.max(0, Math.min(255, v)); row[q + 3] = 255; }
+      rows.push(row); }
+    if (!progressive) { rows.forEach((r, j) => img.data.set(r, j * W * 4)); ctx.putImageData(img, 0, 0); return; }
+    // slow scan: the beam writes the image line by line
+    let j = 0; const scan = document.getElementById("scan"), view = cv.parentElement;
+    const step = () => { if (document.hidden) { requestAnimationFrame(step); return; } const n = Math.ceil(H / 70); for (let k2 = 0; k2 < n && j < H; k2++, j++) img.data.set(rows[j], j * W * 4); ctx.putImageData(img, 0, 0);
+      scan.style.setProperty("--y", (j / H * view.clientHeight) + "px"); if (j < H) requestAnimationFrame(step); else scan.style.setProperty("--y", "-4px"); };
+    requestAnimationFrame(step);
+  }
+  const $ = (id) => document.getElementById(id);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function show(i) {
+    const s = S[i]; render($("img"), s.k, 720, 450, !reduce);
+    const html = `<h1><small>pollen library · plate ${String(i + 1).padStart(2, "0")}</small>${s.c}</h1><p><i>${s.n}</i>. ${s.d}</p><dl><dt>Collected</dt><dd>${s.src}</dd><dt>Coating</dt><dd>Gold-palladium, 8 nm</dd></dl>`;
+    $("over").innerHTML = html; $("over2").innerHTML = html;
+    const bw = Math.round(s.bar * s.mag / 1000 * 4.8);
+    $("strip").innerHTML = `<div><span>HV</span><b>${s.kv} kV</b></div><div><span>WD</span><b>${s.wd} mm</b></div><div><span>Mag</span><b>${s.mag.toLocaleString("en-GB")} x</b></div><div><span>Det</span><b>ETD · SE</b></div><div><span>Spot</span><b>3.0</b></div><div><span>Vacuum</span><b class="ok">OK</b></div><div class="bar" style="--bw:${bw}px"><i></i><b>${s.bar} µm</b></div>`;
+    document.querySelectorAll("#lib button").forEach((b, k) => b.setAttribute("aria-pressed", String(k === i)));
+  }
+  $("lib").innerHTML = S.map((s, i) => `<button type="button" aria-label="${s.c}, ${s.n}"><canvas></canvas><span>${String(i + 1).padStart(2, "0")}</span></button>`).join("");
+  document.querySelectorAll("#lib button").forEach((b, i) => { render(b.querySelector("canvas"), S[i].k, 96, 64, false); b.addEventListener("click", () => show(i)); });
+  show(0);
+})();
+</script>
+</body>
+</html>

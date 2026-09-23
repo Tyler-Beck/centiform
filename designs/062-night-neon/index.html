@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Night Neon · Centiform</title>
+<style>
+/* @fonts: Yellowtail:400:block; Monoton:400:block */
+@font-face{font-family:"Yellowtail";font-style:normal;font-weight:400;font-display:block;src:url(fonts/yellowtail-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Monoton";font-style:normal;font-weight:400;font-display:block;src:url(fonts/monoton-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #1a1413;          /* the alley at 11 pm; mortar */
+  --ink: #ff4fd8;         /* neon pink (argon in pink-coated tube) */
+  --accent-1: #3dfff2;    /* mercury-argon in clear tube, cyan */
+  --accent-2: #ff9b3d;    /* neon red-orange */
+  --brick: #3a211b;
+  --brick2: #33201a;
+  --u: 8px;
+  --course: 26px;         /* one brick course with its joint */
+  /* scale: 1.414 on 22px, because the only text face is a script */
+  --t-1: 18px; --t0: 22px; --t1: 31px; --t2: 44px; --t3: 62px; --t4: clamp(56px, 10vw, 170px);
+  --script: "Yellowtail", cursive;
+  --tube: "Monoton", cursive;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: #f1e3dc; font: 400 var(--t0)/1.45 var(--script); overflow-x: hidden;
+  background: radial-gradient(ellipse 60% 40% at 50% 20%, rgba(255,79,216,.14), transparent 70%) no-repeat, radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(0,0,0,.55)) fixed, url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='116' height='52'><rect width='116' height='52' fill='%231a1413'/><rect x='3' y='3' width='55' height='23' fill='%233a211b'/><rect x='61' y='3' width='55' height='23' fill='%2334201a'/><rect x='-26' y='29' width='52' height='23' fill='%23361f19'/><rect x='32' y='29' width='55' height='23' fill='%233d231c'/><rect x='90' y='29' width='26' height='23' fill='%23361f19'/></svg>") 0 0 / 116px 52px, var(--brick); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 4px; }
+/* the tube: a white-hot core with the gas colour spilling around it */
+.neon { --g: var(--ink); color: #fff5fd; text-shadow: 0 0 2px #fff, 0 0 6px var(--g), 0 0 14px var(--g), 0 0 28px var(--g), 0 0 56px var(--g); }
+.neon.c { --g: var(--accent-1); color: #eafffe; }
+.neon.o { --g: var(--accent-2); color: #fff3e6; }
+.wall { position: relative; min-height: 100vh; display: grid; place-items: center; padding: calc(var(--u) * 8) calc(var(--u) * 3); text-align: center; }
+.wall + .wall { min-height: 80vh; }
+.sign { position: relative; padding: calc(var(--u) * 4) calc(var(--u) * 6); }
+/* standoffs and the wire to the transformer */
+.sign::before, .sign::after { content: ""; position: absolute; top: 18px; width: 12px; height: 12px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #bfb6ad, #5d5550); box-shadow: 0 2px 2px #000; }
+.sign::before { left: 12px; } .sign::after { right: 12px; }
+.box { position: absolute; right: -60px; bottom: -70px; width: 64px; height: 44px; background: linear-gradient(#4a4a48, #2f2f2d); border: 1px solid #111; font: 400 11px/44px var(--script); color: #9d958d; }
+.wire { position: absolute; right: -28px; bottom: -26px; width: 2px; height: 30px; background: #0c0c0c; }
+h1 { margin: 0; font: 400 var(--t4)/1 var(--tube); letter-spacing: .02em; }
+.script { font: 400 var(--t3)/1 var(--script); margin-top: calc(var(--u) * 1); }
+.sign h2 { margin: 0; font: 400 var(--t3)/1.05 var(--tube); }
+.sign .sub { font: 400 var(--t2)/1.1 var(--script); }
+/* enamel plates carry the small print, lit by the spill of the sign */
+.plate { margin: calc(var(--u) * 5) auto 0; max-width: 560px; background: #231a18; border: 2px solid #4b3a33; box-shadow: 0 0 0 4px #150f0e, 0 10px 30px rgba(0,0,0,.6); padding: calc(var(--u) * 2.5) calc(var(--u) * 3); color: #f1e3dc; font: 400 var(--t0)/1.5 var(--script); }
+.plate dl { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 3); margin: calc(var(--u) * 1.5) 0 0; text-align: left; font-size: var(--t0); }
+.plate dt { color: var(--accent-1); }
+.plate dd { margin: 0; }
+nav.lamps { position: fixed; top: calc(var(--u) * 2); right: calc(var(--u) * 2); display: flex; gap: calc(var(--u) * 2); z-index: 5; }
+nav.lamps a { text-decoration: none; font: 400 var(--t1)/1 var(--script); padding: 4px 8px; }
+nav.lamps a:hover { --g: var(--accent-1); }
+@media (prefers-reduced-motion: no-preference) {
+  .flick { animation: strike 2.2s steps(1) both; }
+  .flick.late { animation-delay: .6s; }
+  .buzz { animation: buzz 9s steps(1) infinite 3s; }
+  @keyframes strike { 0% { opacity: .08; } 8% { opacity: 1; } 11% { opacity: .15; } 18% { opacity: 1; } 22% { opacity: .3; } 26%, 100% { opacity: 1; } }
+  @keyframes buzz { 0%, 91% { opacity: 1; } 92% { opacity: .35; } 93% { opacity: 1; } 95% { opacity: .5; } 96% { opacity: 1; } }
+}
+@media (max-width: 700px) {
+  .sign { padding: calc(var(--u) * 3) calc(var(--u) * 2); }
+  .box, .wire { display: none; }
+  .sign h2 { font-size: 40px; }
+  nav.lamps a { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<nav class="lamps" aria-label="Signs"><a class="neon c" href="#classes">Classes</a><a class="neon o" href="#orders">Orders</a></nav>
+<main>
+  <section class="wall" aria-labelledby="h">
+    <div class="sign">
+      <h1 id="h" class="neon flick">Bright<br>Tub<span class="buzz">e</span></h1>
+      <div class="script neon c flick late">neon since 1979</div>
+      <div class="wire" aria-hidden="true"></div><div class="box" aria-hidden="true">12 kV</div>
+    </div>
+  </section>
+  <section class="wall" id="classes" aria-labelledby="c-h">
+    <div class="sign">
+      <h2 id="c-h" class="neon c">Bend Your Own</h2>
+      <div class="sub neon o">Saturday glass class</div>
+      <div class="plate"><p style="margin:0">Two days over the ribbon burner with Jimmy Kerr, who has bent tube for forty-six years. You leave with one word, up to six letters, lit and on a frame.</p>
+        <dl><dt>When</dt><dd>First Saturday and Sunday of the month, 10 till 5</dd><dt>Price</dt><dd>£340, glass and gas included</dd><dt>Bring</dt><dd>Cotton clothes. No man-made fibre near the flame.</dd></dl></div>
+    </div>
+  </section>
+  <section class="wall" id="orders" aria-labelledby="o-h">
+    <div class="sign">
+      <h2 id="o-h" class="neon o">Open Late</h2>
+      <div class="sub neon">signs for bars, chip shops &amp; lovers</div>
+      <div class="plate"><p style="margin:0">Real glass, real gas, bent by hand in the arch under the railway. We do not make LED tubes that pretend.</p>
+        <dl><dt>Small script</dt><dd>from £480, one colour</dd><dt>Shop front</dt><dd>from £1,900, fitted</dd><dt>Repairs</dt><dd>Any tube, any age, re-pumped in a week</dd><dt>Find us</dt><dd>Arch 14, Leith Walk, Edinburgh. Knock loud; it hums in here.</dd></dl></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>

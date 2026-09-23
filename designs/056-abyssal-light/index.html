@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Abyssal Light · Centiform</title>
+<style>
+/* @fonts: Advent Pro:300,600:block; Sarabun:300,400:swap */
+@font-face{font-family:"Advent Pro";font-style:normal;font-weight:300;font-display:block;src:url(fonts/advent-pro-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Advent Pro";font-style:normal;font-weight:600;font-display:block;src:url(fonts/advent-pro-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sarabun";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/sarabun-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sarabun";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sarabun-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #02060c;          /* water below 1,000 m */
+  --ink: #8fe9ff;         /* photophore cyan */
+  --accent-1: #2b6cff;    /* deep blue lure */
+  --accent-2: #c46bff;    /* violet of the siphonophore */
+  --text: #cfe8f0;
+  --u: 8px;
+  /* scale: 1.333 on 18px */
+  --t-1: 13.5px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 42px; --t4: clamp(56px, 9vw, 150px);
+  --disp: "Advent Pro", "Eurostile", sans-serif;
+  --body: "Sarabun", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--text); font: 300 var(--t0)/1.65 var(--body); overflow-x: hidden;
+  background: linear-gradient(180deg, #1c6c9a 0%, #0c3a63 9%, #06203d 22%, #030d1c 38%, var(--bg) 55%, var(--bg) 100%); }
+a { color: var(--ink); }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+canvas#snow { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+main { position: relative; z-index: 1; }
+/* each zone is a depth band of the water column */
+.zone { min-height: 110vh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: calc(var(--u) * 6); padding: calc(var(--u) * 10) calc(var(--u) * 14) calc(var(--u) * 10) calc(var(--u) * 8); }
+.zone .txt { max-width: 46ch; }
+.zone .d { font: 600 var(--t-1)/1 var(--disp); letter-spacing: .3em; text-transform: uppercase; color: var(--ink); }
+.zone h2 { margin: var(--u) 0 calc(var(--u) * 2); font: 300 var(--t3)/1.05 var(--disp); color: #ffffff; letter-spacing: .02em; }
+.zone p { margin: 0 0 calc(var(--u) * 2); }
+.zone svg.org { width: 100%; max-height: 70vh; overflow: visible; }
+.hero { min-height: 100vh; grid-template-columns: minmax(0, 1fr); align-content: end; padding-bottom: calc(var(--u) * 14); }
+.hero h1 { margin: 0; font: 300 var(--t4)/.9 var(--disp); color: #ffffff; letter-spacing: -.01em; }
+.hero h1 b { font-weight: 600; color: var(--ink); display: block; font-size: var(--t-1); line-height: 1.4; letter-spacing: .3em; margin-bottom: calc(var(--u) * 2); }
+.hero p { max-width: 50ch; font-size: var(--t1); line-height: 1.45; }
+.ship { position: absolute; top: 12vh; right: 10vw; width: min(420px, 40vw); }
+.glow { filter: drop-shadow(0 0 6px currentColor) drop-shadow(0 0 16px currentColor); }
+dl.log { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 2); font-size: 15px; font-variant-numeric: tabular-nums; margin: 0; }
+dl.log dt { font: 600 var(--t-1)/1.6 var(--disp); letter-spacing: .14em; text-transform: uppercase; color: var(--ink); }
+dl.log dd { margin: 0; }
+/* the depth gauge, fixed on the right */
+.gauge { position: fixed; right: calc(var(--u) * 3); top: 10vh; bottom: 10vh; width: 64px; z-index: 3; display: flex; flex-direction: column; align-items: center; font: 600 11px/1 var(--disp); letter-spacing: .1em; color: var(--ink); }
+.gauge .tube { position: relative; flex: 1; width: 2px; background: rgba(143,233,255,.25); margin: var(--u) 0; }
+.gauge .tube span { position: absolute; left: 8px; transform: translateY(-50%); color: rgba(207,232,240,.6); white-space: nowrap; }
+.gauge .tube span::before { content: ""; position: absolute; left: -12px; top: 50%; width: 8px; height: 1px; background: rgba(143,233,255,.5); }
+.gauge .sub { position: absolute; left: -7px; width: 16px; height: 16px; border-radius: 50%; background: var(--ink); box-shadow: 0 0 12px var(--ink), 0 0 30px var(--accent-1); top: var(--p, 0%); transform: translateY(-50%); }
+.gauge output { font: 600 var(--t1)/1 var(--disp); color: #fff; font-variant-numeric: tabular-nums; text-align: center; }
+.gauge output small { display: block; font-size: 11px; color: var(--ink); letter-spacing: .2em; }
+@media (max-width: 800px) {
+  .zone { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 8) calc(var(--u) * 9) calc(var(--u) * 8) calc(var(--u) * 2.5); }
+  .ship { width: 60vw; right: 16vw; top: 14vh; }
+  .gauge { right: 6px; width: 50px; }
+  .gauge .tube span { display: none; }
+}
+</style>
+</head>
+<body>
+<canvas id="snow" aria-hidden="true"></canvas>
+<aside class="gauge" aria-hidden="true"><span>0 m</span><div class="tube" id="tube"><i class="sub" id="sub"></i></div><span>4 000 m</span><output id="depth">0<small>metres</small></output></aside>
+<main id="col">
+  <section class="zone hero" data-m="0" aria-labelledby="h">
+    <svg class="ship" viewBox="0 0 420 160" aria-hidden="true"><path d="M10 110 L40 140 H380 L410 100 Z" fill="#0b2238" stroke="#8fe9ff" stroke-width="1.5"/><path d="M90 110 V70 H240 V110 M150 70 V40 H210 V70 M290 110 V50 L330 50 L350 110" fill="none" stroke="#8fe9ff" stroke-width="1.5"/><path d="M330 50 L380 20" stroke="#8fe9ff" stroke-width="1.5"/><path d="M380 20 V110" stroke="#8fe9ff" stroke-width="1" stroke-dasharray="3 4"/><circle cx="180" cy="55" r="3" fill="#ffd36b"/><path d="M0 142 Q60 132 120 142 T240 142 T360 142 T480 142" fill="none" stroke="#8fe9ff" stroke-width="1" opacity=".6"/></svg>
+    <div class="txt"><h1 id="h"><b>RV Halcyon Deep · Cruise HD-31</b>Into the<br>Dark Water</h1>
+      <p>Forty days over the Kerrow Trench. Scroll down with the lander; the gauge on the right keeps count of the metres.</p></div>
+  </section>
+  <section class="zone" data-m="200" aria-labelledby="z1">
+    <div class="txt"><div class="d">200 m · Twilight zone</div><h2 id="z1">The last of the sun</h2><p>Below two hundred metres there is not enough light to grow anything. Lanternfish rise past us every dusk, the largest migration on the planet, each fish trimmed with lights along its belly so that, from below, it has no shadow.</p></div>
+    <svg class="org" viewBox="0 0 400 300" aria-label="Lanternfish with rows of photophores" role="img"><g id="fishes"></g></svg>
+  </section>
+  <section class="zone" data-m="1000" aria-labelledby="z2">
+    <svg class="org" viewBox="0 0 400 400" aria-label="A siphonophore, a colony of glowing bells" role="img"><g id="siph"></g></svg>
+    <div class="txt"><div class="d">1 000 m · Midnight zone</div><h2 id="z2">Every light is a message</h2><p>Here, nine animals in ten make their own light. A siphonophore colony, thirty metres long, drifts past the lander camera in blue and violet pulses; a dragonfish answers in red, a colour most fish cannot see.</p><p>The camera logs every flash. We count them the way astronomers count stars.</p></div>
+  </section>
+  <section class="zone" data-m="2500" aria-labelledby="z3">
+    <div class="txt"><div class="d">2 500 m · Bathypelagic</div><h2 id="z3">The anglerfish keeps its lamp</h2><p>A female anglerfish, 11 cm, holds a lure of glowing bacteria over a mouth that can open wider than her body. Filmed for four minutes on dive 14 before she switched the light off and was gone.</p></div>
+    <svg class="org" viewBox="0 0 400 300" aria-label="Anglerfish with a glowing lure" role="img"><g class="glow" style="color:#2b6cff"><path d="M150 120 Q176 40 250 50" fill="none" stroke="#2b6cff" stroke-width="2"/><circle cx="252" cy="52" r="9" fill="#8fe9ff"/></g><path d="M70 180 Q90 110 170 120 Q240 130 250 190 Q230 240 150 240 Q90 236 70 180Z" fill="#050b14" stroke="#16324d" stroke-width="2"/><path d="M180 196 L200 186 L214 204 L228 190 L242 206" fill="none" stroke="#6f8aa0" stroke-width="2"/><circle cx="196" cy="160" r="4" fill="#8fe9ff" opacity=".8"/><path d="M70 180 L28 150 L34 210 Z" fill="#050b14" stroke="#16324d" stroke-width="2"/></svg>
+  </section>
+  <section class="zone" data-m="4000" aria-labelledby="z4">
+    <svg class="org" viewBox="0 0 400 300" aria-label="The lander on the abyssal plain with sea cucumbers" role="img"><path d="M0 250 Q100 238 200 250 T400 246 V300 H0Z" fill="#0b1826"/><g stroke="#8fe9ff" stroke-width="1.5" fill="none"><path d="M140 250 L170 150 H240 L270 250 M170 150 L205 110 L240 150 M205 110 V80"/><rect x="185" y="170" width="40" height="30"/></g><g class="glow" style="color:#c46bff"><circle cx="205" cy="78" r="4" fill="#c46bff"/></g><ellipse cx="80" cy="252" rx="22" ry="7" fill="#c46bff" opacity=".5"/><ellipse cx="320" cy="248" rx="16" ry="6" fill="#c46bff" opacity=".4"/><path d="M190 200 L120 230" stroke="#2b6cff" stroke-width="10" opacity=".15"/></svg>
+    <div class="txt"><div class="d">4 000 m · Abyssal plain</div><h2 id="z4">The lander sits down</h2><p>Mud as fine as flour, and sea cucumbers that walk across it on tube feet. The lander stays twelve days, then drops its ballast and floats home.</p>
+      <dl class="log"><dt>Cruise</dt><dd>HD-31, 4 March to 13 April 2027</dd><dt>Berths</dt><dd>6 for visiting scientists</dd><dt>Apply</dt><dd>Kerrow Institute of Ocean Science, by 30 November</dd></dl></div>
+  </section>
+</main>
+<script>
+(() => {
+  // lanternfish and a siphonophore, drawn with their lights
+  let f = "";
+  [[60, 80, 1], [190, 150, .8], [90, 220, .7], [260, 70, .6]].forEach(([x, y, s]) => { f += `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 20 Q30 0 80 12 L110 0 L104 22 L110 44 L80 32 Q30 42 0 24Z" fill="#0a1a2b" stroke="#1d3e5c"/><circle cx="16" cy="18" r="5" fill="#cfe8f0"/>`;
+    for (let k = 0; k < 7; k++) f += `<circle class="glow" style="color:#8fe9ff" cx="${24 + k * 8}" cy="${33 - k * .6}" r="2" fill="#8fe9ff"/>`; f += `</g>`; });
+  document.getElementById("fishes").innerHTML = f;
+  let s = `<path d="M200 10 C190 120 216 240 196 390" stroke="#c46bff" stroke-width="1.2" fill="none" opacity=".6"/>`;
+  for (let k = 0; k < 11; k++) { const y = 30 + k * 34, x = 200 + Math.sin(k * .9) * 14; s += `<g class="glow" style="color:${k % 3 ? "#c46bff" : "#2b6cff"}"><path d="M${x - 16} ${y} Q${x} ${y - 22} ${x + 16} ${y} Q${x} ${y + 8} ${x - 16} ${y}Z" fill="none" stroke="currentColor" stroke-width="1.6"/></g><path d="M${x - 10} ${y + 4} q-8 18 -2 34 M${x + 10} ${y + 4} q8 18 2 34" stroke="#8fe9ff" stroke-width=".6" fill="none" opacity=".5"/>`; }
+  document.getElementById("siph").innerHTML = s;
+  // the gauge follows native scroll
+  const out = document.getElementById("depth"), sub = document.getElementById("sub"), tube = document.getElementById("tube");
+  [0, 1000, 2000, 3000].forEach((m) => tube.insertAdjacentHTML("beforeend", `<span style="top:${m / 40}%">${m}</span>`));
+  let q = false;
+  const upd = () => { q = false; const p = Math.min(1, scrollY / ((document.documentElement.scrollHeight - innerHeight) || 1)); const m = Math.round(p * 4000 / 10) * 10;
+    out.firstChild.textContent = m.toLocaleString("en-GB"); sub.style.setProperty("--p", (p * 100).toFixed(2) + "%"); };
+  addEventListener("scroll", () => { if (!q) { q = true; requestAnimationFrame(upd); } }, { passive: true }); upd();
+  // marine snow, and a few specks that glow when they drift
+  const cv = document.getElementById("snow"), cx = cv.getContext("2d");
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  let W, H, parts = [];
+  const size = () => { W = cv.width = innerWidth; H = cv.height = innerHeight; parts = Array.from({ length: Math.round(W * H / 9000) }, (_, i) => ({ x: Math.random() * W, y: Math.random() * H, r: Math.random() * 1.4 + .3, v: Math.random() * .25 + .08, glow: i % 11 === 0, ph: Math.random() * 6.28 })); };
+  size(); addEventListener("resize", size);
+  let last = 0;
+  const loop = (t) => { if (!document.hidden) { const dt = Math.min(50, t - last); last = t; cx.clearRect(0, 0, W, H); const deep = Math.min(1, scrollY / (innerHeight * 2));
+    for (const p of parts) { p.y += p.v * dt * .06; p.x += Math.sin(t / 3000 + p.ph) * .08; if (p.y > H) { p.y = -4; p.x = Math.random() * W; }
+      if (p.glow) { const a = (.3 + .7 * Math.max(0, Math.sin(t / 900 + p.ph))) * deep; cx.fillStyle = `rgba(${p.ph > 3 ? "196,107,255" : "143,233,255"},${a.toFixed(2)})`; cx.shadowColor = cx.fillStyle; cx.shadowBlur = 12; cx.beginPath(); cx.arc(p.x, p.y, p.r + 1.2, 0, 6.28); cx.fill(); cx.shadowBlur = 0; }
+      else { cx.fillStyle = `rgba(207,232,240,${(.25 + .2 * (1 - deep)).toFixed(2)})`; cx.fillRect(p.x, p.y, p.r, p.r); } } } else last = t; requestAnimationFrame(loop); };
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

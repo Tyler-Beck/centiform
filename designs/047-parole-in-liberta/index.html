@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parole in Liberta · Centiform</title>
+<style>
+/* @fonts: Bodoni Moda:400,700,400i:block; League Gothic:400:block */
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400;font-display:block;src:url(fonts/bodoni-moda-symbols-400-normal.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:400;font-display:block;src:url(fonts/bodoni-moda-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:700;font-display:block;src:url(fonts/bodoni-moda-symbols-700-normal.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}
+@font-face{font-family:"Bodoni Moda";font-style:normal;font-weight:700;font-display:block;src:url(fonts/bodoni-moda-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Bodoni Moda";font-style:italic;font-weight:400;font-display:block;src:url(fonts/bodoni-moda-symbols-400-italic.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}
+@font-face{font-family:"Bodoni Moda";font-style:italic;font-weight:400;font-display:block;src:url(fonts/bodoni-moda-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"League Gothic";font-style:normal;font-weight:400;font-display:block;src:url(fonts/league-gothic-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f2efe6;          /* cheap manifesto paper */
+  --ink: #121212;
+  --accent-1: #c0392b;    /* the red of the second forme */
+  --accent-2: #7d7d7d;    /* worn type, grey impression */
+  --u: 8px;
+  /* scale: many sizes on purpose; the reading size is 19px, steps of 1.618 */
+  --t-1: 13px; --t0: 19px; --t1: 31px; --t2: 50px; --t3: 81px; --t4: clamp(90px, 16vw, 280px);
+  --didone: "Bodoni Moda", "Didot", serif;
+  --cond: "League Gothic", "Impact", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.5 var(--didone); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 3px; }
+/* a plate: one impact point, words thrown out from it */
+.plate { position: relative; min-height: 100vh; overflow: hidden; border-bottom: 1px solid var(--accent-2); }
+.plate svg.rays { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.w { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -50%) rotate(var(--r)) scale(var(--s, 1)); white-space: nowrap; line-height: .9; transition: transform 1s cubic-bezier(.2,1.4,.3,1), left 1s cubic-bezier(.2,1.2,.3,1), top 1s cubic-bezier(.2,1.2,.3,1), opacity .4s; }
+.w.c { font-family: var(--cond); text-transform: uppercase; letter-spacing: .01em; }
+.w.d { font-family: var(--didone); font-weight: 700; }
+.w.i { font-family: var(--didone); font-style: italic; }
+.w.red { color: var(--accent-1); }
+.w.grey { color: var(--accent-2); }
+.plate:not(.hit) .w { left: var(--ox); top: var(--oy); --s: .1; opacity: 0; }
+.thesis { position: absolute; width: min(460px, 80vw); left: var(--tx); top: var(--ty); transform: rotate(var(--tr)); background: var(--bg); padding: calc(var(--u) * 2) calc(var(--u) * 2.5); border-left: 6px solid var(--ink); z-index: 3; }
+.thesis b { display: block; font: 400 var(--t1)/1 var(--cond); color: var(--accent-1); letter-spacing: .04em; }
+.thesis p { margin: var(--u) 0 0; font-size: var(--t0); line-height: 1.5; }
+.mast { position: absolute; left: 4vw; top: 4vh; z-index: 4; }
+.mast h1 { margin: 0; font: 400 var(--t3)/.85 var(--cond); text-transform: uppercase; }
+.mast h1 i { font: italic 400 .5em/1 var(--didone); text-transform: none; display: block; color: var(--accent-1); }
+.mast p { margin: var(--u) 0 0; font-size: var(--t-1); letter-spacing: .18em; text-transform: uppercase; }
+.sig { position: absolute; right: 5vw; bottom: 6vh; text-align: right; font: italic 400 var(--t1)/1.1 var(--didone); z-index: 3; }
+.sig small { display: block; font: 400 var(--t-1)/1.4 var(--didone); font-style: normal; letter-spacing: .14em; text-transform: uppercase; }
+@media (prefers-reduced-motion: reduce) { .w { transition: none; } .plate:not(.hit) .w { left: var(--x); top: var(--y); --s: 1; opacity: 1; } }
+@media (max-width: 800px) {
+  .thesis { left: 8vw !important; width: 84vw; }
+  .mast h1 { font-size: 58px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="plate" data-o="62 44" data-seed="3" aria-labelledby="t0"
+    data-w="VRRRRROOOOM|c red 13|180|0;velocità|i 5|55|-12;ELECTRIC|c 7|160|8;speed|d 4|210|-4;ACCIAIO|c grey 6|300|10;+|d red 9|90|0;tram tram tram|i 3|250|-20;100 km/h|c 5|20|6;zzzzzz|c grey 4|330|-30;LIGHT|c 9|120|4;forward|i 4|60|-6;!!!|c red 8|185|0">
+    <header class="mast"><h1 id="t0">Manifesto<i>of Electric Speed</i></h1><p>Ottavio Brenna · Milan · 11 February 1913 · price 10 centesimi</p></header>
+    <div class="thesis" style="--tx: 6vw; --ty: 58vh; --tr: -4deg"><b>Thesis 1</b><p>We declare that the street is faster than the museum. A tram at full current is more beautiful than a thousand painted saints standing still.</p></div>
+  </section>
+  <section class="plate" data-o="30 50" data-seed="8" aria-label="Theses two and three"
+    data-w="ZANG|c red 16|340|-8;TUMB|c 12|20|10;TUMB|c grey 8|60|-16;crash|i 4|120|4;the piston|d 3|160|-6;SINGS|c 7|200|12;ta-ta-ta-ta|i red 3|250|-10;1913|c 6|290|0;iron|i 4|100|20;BOOM|c 10|180|-4">
+    <div class="thesis" style="--tx: 56vw; --ty: 16vh; --tr: 3deg"><b>Thesis 2</b><p>We will set words free from the line. A word that shouts will be large; a word that whispers will be small; a word that runs will lean.</p></div>
+    <div class="thesis" style="--tx: 60vw; --ty: 58vh; --tr: -2deg"><b>Thesis 3</b><p>Punctuation is abolished, except the exclamation mark, which we will use as a hammer, and the plus sign, which joins one engine to the next.</p></div>
+  </section>
+  <section class="plate" data-o="70 55" data-seed="15" aria-label="Thesis four and signature"
+    data-w="FFFFSSSSS|c red 12|200|6;dynamo|i 5|330|-14;HUMMMM|c 9|20|-8;+ + +|d red 6|120|0;GO|c 16|270|4;the city wakes|i 3|60|10;LAMPS|c grey 8|150|-10;now|d 6|240|-20">
+    <div class="thesis" style="--tx: 8vw; --ty: 18vh; --tr: 2deg"><b>Thesis 4</b><p>Every Sunday at noon, from the steps of the Galleria, we will read this manifesto aloud while a motorcycle runs its engine beside us. Come early; bring cotton for your ears.</p></div>
+    <div class="sig">Ottavio Brenna<small>with Lidia Sacchi, Pino Ravera<br>and the Electric Circle of Via Dante</small></div>
+  </section>
+</main>
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  document.querySelectorAll(".plate").forEach((p) => {
+    const [ox, oy] = p.dataset.o.split(" ").map(Number);
+    let seed = +p.dataset.seed; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+    // rays from the impact point
+    const svg = document.createElementNS(NS, "svg"); svg.setAttribute("class", "rays"); svg.setAttribute("aria-hidden", "true"); svg.setAttribute("viewBox", "0 0 100 100"); svg.setAttribute("preserveAspectRatio", "none");
+    let r = "";
+    for (let i = 0; i < 26; i++) { const a = i / 26 * Math.PI * 2 + rnd() * .1, len = 60 + rnd() * 80; r += `<path d="M${ox} ${oy} L${(ox + Math.cos(a) * len).toFixed(1)} ${(oy + Math.sin(a) * len).toFixed(1)}" stroke="${i % 5 ? "#121212" : "#c0392b"}" stroke-width="${i % 3 ? .06 : .18}" vector-effect="none"/>`; }
+    r += `<circle cx="${ox}" cy="${oy}" r="1.2" fill="#c0392b"/>`;
+    svg.innerHTML = r; p.prepend(svg);
+    // words thrown out along the rays at their own sizes
+    p.dataset.w.split(";").forEach((spec, k) => {
+      const [txt, cls, ang, rot] = spec.split("|"); const [kind, ...rest] = cls.split(" "); const size = +rest.pop(); const col = rest.join(" ");
+      const a = (+ang) * Math.PI / 180, d = 14 + (k % 4) * 9 + rnd() * 6;
+      const s = document.createElement("span"); s.className = `w ${kind} ${col}`; s.textContent = txt; s.setAttribute("aria-hidden", "true");
+      s.style.fontSize = `clamp(${Math.max(16, size * 5)}px, ${size * .9}vw, ${size * 16}px)`;
+      s.style.setProperty("--x", Math.min(92, Math.max(8, ox + Math.cos(a) * d * 1.2)) + "%"); s.style.setProperty("--y", Math.min(92, Math.max(8, oy + Math.sin(a) * d)) + "%");
+      s.style.setProperty("--ox", ox + "%"); s.style.setProperty("--oy", oy + "%"); s.style.setProperty("--r", rot + "deg");
+      s.style.transitionDelay = (k * 45) + "ms";
+      p.appendChild(s);
+    });
+  });
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("hit"); io.unobserve(e.target); } }), { threshold: .3 });
+  document.querySelectorAll(".plate").forEach((p) => io.observe(p));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Felt Board · Centiform</title>
+<style>
+/* @fonts: Fredoka:400,600:block; Sniglet:400:swap */
+@font-face{font-family:"Fredoka";font-style:normal;font-weight:400;font-display:block;src:url(fonts/fredoka-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Fredoka";font-style:normal;font-weight:600;font-display:block;src:url(fonts/fredoka-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sniglet";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sniglet-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #3b7d4f;          /* the green felt board */
+  --ink: #fff7e8;         /* cream felt letters */
+  --accent-1: #ffb3c1;    /* pink felt */
+  --accent-2: #ffd23f;    /* yellow felt */
+  --dark: #214d30;
+  --frame: #b98552;
+  --u: 8px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(40px, 4.6vw, 64px);
+  --round: "Fredoka", "Arial Rounded MT Bold", sans-serif;
+  --soft: "Sniglet", "Comic Sans MS", sans-serif;
+  --nap: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='1.6' numOctaves='2' seed='8' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .22 -.04'/></filter><rect width='100%' height='100%' filter='url(%23f)'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: #7a5634; }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.5 var(--soft); min-height: 100vh; overflow-x: hidden; background: repeating-linear-gradient(90deg, #7a5634 0 3px, #845d39 3px 9px); }
+button { font: inherit; }
+:focus-visible { outline: 4px dashed var(--accent-2); outline-offset: 3px; }
+.room { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: calc(var(--u) * 3); padding: calc(var(--u) * 3); min-height: 100vh; }
+/* the board: felt in a wooden frame, on an easel */
+.board { position: relative; background: var(--nap) 0 0 / 200px 200px, radial-gradient(ellipse at 40% 30%, #468d5b, var(--bg) 70%); border: 18px solid var(--frame); border-image: repeating-linear-gradient(90deg, #b98552 0 20px, #a8743f 20px 26px) 18; box-shadow: 0 16px 30px rgba(0,0,0,.4); min-height: 620px; display: flex; flex-direction: column; }
+.board svg { flex: 1; width: 100%; height: 100%; min-height: 540px; touch-action: none; }
+.piece { cursor: grab; }
+.piece:focus { outline: none; }
+.piece:focus-visible > g { filter: url(#fuzz) drop-shadow(0 0 0 #ffd23f) drop-shadow(0 0 4px #ffd23f); }
+.piece.drag { cursor: grabbing; }
+.title { font-family: var(--round); }
+.tray { display: flex; gap: var(--u); padding: var(--u) calc(var(--u) * 2) calc(var(--u) * 1.5); flex-wrap: wrap; align-items: center; background: rgba(0,0,0,.14); }
+.tray span { font: 600 var(--t-1)/1 var(--round); margin-right: var(--u); }
+.tray button { border: 0; border-radius: 999px; padding: 8px 14px; background: var(--ink); color: var(--dark); cursor: pointer; box-shadow: 0 3px 0 rgba(0,0,0,.25); font: 600 var(--t-1)/1 var(--round); }
+.tray button:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,.25); }
+/* the planner: felt cards pinned to the side of the easel */
+.plan { display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+.plan h1 { margin: 0; font: 600 var(--t4)/1 var(--round); color: var(--accent-2); text-shadow: 0 3px 0 rgba(0,0,0,.25); }
+.plan h1 small { display: block; font: 400 var(--t0)/1.4 var(--soft); color: var(--ink); text-shadow: none; margin-top: 6px; }
+.day { position: relative; isolation: isolate; color: #3d2a1a; border-radius: 22px 18px 24px 16px; padding: calc(var(--u) * 1.5) calc(var(--u) * 2) calc(var(--u) * 1.5) calc(var(--u) * 2.5); }
+.day::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--nap) 0 0 / 200px 200px, var(--c, #fff7e8); filter: url(#fuzz) drop-shadow(0 4px 0 rgba(0,0,0,.2)); }
+.day b { font: 600 var(--t1)/1.1 var(--round); display: block; }
+.day span { font-size: 16px; }
+.day::before { content: ""; position: absolute; left: 50%; top: -6px; width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #e0455f 60%); }
+.day.today { outline: 4px dashed var(--accent-2); outline-offset: 4px; }
+.hint { font-size: var(--t-1); color: #f1e2c9; }
+@media (max-width: 1000px) {
+  .room { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 1.5); }
+  .board { min-height: 460px; border-width: 12px; }
+  .board svg { min-height: 380px; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="fuzz" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="1.4" numOctaves="2" seed="4" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="4.5" xChannelSelector="R" yChannelSelector="G"/></filter>
+</svg>
+<div class="room">
+  <main class="board" aria-label="Felt board">
+    <svg id="felt" viewBox="0 0 1000 640" preserveAspectRatio="xMidYMid meet" role="application" aria-label="Felt board scene. Tab to a piece and use arrow keys to move it."></svg>
+    <div class="tray" role="group" aria-label="Add a felt piece"><span>Felt box:</span><button type="button" data-add="sun">Sun</button><button type="button" data-add="tree">Tree</button><button type="button" data-add="hen">Hen</button><button type="button" data-add="owl">Owl</button><button type="button" data-add="house">House</button><button type="button" data-add="moon">Moon</button><button type="button" data-add="flower">Flower</button></div>
+  </main>
+  <aside class="plan" aria-label="Storytime plan">
+    <h1>Room 3 Storytime<small>Week of 16 March · Ms Adeyemi · 10:15 on the carpet</small></h1>
+    <div class="day" style="--c:#fff7e8"><b>Monday</b><span>“The Very Busy Hen” · song: Five Little Ducks</span></div>
+    <div class="day today" style="--c:#ffd23f"><b>Tuesday</b><span>“Owl Moves House” · the children place the pieces</span></div>
+    <div class="day" style="--c:#ffb3c1"><b>Wednesday</b><span>Library visit, no board · bring the red book bag</span></div>
+    <div class="day" style="--c:#b8e0f2"><b>Thursday</b><span>“Grandad’s Big Carrot” · counting to ten</span></div>
+    <div class="day" style="--c:#fff7e8"><b>Friday</b><span>Children choose. Last week they chose the hen, twice.</span></div>
+    <p class="hint">Drag the felt to set the scene. Pieces stay where you leave them until the page is closed, just like the real board until the cleaners come.</p>
+  </aside>
+</div>
+<script>
+(() => {
+  const svg = document.getElementById("felt"), NS = "http://www.w3.org/2000/svg";
+  const SH = {
+    sun: `<circle r="48" fill="#ffd23f"/>${Array.from({ length: 10 }, (_, i) => `<path d="M-9 -58 L0 -86 L9 -58Z" fill="#ffd23f" transform="rotate(${i * 36})"/>`).join("")}<circle cx="-15" cy="-8" r="5" fill="#3d2a1a"/><circle cx="15" cy="-8" r="5" fill="#3d2a1a"/><path d="M-16 14 Q0 28 16 14" stroke="#e0455f" stroke-width="6" fill="none" stroke-linecap="round"/>`,
+    tree: `<rect x="-16" y="10" width="32" height="110" rx="6" fill="#8a5a33"/><circle cy="-40" r="70" fill="#6fbf5a"/><circle cx="-50" cy="0" r="46" fill="#5aa84a"/><circle cx="52" cy="-4" r="44" fill="#62b352"/><circle cx="-20" cy="-60" r="10" fill="#e0455f"/><circle cx="30" cy="-30" r="10" fill="#e0455f"/><circle cx="-4" cy="-12" r="10" fill="#e0455f"/>`,
+    hen: `<ellipse rx="62" ry="48" fill="#fff7e8"/><circle cx="48" cy="-40" r="28" fill="#fff7e8"/><path d="M36 -70 q6 -16 12 -2 q6 -16 12 0 q8 -12 10 4z" fill="#e0455f"/><path d="M74 -40 L92 -34 L74 -28Z" fill="#ffd23f"/><circle cx="54" cy="-44" r="4" fill="#3d2a1a"/><path d="M-60 -10 q-30 -30 -20 -50 q16 18 30 26z" fill="#fff7e8"/><path d="M-20 44 v30 M10 44 v30" stroke="#ffd23f" stroke-width="7" stroke-linecap="round"/><path d="M-30 0 q20 20 40 0" stroke="#ffb3c1" stroke-width="8" fill="none" stroke-linecap="round"/>`,
+    owl: `<ellipse rx="54" ry="66" fill="#a0724a"/><ellipse cy="16" rx="34" ry="42" fill="#e8c9a0"/><circle cx="-20" cy="-26" r="20" fill="#fff7e8"/><circle cx="20" cy="-26" r="20" fill="#fff7e8"/><circle cx="-20" cy="-26" r="9" fill="#3d2a1a"/><circle cx="20" cy="-26" r="9" fill="#3d2a1a"/><path d="M-8 -6 L0 8 L8 -6Z" fill="#ffd23f"/><path d="M-54 -60 L-30 -48 L-44 -30Z M54 -60 L30 -48 L44 -30Z" fill="#a0724a"/>`,
+    house: `<rect x="-70" y="-30" width="140" height="110" fill="#ffb3c1"/><path d="M-90 -26 L0 -104 L90 -26Z" fill="#e0455f"/><rect x="-18" y="20" width="36" height="60" rx="18" fill="#8a5a33"/><rect x="-56" y="-10" width="30" height="30" fill="#b8e0f2"/><rect x="26" y="-10" width="30" height="30" fill="#b8e0f2"/>`,
+    moon: `<path d="M20 -60 A62 62 0 1 0 20 60 A48 48 0 1 1 20 -60Z" fill="#fff7e8"/><circle cx="-30" cy="-6" r="4" fill="#3d2a1a"/>`,
+    flower: `<rect x="-5" y="0" width="10" height="80" fill="#5aa84a"/><path d="M5 50 q30 -20 40 0 q-20 14 -40 0z" fill="#6fbf5a"/>${Array.from({ length: 6 }, (_, i) => `<ellipse cy="-26" rx="14" ry="22" fill="#ffb3c1" transform="rotate(${i * 60})"/>`).join("")}<circle r="14" fill="#ffd23f"/>`
+  };
+  const add = (k, x, y, s = 1) => {
+    const g = document.createElementNS(NS, "g"); g.setAttribute("class", "piece"); g.setAttribute("tabindex", "0"); g.setAttribute("role", "img"); g.setAttribute("aria-label", "Felt " + k);
+    g.dataset.x = x; g.dataset.y = y; g.dataset.s = s; g.setAttribute("transform", `translate(${x} ${y}) scale(${s})`);
+    g.innerHTML = `<g filter="url(#fuzz)" style="filter:url(#fuzz) drop-shadow(0 4px 0 rgba(0,0,0,.25))">${SH[k]}</g>`;
+    svg.appendChild(g); return g;
+  };
+  // the scene for Tuesday: Owl Moves House
+  svg.innerHTML = `<text class="title" x="40" y="70" font-size="46" fill="#fff7e8" font-family="Fredoka" font-weight="600" filter="url(#fuzz)">Owl Moves House</text><path d="M0 560 Q250 520 500 560 T1000 550 V640 H0Z" fill="#2f6b41"/>`;
+  add("moon", 860, 120, .9); add("tree", 230, 400, 1.2); add("house", 700, 450); add("owl", 240, 290, .8); add("flower", 480, 500, .8); add("flower", 540, 520, .6); add("hen", 880, 520, .7);
+  // dragging, with pointer or keys
+  let drag = null;
+  const pt = (e) => { const p = svg.createSVGPoint(); p.x = e.clientX; p.y = e.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); };
+  const place = (g, x, y) => { g.dataset.x = x; g.dataset.y = y; g.setAttribute("transform", `translate(${x} ${y}) scale(${g.dataset.s})`); };
+  svg.addEventListener("pointerdown", (e) => { const g = e.target.closest(".piece"); if (!g) return; const p = pt(e); drag = { g, dx: p.x - g.dataset.x, dy: p.y - g.dataset.y }; g.classList.add("drag"); svg.appendChild(g); svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener("pointermove", (e) => { if (!drag) return; const p = pt(e); place(drag.g, Math.max(0, Math.min(1000, p.x - drag.dx)), Math.max(0, Math.min(640, p.y - drag.dy))); });
+  svg.addEventListener("pointerup", () => { if (drag) drag.g.classList.remove("drag"); drag = null; });
+  svg.addEventListener("keydown", (e) => { const g = e.target.closest(".piece"); if (!g) return; const d = { ArrowLeft: [-20, 0], ArrowRight: [20, 0], ArrowUp: [0, -20], ArrowDown: [0, 20] }[e.key]; if (!d) return; e.preventDefault(); place(g, +g.dataset.x + d[0], +g.dataset.y + d[1]); });
+  document.querySelector(".tray").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; const g = add(b.dataset.add, 420 + Math.random() * 160, 260 + Math.random() * 100, .8); g.focus(); });
+})();
+</script>
+</body>
+</html>
