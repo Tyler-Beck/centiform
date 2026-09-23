@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gold-Tooled Binding · Centiform</title>
+<style>
+/* @fonts: Almendra Display:400:block; Goudy Bookletter 1911:400:swap */
+@font-face{font-family:"Almendra Display";font-style:normal;font-weight:400;font-display:block;src:url(fonts/almendra-display-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Goudy Bookletter 1911";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/goudy-bookletter-1911-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #3a1e14;          /* the library panelling, oiled walnut */
+  --ink: #e8c77a;         /* gold leaf */
+  --accent-1: #6e2a1a;    /* red morocco */
+  --accent-2: #274a3c;    /* green morocco */
+  --paper: #f1e6cc;
+  --type: #2c1c14;
+  --u: 8px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(44px, 5.4vw, 84px);
+  --disp: "Almendra Display", serif;
+  --text: "Goudy Bookletter 1911", Georgia, serif;
+  --grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='l'><feTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' seed='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 -.12'/></filter><rect width='100%' height='100%' filter='url(%23l)'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: radial-gradient(ellipse at 50% 0%, #56301f, var(--bg) 60%); font: 400 var(--t0)/1.6 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+header { text-align: center; padding: calc(var(--u) * 5) calc(var(--u) * 3) calc(var(--u) * 2); }
+header .over { font-size: var(--t-1); letter-spacing: .3em; text-transform: uppercase; }
+h1 { margin: var(--u) 0; font: 400 var(--t4)/1 var(--disp); color: var(--ink); text-shadow: 0 1px 0 #8a6a2a, 0 -1px 0 #fff3c4; }
+header p { margin: 0 auto; max-width: 52ch; color: #e6d3b0; }
+.lib { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: calc(var(--u) * 5); padding: calc(var(--u) * 3) calc(var(--u) * 5) calc(var(--u) * 6); align-items: end; }
+/* the shelf: spines with raised bands and gold-tooled panels */
+.shelf { display: flex; align-items: flex-end; gap: 4px; padding: 0 calc(var(--u) * 2); border-bottom: 18px solid #2a150d; box-shadow: 0 10px 0 #1e0f09; min-height: 430px; overflow-x: auto; }
+.spine { flex: none; width: var(--w, 64px); height: var(--h, 380px); background: var(--grain) 0 0 / 160px 160px, linear-gradient(90deg, rgba(0,0,0,.35), rgba(255,255,255,.08) 30%, rgba(0,0,0,.1) 70%, rgba(0,0,0,.4)), var(--c); border: 0; border-radius: 6px 6px 2px 2px; cursor: pointer; position: relative; padding: 0; color: var(--ink); }
+.spine::before { content: ""; position: absolute; left: 0; right: 0; top: 18%; height: 70%; background: repeating-linear-gradient(transparent 0 calc(20% - 6px), rgba(0,0,0,.35) calc(20% - 6px) calc(20% - 4px), rgba(255,255,255,.18) calc(20% - 4px) calc(20% - 2px), transparent calc(20% - 2px) 20%); }
+.spine span { position: absolute; left: 50%; top: 22%; transform: translateX(-50%); writing-mode: vertical-rl; font: 400 var(--t1)/1 var(--disp); white-space: nowrap; color: #f3d98f; text-shadow: 0 1px 0 rgba(0,0,0,.8), 0 0 1px #f3d98f; z-index: 1; }
+.spine i { position: absolute; left: 8px; right: 8px; top: 8%; height: 7%; border: 1.5px solid var(--ink); border-left: 0; border-right: 0; }
+.spine i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 8px; height: 8px; margin: -4px; background: var(--ink); transform: rotate(45deg); }
+.spine[aria-pressed="true"] { transform: translateY(-18px); box-shadow: 0 18px 0 -6px rgba(0,0,0,.4); }
+/* the open book: board swung back, marbled pastedown, title page */
+.book { position: relative; display: grid; grid-template-columns: 1fr 1fr; aspect-ratio: 1.45; perspective: 1800px; filter: drop-shadow(0 26px 30px rgba(0,0,0,.6)); }
+.pastedown { position: relative; border-radius: 4px 0 0 4px; overflow: hidden; background: var(--c, var(--accent-1)); padding: 14px 0 14px 14px; }
+.pastedown svg { width: 100%; height: 100%; display: block; }
+.title { background: var(--paper); color: var(--type); border-radius: 0 3px 3px 0; padding: 9% 10%; text-align: center; display: flex; flex-direction: column; justify-content: space-between; box-shadow: inset 12px 0 18px -12px rgba(60,40,20,.5); }
+.title h2 { margin: 0; font: 400 var(--t3)/1.05 var(--disp); color: #5a1f12; }
+.title .by { font-style: italic; }
+.title p { margin: 0; font-size: 16px; line-height: 1.5; }
+.title .imp { font-size: var(--t-1); letter-spacing: .14em; text-transform: uppercase; }
+.board { position: absolute; left: 50%; top: 0; width: 50%; height: 100%; transform-origin: 0 50%; transform-style: preserve-3d; z-index: 2; pointer-events: none; }
+.board svg { width: 100%; height: 100%; display: block; backface-visibility: hidden; border-radius: 0 6px 6px 0; }
+.book.opening .board { animation: swing 1.4s cubic-bezier(.5,0,.2,1) forwards; }
+@keyframes swing { from { transform: rotateY(0); } to { transform: rotateY(-178deg); } }
+.board:not(.go) { display: none; }
+.visit { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 4); padding: 0 calc(var(--u) * 5) calc(var(--u) * 6); color: #e6d3b0; }
+.visit div { border-top: 1px solid var(--ink); padding-top: var(--u); }
+.visit b { display: block; font: 400 var(--t1)/1.2 var(--disp); color: var(--ink); }
+@media (prefers-reduced-motion: reduce) { .board { display: none !important; } }
+@media (max-width: 1000px) {
+  .lib { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); }
+  .shelf { min-height: 300px; }
+  .spine { height: calc(var(--h, 380px) * .72); width: calc(var(--w, 64px) * .8); }
+  .spine span { font-size: 17px; }
+  .book { grid-template-columns: .5fr 1fr; aspect-ratio: auto; min-height: 460px; }
+  .board { left: 33.3%; width: 66.7%; }
+  .visit { grid-template-columns: minmax(0, 1fr); padding: 0 calc(var(--u) * 2) calc(var(--u) * 5); }
+}
+</style>
+</head>
+<body>
+<header><div class="over">The Harrowgate Private Press · founded 1893</div><h1>The Bound Library</h1><p>Forty-two titles hand-set, printed on our Albion press and bound in goatskin by our own finishers. Choose a spine to open it.</p></header>
+<main class="lib">
+  <nav class="shelf" id="shelf" aria-label="Books on the shelf"></nav>
+  <section class="book" id="book" aria-live="polite">
+    <div class="pastedown" id="pd"></div>
+    <div class="title" id="tp"></div>
+    <div class="board" id="board" aria-hidden="true"></div>
+  </section>
+</main>
+<section class="visit" aria-label="Visiting">
+  <div><b>The Reading Room</b>Open to readers on Wednesdays, 10 till 4. Cotton gloves are not needed; clean, dry hands are.</div>
+  <div><b>The Bindery</b>Finishing tools of brass, 1,400 of them, bought from two London binderies as they closed. Tours on the first Saturday.</div>
+  <div><b>Subscriptions</b>New titles in editions of 150. Subscribers are offered the first 50 in full morocco.</div>
+</section>
+<script>
+(() => {
+  const B = [
+    { t: "The Compleat Angler", a: "Izaak Walton", c: "#6e2a1a", w: 70, h: 400, y: "1896", ed: "Edition of 120, in red morocco, gold-tooled with a border of fish and reeds.", m: ["#6e2a1a", "#274a3c", "#e8c77a", "#f1e6cc", "#2f3f6a"] },
+    { t: "Songs of Innocence", a: "William Blake", c: "#274a3c", w: 54, h: 340, y: "1901", ed: "Edition of 90, green morocco, the covers blind-tooled with a vine.", m: ["#274a3c", "#b86a3a", "#f1e6cc", "#6a8c5a", "#2c1c14"] },
+    { t: "Sonnets", a: "Christina Rossetti", c: "#3b2a4a", w: 58, h: 360, y: "1908", ed: "Edition of 150, violet morocco, gold fillets and a lozenge of daisies.", m: ["#3b2a4a", "#e8c77a", "#c0a0c8", "#f1e6cc", "#6e2a1a"] },
+    { t: "The Natural History of Selborne", a: "Gilbert White", c: "#8a5a2a", w: 84, h: 410, y: "1912", ed: "Edition of 75, tan calf, with birds tooled in gold at each corner.", m: ["#8a5a2a", "#274a3c", "#e8c77a", "#3a4f6a", "#f1e6cc"] },
+    { t: "Poems", a: "John Clare", c: "#1f3350", w: 60, h: 350, y: "1920", ed: "Edition of 110, blue morocco, the board tooled with a single hawthorn.", m: ["#1f3350", "#c8a04a", "#f1e6cc", "#8a3a2a", "#5a7a9a"] },
+    { t: "Urne-Buriall", a: "Sir Thomas Browne", c: "#2c1c14", w: 50, h: 330, y: "1927", ed: "Edition of 60, black morocco, gold-tooled with a border of small urns.", m: ["#2c1c14", "#e8c77a", "#6e2a1a", "#f1e6cc", "#274a3c"] }
+  ];
+  let seed = 68; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  // marbled endpaper: bands of colour dragged through with a comb, then swirled
+  const marble = (m, n) => { let s = ""; for (let i = 0; i < 40; i++) s += `<rect x="-120" y="${i * 12 - 60}" width="640" height="15" fill="${m[(i * 7 + (i % 3)) % m.length]}"/>`;
+    return `<svg viewBox="0 0 400 480" preserveAspectRatio="none" aria-hidden="true"><defs><filter id="mb${n}" x="0" y="0" width="100%" height="100%"><feTurbulence type="turbulence" baseFrequency=".006 .018" numOctaves="2" seed="${n + 3}" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="90" xChannelSelector="R" yChannelSelector="G"/></filter></defs><g filter="url(#mb${n})">${s}</g></svg>`; };
+  // the front board: gold fillets, corner fleurons, a centre lozenge, blind lines
+  const board = (c) => { const fl = (x, y, r) => `<g transform="translate(${x} ${y}) rotate(${r})"><path d="M0 0 C10 -4 18 -14 20 -26 C12 -18 4 -16 0 -4 C-4 -16 -12 -18 -20 -26 C-18 -14 -10 -4 0 0Z" fill="#e8c77a"/><circle r="3" fill="#e8c77a" cy="6"/></g>`;
+    return `<svg viewBox="0 0 400 480"><rect width="400" height="480" fill="${c}"/><rect width="400" height="480" fill="url(#gr)" opacity=".5"/><rect x="20" y="20" width="360" height="440" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="3"/><rect x="34" y="34" width="332" height="412" fill="none" stroke="#e8c77a" stroke-width="2"/><rect x="42" y="42" width="316" height="396" fill="none" stroke="#e8c77a" stroke-width=".8"/>
+      ${fl(62, 62, 135)}${fl(338, 62, -135)}${fl(62, 418, 45)}${fl(338, 418, -45)}<path d="M200 170 L270 240 L200 310 L130 240Z" fill="none" stroke="#e8c77a" stroke-width="2"/><path d="M200 190 L250 240 L200 290 L150 240Z" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="2"/><circle cx="200" cy="240" r="10" fill="#e8c77a"/>${[0, 90, 180, 270].map((r) => `<g transform="rotate(${r} 200 240)"><circle cx="200" cy="205" r="4" fill="#e8c77a"/></g>`).join("")}</svg>`; };
+  const shelf = document.getElementById("shelf"), book = document.getElementById("book"), pd = document.getElementById("pd"), tp = document.getElementById("tp"), bd = document.getElementById("board");
+  shelf.innerHTML = B.map((b, i) => `<button type="button" class="spine" style="--c:${b.c};--w:${b.w}px;--h:${b.h}px" aria-pressed="false" aria-label="${b.t}, ${b.a}"><i></i><span>${b.t.length > 22 ? b.t.split(" ").slice(-1)[0] : b.t}</span></button>`).join("");
+  const open = (i, anim) => { const b = B[i]; book.style.setProperty("--c", b.c);
+    pd.innerHTML = marble(b.m, i);
+    tp.innerHTML = `<div class="imp">Harrowgate Press</div><div><h2>${b.t}</h2><p class="by">by ${b.a}</p></div><p>${b.ed}</p><div class="imp">Printed ${b.y}</div>`;
+    bd.innerHTML = board(b.c) + `<svg width="0" height="0" style="position:absolute"><defs><pattern id="gr" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#000"/></pattern></defs></svg>`;
+    shelf.querySelectorAll(".spine").forEach((s, k) => s.setAttribute("aria-pressed", String(k === i)));
+    if (anim) { bd.classList.add("go"); book.classList.remove("opening"); void book.offsetWidth; book.classList.add("opening"); } };
+  shelf.addEventListener("click", (e) => { const s = e.target.closest(".spine"); if (s) open([...shelf.children].indexOf(s), true); });
+  open(0, true);
+})();
+</script>
+</body>
+</html>

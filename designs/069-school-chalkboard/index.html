@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School Chalkboard · Centiform</title>
+<style>
+/* @fonts: Cabin Sketch:400,700:block; Gochi Hand:400:swap */
+@font-face{font-family:"Cabin Sketch";font-style:normal;font-weight:400;font-display:block;src:url(fonts/cabin-sketch-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cabin Sketch";font-style:normal;font-weight:700;font-display:block;src:url(fonts/cabin-sketch-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gochi Hand";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gochi-hand-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #2c3a33;          /* slate, green-painted */
+  --ink: #f1f1ea;         /* white chalk */
+  --accent-1: #f6d365;    /* yellow chalk */
+  --accent-2: #9fd3c7;    /* blue-green chalk */
+  --pink: #f4a6a6;
+  --frame: #8a5a32;
+  --u: 8px;
+  /* scale: 1.25 on 21px (chalk hands run small) */
+  --t-1: 17px; --t0: 21px; --t1: 26px; --t2: 33px; --t3: 41px; --t4: clamp(46px, 5.6vw, 88px);
+  --sketch: "Cabin Sketch", "Comic Sans MS", cursive;
+  --hand: "Gochi Hand", "Comic Sans MS", cursive;
+  --dust: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='d'><feTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='9' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 -.02'/></filter><rect width='100%' height='100%' filter='url(%23d)'/></svg>");
+  --chalkmask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='m'><feTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2' seed='4' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -1.4 1.5'/></filter><rect width='100%' height='100%' filter='url(%23m)'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: #c9b99a; }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.5 var(--hand); overflow-x: hidden; background: linear-gradient(#d8cbb0, #b9a684); min-height: 100vh; padding: calc(var(--u) * 3); }
+button, input { font: inherit; }
+:focus-visible { outline: 3px dashed var(--accent-1); outline-offset: 3px; }
+/* the board: slate in an oak frame, with a chalk ledge */
+.board { position: relative; background: var(--dust) 0 0 / 300px 300px, radial-gradient(ellipse at 30% 30%, #34463d, var(--bg) 60%, #25312b); border: 22px solid var(--frame); border-image: linear-gradient(135deg, #a06a3b, #7a4c28 50%, #8f5c32) 22; box-shadow: 0 20px 40px -12px rgba(0,0,0,.5); padding: calc(var(--u) * 4) calc(var(--u) * 5) calc(var(--u) * 8); min-height: calc(100vh - 48px); overflow: hidden; }
+.chalk { -webkit-mask: var(--chalkmask) 0 0 / 120px 120px; mask: var(--chalkmask) 0 0 / 120px 120px; }
+/* ghosts of lessons wiped with a dry cloth */
+.ghost { position: absolute; font: 400 var(--t3)/1.1 var(--hand); color: rgba(241,241,234,.08); filter: blur(2.5px); transform: rotate(var(--r)); pointer-events: none; white-space: nowrap; }
+.smear { position: absolute; width: 520px; height: 150px; background: radial-gradient(ellipse, rgba(241,241,234,.07), transparent 70%); transform: rotate(-8deg); pointer-events: none; }
+.head { position: relative; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: var(--u); border-bottom: 2px solid rgba(241,241,234,.6); padding-bottom: var(--u); }
+.head h1 { margin: 0; font: 700 var(--t4)/1 var(--sketch); }
+.head .date { font-size: var(--t1); color: var(--accent-1); }
+.grid { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) minmax(0, 1fr); gap: calc(var(--u) * 5); margin-top: calc(var(--u) * 3); }
+h2 { margin: 0 0 var(--u); font: 400 var(--t2)/1.1 var(--sketch); color: var(--accent-2); text-decoration: underline wavy rgba(159,211,199,.6); text-underline-offset: 6px; }
+.grid ol, .grid ul { margin: 0; padding-left: 1.2em; }
+.grid li { margin-bottom: 6px; }
+.formula { font: 400 var(--t3)/1.2 var(--sketch); color: var(--accent-1); margin: calc(var(--u) * 2) 0; white-space: nowrap; }
+.formula small { font: 400 var(--t-1)/1.4 var(--hand); color: var(--ink); display: block; white-space: normal; }
+.diagram svg { width: 100%; height: auto; max-height: 440px; }
+.cs { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; filter: url(#chalky); }
+.cs.y { stroke: var(--accent-1); } .cs.b { stroke: var(--accent-2); }
+.bob { transform-origin: 200px 40px; transform: rotate(var(--a0, 18deg)); }
+.ctrl { display: flex; gap: calc(var(--u) * 2); align-items: center; flex-wrap: wrap; font-size: var(--t-1); }
+.ctrl input { accent-color: var(--accent-1); width: 160px; }
+.ctrl output { color: var(--accent-1); font-size: var(--t1); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { border: 2px solid rgba(241,241,234,.55); padding: 4px 10px; text-align: center; }
+th { color: var(--accent-2); font-weight: 400; }
+.hw { margin-top: calc(var(--u) * 3); color: var(--pink); font-size: var(--t1); transform: rotate(-1.5deg); }
+.ledge { position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: linear-gradient(#9a6a3e, #6e4424); box-shadow: 0 -2px 0 rgba(0,0,0,.3); display: flex; align-items: center; gap: 18px; padding: 0 60px; }
+.ledge i { display: block; height: 10px; width: 60px; border-radius: 5px; background: var(--c, #f1f1ea); box-shadow: 0 2px 0 rgba(0,0,0,.3); }
+.ledge b { display: block; width: 120px; height: 22px; margin-left: auto; background: linear-gradient(#5a4a3a 0 40%, #d9d4c6 40%); border-radius: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .bob { animation: swing var(--T, 2s) ease-in-out infinite alternate; }
+  @keyframes swing { from { transform: rotate(var(--a0, 18deg)); } to { transform: rotate(calc(var(--a0, 18deg) * -1)); } }
+}
+@media (max-width: 1100px) { .grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .diagram { grid-column: 1 / -1; order: -1; } }
+@media (max-width: 700px) {
+  body { padding: var(--u); }
+  .board { padding: calc(var(--u) * 2.5) calc(var(--u) * 2) calc(var(--u) * 7); border-width: 12px; }
+  .grid { grid-template-columns: minmax(0, 1fr); }
+  .formula { font-size: 32px; }
+  .ghost { display: none; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="chalky" filterUnits="userSpaceOnUse" x="-20" y="-20" width="440" height="460"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="3"/><feComposite in2="n" operator="in"/><feComponentTransfer><feFuncA type="linear" slope="2.2"/></feComponentTransfer></filter></svg>
+<main class="board" aria-labelledby="h">
+  <div class="ghost" style="left: 52%; top: 8%; --r: -3deg" aria-hidden="true">F = ma  · Newton’s 3rd law</div>
+  <div class="ghost" style="left: 4%; top: 64%; --r: 4deg" aria-hidden="true">homework p. 112 q. 4–9</div>
+  <div class="smear" style="left: 30%; top: 55%" aria-hidden="true"></div>
+  <div class="smear" style="left: 64%; top: 20%" aria-hidden="true"></div>
+  <header class="head"><h1 id="h" class="chalk">The Simple Pendulum</h1><span class="date chalk">Tues 3 Feb · Year 10 · Room 14 · Mr Okonjo</span></header>
+  <div class="grid">
+    <section class="chalk" aria-labelledby="aims">
+      <h2 id="aims">Today we will</h2>
+      <ol><li>time 10 swings, not 1</li><li>change the length, keep the mass</li><li>find out if the angle matters (small ones!)</li><li>plot T² against L</li></ol>
+      <div class="formula">T = 2π √(L / g)<small>T is the time for one full swing there and back. g = 9.81 m/s² on Earth, less on the Moon.</small></div>
+    </section>
+    <section class="diagram" aria-labelledby="d-h">
+      <h2 id="d-h" class="chalk">Set-up</h2>
+      <svg viewBox="0 0 400 420" role="img" aria-label="Chalk diagram: a clamp stand, a string of length L and a bob swinging through a small angle">
+        <path class="cs" d="M60 400 H340 M100 400 V30 H240 M92 30 H108 M196 30 H204 V50"/>
+        <path class="cs y" d="M200 40 V300" stroke-dasharray="6 10"/>
+        <path class="cs b" d="M200 110 A70 70 0 0 1 222 106"/>
+        <text x="228" y="118" fill="#9fd3c7" font-family="Gochi Hand" font-size="22">θ</text>
+        <g class="bob" id="bob"><path class="cs" id="string" d="M200 40 V300"/><circle class="cs y" id="ball" cx="200" cy="316" r="16"/></g>
+        <path class="cs" d="M320 40 V300 M312 40 H328 M312 300 H328"/><text x="330" y="176" fill="#f1f1ea" font-family="Gochi Hand" font-size="26" id="Llab">L</text>
+      </svg>
+      <div class="ctrl chalk"><label for="len">Length L</label><input id="len" type="range" min="20" max="100" value="60"><output id="lv">0.60 m</output><span>→ T =</span><output id="tv">1.55 s</output></div>
+    </section>
+    <section class="chalk" aria-labelledby="r-h">
+      <h2 id="r-h">Our results</h2>
+      <table><thead><tr><th>L (m)</th><th>10 T (s)</th><th>T (s)</th><th>T² (s²)</th></tr></thead>
+        <tbody><tr><td>0.20</td><td>9.0</td><td>0.90</td><td>0.81</td></tr><tr><td>0.40</td><td>12.7</td><td>1.27</td><td>1.61</td></tr><tr><td>0.60</td><td>15.5</td><td>1.55</td><td>2.40</td></tr><tr><td>0.80</td><td>17.9</td><td>1.79</td><td>3.20</td></tr><tr><td>1.00</td><td>20.1</td><td>2.01</td><td>4.04</td></tr></tbody></table>
+      <p>Straight line through the origin, so T² ∝ L. Gradient ≈ 4.0, and 4π²/g = 4.02. Close!</p>
+      <p class="hw">HW: why does the mass not matter? One paragraph. Friday.</p>
+    </section>
+  </div>
+  <div class="ledge" aria-hidden="true"><i></i><i style="--c:#f6d365; width:42px"></i><i style="--c:#9fd3c7; width:30px"></i><b></b></div>
+</main>
+<script>
+(() => {
+  const len = document.getElementById("len"), bob = document.getElementById("bob"), str = document.getElementById("string"), ball = document.getElementById("ball");
+  const set = () => { const L = len.value / 100, T = 2 * Math.PI * Math.sqrt(L / 9.81), px = 60 + L * 240;
+    str.setAttribute("d", `M200 40 V${40 + px}`); ball.setAttribute("cy", 56 + px);
+    document.getElementById("lv").textContent = L.toFixed(2) + " m"; document.getElementById("tv").textContent = T.toFixed(2) + " s";
+    bob.style.setProperty("--T", (T / 2).toFixed(3) + "s"); };
+  len.addEventListener("input", set); set();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chancery Seal · Centiform</title>
+<style>
+/* @fonts: Pinyon Script:400:block; Radley:400,400i:swap */
+@font-face{font-family:"Pinyon Script";font-style:normal;font-weight:400;font-display:block;src:url(fonts/pinyon-script-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Radley";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/radley-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Radley";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/radley-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f1e7d0;          /* calf vellum, hair side */
+  --ink: #2a2320;         /* iron-gall ink, aged to brown-black */
+  --accent-1: #9e1b1b;    /* sealing wax */
+  --accent-2: #6b5a3c;    /* the ruling, drawn in plummet */
+  --silk: #2f5a3a;        /* green silk cords */
+  --desk: #3b2c22;
+  --u: 8px;
+  --line: 34px;           /* one ruled line */
+  /* scale: 1.333 on 19px */
+  --t-1: 14px; --t0: 19px; --t1: 25px; --t2: 34px; --t3: 45px; --t4: clamp(56px, 7vw, 108px);
+  --hand: "Pinyon Script", cursive;
+  --text: "Radley", Georgia, serif;
+  --vel: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='v'><feTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='4' seed='22' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .55 0 0 0 0 .45 0 0 0 0 .3 0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23v)'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--desk); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/var(--line) var(--text); overflow-x: hidden; background: radial-gradient(ellipse at 50% 20%, #54402f, var(--desk) 70%); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+.top { text-align: center; color: #e9dcc0; padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 3); font-size: var(--t-1); letter-spacing: .2em; text-transform: uppercase; line-height: 1.5; }
+.top b { display: block; font: 400 var(--t2)/1.2 var(--hand); letter-spacing: 0; text-transform: none; }
+/* the charter: one long membrane, pricked and ruled */
+.charter { position: relative; width: min(1000px, calc(100% - 32px)); margin: 0 auto; background: var(--vel) 0 0 / 400px 400px, radial-gradient(ellipse at 30% 20%, #f6eedb, var(--bg) 55%, #e6d8b8); padding: calc(var(--u) * 10) 13% calc(var(--u) * 6) 13%; box-shadow: 0 30px 50px -20px rgba(0,0,0,.6); clip-path: polygon(0 1%, 3% 0, 50% .6%, 97% 0, 100% 1.2%, 99.4% 50%, 100% 99%, 0 100%, .5% 60%); }
+.charter::before { content: ""; position: absolute; inset: calc(var(--u) * 10) 11% 220px 11%; pointer-events: none;
+  background: repeating-linear-gradient(transparent 0 calc(var(--line) - 1px), rgba(107,90,60,.22) calc(var(--line) - 1px) var(--line)),
+    linear-gradient(90deg, rgba(107,90,60,.3) 1px, transparent 1px 16px, rgba(107,90,60,.3) 16px 17px, transparent 17px calc(100% - 17px), rgba(107,90,60,.3) calc(100% - 17px) calc(100% - 16px), transparent calc(100% - 16px) calc(100% - 1px), rgba(107,90,60,.3) calc(100% - 1px)); }
+.charter > * { position: relative; }
+.inv { font: 400 var(--t3)/1.2 var(--hand); margin: 0 0 var(--line); }
+.initial { float: left; font: 400 calc(var(--line) * 4.6)/.8 var(--hand); color: var(--accent-1); margin: 6px 14px 0 -6px; text-shadow: 2px 2px 0 rgba(107,90,60,.25); }
+.charter p { margin: 0 0 var(--line); text-align: justify; hyphens: auto; }
+.charter .nm { font: 400 1.35em/1 var(--hand); }
+.note { position: absolute; right: -11%; width: 9%; font: italic 400 12px/1.4 var(--text); color: var(--accent-2); text-align: left; }
+.dated { text-align: right; font-style: italic; }
+.witness { margin: var(--line) 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 calc(var(--u) * 4); font-size: 16px; }
+/* the foot: plica folded up, cords through it, the wax seal hanging below */
+.plica { position: relative; height: 70px; margin: calc(var(--line) * 1) -16% 0; background: linear-gradient(#d9c9a3, #efe3c6 40%, #e2d2ad); box-shadow: 0 -2px 4px rgba(0,0,0,.18) inset, 0 -1px 0 rgba(107,90,60,.4); }
+.cords { position: absolute; left: 50%; top: -150px; width: 60px !important; height: 170px !important; margin-left: -30px; z-index: -1; }
+.seal { position: relative; z-index: 0; isolation: isolate; width: 170px; height: 170px; margin: 110px auto 0; border-radius: 48% 52% 50% 50% / 50% 48% 52% 50%; background: radial-gradient(circle at 38% 32%, #d0453b, var(--accent-1) 45%, #6e0f0f 80%, #4a0808); box-shadow: 0 10px 18px rgba(0,0,0,.5), inset -6px -8px 14px rgba(0,0,0,.35), inset 6px 6px 12px rgba(255,160,140,.25); display: grid; place-items: center; }
+.seal svg { width: 138px; height: 138px; }
+.seal-cap { text-align: center; color: #e9dcc0; font-size: var(--t-1); line-height: 1.5; padding: calc(var(--u) * 2) calc(var(--u) * 3) calc(var(--u) * 6); max-width: 60ch; margin: 0 auto; }
+@media (prefers-reduced-motion: no-preference) {
+  .seal { animation: press 1.4s cubic-bezier(.3,1.5,.5,1) both .4s; }
+  @keyframes press { from { transform: scale(1.25); opacity: 0; } }
+}
+@media (max-width: 800px) {
+  .charter { padding: calc(var(--u) * 6) 7% calc(var(--u) * 4); }
+  .charter::before { inset: calc(var(--u) * 6) 5% 220px 5%; }
+  .note { position: static; width: auto; display: block; margin: -24px 0 var(--line); }
+  .witness { grid-template-columns: 1fr; }
+  .plica { margin: var(--line) -8% 0; }
+  .inv { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+<header class="top"><b>The Ashcombe Charters</b>Borough record office · item AC/1 · shown in facsimile, full size 64 × 49 cm</header>
+<main>
+  <article class="charter" aria-labelledby="t">
+    <h1 class="inv" id="t">Henry, by the grace of God King of England and of France, and Lord of Ireland,</h1>
+    <p><span class="initial" aria-hidden="true">T</span>to all to whom these present letters shall come, greeting. Know that of our special grace we have granted, and by this our charter confirmed, to our beloved and faithful men the <span class="nm">Burgesses of Ashcombe</span> and their successors for ever, the mill called Welbeck Mill upon the water of the Axe, with the leat, the weir, the eel-traps and the two acres of meadow lying between the weir and the king’s highway.</p>
+    <span class="note" style="top: 230px">The mill still turns; it now grinds flour for the museum bakery.</span>
+    <p>To have and to hold of us and our heirs, rendering yearly to us at our Exchequer one pound of pepper at the feast of Saint Michael, and grinding without charge the corn of the poor of the said borough on every Saturday of the year.</p>
+    <p>And we will and firmly command that the said burgesses may hold a market in the said borough every Wednesday, and a fair every year lasting three days, namely on the eve, the day and the morrow of the Nativity of Saint John the Baptist, with all the liberties and free customs belonging to such a market and fair, unless the market or fair be to the harm of neighbouring markets and fairs.</p>
+    <span class="note" style="top: 560px">The Wednesday market has not missed a week since, except in 1665.</span>
+    <p>Wherefore we will that the said burgesses and their successors shall have and hold all the aforesaid well and in peace, freely and quietly, wholly and honourably, as is aforesaid.</p>
+    <div class="witness"><span>These being witnesses: the venerable father <span class="nm">Henry</span>, Archbishop of Canterbury;</span><span>our dearest brother <span class="nm">Thomas</span>, Duke of Clarence; <span class="nm">Richard</span>, Earl of Warwick; and others.</span></div>
+    <p class="dated">Given by our hand at Westminster, the twelfth day of June, in the second year of our reign.</p>
+    <div class="plica" aria-hidden="true">
+    </div>
+  </article>
+  <div class="seal" role="img" aria-label="Red wax seal showing a mill wheel beneath a crown, with a border legend">
+<svg class="cords" viewBox="0 0 60 170"><path d="M22 0 C18 60 26 110 24 170" stroke="#2f5a3a" stroke-width="6" fill="none"/><path d="M38 0 C42 60 34 110 36 170" stroke="#3d7049" stroke-width="6" fill="none"/><path d="M22 0 C18 60 26 110 24 170 M38 0 C42 60 34 110 36 170" stroke="rgba(255,255,255,.25)" stroke-width="1.5" stroke-dasharray="3 5" fill="none"/></svg>
+    <svg viewBox="-70 -70 140 140" aria-hidden="true">
+      <defs><path id="rim" d="M-52 0 A52 52 0 1 1 52 0 A52 52 0 1 1 -52 0"/><filter id="emb"><feGaussianBlur in="SourceAlpha" stdDeviation="1"/><feOffset dx="-1.2" dy="-1.2" result="h"/><feFlood flood-color="#ffb4a4" flood-opacity=".55"/><feComposite in2="h" operator="in" result="hi"/><feGaussianBlur in="SourceAlpha" stdDeviation="1"/><feOffset dx="1.4" dy="1.6" result="s"/><feFlood flood-color="#2a0404" flood-opacity=".75"/><feComposite in2="s" operator="in" result="sh"/><feMerge><feMergeNode in="sh"/><feMergeNode in="hi"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g filter="url(#emb)" fill="#a82420">
+        <circle r="62" fill="none" stroke="#a82420" stroke-width="3"/><circle r="44" fill="none" stroke="#a82420" stroke-width="2"/>
+        <text font-family="Radley, serif" font-size="11" letter-spacing="1.6" fill="#a82420"><textPath href="#rim">✚ SIGILLVM ✚ BVRGENSIVM ✚ DE ✚ ASCOMBE ✚</textPath></text>
+        <circle r="18" cy="8" fill="none" stroke="#a82420" stroke-width="3"/>
+        <path d="M0 -10 V26 M-18 8 H18 M-13 -5 L13 21 M13 -5 L-13 21" stroke="#a82420" stroke-width="2"/>
+        <path d="M-16 -18 L-16 -30 L-8 -22 L0 -34 L8 -22 L16 -30 L16 -18Z" fill="#a82420"/>
+        <path d="M-30 30 Q-15 24 0 30 T30 30" fill="none" stroke="#a82420" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+  <p class="seal-cap">The common seal of the burgesses, in red wax on green silk cords, pressed 12 June 1414. Shown with the plica folded up, as the charter was delivered.</p>
+</main>
+</body>
+</html>

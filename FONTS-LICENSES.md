@@ -125,3 +125,23 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Petrona | OFL-1.1 | https://fontsource.org/fonts/petrona | 059-entomology-drawers |
 | Hanken Grotesk | OFL-1.1 | https://fontsource.org/fonts/hanken-grotesk | 060-electron-micrograph |
 | Major Mono Display | OFL-1.1 | https://fontsource.org/fonts/major-mono-display | 060-electron-micrograph |
+| Abril Fatface | OFL-1.1 | https://fontsource.org/fonts/abril-fatface | 061-letterpress-cotton |
+| Rufina | OFL-1.1 | https://fontsource.org/fonts/rufina | 061-letterpress-cotton |
+| Yellowtail | Apache-2.0 | https://fontsource.org/fonts/yellowtail | 062-night-neon |
+| Monoton | OFL-1.1 | https://fontsource.org/fonts/monoton | 062-night-neon |
+| Michroma | OFL-1.1 | https://fontsource.org/fonts/michroma | 063-anodized-nameplate |
+| Tomorrow | OFL-1.1 | https://fontsource.org/fonts/tomorrow | 063-anodized-nameplate |
+| Pinyon Script | OFL-1.1 | https://fontsource.org/fonts/pinyon-script | 064-chancery-seal |
+| Radley | OFL-1.1 | https://fontsource.org/fonts/radley | 064-chancery-seal |
+| Fredoka | OFL-1.1 | https://fontsource.org/fonts/fredoka | 065-felt-board |
+| Sniglet | OFL-1.1 | https://fontsource.org/fonts/sniglet | 065-felt-board |
+| Hahmlet | OFL-1.1 | https://fontsource.org/fonts/hahmlet | 066-celadon-glaze |
+| Gothic A1 | OFL-1.1 | https://fontsource.org/fonts/gothic-a1 | 066-celadon-glaze |
+| Forum | OFL-1.1 | https://fontsource.org/fonts/forum | 067-marquetry-inlay |
+| Proza Libre | OFL-1.1 | https://fontsource.org/fonts/proza-libre | 067-marquetry-inlay |
+| Almendra Display | OFL-1.1 | https://fontsource.org/fonts/almendra-display | 068-gold-tooled-binding |
+| Goudy Bookletter 1911 | OFL-1.1 | https://fontsource.org/fonts/goudy-bookletter-1911 | 068-gold-tooled-binding |
+| Cabin Sketch | OFL-1.1 | https://fontsource.org/fonts/cabin-sketch | 069-school-chalkboard |
+| Gochi Hand | OFL-1.1 | https://fontsource.org/fonts/gochi-hand | 069-school-chalkboard |
+| Handjet | OFL-1.1 | https://fontsource.org/fonts/handjet | 070-sampler-stitch |
+| Nunito | OFL-1.1 | https://fontsource.org/fonts/nunito | 070-sampler-stitch |
