@@ -19,3 +19,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Crimson Pro | OFL-1.1 | https://fontsource.org/fonts/crimson-pro | 005-triband-paperbacks |
 | Cormorant | OFL-1.1 | https://fontsource.org/fonts/cormorant | 006-herbarium-sheets |
 | Sometype Mono | OFL-1.1 | https://fontsource.org/fonts/sometype-mono | 006-herbarium-sheets |
+| Work Sans | OFL-1.1 | https://fontsource.org/fonts/work-sans | 007-transit-annual-1972 |
+| Spectral | OFL-1.1 | https://fontsource.org/fonts/spectral | 007-transit-annual-1972 |

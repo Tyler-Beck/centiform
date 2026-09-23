@@ -50,7 +50,7 @@ window.CENTIFORM = [
     fonts: ["Work Sans","Spectral"], swatch: ["#eceae4","#1a1a1a","#7a2e8e","#d9b310"],
     grammar: "Thick black top band on every spread, 6-unit modular grid, figures set huge",
     motif: "Oversized financial numerals with thin unit labels",
-    status: "planned" },
+    status: "done" },
   { n: 8, slug: "008-basement-xerox", title: "Basement Xerox", family: "Paper & Print",
     subject: "Flyer wall for a basement show series.", format: "poster", mode: "light",
     thesis: "Punk cut-and-paste collage, photocopied",

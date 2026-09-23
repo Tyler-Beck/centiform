@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transit Annual 1972 · Centiform</title>
+<style>
+/* @fonts: Work Sans:300,500,800:swap; Spectral:400,400i,600:swap */
+@font-face{font-family:"Work Sans";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/work-sans-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Work Sans";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/work-sans-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Work Sans";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/work-sans-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Spectral";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/spectral-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Spectral";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/spectral-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Spectral";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/spectral-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #eceae4;          /* coated stock, slightly warm */
+  --ink: #1a1a1a;
+  --accent-1: #7a2e8e;    /* authority purple */
+  --accent-2: #d9b310;    /* bus yellow */
+  --grey: #8d8b85;
+  --band: 12vh;           /* the black band on every spread */
+  --u: 8px;
+  --m: calc((100% - 5 * var(--g)) / 6);   /* one of six modules */
+  --g: calc(var(--u) * 3);
+  /* scale: 1.5 on 17px */
+  --t-1: 12px; --t0: 17px; --t1: 25.5px; --t2: 38px; --t3: 57px; --t4: clamp(84px, 11vw, 190px);
+  --sans: "Work Sans", "Helvetica Neue", sans-serif;
+  --serif: "Spectral", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #cfccc3; color: var(--ink); }
+body { font: 400 var(--t0)/1.55 var(--serif); }
+.spread { position: relative; background: var(--bg); min-height: 100vh; display: grid; grid-template-rows: var(--band) 1fr auto; margin-bottom: calc(var(--u) * 2); }
+.band { background: var(--ink); color: var(--bg); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--g); align-items: end; padding: 0 calc(var(--u) * 7) calc(var(--u) * 2); font: 500 var(--t-1)/1.3 var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+.band b { font-weight: 800; }
+.band .r { grid-column: 6; text-align: right; }
+.grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); column-gap: var(--g); row-gap: calc(var(--u) * 5); padding: calc(var(--u) * 6) calc(var(--u) * 7) calc(var(--u) * 7); align-content: start; }
+.folio { display: flex; justify-content: space-between; padding: 0 calc(var(--u) * 7) calc(var(--u) * 3); font: 500 var(--t-1)/1 var(--sans); letter-spacing: .12em; color: var(--grey); }
+.lbl { font: 300 var(--t-1)/1.35 var(--sans); letter-spacing: .16em; text-transform: uppercase; }
+/* cover */
+.cover .grid { grid-template-rows: auto 1fr; min-height: calc(100vh - var(--band) - 40px); }
+.logo { grid-column: 1 / span 4; font: 800 clamp(110px, 20vw, 380px)/.8 var(--sans); letter-spacing: -.06em; margin: 0; }
+.logo span { color: var(--accent-1); }
+.cover .year { grid-column: 5 / span 2; align-self: end; text-align: right; font: 300 var(--t3)/1 var(--sans); letter-spacing: -.02em; }
+.stripes { grid-column: 1 / -1; align-self: end; display: grid; gap: calc(var(--u) * 1.5); }
+.stripes i { display: block; height: calc(var(--u) * 5); }
+.stripes i:nth-child(1) { background: var(--accent-1); width: 100%; }
+.stripes i:nth-child(2) { background: var(--accent-2); width: 83.3%; }
+.stripes i:nth-child(3) { background: var(--ink); width: 66.6%; }
+.cover .sub { grid-column: 1 / span 3; font: 400 var(--t1)/1.3 var(--serif); margin: 0; }
+.cover .sub em { color: var(--accent-1); }
+.cover .who { grid-column: 5 / span 2; margin: 0; align-self: end; }
+/* figures */
+.fig { border-top: 3px solid var(--ink); padding-top: calc(var(--u) * 1.5); }
+.fig.w2 { grid-column: span 2; } .fig.w3 { grid-column: span 3; } .fig.w4 { grid-column: span 4; }
+.num { font: 800 var(--t4)/.86 var(--sans); letter-spacing: -.05em; display: flex; align-items: flex-start; gap: 6px; margin: calc(var(--u) * 1.5) 0 var(--u); font-variant-numeric: tabular-nums lining-nums; }
+.num.m { font-size: clamp(64px, 7.4vw, 128px); }
+.num sup { font: 300 var(--t1)/1 var(--sans); letter-spacing: 0; margin-top: .3em; }
+.num small { font: 300 var(--t2)/1 var(--sans); letter-spacing: -.02em; align-self: flex-end; margin-bottom: .1em; }
+.fig.p .num { color: var(--accent-1); }
+.fig p { margin: 0; font-size: 16px; line-height: 1.5; max-width: 34ch; }
+.delta { font: 500 var(--t-1)/1 var(--sans); letter-spacing: .1em; }
+.delta.up::before { content: "\25B2  "; color: var(--accent-1); }
+.delta.dn::before { content: "\25BC  "; color: var(--grey); }
+h2.sec { grid-column: 1 / span 3; margin: 0; font: 800 var(--t2)/1 var(--sans); letter-spacing: -.03em; }
+h2.sec + .intro { grid-column: 4 / span 3; margin: 0; font-size: var(--t0); }
+/* letter */
+.letter { grid-column: 1 / span 3; columns: 2; column-gap: var(--g); }
+.letter p { margin: 0 0 calc(var(--u) * 1.5); text-indent: 1.4em; }
+.letter p:first-child { text-indent: 0; }
+.letter p:first-child::first-line { font-variant: small-caps; letter-spacing: .04em; }
+.sig { font-style: italic; }
+.chart { grid-column: 4 / span 3; }
+.bars { display: grid; grid-template-columns: repeat(12, 1fr); align-items: end; gap: 6px; height: 280px; border-bottom: 3px solid var(--ink); margin-top: calc(var(--u) * 2); }
+.bars div { background: var(--ink); position: relative; }
+.bars div.hi { background: var(--accent-1); }
+.bars div span { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font: 500 10px/1 var(--sans); }
+.months { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; font: 500 10px/2 var(--sans); letter-spacing: .08em; text-align: center; }
+.chart .note { margin-top: calc(var(--u) * 2); font-size: 15px; }
+.chart .note b { background: var(--accent-2); padding: 0 4px; font-weight: 600; }
+/* statement */
+.stmt { grid-column: 1 / span 4; width: 100%; border-collapse: collapse; font: 400 15px/1.4 var(--sans); font-variant-numeric: tabular-nums; }
+.stmt caption { text-align: left; padding-bottom: var(--u); }
+.stmt th { text-align: left; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; font-size: 11px; border-bottom: 3px solid var(--ink); padding: var(--u) 0; }
+.stmt td { padding: var(--u) 0; border-bottom: 1px solid #c3c0b8; }
+.stmt td:not(:first-child), .stmt th:not(:first-child) { text-align: right; width: 18%; }
+.stmt tr.tot td { font-weight: 800; border-bottom: 3px solid var(--ink); border-top: 1px solid var(--ink); }
+.stmt tr.sub td:first-child { padding-left: calc(var(--u) * 3); color: #4a4a4a; }
+.side { grid-column: 5 / span 2; }
+.side .num { font-size: clamp(56px, 6vw, 104px); color: var(--accent-1); }
+.bus { width: 100%; height: auto; display: block; margin-top: calc(var(--u) * 3); }
+@media (max-width: 900px) {
+  :root { --band: 72px; }
+  .band, .grid, .folio { padding-left: calc(var(--u) * 2.5); padding-right: calc(var(--u) * 2.5); }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: calc(var(--u) * 2); }
+  .band { grid-template-columns: 1fr auto; }
+  .band span:nth-child(2) { display: none; }
+  .band .r { grid-column: auto; }
+  .logo, .cover .sub, .cover .who, .cover .year, h2.sec, h2.sec + .intro, .letter, .chart, .stmt, .side, .fig.w3, .fig.w4 { grid-column: 1 / -1; }
+  .cover .year { text-align: left; }
+  .letter { columns: 1; }
+  .fig.w2 { grid-column: span 1; }
+  .num.m { font-size: 52px; }
+  .fig.w2 .num { font-size: 52px; }
+  .fig.w2 .num small { font-size: 20px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="spread cover" aria-label="Cover">
+    <div class="band"><span><b>TCTA</b> Tri-County Transit Authority</span><span>Harlan · Bay · Oakmont</span><span class="r">Report No. 9</span></div>
+    <div class="grid">
+      <h1 class="logo">TC<span>T</span>A</h1>
+      <p class="year">Annual<br>Report<br><b>1972</b></p>
+      <p class="sub">The year we carried <em>41.2 million</em> riders on 312 buses, opened the Crosstown Line, and never once raised the fare.</p>
+      <p class="who lbl">Submitted to the Board of Commissioners and the people of Harlan, Bay and Oakmont Counties, March 14, 1973</p>
+      <div class="stripes" aria-hidden="true"><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="spread" aria-labelledby="h-fig">
+    <div class="band"><span><b>01</b> The Year in Figures</span><span>Fiscal year ending December 31, 1972</span><span class="r">Pages 2–3</span></div>
+    <div class="grid">
+      <h2 class="sec" id="h-fig">Six numbers that tell the year.</h2>
+      <p class="intro">Figures are audited by Pell, Marchetti &amp; Co. and compared with 1971. A ride is one boarding; a transfer is counted again.</p>
+      <div class="fig w3 p"><span class="lbl">Rides</span><div class="num">41.2<small>m</small></div><span class="delta up">+9.6% on 1971</span><p>Highest since 1953. The Crosstown Line alone carried 3.1 million in its first eight months.</p></div>
+      <div class="fig w3"><span class="lbl">Fare</span><div class="num"><sup>$</sup>0.30</div><span class="delta dn">Unchanged since 1968</span><p>Children under twelve and riders over sixty-five pay ten cents at all hours.</p></div>
+      <div class="fig w2"><span class="lbl">Fleet in service</span><div class="num m">312</div><p>Including 40 new 40-foot coaches with air conditioning.</p></div>
+      <div class="fig w2"><span class="lbl">On time</span><div class="num m">94.1<small>%</small></div><p>Within three minutes of the published timetable.</p></div>
+      <div class="fig w2 p"><span class="lbl">Bus miles</span><div class="num m">18.6<small>m</small></div><p>Enough to circle the earth 747 times.</p></div>
+    </div>
+    <div class="folio"><span>TCTA Annual Report 1972</span><span>2 – 3</span></div>
+  </section>
+
+  <section class="spread" aria-labelledby="h-let">
+    <div class="band"><span><b>02</b> From the Chairman</span><span>Letter to the commissioners</span><span class="r">Pages 4–5</span></div>
+    <div class="grid">
+      <h2 class="sec" id="h-let">A year of more riders, not higher fares.</h2>
+      <p class="intro">Ridership rose every month but February, when the ice storm closed routes 4, 11 and 16 for six days.</p>
+      <div class="letter">
+        <p>Ten years ago this Authority was formed from three bankrupt private lines, a garage with a leaking roof, and 190 buses of which 60 would start in cold weather. In 1972 we ran 312 buses from four garages, and every one of them started.</p>
+        <p>The Crosstown Line, opened on May 1, is the first route in the region that does not run to or from the downtown terminal. It links the Oakmont mills, Bay Community College and the new county hospital. By December it was our fourth busiest route.</p>
+        <p>We did not raise the fare. The Board chose instead to seek the state operating grant, which paid 14 cents of every dollar we spent. We believe a thirty-cent ride is worth defending.</p>
+        <p>In 1973 we will begin work on the Harlan Avenue busway and order 60 more coaches. I thank our 1,406 employees, who made this year possible, and the riders who made it necessary.</p>
+        <p class="sig">Walter J. Okafor, Chairman</p>
+      </div>
+      <figure class="chart" aria-labelledby="ch-t">
+        <span class="lbl" id="ch-t">Rides per month, 1972, in millions</span>
+        <div class="bars" id="bars"></div>
+        <div class="months" aria-hidden="true"><span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+        <p class="note">Purple months ran the Crosstown Line. <b>October</b> was the busiest month in the Authority’s history: 3.92 million rides.</p>
+      </figure>
+    </div>
+    <div class="folio"><span>TCTA Annual Report 1972</span><span>4 – 5</span></div>
+  </section>
+
+  <section class="spread" aria-labelledby="h-fin">
+    <div class="band"><span><b>03</b> Statement of Operations</span><span>In thousands of dollars</span><span class="r">Pages 6–7</span></div>
+    <div class="grid">
+      <h2 class="sec" id="h-fin">Where each dollar went.</h2>
+      <p class="intro">Operating income covered 71% of operating cost, the best ratio of any authority of our size in the state.</p>
+      <table class="stmt">
+        <thead><tr><th scope="col">Item</th><th scope="col">1972</th><th scope="col">1971</th></tr></thead>
+        <tbody>
+          <tr><td>Passenger fares</td><td>11,904</td><td>10,861</td></tr>
+          <tr><td>Charter and school service</td><td>1,212</td><td>1,148</td></tr>
+          <tr><td>Advertising on vehicles</td><td>386</td><td>341</td></tr>
+          <tr class="tot"><td>Operating income</td><td>13,502</td><td>12,350</td></tr>
+          <tr><td>Wages and benefits</td><td>12,640</td><td>11,722</td></tr>
+          <tr class="sub"><td>of which drivers</td><td>8,915</td><td>8,340</td></tr>
+          <tr><td>Fuel, tyres, parts</td><td>3,318</td><td>3,096</td></tr>
+          <tr><td>Insurance and claims</td><td>1,104</td><td>1,212</td></tr>
+          <tr><td>General administration</td><td>1,946</td><td>1,871</td></tr>
+          <tr class="tot"><td>Operating cost</td><td>19,008</td><td>17,901</td></tr>
+          <tr><td>State operating grant</td><td>2,660</td><td>–</td></tr>
+          <tr><td>County contributions</td><td>2,915</td><td>5,480</td></tr>
+          <tr class="tot"><td>Result for the year</td><td>69</td><td>(71)</td></tr>
+        </tbody>
+      </table>
+      <aside class="side">
+        <span class="lbl">Cost per ride</span>
+        <div class="num">46<small>¢</small></div>
+        <p>Down from 48¢ in 1971, because more riders shared the same buses.</p>
+        <svg class="bus" viewBox="0 0 240 120" role="img" aria-label="TCTA coach in authority livery"><rect x="10" y="10" width="220" height="92" fill="#eceae4" stroke="#1a1a1a" stroke-width="3"/><rect x="10" y="62" width="220" height="10" fill="#7a2e8e"/><rect x="10" y="74" width="220" height="6" fill="#d9b310"/><g fill="#1a1a1a"><rect x="20" y="20" width="36" height="32"/><rect x="62" y="20" width="36" height="32"/><rect x="104" y="20" width="36" height="32"/><rect x="146" y="20" width="36" height="32"/><rect x="190" y="20" width="32" height="50"/></g><rect x="20" y="16" width="160" height="2" fill="#1a1a1a"/><circle cx="54" cy="104" r="12" fill="#1a1a1a"/><circle cx="186" cy="104" r="12" fill="#1a1a1a"/><circle cx="54" cy="104" r="4" fill="#eceae4"/><circle cx="186" cy="104" r="4" fill="#eceae4"/><text x="24" y="92" font-family="Work Sans" font-weight="800" font-size="12" fill="#1a1a1a">TCTA  CROSSTOWN 9</text></svg>
+      </aside>
+    </div>
+    <div class="folio"><span>TCTA Annual Report 1972</span><span>6 – 7</span></div>
+  </section>
+</main>
+<script>
+  const M = [3.12, 2.71, 3.26, 3.30, 3.41, 3.38, 3.29, 3.35, 3.71, 3.92, 3.84, 3.76];
+  document.getElementById("bars").innerHTML = M.map((v, i) => `<div class="${i >= 4 ? "hi" : ""}" style="height:${(v / 4.2 * 100).toFixed(1)}%" title="${v} m"><span>${v.toFixed(1)}</span></div>`).join("");
+</script>
+</body>
+</html>
