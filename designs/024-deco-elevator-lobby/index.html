@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deco Elevator Lobby · Centiform</title>
+<style>
+/* @fonts: Poiret One:400:block; Tenor Sans:400:swap */
+@font-face{font-family:"Poiret One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/poiret-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Tenor Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/tenor-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #0f0f0f;          /* Belgian black marble */
+  --ink: #d4af6a;         /* polished brass */
+  --accent-1: #1f4b3f;    /* verde antico inlay */
+  --accent-2: #efe6d2;    /* nickel-white directory letters */
+  --brass-dk: #8f7440;
+  --brass-hi: #f3d99a;
+  --u: 8px;
+  /* scale: 1.5 on 17px, rounded to whole pixels */
+  --t-1: 13px; --t0: 17px; --t1: 22px; --t2: 30px; --t3: 44px;
+  --t4: clamp(48px, 7vw, 120px);
+  --deco: "Poiret One", "Didot", serif;
+  --sans: "Tenor Sans", "Gill Sans", sans-serif;
+  --marble: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='1000' preserveAspectRatio='none'><filter id='m'><feTurbulence type='turbulence' baseFrequency='.004 .012' numOctaves='5' seed='21' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .85 0 0 0 0 .82 0 0 0 0 .76 -2.2 0 0 0 .62'/></filter><rect width='100%' height='100%' filter='url(%23m)' opacity='.22'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); scroll-behavior: smooth; }
+body { margin: 0; color: var(--ink); background: var(--marble) center / cover fixed, var(--bg); font: 400 var(--t0)/1.6 var(--sans); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 1px solid var(--accent-2); outline-offset: 4px; }
+
+/* floor indicator: brass arc above the doors, needle follows scroll */
+.ind { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 260px; height: 138px; z-index: 5; pointer-events: none; }
+.ind svg { width: 100%; height: 100%; overflow: visible; }
+.ind .needle { transform-origin: 130px 128px; transform: rotate(var(--a, -90deg)); }
+.ind text { font: 400 12px var(--sans); fill: var(--ink); }
+.ind .now { font: 400 11px var(--sans); fill: var(--accent-2); letter-spacing: .2em; }
+
+/* the lobby wall: strictly symmetric about the centre line */
+.wall { min-height: 100vh; min-height: 100svh; display: grid; justify-items: center; align-content: end; padding: 150px calc(var(--u) * 3) 0; text-align: center; }
+.name { font: 400 var(--t-1)/1 var(--sans); letter-spacing: .5em; text-transform: uppercase; margin-bottom: calc(var(--u) * 2); }
+h1 { margin: 0 0 calc(var(--u) * 4); font: 400 var(--t4)/.9 var(--deco); letter-spacing: .06em; color: var(--brass-hi); text-transform: uppercase; }
+/* ziggurat: frames step inward as they rise */
+.zig { position: relative; width: min(760px, 100%); padding: calc(var(--u) * 4) calc(var(--u) * 4) 0;
+  background: var(--accent-1);
+  clip-path: polygon(0 100%, 0 24%, 8% 24%, 8% 12%, 16% 12%, 16% 0, 84% 0, 84% 12%, 92% 12%, 92% 24%, 100% 24%, 100% 100%); }
+.zig > * { position: relative; }
+.fan { width: 62%; margin: 0 auto calc(var(--u) * 2); display: block; }
+.frame { border: 3px solid var(--ink); border-bottom: 0; padding: 10px 10px 0; box-shadow: 0 0 0 1px var(--brass-dk), inset 0 0 0 1px var(--brass-dk); background: #161512; }
+.doors { position: relative; display: grid; grid-template-columns: 1fr 1fr; height: min(34vh, 380px); overflow: hidden; background: linear-gradient(#e9dcbc, #b89a62); }
+.car { position: absolute; inset: 0; display: grid; place-content: center; gap: var(--u); color: #2a2419; }
+.car b { font: 400 var(--t3)/1 var(--deco); }
+.car span { font-size: var(--t-1); letter-spacing: .3em; text-transform: uppercase; }
+.door { position: relative; z-index: 1; background:
+  repeating-conic-gradient(from -90deg at 100% 100%, transparent 0 4deg, rgba(243,217,154,.55) 4deg 4.6deg),
+  linear-gradient(120deg, #6f5a32, #b5924f 40%, #7d663a 60%, #c7a767);
+  box-shadow: inset 0 0 0 6px #5c4a28, inset 0 0 0 8px var(--ink); }
+.door.r { background:
+  repeating-conic-gradient(from 0deg at 0 100%, transparent 0 4deg, rgba(243,217,154,.55) 4deg 4.6deg),
+  linear-gradient(240deg, #6f5a32, #b5924f 40%, #7d663a 60%, #c7a767); }
+.door::after { content: ""; position: absolute; left: 50%; top: 18%; width: 36%; aspect-ratio: 1; transform: translateX(-50%) rotate(45deg); border: 2px solid var(--brass-hi); }
+.doors.open .door.l { transform: translateX(-86%); }
+.doors.open .door.r { transform: translateX(86%); }
+.call { display: flex; justify-content: center; gap: calc(var(--u) * 2); padding: calc(var(--u) * 3) 0; }
+.call button { width: 56px; height: 56px; border-radius: 50%; border: 3px solid var(--ink); background: radial-gradient(circle at 40% 35%, var(--brass-hi), var(--brass-dk)); color: #1a1508; font: 400 var(--t-1)/1 var(--sans); cursor: pointer; }
+.call button[aria-pressed="true"] { box-shadow: 0 0 0 4px var(--bg), 0 0 18px 4px rgba(243,217,154,.8); }
+
+/* directory: glass case, felt-black, nickel letters */
+.dir { width: min(1120px, calc(100% - 48px)); margin: calc(var(--u) * 12) auto; text-align: center; }
+.dir h2 { font: 400 var(--t3)/1 var(--deco); letter-spacing: .1em; text-transform: uppercase; margin: 0 0 var(--u); color: var(--brass-hi); }
+.dir > p { margin: 0 auto calc(var(--u) * 5); max-width: 52ch; }
+.case { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 3); border: 3px double var(--ink); padding: calc(var(--u) * 3); background: #0a0a0a; }
+.bank { border: 1px solid var(--brass-dk); padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+.bank h3 { margin: 0 0 calc(var(--u) * 2); font: 400 var(--t1)/1.2 var(--deco); color: var(--ink); letter-spacing: .08em; }
+.bank h3 small { display: block; font: 400 var(--t-1)/1.6 var(--sans); letter-spacing: .24em; color: var(--brass-dk); text-transform: uppercase; }
+.bank ol { list-style: none; margin: 0; padding: 0; text-align: left; font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-2); }
+.bank li { display: flex; gap: var(--u); padding: 5px 0; font-variant-numeric: tabular-nums; }
+.bank li i { font-style: normal; width: 3ch; color: var(--ink); }
+.bank li::after { content: ""; order: 2; flex: 1; border-bottom: 1px dotted #4a4232; margin-bottom: 6px; }
+.bank li span { order: 1; }
+.bank li em { order: 3; font-style: normal; color: var(--ink); }
+
+.terrace { width: min(1120px, calc(100% - 48px)); margin: 0 auto calc(var(--u) * 12); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: calc(var(--u) * 5); text-align: center; }
+.terrace .col { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: calc(var(--u) * 3) 0; }
+.terrace .col b { display: block; font: 400 var(--t2)/1.1 var(--deco); color: var(--brass-hi); }
+.terrace .mid { font: 400 var(--t3)/1 var(--deco); color: var(--brass-hi); writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: .2em; border-left: 1px solid var(--ink); border-right: 1px solid var(--ink); padding: calc(var(--u) * 2) var(--u); }
+footer { text-align: center; padding: calc(var(--u) * 5) calc(var(--u) * 3) calc(var(--u) * 8); font-size: var(--t-1); letter-spacing: .4em; text-transform: uppercase; border-top: 1px solid var(--brass-dk); }
+footer b { display: block; font: 400 var(--t2)/1.4 var(--deco); letter-spacing: .3em; color: var(--brass-hi); }
+@media (prefers-reduced-motion: no-preference) {
+  .door { transition: transform 1.8s cubic-bezier(.6,0,.2,1); }
+  .ind .needle { transition: transform .35s cubic-bezier(.3,1.4,.5,1); }
+}
+@media (max-width: 860px) {
+  .case { grid-template-columns: minmax(0, 1fr); }
+  .terrace { grid-template-columns: minmax(0, 1fr); }
+  .terrace .mid { writing-mode: horizontal-tb; transform: none; border: 0; }
+  .zig { padding: calc(var(--u) * 3) calc(var(--u) * 2) 0; }
+  .ind { width: 200px; height: 106px; }
+  .wall { padding-top: 120px; }
+  .name { letter-spacing: .3em; }
+}
+</style>
+</head>
+<body>
+<div class="ind" aria-hidden="true">
+  <svg viewBox="0 0 260 138">
+    <path d="M14 128 A116 116 0 0 1 246 128" fill="#141310" stroke="#d4af6a" stroke-width="3"/>
+    <path d="M28 128 A102 102 0 0 1 232 128" fill="none" stroke="#8f7440" stroke-width="1"/>
+    <g stroke="#d4af6a" stroke-width="1.5">
+      <line x1="30" y1="128" x2="40" y2="128"/><line x1="43.4" y1="78" x2="52" y2="83"/><line x1="80" y1="41.4" x2="85" y2="50"/><line x1="130" y1="28" x2="130" y2="38"/><line x1="180" y1="41.4" x2="175" y2="50"/><line x1="216.6" y1="78" x2="208" y2="83"/><line x1="230" y1="128" x2="220" y2="128"/>
+    </g>
+    <text x="44" y="124">L</text><text x="56" y="92">10</text><text x="84" y="64">20</text><text x="122" y="54">30</text><text x="166" y="64">40</text><text x="190" y="92">50</text><text x="204" y="124">60</text>
+    <g class="needle"><path d="M130 128 L130 34" stroke="#f3d99a" stroke-width="2.5"/><path d="M130 30 l-5 12 h10 z" fill="#f3d99a"/></g>
+    <circle cx="130" cy="128" r="9" fill="#d4af6a"/>
+    <text class="now" x="130" y="112" text-anchor="middle" id="now">LOBBY</text>
+  </svg>
+</div>
+
+<header class="wall">
+  <div class="name">Nine Hundred Fifth Avenue · Erected 1930</div>
+  <h1>The Halloran<br>Building</h1>
+  <div class="zig">
+    <svg class="fan" viewBox="0 0 400 80" aria-hidden="true">
+      <g fill="none" stroke="#d4af6a" stroke-width="1.5"><path d="M20 80 A180 180 0 0 1 380 80"/><path d="M60 80 A140 140 0 0 1 340 80"/><path d="M100 80 A100 100 0 0 1 300 80"/></g>
+      <g stroke="#d4af6a" stroke-width="1"><line x1="200" y1="80" x2="200" y2="0"/><line x1="200" y1="80" x2="120" y2="8"/><line x1="200" y1="80" x2="280" y2="8"/><line x1="200" y1="80" x2="60" y2="30"/><line x1="200" y1="80" x2="340" y2="30"/></g>
+      <path d="M170 80 A30 30 0 0 1 230 80 Z" fill="#d4af6a"/>
+    </svg>
+    <div class="frame">
+      <div class="doors" id="doors">
+        <div class="car"><b>Car Three</b><span>Express · Floors 41 to 61</span></div>
+        <div class="door l"></div><div class="door r"></div>
+      </div>
+    </div>
+    <div class="call" role="group" aria-label="Call the car">
+      <button type="button" aria-pressed="false" id="up" aria-label="Call car, going up">Up</button>
+      <button type="button" aria-pressed="false" id="dn" aria-label="Call car, going down">Down</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="dir" id="directory" aria-labelledby="dir-h">
+  <h2 id="dir-h">Directory of Tenants</h2>
+  <p>Take the car for your floor bank. Porters are on duty from seven until eleven. Parcels for the upper floors go by the freight car on the Forty-Ninth Street side.</p>
+  <div class="case">
+    <div class="bank">
+      <h3><small>Cars 1 &amp; 2</small>Local · 2 to 20</h3>
+      <ol>
+        <li><i>2</i><span>Ferriday Savings Bank</span><em>200</em></li>
+        <li><i>4</i><span>Ostrander Typewriter Co.</span><em>410</em></li>
+        <li><i>7</i><span>Dr. M. Pell, Dentistry</span><em>702</em></li>
+        <li><i>9</i><span>Cairn &amp; Webb, Patents</span><em>915</em></li>
+        <li><i>12</i><span>Lumina Radio Corporation</span><em>1200</em></li>
+        <li><i>15</i><span>Vogel Millinery</span><em>1508</em></li>
+        <li><i>18</i><span>Transatlantic Cable Office</span><em>1801</em></li>
+      </ol>
+    </div>
+    <div class="bank">
+      <h3><small>Cars 4 &amp; 5</small>Local · 21 to 40</h3>
+      <ol>
+        <li><i>22</i><span>Hollis Advertising</span><em>2204</em></li>
+        <li><i>25</i><span>Brandt Steamship Lines</span><em>2500</em></li>
+        <li><i>28</i><span>Kessler &amp; Sons, Architects</span><em>2810</em></li>
+        <li><i>31</i><span>The Meridian Club</span><em>3100</em></li>
+        <li><i>34</i><span>Albion Aero Company</span><em>3412</em></li>
+        <li><i>37</i><span>North Star Insurance</span><em>3700</em></li>
+        <li><i>39</i><span>Ruth Amberly, Portraits</span><em>3906</em></li>
+      </ol>
+    </div>
+    <div class="bank">
+      <h3><small>Car 3 · Express</small>41 to 61</h3>
+      <ol>
+        <li><i>42</i><span>Consolidated Copper</span><em>4200</em></li>
+        <li><i>45</i><span>Halloran Estate Offices</span><em>4500</em></li>
+        <li><i>50</i><span>Weather Bureau Station</span><em>5001</em></li>
+        <li><i>54</i><span>Silverline Airship Tickets</span><em>5400</em></li>
+        <li><i>58</i><span>The Cloud Room, Dining</span><em>5800</em></li>
+        <li><i>60</i><span>Mooring Mast Control</span><em>6000</em></li>
+        <li><i>61</i><span>Observation Terrace</span><em>Roof</em></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="terrace" aria-label="Observation terrace">
+  <div class="col"><b>Fifty cents</b>Admission to the terrace, children half. Tickets at the brass kiosk by Car Three.</div>
+  <div class="mid">Floor 61</div>
+  <div class="col"><b>Ten to midnight</b>On a clear night the lamps of four states. In fog the terrace closes and the bell sounds twice.</div>
+</section>
+</main>
+<footer><b>MCMXXX</b>Corbett &amp; Vail, architects · Halloran Realty, owners</footer>
+<script>
+(() => {
+  const doors = document.getElementById("doors"), now = document.getElementById("now"), root = document.documentElement;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  setTimeout(() => doors.classList.add("open"), reduce ? 0 : 700);
+  ["up", "dn"].forEach((id) => document.getElementById(id).addEventListener("click", (e) => {
+    const b = e.currentTarget, on = b.getAttribute("aria-pressed") !== "true";
+    b.setAttribute("aria-pressed", String(on));
+    doors.classList.toggle("open", !on);
+    if (on) setTimeout(() => { doors.classList.add("open"); b.setAttribute("aria-pressed", "false"); }, reduce ? 0 : 2600);
+  }));
+  let q = false;
+  const set = () => {
+    q = false;
+    const p = Math.min(1, Math.max(0, scrollY / ((root.scrollHeight - innerHeight) || 1)));
+    root.style.setProperty("--a", (-90 + p * 180).toFixed(1) + "deg");
+    const f = Math.round(p * 61);
+    now.textContent = f === 0 ? "LOBBY" : "FLOOR " + f;
+  };
+  addEventListener("scroll", () => { if (!q && !document.hidden) { q = true; requestAnimationFrame(set); } }, { passive: true });
+  set();
+})();
+</script>
+</body>
+</html>

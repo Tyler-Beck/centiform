@@ -47,3 +47,23 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Chivo Mono | OFL-1.1 | https://fontsource.org/fonts/chivo-mono | 019-hifi-brochure-1965 |
 | Syncopate | Apache-2.0 | https://fontsource.org/fonts/syncopate | 020-darkroom-contact-sheet |
 | Fragment Mono | OFL-1.1 | https://fontsource.org/fonts/fragment-mono | 020-darkroom-contact-sheet |
+| Big Shoulders Display | OFL-1.1 | https://fontsource.org/fonts/big-shoulders-display | 021-beton-brut |
+| Public Sans | OFL-1.1 | https://fontsource.org/fonts/public-sans | 021-beton-brut |
+| Architects Daughter | OFL-1.1 | https://fontsource.org/fonts/architects-daughter | 022-cyanotype-blueprint |
+| Sono | OFL-1.1 | https://fontsource.org/fonts/sono | 022-cyanotype-blueprint |
+| Shippori Mincho | OFL-1.1 | https://fontsource.org/fonts/shippori-mincho | 023-tatami-ma |
+| Zen Kaku Gothic New | OFL-1.1 | https://fontsource.org/fonts/zen-kaku-gothic-new | 023-tatami-ma |
+| Poiret One | OFL-1.1 | https://fontsource.org/fonts/poiret-one | 024-deco-elevator-lobby |
+| Tenor Sans | OFL-1.1 | https://fontsource.org/fonts/tenor-sans | 024-deco-elevator-lobby |
+| Righteous | OFL-1.1 | https://fontsource.org/fonts/righteous | 025-palm-springs-breeze |
+| Questrial | OFL-1.1 | https://fontsource.org/fonts/questrial | 025-palm-springs-breeze |
+| Uncial Antiqua | OFL-1.1 | https://fontsource.org/fonts/uncial-antiqua | 026-rose-window |
+| Cardo | OFL-1.1 | https://fontsource.org/fonts/cardo | 026-rose-window |
+| Ruslan Display | OFL-1.1 | https://fontsource.org/fonts/ruslan-display | 027-mosaic-bus-stop |
+| PT Sans | OFL-1.1 | https://fontsource.org/fonts/pt-sans | 027-mosaic-bus-stop |
+| Arvo | OFL-1.1 | https://fontsource.org/fonts/arvo | 028-subway-tile-station |
+| Hind | OFL-1.1 | https://fontsource.org/fonts/hind | 028-subway-tile-station |
+| Bungee | OFL-1.1 | https://fontsource.org/fonts/bungee | 029-isometric-planner |
+| Sen | OFL-1.1 | https://fontsource.org/fonts/sen | 029-isometric-planner |
+| Italiana | OFL-1.1 | https://fontsource.org/fonts/italiana | 030-victorian-glasshouse |
+| Gelasio | OFL-1.1 | https://fontsource.org/fonts/gelasio | 030-victorian-glasshouse |

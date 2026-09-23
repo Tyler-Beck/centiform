@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palm Springs Breeze · Centiform</title>
+<style>
+/* @fonts: Righteous:400:block; Questrial:400:swap */
+@font-face{font-family:"Righteous";font-style:normal;font-weight:400;font-display:block;src:url(fonts/righteous-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Questrial";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/questrial-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f6ead2;          /* sun-bleached stucco */
+  --ink: #3a2e2a;         /* redwood fascia */
+  --accent-1: #2fb8b3;    /* pool */
+  --accent-2: #f2a03d;    /* the front door, and 5pm light */
+  --sand: #e8d3aa;
+  --sky: #f9dcb0;
+  --shade: rgba(58,46,42,.22);
+  --deep: #1c8a86;
+  --u: 8px;
+  --sun: 30deg;           /* sun elevation: shadows are 1.73x their height */
+  /* scale: 1.2 minor third on 17px */
+  --t-1: 14px; --t0: 17px; --t1: 20px; --t2: 24px; --t3: 29px; --t4: 35px;
+  --t5: clamp(56px, 8.5vw, 150px);
+  --display: "Righteous", "Futura", sans-serif;
+  --text: "Questrial", "Century Gothic", sans-serif;
+  --block: 72px;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+.roof, main { overflow-x: clip; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+
+/* the roof: one long, thin, low line */
+.roof { position: relative; height: calc(var(--u) * 9); background: var(--ink); color: var(--bg); display: flex; align-items: center; justify-content: space-between; padding: 0 calc(var(--u) * 4); z-index: 3; }
+.roof::after { content: ""; position: absolute; left: 0; right: -20%; top: 100%; height: calc(var(--u) * 9 * 1.73); background: var(--shade); transform-origin: 0 0; transform: skewX(-60deg); pointer-events: none; }
+.roof b { font: 400 var(--t2)/1 var(--display); letter-spacing: .04em; }
+.roof nav { display: flex; gap: calc(var(--u) * 4); font-size: var(--t-1); letter-spacing: .16em; text-transform: uppercase; }
+.roof a { text-decoration: none; }
+.roof a:hover { color: var(--accent-2); }
+
+/* the house band: text on the left, breeze-block screen on the right */
+.house { position: relative; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); min-height: calc(100vh - var(--u) * 9 - 180px); }
+.intro { padding: calc(var(--u) * 10) calc(var(--u) * 4) calc(var(--u) * 5); display: flex; flex-direction: column; justify-content: flex-end; }
+.intro h1 { margin: 0; font: 400 var(--t5)/.86 var(--display); letter-spacing: -.01em; }
+.intro h1 span { color: var(--accent-1); display: block; }
+.intro p { max-width: 38ch; margin: calc(var(--u) * 3) 0 0; font-size: var(--t1); }
+.facts { display: flex; gap: calc(var(--u) * 4); margin-top: calc(var(--u) * 4); flex-wrap: wrap; }
+.facts div { border-left: 4px solid var(--accent-2); padding-left: calc(var(--u) * 1.5); font-size: var(--t-1); letter-spacing: .08em; text-transform: uppercase; }
+.facts b { display: block; font: 400 var(--t4)/1 var(--display); letter-spacing: 0; text-transform: none; }
+
+.screen { position: relative; overflow: hidden; background: linear-gradient(180deg, var(--sky) 0 55%, var(--accent-1) 55%); }
+.screen .mtn { position: absolute; left: 0; right: 0; top: 34%; height: 21%; }
+.screen .blocks { position: absolute; inset: 0; background: #efe0c2;
+  -webkit-mask: radial-gradient(circle at 50% 50%, transparent 0 27%, #000 28% 31%, transparent 32% 44%, #000 45%) 0 0 / var(--block) var(--block);
+          mask: radial-gradient(circle at 50% 50%, transparent 0 27%, #000 28% 31%, transparent 32% 44%, #000 45%) 0 0 / var(--block) var(--block); }
+.screen .blocks::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(58,46,42,.1) 1px, transparent 1px) 0 0 / var(--block) var(--block), linear-gradient(rgba(58,46,42,.1) 1px, transparent 1px) 0 0 / var(--block) var(--block); }
+/* sunlight through the screen, thrown onto the terrace */
+.terrace { position: relative; height: 180px; background: var(--sand); overflow: hidden; }
+.terrace::before { content: ""; position: absolute; left: calc(100% * 5 / 12); right: -40%; top: 0; bottom: 0; background: rgba(58,46,42,.2); transform-origin: 0 0; transform: skewX(-60deg);
+  -webkit-mask: radial-gradient(circle, transparent 0 44%, #000 45%) 0 0 / var(--block) calc(var(--block) * .58);
+          mask: radial-gradient(circle, transparent 0 44%, #000 45%) 0 0 / var(--block) calc(var(--block) * .58); }
+.terrace p { position: relative; margin: 0; padding: calc(var(--u) * 5) calc(var(--u) * 4); max-width: 44ch; font-size: var(--t1); }
+
+/* the pool: a long rectangle, full width */
+.pool { position: relative; background: var(--accent-1); color: #06302e; padding: calc(var(--u) * 8) calc(var(--u) * 4); overflow: hidden; border-top: 14px solid #fbf4e6; border-bottom: 14px solid #fbf4e6; }
+.pool::before { content: ""; position: absolute; inset: -40px; opacity: .35;
+  background: radial-gradient(ellipse 40px 12px at 30% 40%, #bff3ee 40%, transparent 70%) 0 0 / 120px 60px, radial-gradient(ellipse 30px 10px at 70% 70%, #bff3ee 40%, transparent 70%) 0 0 / 90px 50px; }
+.pool > * { position: relative; }
+.pool h2, .plan h2, .book h2 { margin: 0 0 calc(var(--u) * 4); font: 400 var(--t4)/1 var(--display); }
+.pool ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 4); }
+.pool li { border-top: 2px solid #06302e; padding-top: calc(var(--u) * 2); }
+.pool li b { display: block; font: 400 var(--t2)/1.2 var(--display); margin-bottom: var(--u); }
+
+/* plan: rooms laid in one long row, like the house */
+.plan { padding: calc(var(--u) * 10) calc(var(--u) * 4) calc(var(--u) * 8); }
+.rooms { display: grid; grid-template-columns: 3fr 2fr 2fr 2fr 2fr 3fr; border: 6px solid var(--ink); position: relative; }
+.rooms::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 60px; background: var(--shade); transform-origin: 0 0; transform: skewX(-60deg); }
+.rooms > div { min-height: 190px; padding: calc(var(--u) * 2); border-right: 2px solid var(--ink); display: flex; flex-direction: column; justify-content: space-between; font-size: 15px; }
+.rooms > div:last-child { border-right: 0; background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(58,46,42,.12) 10px 12px); }
+.rooms b { font: 400 var(--t1)/1.1 var(--display); }
+.rooms .glass { background: linear-gradient(90deg, rgba(47,184,179,.18), rgba(47,184,179,.05)); }
+.rooms .door { border-left: 10px solid var(--accent-2); }
+.rooms span { color: #6a5a52; }
+
+.book { background: var(--ink); color: var(--bg); padding: calc(var(--u) * 8) calc(var(--u) * 4); display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: calc(var(--u) * 6); }
+.book p { margin: 0 0 calc(var(--u) * 2); max-width: 40ch; }
+.months { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 2px; }
+.months div { background: #4a3c37; padding: calc(var(--u) * 2) calc(var(--u) * 1.5); font-size: var(--t-1); }
+.months b { display: block; font: 400 var(--t1)/1 var(--display); margin-bottom: var(--u); }
+.months i { font-style: normal; display: block; color: var(--accent-2); font-variant-numeric: tabular-nums; }
+.months .full { background: #2f2522; color: #a8968c; }
+.months .full i { color: #a8968c; }
+.phone { display: inline-block; margin-top: calc(var(--u) * 2); background: var(--accent-2); color: var(--ink); padding: calc(var(--u) * 2) calc(var(--u) * 3); font: 400 var(--t1)/1 var(--display); text-decoration: none; }
+footer { background: var(--sand); padding: calc(var(--u) * 3) calc(var(--u) * 4); font-size: var(--t-1); letter-spacing: .1em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .pool::before { animation: glint 9s linear infinite alternate; }
+  @keyframes glint { to { transform: translate(60px, 18px); } }
+}
+@media (max-width: 900px) {
+  :root { --block: 56px; }
+  .house { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 220px; min-height: 0; }
+  .intro { padding: calc(var(--u) * 6) calc(var(--u) * 2.5) calc(var(--u) * 4); }
+  .roof { padding: 0 calc(var(--u) * 2.5); }
+  .roof nav { gap: calc(var(--u) * 2); }
+  .roof b { display: none; }
+  .terrace { height: 120px; }
+  .terrace::before { left: 0; }
+  .terrace p { padding: calc(var(--u) * 3) calc(var(--u) * 2.5); font-size: var(--t0); }
+  .pool, .plan, .book { padding-left: calc(var(--u) * 2.5); padding-right: calc(var(--u) * 2.5); }
+  .pool ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rooms { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rooms > div { min-height: 120px; border-bottom: 2px solid var(--ink); }
+  .book { grid-template-columns: minmax(0, 1fr); }
+  .months { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+</style>
+</head>
+<body>
+<header class="roof">
+  <b>Casa Ocotillo</b>
+  <nav aria-label="House"><a href="#pool">Pool</a><a href="#plan">Plan</a><a href="#book">Book</a></nav>
+</header>
+<main>
+  <section class="house" aria-labelledby="h">
+    <div class="intro">
+      <h1 id="h">Casa<span>Ocotillo</span></h1>
+      <p>A low steel-and-glass house by the architect Lena Marsh, built in 1959 on four acres of creosote below Mount San Jacinto.</p>
+      <div class="facts">
+        <div><b>6</b>guests</div>
+        <div><b>3</b>bedrooms</div>
+        <div><b>$640</b>a night</div>
+      </div>
+    </div>
+    <div class="screen" aria-hidden="true">
+      <svg class="mtn" viewBox="0 0 800 120" preserveAspectRatio="none"><path d="M0 120 L0 80 L90 40 L160 70 L260 10 L360 64 L440 38 L560 92 L660 50 L800 84 L800 120 Z" fill="#d98e52" opacity=".55"/></svg>
+      <div class="blocks"></div>
+    </div>
+  </section>
+  <div class="terrace"><p>At five in the afternoon the screen wall throws its circles across the terrace. We built the dinner hour around it.</p></div>
+
+  <section class="pool" id="pool" aria-labelledby="pool-h">
+    <h2 id="pool-h">The pool, 40 feet by 12</h2>
+    <ul>
+      <li><b>82 °F</b>Heated by the roof panels from April to October.</li>
+      <li><b>Diving board</b>The original 1959 board, re-sprung in 2024.</li>
+      <li><b>Cabana</b>Outdoor shower, towels, a record player and 60 records.</li>
+      <li><b>Quiet hours</b>After 10 pm the city asks us to keep it down.</li>
+    </ul>
+  </section>
+
+  <section class="plan" id="plan" aria-labelledby="plan-h">
+    <h2 id="plan-h">One storey, 2,140 square feet</h2>
+    <div class="rooms">
+      <div class="glass door"><b>Living</b><span>Glass on three sides, sunken hearth</span></div>
+      <div><b>Kitchen</b><span>1959 Frigidaire, restored</span></div>
+      <div class="glass"><b>Primary</b><span>King bed, pool door</span></div>
+      <div><b>Bedroom 2</b><span>Queen, garden</span></div>
+      <div><b>Bedroom 3</b><span>Two twins, desk</span></div>
+      <div><b>Carport</b><span>Two cars, EV plug</span></div>
+    </div>
+  </section>
+
+  <section class="book" id="book" aria-labelledby="book-h">
+    <div>
+      <h2 id="book-h">Book a season</h2>
+      <p>Three nights minimum. The house is closed in August when the valley passes 110 °F.</p>
+      <p>Hosts: Dolores and Frank Aceves, who live in the casita by the gate.</p>
+      <a class="phone" href="#book">760 555 0159</a>
+    </div>
+    <div class="months" aria-label="Availability">
+      <div><b>Oct</b><i>14 nights open</i></div>
+      <div class="full"><b>Nov</b><i>Full</i></div>
+      <div><b>Dec</b><i>6 nights open</i></div>
+      <div class="full"><b>Jan</b><i>Full</i></div>
+      <div><b>Feb</b><i>9 nights open</i></div>
+      <div><b>Mar</b><i>11 nights open</i></div>
+    </div>
+  </section>
+</main>
+<footer><span>1260 E. Vista Chino, Palm Springs, California</span><span>City Class 1 Historic Site no. 88</span></footer>
+</body>
+</html>
