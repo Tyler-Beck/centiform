@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riso Repair Zine · Centiform</title>
+<style>
+/* @fonts: Rubik Mono One:400:block; Rubik:400,500,700,400i:swap */
+@font-face{font-family:"Rubik Mono One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/rubik-mono-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rubik";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/rubik-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rubik";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/rubik-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rubik";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/rubik-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Rubik";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/rubik-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f3efe6;          /* newsprint-ish riso paper */
+  --ink: #1d1d1d;
+  --accent-1: #0078bf;    /* riso Blue drum */
+  --accent-2: #ff48b0;    /* riso Fluorescent Pink drum */
+  --overprint: #6b4a9e;   /* what the eye reads where pink lands on blue */
+  --desk: #cfc8b8;
+  --staple: #9ea3a8;
+  --u: 6px;               /* registration step: every gap is a multiple */
+  --mis: 3px;             /* drum misregistration */
+  /* type scale 1.414 on 17px */
+  --t-1: 12px; --t0: 17px; --t1: 24px; --t2: 34px; --t3: 48px; --t4: clamp(52px, 7vw, 96px);
+  --display: "Rubik Mono One", "Arial Black", sans-serif;
+  --text: "Rubik", "Trebuchet MS", sans-serif;
+  --dots-pink: radial-gradient(circle at 50% 50%, var(--accent-2) 36%, transparent 38%) 0 0 / 7px 7px;
+  --dots-blue: radial-gradient(circle at 50% 50%, var(--accent-1) 30%, transparent 32%) 0 0 / 6px 6px;
+}
+* { box-sizing: border-box; }
+html { background: var(--desk); }
+body { margin: 0; font: 400 var(--t0)/1.5 var(--text); color: var(--ink); background: var(--desk); padding: calc(var(--u) * 5) calc(var(--u) * 4) calc(var(--u) * 12); }
+/* spread = two pages, a fold, two staples */
+.spread { position: relative; display: grid; grid-template-columns: 1fr 1fr; max-width: 1480px; margin: 0 auto calc(var(--u) * 8); box-shadow: 0 2px 0 #b9b2a2, 0 18px 30px -18px rgba(29,29,29,.5); }
+.spread::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 36px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(29,29,29,.10) 45%, rgba(29,29,29,.16) 50%, rgba(29,29,29,.10) 55%, transparent); pointer-events: none; z-index: 3; }
+.staple { position: absolute; left: 50%; width: 5px; height: 42px; transform: translateX(-50%); background: linear-gradient(90deg, #6c7176, var(--staple) 40%, #d8dcdf 60%, #7b8085); border-radius: 1px; z-index: 4; box-shadow: 1px 1px 0 rgba(0,0,0,.2); }
+.staple.a { top: 22%; } .staple.b { bottom: 22%; }
+.page { position: relative; background: var(--bg); padding: calc(var(--u) * 7) calc(var(--u) * 7) calc(var(--u) * 9); overflow: hidden; min-height: min(92vh, 860px); }
+/* paper tooth */
+.page::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .5 0 0 0 0 .4 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.folio { position: absolute; bottom: calc(var(--u) * 3); font: var(--t-1)/1 var(--display); color: var(--accent-1); }
+.page:nth-child(odd) .folio { left: calc(var(--u) * 7); }
+.page:nth-child(even) .folio { right: calc(var(--u) * 7); }
+/* ink layers: every coloured element prints twice, the pink drum is off by --mis */
+.ink { position: relative; display: inline-block; color: var(--accent-1); mix-blend-mode: multiply; filter: url(#rough); }
+.ink::after { content: attr(data-t); position: absolute; left: var(--mis); top: calc(var(--mis) * -.6); color: transparent; background: var(--dots-pink); -webkit-background-clip: text; background-clip: text; mix-blend-mode: multiply; white-space: inherit; pointer-events: none; }
+.ink.pk { color: var(--accent-2); }
+.ink.pk::after { background: var(--dots-blue); -webkit-background-clip: text; background-clip: text; left: calc(var(--mis) * -1); }
+.blue { color: var(--accent-1); }
+.pink { color: var(--accent-2); }
+h1, h2, h3 { margin: 0; font-family: var(--display); font-weight: 400; line-height: .95; letter-spacing: -.01em; }
+h1 { font-size: var(--t4); }
+h2 { font-size: var(--t3); }
+h3 { font-size: var(--t1); }
+p { margin: 0 0 calc(var(--u) * 2); max-width: 58ch; }
+/* cover */
+.cover { display: grid; grid-template-rows: auto 1fr auto; gap: calc(var(--u) * 3); }
+.issue { display: flex; justify-content: space-between; font: var(--t-1)/1.4 var(--display); text-transform: uppercase; }
+.issue span:last-child { background: var(--ink); color: var(--bg); padding: 2px 6px; }
+.cover h1 { font-size: clamp(56px, 8.6vw, 132px); line-height: .86; }
+.cover h1 .ink { display: block; }
+.cover .wheel { position: absolute; right: -22%; bottom: -12%; width: 72%; z-index: 0; mix-blend-mode: multiply; }
+.cover .blurb { position: relative; z-index: 1; font-size: var(--t1); line-height: 1.25; max-width: 13ch; font-weight: 500; }
+.cover .blurb em { font-style: normal; background: var(--dots-pink); padding: 0 4px; }
+.inside { position: relative; z-index: 1; }
+.toc { list-style: none; margin: 0; padding: 0; counter-reset: t; }
+.toc li { counter-increment: t; display: grid; grid-template-columns: calc(var(--u) * 9) 1fr auto; gap: calc(var(--u) * 2); align-items: baseline; padding: calc(var(--u) * 2) 0; border-bottom: 3px solid var(--accent-1); mix-blend-mode: multiply; }
+.toc li::before { content: counter(t, decimal-leading-zero); font: var(--t2)/1 var(--display); color: var(--accent-2); }
+.toc b { font: var(--t1)/1.05 var(--display); display: block; }
+.toc span { font-size: var(--t-1); text-transform: uppercase; letter-spacing: .08em; }
+.toc a { color: inherit; text-decoration: none; }
+.toc a:hover b, .toc a:focus-visible b { background: var(--dots-pink); }
+.toc a:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+.stamp { position: absolute; right: calc(var(--u) * 6); top: calc(var(--u) * 6); width: 150px; aspect-ratio: 1; border-radius: 50%; border: 4px solid var(--accent-2); display: grid; place-items: center; text-align: center; font: 14px/1.1 var(--display); color: var(--accent-2); transform: rotate(12deg); mix-blend-mode: multiply; z-index: 2; }
+/* steps */
+.steps { list-style: none; margin: calc(var(--u) * 4) 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: calc(var(--u) * 4) calc(var(--u) * 4); }
+.steps li { position: relative; }
+.steps figure { margin: 0 0 calc(var(--u) * 2); height: 150px; position: relative; }
+.steps figure svg { width: 100%; height: 100%; overflow: visible; }
+.steps .no { position: absolute; left: -6px; top: -12px; font: var(--t3)/1 var(--display); color: var(--accent-2); mix-blend-mode: multiply; z-index: 1; }
+.steps h3 { margin-bottom: var(--u); }
+.steps p { font-size: 16px; line-height: 1.45; }
+.tip { margin-top: calc(var(--u) * 4); padding: calc(var(--u) * 3); background: var(--dots-blue); position: relative; mix-blend-mode: multiply; }
+.tip p { background: var(--bg); padding: calc(var(--u) * 2); margin: 0; max-width: none; font-weight: 500; }
+.tip p b { font-family: var(--display); font-weight: 400; color: var(--accent-2); }
+/* tool wall + prices */
+.pegboard { margin-top: calc(var(--u) * 4); display: grid; grid-template-columns: repeat(4, 1fr); gap: calc(var(--u) * 2); padding: calc(var(--u) * 3); background:
+  radial-gradient(circle, rgba(0,120,191,.55) 2px, transparent 2.6px) 0 0 / 24px 24px; border: 3px solid var(--accent-1); mix-blend-mode: multiply; }
+.pegboard figure { margin: 0; text-align: center; font: 11px/1.2 var(--display); text-transform: uppercase; }
+.pegboard svg { width: 100%; height: 80px; display: block; }
+.prices { width: 100%; border-collapse: collapse; margin-top: calc(var(--u) * 3); font-variant-numeric: tabular-nums; }
+.prices th { text-align: left; font: var(--t-1)/1 var(--display); color: var(--accent-2); padding: var(--u) 0; border-bottom: 3px solid var(--accent-2); }
+.prices td { padding: calc(var(--u) * 1.5) 0; border-bottom: 1px dashed var(--accent-1); }
+.prices td:last-child, .prices th:last-child { text-align: right; }
+.prices td:last-child { font-weight: 700; color: var(--accent-1); }
+.hours { display: grid; grid-template-columns: repeat(3, 1fr); gap: calc(var(--u) * 2); margin: calc(var(--u) * 4) 0; }
+.hours div { border: 3px solid var(--ink); padding: calc(var(--u) * 2); background: var(--bg); position: relative; }
+.hours div::before { content: ""; position: absolute; inset: 0; transform: translate(var(--mis), var(--mis)); border: 3px solid var(--accent-2); z-index: -1; }
+.hours b { display: block; font: var(--t1)/1 var(--display); color: var(--accent-1); }
+.hours span { font-size: 14px; }
+.back { display: flex; flex-direction: column; justify-content: space-between; }
+.back h2 { font-size: clamp(40px, 5.4vw, 80px); }
+.cutout { border: 3px dashed var(--ink); padding: calc(var(--u) * 3); position: relative; }
+.cutout::before { content: "cut here"; position: absolute; top: -9px; left: 24px; background: var(--bg); padding: 0 6px; font: 12px/1 var(--display); text-transform: uppercase; }
+.cutout p { font-size: 15px; }
+.cutout b { font-family: var(--display); font-weight: 400; }
+@media (max-width: 980px) {
+  body { padding: calc(var(--u) * 2) calc(var(--u) * 2) calc(var(--u) * 8); }
+  .spread { grid-template-columns: 1fr; }
+  .spread::before, .staple { display: none; }
+  .page { min-height: 0; padding: calc(var(--u) * 5) calc(var(--u) * 3) calc(var(--u) * 8); }
+  .page + .page { border-top: 2px dashed rgba(29,29,29,.25); }
+  .page:nth-child(odd) .folio { left: calc(var(--u) * 3); }
+  .page:nth-child(even) .folio { right: calc(var(--u) * 3); }
+  .cover { min-height: calc(100vh - 24px); }
+  .steps { grid-template-columns: 1fr; }
+  .pegboard { grid-template-columns: repeat(2, 1fr); }
+  .hours { grid-template-columns: 1fr; }
+  .stamp { width: 110px; font-size: 11px; right: calc(var(--u) * 2); top: calc(var(--u) * 2); }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".75" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="2.2"/></filter>
+  <pattern id="hp" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(15)"><circle cx="3.5" cy="3.5" r="2.3" fill="#ff48b0"/></pattern>
+  <pattern id="hb" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="3" cy="3" r="1.4" fill="#0078bf"/></pattern>
+</svg>
+
+<main>
+  <!-- spread 1: back cover + cover -->
+  <section class="spread" aria-label="Cover">
+    <span class="staple a"></span><span class="staple b"></span>
+    <article class="page back">
+      <div>
+        <h2><span class="ink" data-t="Bring">Bring</span><br><span class="ink pk" data-t="the bike,">the bike,</span><br><span class="ink" data-t="not the fear.">not the fear.</span></h2>
+        <p style="margin-top:36px">The Chainring Collective is a volunteer workshop in the back of the old Merritt Dairy garage, 418 Loom Street. We lend the stands, the tools and two spare hands. You do the fixing. Nobody here was born knowing how to true a wheel.</p>
+      </div>
+      <div class="cutout">
+        <p><b>Punch card.</b> Five Tuesday nights = one free chain, any speed. Cut along the line, bring it back, get it stamped at the counter by whoever is wearing the grease-proof apron.</p>
+        <p style="margin:0">□ □ □ □ □</p>
+      </div>
+      <span class="folio">16</span>
+    </article>
+    <article class="page cover">
+      <div class="issue"><span>Fix It Yourself! · No. 7</span><span>Spring ’26 · Free / $2</span></div>
+      <h1><span class="ink" data-t="FLAT">FLAT</span><span class="ink pk" data-t="TIRE">TIRE</span><span class="ink" data-t="SEASON">SEASON</span></h1>
+      <div class="inside">
+        <p class="blurb">A zine from the Chainring Collective about <em>patches, levers, spokes</em> and the Tuesday night fix-it shop.</p>
+      </div>
+      <svg class="wheel" viewBox="0 0 400 400" aria-hidden="true">
+        <circle cx="200" cy="200" r="180" fill="url(#hp)"/>
+        <circle cx="200" cy="200" r="182" fill="none" stroke="#0078bf" stroke-width="22"/>
+        <circle cx="200" cy="200" r="160" fill="none" stroke="#0078bf" stroke-width="4"/>
+        <g stroke="#0078bf" stroke-width="2.5">
+          <line x1="200" y1="200" x2="200" y2="40"/><line x1="200" y1="200" x2="313" y2="87"/><line x1="200" y1="200" x2="360" y2="200"/><line x1="200" y1="200" x2="313" y2="313"/>
+          <line x1="200" y1="200" x2="200" y2="360"/><line x1="200" y1="200" x2="87" y2="313"/><line x1="200" y1="200" x2="40" y2="200"/><line x1="200" y1="200" x2="87" y2="87"/>
+          <line x1="200" y1="200" x2="261" y2="52"/><line x1="200" y1="200" x2="348" y2="139"/><line x1="200" y1="200" x2="348" y2="261"/><line x1="200" y1="200" x2="261" y2="348"/>
+          <line x1="200" y1="200" x2="139" y2="348"/><line x1="200" y1="200" x2="52" y2="261"/><line x1="200" y1="200" x2="52" y2="139"/><line x1="200" y1="200" x2="139" y2="52"/>
+        </g>
+        <circle cx="200" cy="200" r="22" fill="#ff48b0" stroke="#0078bf" stroke-width="5"/>
+      </svg>
+      <span class="folio">1</span>
+    </article>
+  </section>
+
+  <!-- spread 2: contents + patching -->
+  <section class="spread" aria-label="How to patch a tube">
+    <span class="staple a"></span><span class="staple b"></span>
+    <article class="page">
+      <div class="stamp">Open<br>Tues<br>6–9 pm</div>
+      <h2><span class="ink" data-t="In this">In this</span><br><span class="ink pk" data-t="issue">issue</span></h2>
+      <ol class="toc" style="margin-top:36px">
+        <li><a href="#patch"><b>Patch a tube in 6 moves</b><span>by Dolores Kim</span></a><span>p. 3</span></li>
+        <li><a href="#wall"><b>What hangs on the tool wall</b><span>by the Tuesday crew</span></a><span>p. 6</span></li>
+        <li><a href="#bin"><b>Prices from the parts bin</b><span>pay what you can</span></a><span>p. 8</span></li>
+        <li><a href="#hours"><b>When we are open</b><span>and who to ask</span></a><span>p. 9</span></li>
+      </ol>
+      <div class="tip"><p><b>Rule one.</b> Every fix gets done by the owner of the bike. A volunteer will point, explain, and hold the wheel, but your hands turn the wrench. That is how the knowledge leaves the building with you.</p></div>
+      <span class="folio">2</span>
+    </article>
+    <article class="page" id="patch">
+      <h2><span class="ink" data-t="Patch it">Patch it</span> <span class="ink pk" data-t="in six">in six</span></h2>
+      <ol class="steps">
+        <li><span class="no">1</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><circle cx="100" cy="80" r="62" fill="none" stroke="#0078bf" stroke-width="10"/><path d="M60 40 L110 20 L118 34 L70 52Z" fill="url(#hp)" stroke="#1d1d1d" stroke-width="3"/><path d="M130 30 L170 12 L176 24 L136 42Z" fill="url(#hp)" stroke="#1d1d1d" stroke-width="3"/></svg></figure><h3>Two levers</h3><p>Hook the first lever under the bead opposite the valve, clip it to a spoke. The second one runs around the rim.</p></li>
+        <li><span class="no">2</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><ellipse cx="100" cy="80" rx="80" ry="36" fill="url(#hb)" stroke="#0078bf" stroke-width="6"/><g fill="none" stroke="#ff48b0" stroke-width="4"><path d="M150 40c8-8 16-8 22 0"/><path d="M156 30c10-10 22-10 30 0"/></g><circle cx="148" cy="62" r="4" fill="#1d1d1d"/></svg></figure><h3>Find the hiss</h3><p>Pump the tube up fat. Pass it near your cheek or dunk it in the tub by the door. Mark the hole with chalk.</p></li>
+        <li><span class="no">3</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="40" y="50" width="120" height="50" fill="url(#hb)" stroke="#0078bf" stroke-width="6"/><g stroke="#1d1d1d" stroke-width="3"><path d="M70 60 l60 30 M70 90 l60 -30 M80 55 l40 40"/></g><rect x="120" y="20" width="44" height="26" fill="#ff48b0" transform="rotate(20 142 33)"/></svg></figure><h3>Rough it up</h3><p>Sand a patch-sized circle around the hole. Shiny rubber will not hold glue; dull rubber will.</p></li>
+        <li><span class="no">4</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><circle cx="100" cy="76" r="44" fill="url(#hp)" stroke="#ff48b0" stroke-width="4"/><path d="M100 20 v40" stroke="#0078bf" stroke-width="14" stroke-linecap="round"/><path d="M100 60 q6 12 0 18 q-6 -6 0 -18z" fill="#0078bf"/></svg></figure><h3>Thin glue, wait</h3><p>One thin coat of vulcanising fluid. Wait until it goes from shiny to matt, about three minutes. Do not blow on it.</p></li>
+        <li><span class="no">5</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><rect x="60" y="46" width="80" height="60" rx="10" fill="url(#hb)" stroke="#0078bf" stroke-width="6"/><path d="M40 120 h120" stroke="#1d1d1d" stroke-width="10"/><path d="M100 18 v22 M88 30 l12 12 l12 -12" stroke="#ff48b0" stroke-width="6" fill="none"/></svg></figure><h3>Press hard</h3><p>Peel the foil, press the patch on from the centre out. Roll it with a tyre lever against the bench for a full minute.</p></li>
+        <li><span class="no">6</span><figure><svg viewBox="0 0 200 150" aria-hidden="true"><circle cx="100" cy="76" r="60" fill="none" stroke="#0078bf" stroke-width="12"/><rect x="94" y="4" width="12" height="18" fill="#1d1d1d"/><text x="100" y="86" text-anchor="middle" font-family="Rubik Mono One" font-size="26" fill="#ff48b0">60 PSI</text></svg></figure><h3>Seat and pump</h3><p>Tuck the tube in, push the valve up, roll the bead back with your thumbs. Pump to the number moulded on the sidewall.</p></li>
+      </ol>
+      <span class="folio">3</span>
+    </article>
+  </section>
+
+  <!-- spread 3: tool wall + parts bin -->
+  <section class="spread" aria-label="Tool wall and prices">
+    <span class="staple a"></span><span class="staple b"></span>
+    <article class="page" id="wall">
+      <h2><span class="ink pk" data-t="The tool">The tool</span><br><span class="ink" data-t="wall">wall</span></h2>
+      <p style="margin-top:24px">Every tool has a painted outline on the pegboard. If the outline is empty at 9 pm, nobody goes home. It has happened twice. Both times it was the 15 mm cone wrench, and both times it was in someone's back pocket.</p>
+      <div class="pegboard">
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M26 6 h8 v50 l6 8 v10 h-20 v-10 l6 -8z" fill="url(#hp)" stroke="#0078bf" stroke-width="3"/></svg>Cone 15</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="18" r="12" fill="none" stroke="#0078bf" stroke-width="5"/><rect x="26" y="30" width="8" height="44" fill="#ff48b0"/></svg>Chain tool</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M18 8 h24 l-4 64 h-16z" fill="url(#hb)" stroke="#0078bf" stroke-width="3"/><rect x="24" y="4" width="12" height="8" fill="#ff48b0"/></svg>Spoke key</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M22 6 l16 0 l0 30 l-8 40 l-8 -40z" fill="#ff48b0" stroke="#1d1d1d" stroke-width="2"/></svg>Lever</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><rect x="10" y="8" width="40" height="12" fill="#0078bf"/><rect x="26" y="20" width="8" height="54" fill="url(#hp)" stroke="#1d1d1d" stroke-width="2"/></svg>Pump</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M14 10 l32 60 M46 10 l-32 60" stroke="#0078bf" stroke-width="6"/><circle cx="30" cy="40" r="5" fill="#ff48b0"/></svg>Cutters</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><path d="M30 6 v40 M16 46 h28 l-4 28 h-20z" stroke="#0078bf" stroke-width="5" fill="url(#hp)"/></svg>Hex set</figure>
+        <figure><svg viewBox="0 0 60 80" aria-hidden="true"><circle cx="30" cy="40" r="22" fill="url(#hb)" stroke="#0078bf" stroke-width="4"/><path d="M30 18 v44 M8 40 h44" stroke="#ff48b0" stroke-width="3"/></svg>Truing gauge</figure>
+      </div>
+      <span class="folio">6</span>
+    </article>
+    <article class="page" id="bin">
+      <h2><span class="ink" data-t="Parts bin">Parts bin</span></h2>
+      <p style="margin-top:24px">Used parts come from donated bikes that are past saving. New parts are bought at cost. The jar by the till is honour system: pay the number, pay less, or pay more for the next person.</p>
+      <table class="prices">
+        <thead><tr><th scope="col">Part</th><th scope="col">Condition</th><th scope="col">Price</th></tr></thead>
+        <tbody>
+          <tr><td>Inner tube, 700×28</td><td>New</td><td>$6</td></tr>
+          <tr><td>Patch kit (6 patches)</td><td>New</td><td>$3</td></tr>
+          <tr><td>Brake pads, pair</td><td>New</td><td>$4</td></tr>
+          <tr><td>Chain, 8-speed</td><td>Used, measured</td><td>$5</td></tr>
+          <tr><td>Wheel, 26″ rear</td><td>Used, trued</td><td>$15</td></tr>
+          <tr><td>Saddle</td><td>Used, clean</td><td>$2</td></tr>
+          <tr><td>Stand time</td><td>Any night</td><td>Free</td></tr>
+        </tbody>
+      </table>
+      <div class="hours" id="hours">
+        <div><b>Tue</b><span>6–9 pm, open shop. Ask for Dolores or Femi.</span></div>
+        <div><b>Thu</b><span>6–8 pm, women, trans and non-binary night.</span></div>
+        <div><b>Sat</b><span>10 am–1 pm, kids' bikes and wheel school.</span></div>
+      </div>
+      <span class="folio">8</span>
+    </article>
+  </section>
+</main>
+</body>
+</html>

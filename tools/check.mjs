@@ -70,7 +70,7 @@ for (const d of done) {
     for (const m of html.matchAll(re)) refs.push(m[1].trim());
   }
   for (const r of refs) {
-    if (!r || r.startsWith("#") || r.startsWith("data:") || r.includes("${")) continue;
+    if (!r || r.startsWith("#") || r.startsWith("%23") || r.startsWith("data:") || r.includes("${")) continue;
     if (/^([a-z]+:|\/\/|\/)/i.test(r) || r.includes("..")) { fail(where, `reference leaves the folder: ${r}`); continue; }
     const target = path.join(dir, r.split(/[?#]/)[0]);
     if (!fs.existsSync(target)) fail(where, `reference not found: ${r}`);

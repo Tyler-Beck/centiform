@@ -22,7 +22,7 @@ window.CENTIFORM = [
     fonts: ["Rubik Mono One","Rubik"], swatch: ["#f3efe6","#0078bf","#ff48b0","#1d1d1d"],
     grammar: "Stapled spreads, blocks offset 2-4px between the two ink layers, mix-blend-mode multiply",
     motif: "Halftone dot fills and the purple where pink overprints blue",
-    status: "planned" },
+    status: "done" },
   { n: 4, slug: "004-exposition-broadsheet", title: "Exposition Broadsheet", family: "Paper & Print",
     subject: "Front page covering a fictional 1893 industrial exposition.", format: "editorial", mode: "light",
     thesis: "Victorian newspaper: seven dense justified columns",
