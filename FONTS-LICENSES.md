@@ -33,3 +33,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | M PLUS 1p | OFL-1.1 | https://fontsource.org/fonts/m-plus-1p | 012-pocket-calculator-manual |
 | B612 | OFL-1.1 | https://fontsource.org/fonts/b612 | 013-glass-cockpit |
 | B612 Mono | OFL-1.1 | https://fontsource.org/fonts/b612-mono | 013-glass-cockpit |
+| Limelight | OFL-1.1 | https://fontsource.org/fonts/limelight | 014-valve-radio-dial |
+| Marcellus | OFL-1.1 | https://fontsource.org/fonts/marcellus | 014-valve-radio-dial |

@@ -99,7 +99,7 @@ window.CENTIFORM = [
     fonts: ["Limelight","Marcellus"], swatch: ["#3e2417","#e8d49a","#b23a1c","#c9a14a"],
     grammar: "Horizontal tuning dial is the navigation; each station is a section",
     motif: "Tuning needle that slides between city names",
-    status: "planned" },
+    status: "done" },
   { n: 15, slug: "015-card-catalog", title: "Card Catalog", family: "Instruments",
     subject: "Search interface for a small-town library.", format: "tool", mode: "light",
     thesis: "Oak card-catalogue drawers and typed index cards",
