@@ -106,7 +106,7 @@ window.CENTIFORM = [
     fonts: ["Anonymous Pro","Libre Baskerville"], swatch: ["#c89b6d","#2e1f14","#fbf8ef","#b33a3a"],
     grammar: "Drawers with brass label holders open into stacks of index cards",
     motif: "Typed 3x5 card with punch hole and red top rule",
-    status: "planned" },
+    status: "done" },
   { n: 16, slug: "016-split-flap-departures", title: "Split-Flap Departures", family: "Instruments",
     subject: "Departure board for a fictional night-train terminal.", format: "dashboard", mode: "dark",
     thesis: "Mechanical split-flap board with flipping characters",
