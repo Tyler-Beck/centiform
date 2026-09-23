@@ -37,3 +37,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Marcellus | OFL-1.1 | https://fontsource.org/fonts/marcellus | 014-valve-radio-dial |
 | Anonymous Pro | OFL-1.1 | https://fontsource.org/fonts/anonymous-pro | 015-card-catalog |
 | Libre Baskerville | OFL-1.1 | https://fontsource.org/fonts/libre-baskerville | 015-card-catalog |
+| Barlow Condensed | OFL-1.1 | https://fontsource.org/fonts/barlow-condensed | 016-split-flap-departures |
+| Barlow | OFL-1.1 | https://fontsource.org/fonts/barlow | 016-split-flap-departures |

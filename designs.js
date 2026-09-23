@@ -113,7 +113,7 @@ window.CENTIFORM = [
     fonts: ["Barlow Condensed","Barlow"], swatch: ["#1b1b1d","#f2f2f0","#ffcf3f","#2f2f33"],
     grammar: "Rows of flap cells; every value is spelled out cell by cell",
     motif: "Flip animation per character (CSS 3D rotateX)",
-    status: "planned" },
+    status: "done" },
   { n: 17, slug: "017-punch-card-batch", title: "Punch Card Batch", family: "Instruments",
     subject: "Job control documentation for a fictional 1968 mainframe.", format: "docs", mode: "light",
     thesis: "80-column punch cards and line-printer greenbar",
