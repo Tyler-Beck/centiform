@@ -172,3 +172,13 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Kosugi | Apache-2.0 | https://fontsource.org/fonts/kosugi | 084-tin-robot-box |
 | Rye | OFL-1.1 | https://fontsource.org/fonts/rye | 085-chromolitho-circus |
 | Glass Antiqua | OFL-1.1 | https://fontsource.org/fonts/glass-antiqua | 085-chromolitho-circus |
+| Chewy | Apache-2.0 | https://fontsource.org/fonts/chewy | 086-claymation-studio |
+| Baloo 2 | OFL-1.1 | https://fontsource.org/fonts/baloo-2 | 086-claymation-studio |
+| Grandstander | OFL-1.1 | https://fontsource.org/fonts/grandstander | 087-rainbow-stationery |
+| Mali | OFL-1.1 | https://fontsource.org/fonts/mali | 087-rainbow-stationery |
+| Metal Mania | OFL-1.1 | https://fontsource.org/fonts/metal-mania | 088-skate-deck-1987 |
+| Permanent Marker | Apache-2.0 | https://fontsource.org/fonts/permanent-marker | 088-skate-deck-1987 |
+| Holtwood One SC | OFL-1.1 | https://fontsource.org/fonts/holtwood-one-sc | 089-parlour-board-game |
+| Arbutus Slab | OFL-1.1 | https://fontsource.org/fonts/arbutus-slab | 089-parlour-board-game |
+| Gluten | OFL-1.1 | https://fontsource.org/fonts/gluten | 090-gouache-picture-book |
+| Andika | OFL-1.1 | https://fontsource.org/fonts/andika | 090-gouache-picture-book |

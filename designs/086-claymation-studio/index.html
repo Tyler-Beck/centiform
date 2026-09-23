@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claymation Studio · Centiform</title>
+<style>
+/* @fonts: Chewy:400:block; Baloo 2:400,600 */
+@font-face{font-family:"Chewy";font-style:normal;font-weight:400;font-display:block;src:url(fonts/chewy-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/baloo-2-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Baloo 2";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/baloo-2-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ffe7c2;          /* the bench under the lamp, warm card */
+  --ink: #3b2a20;         /* chocolate plasticine */
+  --accent-1: #ff7a59;    /* coral clay */
+  --accent-2: #5bc0be;    /* teal clay */
+  --butter: #ffd36b; --plum: #a0567a; --moss: #8cb85a; --cream: #fff6e6;
+  --u: 8px;
+  --fps: 12;              /* shot on twos */
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(56px, 7.5vw, 124px);
+  --chewy: "Chewy", "Cooper Black", cursive;
+  --baloo: "Baloo 2", "Trebuchet MS", sans-serif;
+  /* thumbprint whorls, pressed into every blob */
+  --thumb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='none' stroke='%233b2a20' stroke-opacity='.09' stroke-width='1.3'%3E%3Cellipse cx='70' cy='70' rx='12' ry='16'/%3E%3Cellipse cx='70' cy='70' rx='20' ry='25'/%3E%3Cellipse cx='70' cy='70' rx='28' ry='34'/%3E%3Cpath d='M34 70a36 43 0 0 1 72 0'/%3E%3Cpath d='M26 74a44 51 0 0 1 88 -4'/%3E%3C/g%3E%3C/svg%3E");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.6 var(--baloo); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 4px solid var(--accent-2); outline-offset: 4px; }
+
+/* lumps: no two corners the same, a thumbprint in every one */
+.lump { position: relative; padding: calc(var(--u) * 5) calc(var(--u) * 6); background-image: var(--thumb); background-color: var(--c, var(--cream)); box-shadow: inset -6px -8px 0 rgba(59, 42, 32, .14), inset 6px 6px 0 rgba(255, 255, 255, .35), 0 8px 0 rgba(59, 42, 32, .18); }
+.l1 { border-radius: 46% 54% 42% 58% / 52% 38% 62% 48%; }
+.l2 { border-radius: 58% 42% 55% 45% / 40% 56% 44% 60%; }
+.l3 { border-radius: 38% 62% 48% 52% / 56% 44% 58% 42%; }
+.l4 { border-radius: 52% 48% 60% 40% / 44% 60% 40% 56%; }
+
+.stage { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); grid-template-rows: auto 1fr; gap: calc(var(--u) * 3) calc(var(--u) * 4); padding: calc(var(--u) * 3) calc(var(--u) * 5) calc(var(--u) * 4); min-height: 100svh; }
+.top { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+.logo { font: 400 var(--t2)/1 var(--chewy); display: flex; align-items: center; gap: 10px; text-decoration: none; }
+.logo i { width: 34px; height: 30px; background: var(--accent-1); border-radius: 55% 45% 50% 50% / 60% 55% 45% 40%; box-shadow: inset -3px -4px 0 rgba(0,0,0,.15); }
+nav { display: flex; gap: calc(var(--u) * 1.5); flex-wrap: wrap; }
+nav a { text-decoration: none; font: 600 var(--t-1)/1 var(--baloo); padding: 10px 16px; background: var(--cream); border-radius: 60% 40% 55% 45% / 55% 60% 40% 45%; box-shadow: inset -2px -3px 0 rgba(59,42,32,.15), 0 3px 0 rgba(59,42,32,.2); }
+nav a:hover { background: var(--butter); }
+
+.hero { --c: var(--accent-1); display: grid; align-content: center; padding: calc(var(--u) * 7) calc(var(--u) * 8); }
+.hero h1 { margin: 0; font: 400 var(--t4)/.88 var(--chewy); color: var(--cream); text-shadow: 0 5px 0 var(--ink); letter-spacing: .01em; }
+.hero p { margin: calc(var(--u) * 3) 0 0; max-width: 28em; font-size: var(--t1); line-height: 1.45; color: var(--ink); }
+.set { position: relative; display: grid; place-items: center; }
+.set .l2 { --c: var(--accent-2); position: absolute; inset: 6% 2% 10% 4%; }
+.set svg { position: relative; width: min(100%, 520px); height: auto; }
+.cnt { position: absolute; right: 8%; bottom: 6%; font: 600 var(--t-1)/1.2 var(--baloo); background: var(--ink); color: var(--cream); padding: 6px 12px; border-radius: 40% 60% 50% 50% / 60% 50% 50% 40%; font-variant-numeric: tabular-nums; }
+
+/* the frame strip: one second is twelve poses */
+.sheet { padding: calc(var(--u) * 6) calc(var(--u) * 5) calc(var(--u) * 8); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: calc(var(--u) * 5); align-items: center; }
+.sheet h2, .bench h2, .visit h2 { margin: 0 0 var(--u); font: 400 var(--t3)/1.05 var(--chewy); }
+.sheet p { margin: 0 0 calc(var(--u) * 2); max-width: 30em; }
+.frames { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--u); }
+.fr { background: var(--cream); border-radius: 30% 34% 28% 36% / 34% 28% 36% 30%; aspect-ratio: 1; display: grid; place-items: center; position: relative; box-shadow: inset -3px -4px 0 rgba(59,42,32,.12); }
+.fr b { position: absolute; left: 10px; top: 6px; font: 600 11px/1 var(--baloo); color: var(--plum); }
+.fr svg { width: 72%; height: 72%; }
+.fr.on { background: var(--butter); }
+.two { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: calc(var(--u) * 4); padding: 0 calc(var(--u) * 5) calc(var(--u) * 8); }
+.bench { --c: var(--butter); }
+.bench dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--u) * 2) calc(var(--u) * 4); margin: calc(var(--u) * 2) 0 0; }
+.bench dt { font: 400 var(--t3)/1 var(--chewy); color: var(--plum); font-variant-numeric: tabular-nums; }
+.bench dd { margin: 4px 0 0; font-size: var(--t-1); line-height: 1.4; }
+.visit { --c: var(--moss); }
+.visit p { margin: 0 0 calc(var(--u) * 2); }
+.btn { display: inline-block; font: 400 var(--t1)/1 var(--chewy); text-decoration: none; background: var(--accent-1); color: var(--cream); padding: 14px 26px; border-radius: 55% 45% 60% 40% / 60% 45% 55% 40%; box-shadow: inset -3px -5px 0 rgba(0,0,0,.18), 0 5px 0 var(--ink); text-shadow: 0 2px 0 var(--ink); }
+.btn:hover { background: var(--plum); }
+footer { padding: 0 calc(var(--u) * 5) calc(var(--u) * 5); font-size: var(--t-1); display: flex; justify-content: space-between; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+
+/* clay boil: three sculpts swapped at twelve frames a second */
+.boil .b1, .boil .b2 { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .boil .b0 { animation: b0 .25s steps(1, end) infinite; }
+  .boil .b1 { animation: b1 .25s steps(1, end) infinite; }
+  .boil .b2 { animation: b2 .25s steps(1, end) infinite; }
+  @keyframes b0 { 0% { opacity: 1; } 33.33% { opacity: 0; } }
+  @keyframes b1 { 0%, 33.32% { opacity: 0; } 33.33% { opacity: 1; } 66.66% { opacity: 0; } }
+  @keyframes b2 { 0%, 66.65% { opacity: 0; } 66.66% { opacity: 1; } }
+}
+
+@media (min-width: 1900px) { :root { --t0: 20px; } .stage, .two, .sheet { padding-inline: calc(var(--u) * 12); } }
+@media (max-width: 1000px) { .stage { grid-template-columns: minmax(0, 1fr); } .set { min-height: 360px; } .sheet, .two { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 560px) {
+  .stage { padding: calc(var(--u) * 2); } .hero { padding: calc(var(--u) * 6) calc(var(--u) * 4); }
+  .frames { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .sheet, .two { padding-inline: calc(var(--u) * 2); } .lump { padding: calc(var(--u) * 5) calc(var(--u) * 3.5); }
+  .bench dl { grid-template-columns: minmax(0, 1fr); }
+  nav a { padding: 8px 12px; }
+}
+</style>
+</head>
+<body>
+<div class="stage">
+  <header class="top">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Squidge &amp; Thumb</a>
+    <nav aria-label="Studio">
+      <a href="#frames">How a second is made</a>
+      <a href="#bench">On the bench</a>
+      <a href="#visit">Open studio</a>
+    </nav>
+  </header>
+  <section class="lump l1 hero" id="top" aria-labelledby="h1">
+    <h1 id="h1">Made by hand, one frame at a time</h1>
+    <p>A stop-motion studio in a former bakery on Gloucester Road. Eleven animators, four stages, 380 kg of plasticine and a great many thumbs.</p>
+  </section>
+  <div class="set" aria-label="Mo the mole, on set">
+    <div class="lump l2" aria-hidden="true"></div>
+    <svg viewBox="0 0 400 360" role="img" aria-label="Mo the clay mole waving">
+      <ellipse cx="200" cy="330" rx="130" ry="18" fill="#3b2a20" opacity=".2"/>
+      <g class="boil">
+        <g class="b0"><path d="M110 320c-18-70 0-190 92-196 94-4 112 120 92 196z" fill="#6b4a3a" stroke="#3b2a20" stroke-width="5"/><path d="M160 300c-6-40 6-80 42-82 36 0 46 40 40 82z" fill="#d9a78a"/></g>
+        <g class="b1"><path d="M112 322c-20-72 2-192 90-198 96-2 114 118 90 198z" fill="#6b4a3a" stroke="#3b2a20" stroke-width="5"/><path d="M158 300c-4-42 8-82 44-82 34 2 44 42 38 82z" fill="#d9a78a"/></g>
+        <g class="b2"><path d="M108 320c-16-68 -2-188 94-196 92-6 110 122 94 196z" fill="#6b4a3a" stroke="#3b2a20" stroke-width="5"/><path d="M162 300c-8-40 4-80 40-80 38-2 48 38 42 80z" fill="#d9a78a"/></g>
+      </g>
+      <circle cx="176" cy="178" r="11" fill="#3b2a20"/><circle cx="228" cy="178" r="11" fill="#3b2a20"/><circle cx="179" cy="175" r="3.5" fill="#fff6e6"/><circle cx="231" cy="175" r="3.5" fill="#fff6e6"/>
+      <ellipse cx="202" cy="206" rx="22" ry="15" fill="#ff7a59" stroke="#3b2a20" stroke-width="4"/>
+      <path d="M186 226q16 12 32 0" fill="none" stroke="#3b2a20" stroke-width="4" stroke-linecap="round"/>
+      <path d="M296 230c30-20 40-60 30-80" fill="none" stroke="#3b2a20" stroke-width="20" stroke-linecap="round"/><path d="M296 230c30-20 40-60 30-80" fill="none" stroke="#6b4a3a" stroke-width="13" stroke-linecap="round"/>
+      <circle cx="326" cy="146" r="18" fill="#d9a78a" stroke="#3b2a20" stroke-width="4"/>
+      <path d="M108 250c-30 10-40 40-28 60" fill="none" stroke="#3b2a20" stroke-width="20" stroke-linecap="round"/><path d="M108 250c-30 10-40 40-28 60" fill="none" stroke="#6b4a3a" stroke-width="13" stroke-linecap="round"/>
+      <path d="M150 128c10-26 30-34 56-30" fill="none" stroke="#a0567a" stroke-width="16" stroke-linecap="round"/><circle cx="210" cy="98" r="12" fill="#ffd36b" stroke="#3b2a20" stroke-width="4"/>
+    </svg>
+    <span class="cnt" id="cnt">FR 0001 · 12 fps</span>
+  </div>
+</div>
+
+<section class="sheet" id="frames" aria-labelledby="h2">
+  <div>
+    <h2 id="h2">How a second is made</h2>
+    <p>Film runs at 24 frames a second. We shoot on twos: each pose is held for two frames, so a second of Mo takes twelve careful nudges of clay.</p>
+    <p>A good day on one stage is four seconds of finished film. A bad day is a sneeze.</p>
+  </div>
+  <div class="frames" id="fr" aria-label="Twelve poses of a bouncing clay ball"></div>
+</section>
+
+<div class="two">
+  <section class="lump l3 bench" id="bench" aria-labelledby="h3">
+    <h2 id="h3">On the bench this week</h2>
+    <p style="margin:0"><b>Moles on Holiday</b>, series two: 26 episodes of seven minutes each, for Kettle Television.</p>
+    <dl>
+      <div><dt>2,184</dt><dd>seconds of film still to shoot</dd></div>
+      <div><dt>4.2 s</dt><dd>average finished film per stage per day</dd></div>
+      <div><dt>17</dt><dd>replacement mouths for Mo, one per vowel and then some</dd></div>
+      <div><dt>9 kg</dt><dd>of brown plasticine used on the beach set alone</dd></div>
+    </dl>
+  </section>
+  <section class="lump l4 visit" id="visit" aria-labelledby="h4">
+    <h2 id="h4">Open studio</h2>
+    <p>Saturday 17 October, 10:00 to 16:00. Watch a scene being shot, hold an armature, and make a thirty-frame film of your own on our kitchen-table rig.</p>
+    <p>Free. Children very welcome; please wash sticky hands before touching the sets.</p>
+    <a class="btn" href="#visit">Book a slot</a>
+  </section>
+</div>
+<footer><span>Squidge &amp; Thumb Ltd · 212 Gloucester Road, Bristol BS7 8NU</span><span>We are hiring a junior animator from January</span></footer>
+
+<script>
+(() => {
+  // twelve poses of a ball: squash, rise, stretch, land
+  const P = [[0, 1.3, .7], [8, .95, 1.1], [26, .9, 1.12], [40, .96, 1.04], [48, 1, 1], [50, 1, 1], [46, 1, 1], [36, .96, 1.04], [22, .92, 1.1], [8, .9, 1.14], [0, 1.2, .8], [0, 1.35, .65]];
+  document.getElementById("fr").innerHTML = P.map(([y, sx, sy], i) => `<div class="fr" data-i="${i}"><b>${String(i * 2 + 1).padStart(2, "0")}</b><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M8 92h84" stroke="#3b2a20" stroke-width="3" stroke-linecap="round"/><ellipse cx="50" cy="${92 - 16 * sy - y}" rx="${16 * sx}" ry="${16 * sy}" fill="#ff7a59" stroke="#3b2a20" stroke-width="3"/><ellipse cx="${50 - 5 * sx}" cy="${92 - 22 * sy - y}" rx="4" ry="3" fill="#fff6e6" opacity=".7"/></svg></div>`).join("");
+  const frames = [...document.querySelectorAll(".fr")], cnt = document.getElementById("cnt");
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) { frames[4].classList.add("on"); return; }
+  // the frame counter and the lit pose advance at exactly twelve frames a second
+  let n = 0, last = 0;
+  const tick = (t) => {
+    if (!document.hidden && t - last >= 1000 / 12) {
+      last = t; n++;
+      frames.forEach((f, i) => f.classList.toggle("on", i === n % 12));
+      cnt.textContent = `FR ${String(n % 10000).padStart(4, "0")} · 12 fps`;
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

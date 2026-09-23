@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gouache Picture Book · Centiform</title>
+<style>
+/* @fonts: Gluten:600:block; Andika:400,700 */
+@font-face{font-family:"Gluten";font-style:normal;font-weight:600;font-display:block;src:url(fonts/gluten-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Andika";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/andika-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Andika";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/andika-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fbf3e4;          /* cartridge paper */
+  --ink: #35302b;         /* sepia-black paint */
+  --accent-1: #e4775a;    /* fox orange */
+  --accent-2: #6aa6a0;    /* verdigris */
+  --ochre: #e8b75a; --leaf: #7d9a4f; --night: #3c4a6b; --pink: #eeb3a3; --cream: #fff8ea;
+  --u: 8px;
+  /* scale: 1.25 on 20px, a read-aloud size */
+  --t-1: 16px; --t0: 20px; --t1: 25px; --t2: 31px; --t3: 39px; --t4: clamp(44px, 4.6vw, 82px);
+  --glu: "Gluten", "Cooper Black", cursive;
+  --and: "Andika", "Gill Sans", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: #d9cdb8; }
+body { margin: 0; background: #d9cdb8; color: var(--ink); font: 400 var(--t0)/1.6 var(--and); overflow-x: hidden; min-height: 100svh; display: grid; place-items: center; padding: calc(var(--u) * 3); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 4px; }
+
+/* the open book: two pages, a shaded gutter, a leaf that turns */
+.book { position: relative; width: min(100%, calc((100svh - 150px) * 1.6), 1800px); aspect-ratio: 1.6; perspective: 2400px; }
+.pages { position: absolute; inset: 0; display: grid; grid-template-columns: 1fr 1fr; box-shadow: 0 18px 30px rgba(53, 48, 43, .35), 0 3px 0 #bfae92, 0 6px 0 #d8c8ac, 0 9px 0 #bfae92; }
+.page { position: relative; background: var(--bg); overflow: hidden; min-width: 0;
+  background-image: radial-gradient(circle at 30% 20%, rgba(180, 150, 100, .06), transparent 50%), url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .33 0 0 0 0 .25 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.page.l { box-shadow: inset -40px 0 40px -30px rgba(53, 48, 43, .28); }
+.page.r { box-shadow: inset 40px 0 40px -30px rgba(53, 48, 43, .28); }
+.page svg.paint { position: absolute; inset: 0; width: 100%; height: 100%; }
+.words { position: absolute; left: 10%; right: 10%; bottom: 10%; font-size: var(--t0); line-height: 1.6; }
+.words.top { top: 10%; bottom: auto; }
+.words p { margin: 0 0 calc(var(--u) * 1.5); max-width: 26em; }
+.words.on-paint { background: var(--cream); padding: calc(var(--u) * 2.5) calc(var(--u) * 3); border-radius: 46% 54% 50% 50% / 8% 10% 8% 12%; }
+.title { position: absolute; inset: 12% 12%; display: grid; align-content: center; text-align: center; gap: calc(var(--u) * 2); }
+.title h1 { margin: 0; font: 600 var(--t4)/1 var(--glu); color: var(--accent-1); }
+.title p { margin: 0; font-size: var(--t-1); }
+.title .imp { font: 700 var(--t-1)/1 var(--and); letter-spacing: .2em; text-transform: uppercase; color: var(--accent-2); }
+.folio { position: absolute; bottom: 4%; font-size: 13px; color: #7a6f63; }
+.l .folio { left: 6%; } .r .folio { right: 6%; }
+
+.leaf { position: absolute; top: 0; bottom: 0; width: 50%; transform-style: preserve-3d; z-index: 5; }
+.leaf.fwd { left: 50%; transform-origin: 0 50%; }
+.leaf.back { left: 0; transform-origin: 100% 50%; }
+.leaf .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.leaf .face.b { transform: rotateY(180deg); }
+.leaf.fwd.go { transform: rotateY(-180deg); }
+.leaf.back.go { transform: rotateY(180deg); }
+@media (prefers-reduced-motion: no-preference) { .leaf { transition: transform .9s cubic-bezier(.45, .05, .35, 1); } }
+
+.ctl { margin-top: calc(var(--u) * 3); display: flex; justify-content: center; align-items: center; gap: calc(var(--u) * 3); }
+.ctl button { background: var(--cream); border: 0; padding: 10px 22px; font: 600 var(--t1)/1 var(--glu); color: var(--ink); border-radius: 50% 46% 52% 48% / 60% 50% 56% 44%; box-shadow: inset 0 -4px 0 rgba(53, 48, 43, .14); }
+.ctl button:hover { background: var(--ochre); }
+.ctl button:disabled { opacity: .4; cursor: default; }
+.ctl output { font-size: var(--t-1); min-width: 7em; text-align: center; }
+.wrap { width: 100%; display: grid; justify-items: center; }
+
+@media (max-width: 760px) {
+  body { padding: calc(var(--u) * 2) 0; place-items: start center; }
+  .book { width: calc(100% - 24px); aspect-ratio: auto; height: auto; perspective: none; }
+  .pages { position: relative; grid-template-columns: minmax(0, 1fr); }
+  .page { aspect-ratio: .8; }
+  .page.l, .page.r { box-shadow: none; }
+  .page.l { border-bottom: 1px dashed #c9b99c; }
+  .leaf { display: none; }
+  :root { --t0: 18px; }
+  .words { left: 8%; right: 8%; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- gouache edge: the brush drags a wet edge that wobbles, then dry-brush breaks it up -->
+    <filter id="rough" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".035" numOctaves="3" seed="4" result="w"/><feDisplacementMap in="SourceGraphic" in2="w" scale="9"/></filter>
+    <filter id="dry" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency=".04 .6" numOctaves="2" seed="9" result="s"/><feDisplacementMap in="SourceGraphic" in2="s" scale="12" result="d"/><feTurbulence type="fractalNoise" baseFrequency="1.4 .08" numOctaves="1" seed="2" result="g"/><feColorMatrix in="g" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.4 1.6" result="m"/><feComposite in="d" in2="m" operator="in"/></filter>
+  </defs>
+</svg>
+<div class="wrap">
+  <main class="book" id="book" aria-label="The Fox Who Kept the Allotment">
+    <div class="pages"><section class="page l" id="L"></section><section class="page r" id="R"></section></div>
+  </main>
+  <nav class="ctl" aria-label="Turn the pages">
+    <button type="button" id="prev" aria-label="Turn back">‹ back</button>
+    <output id="where">title page</output>
+    <button type="button" id="next" aria-label="Turn the page">turn ›</button>
+  </nav>
+</div>
+<script>
+(() => {
+  const W = 500, H = 625;
+  const fox = (x, y, s = 1, flip = false) => `<g transform="translate(${x} ${y}) scale(${flip ? -s : s} ${s})" filter="url(#rough)">
+    <path d="M-40 36h16v40h-16zM14 36h16v40h-16z" fill="#35302b"/><path d="M-60 40c10-50 60-70 100-44 20 12 30 34 22 54H-50z" fill="#e4775a"/><path d="M-60 40c-30 4-50-20-40-40 12 10 30 6 40 16z" fill="#e4775a"/><path d="M-96 6c4 6 10 8 16 6-6-10-12-12-16-6z" fill="#fff8ea"/>
+    <path d="M30 -10c0-30 14-44 30-44l8-22 8 24c10 6 14 18 12 30l20 10-22 8c-8 12-30 16-56-6z" fill="#e4775a"/><path d="M76 4l20 10-22 8z" fill="#fff8ea"/><circle cx="92" cy="14" r="3.4" fill="#35302b"/><circle cx="62" cy="-6" r="3.2" fill="#35302b"/>
+    </g>`;
+  // small spot paintings for the text pages
+  const SPOT = {
+    pear: '<path d="M100 40c-10 0-14 20-16 34-14 10-24 30-16 48 10 22 54 22 64 0 8-18-2-38-16-48-2-14-6-34-16-34z" fill="#9bbd5a"/><path d="M100 40c2-10 8-16 16-18" stroke="#35302b" stroke-width="5" fill="none"/><path d="M104 30c10-10 24-8 28 0-10 6-20 6-28 0z" fill="#7d9a4f"/>',
+    slug: '<path d="M40 130c10-30 60-30 90-10 20 10 40 10 50 20H40z" fill="#c9a66b"/><path d="M150 118l6-20M160 122l10-18" stroke="#35302b" stroke-width="4"/><circle cx="156" cy="97" r="4" fill="#35302b"/><circle cx="171" cy="103" r="4" fill="#35302b"/>',
+    leaf: '<path d="M30 110c20-70 120-90 160-60-10 60-90 90-160 60z" fill="#7d9a4f"/><path d="M40 110c40-20 90-40 140-56" stroke="#a9c27a" stroke-width="5" fill="none"/><path d="M110 120v36" stroke="#e4775a" stroke-width="8"/>',
+    prints: '<g fill="#35302b"><ellipse cx="50" cy="130" rx="9" ry="11"/><ellipse cx="90" cy="110" rx="9" ry="11"/><ellipse cx="130" cy="90" rx="9" ry="11"/><ellipse cx="170" cy="70" rx="9" ry="11"/></g><path d="M40 60c10-16 30-16 36 0" fill="#e8b75a"/>',
+  };
+  const spot = (k) => `<svg viewBox="0 0 200 170" style="position:absolute;right:8%;bottom:8%;width:34%;height:auto" aria-hidden="true"><g filter="url(#rough)">${SPOT[k]}</g></svg>`;
+  const cabbage = (x, y, r, c = "#7d9a4f") => `<g filter="url(#rough)"><circle cx="${x}" cy="${y}" r="${r}" fill="${c}"/><path d="M${x - r * .7} ${y}q${r * .7} ${-r} ${r * 1.4} 0" fill="none" stroke="#a9c27a" stroke-width="${r / 6}"/><circle cx="${x}" cy="${y - r * .1}" r="${r * .45}" fill="#a9c27a"/></g>`;
+  const hills = (a, b) => `<path d="M-20 ${H * .58}C100 ${H * .48} 220 ${H * .6} 520 ${H * .5}V${H + 20}H-20z" fill="${a}" filter="url(#rough)"/><path d="M-20 ${H * .7}C140 ${H * .62} 300 ${H * .74} 520 ${H * .64}V${H + 20}H-20z" fill="${b}" filter="url(#dry)"/>`;
+  const paint = (inner, sky) => `<svg class="paint" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect x="-10" y="-10" width="${W + 20}" height="${H + 20}" fill="${sky}" filter="url(#rough)"/>${inner}</svg>`;
+  // endpaper: repeated leaves, dry-brushed
+  const endpaper = () => { let o = ""; for (let r = 0; r < 7; r++) for (let c = 0; c < 6; c++) { const x = c * 90 + (r % 2) * 45, y = r * 95 + 20; o += `<path d="M${x} ${y}c20-30 60-30 70 0-10 30-50 30-70 0z" fill="${(r + c) % 3 ? "#7d9a4f" : "#6aa6a0"}" transform="rotate(${(r * 37 + c * 23) % 60 - 30} ${x + 35} ${y})"/>`; } return `<svg class="paint" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="${W}" height="${H}" fill="#eeb3a3"/><g filter="url(#dry)">${o}</g></svg>`; };
+
+  const SP = [
+    { name: "title page", l: endpaper(), r: `<div class="title"><p class="imp">Hedgerow Books</p><h1>The Fox Who Kept the Allotment</h1><p>words by Nell Ashby<br>pictures by Tomás Reyes</p></div>` },
+    { name: "pages 2 and 3",
+      l: paint(`<circle cx="360" cy="190" r="70" fill="#e8b75a" filter="url(#rough)"/>${hills("#6aa6a0", "#7d9a4f")}<path d="M60 360v-90M140 360v-90M60 300h80M60 330h80" stroke="#35302b" stroke-width="10" filter="url(#rough)"/>${fox(300, 470, 1)}`, "#eeb3a3"),
+      r: `<div class="words top"><p>Every morning, before the people came, Fennel the fox let herself into plot fourteen through the gap under the gate.</p><p>Nobody had kept plot fourteen for three summers. The beans had gone wild. The shed had a hole in its roof the shape of a pear.</p></div>${spot("pear")}<span class="folio">3</span>` },
+    { name: "pages 4 and 5",
+      l: `${spot("slug").replace("bottom:8%", "top:10%")}<div class="words"><p>She did not know much about gardens. She knew that slugs were slow and that cabbages were round.</p><p>So she sat very still beside the cabbages, all night, and every slug that came along turned round and went home again.</p></div><span class="folio">4</span>`,
+      r: paint(`${hills("#7d9a4f", "#5f7a3c")}${cabbage(110, 470, 46)}${cabbage(230, 500, 54, "#6f8f45")}${cabbage(370, 470, 42)}${fox(250, 360, .8, true)}<circle cx="80" cy="120" r="44" fill="#fff8ea" filter="url(#rough)"/><circle cx="96" cy="112" r="40" fill="#3c4a6b" filter="url(#rough)"/>`, "#3c4a6b") },
+    { name: "pages 6 and 7",
+      l: paint(`${hills("#6aa6a0", "#3c4a6b")}<g stroke="#fff8ea" stroke-width="4" stroke-linecap="round" opacity=".8" filter="url(#dry)">${Array.from({ length: 40 }, (_, i) => `<path d="M${(i * 53) % 500} ${(i * 97) % 520}l-10 30"/>`).join("")}</g><path d="M300 520c0-70 20-120 60-120s60 50 60 120z" fill="#e4775a" filter="url(#rough)"/><path d="M270 420c40-60 140-60 180 0z" fill="#35302b" filter="url(#rough)"/>`, "#8aa7b5"),
+      r: `<div class="words top"><p>When it rained, Fennel sheltered under a rhubarb leaf as big as an umbrella.</p><p>The water ran off its edges in silver strings, and the old shed filled up through the pear-shaped hole, and the watering can filled up too, all by itself.</p></div>${spot("leaf")}<span class="folio">7</span>` },
+    { name: "pages 8 and 9",
+      l: `${spot("prints").replace("bottom:8%", "top:8%")}<div class="words"><p>In September a girl called Ada took on plot fourteen. She found the cabbages fat and whole, and a line of small footprints in the mud.</p><p>She left a pear on the shed step. In the morning it was gone.</p></div><span class="folio">8</span>`,
+      r: paint(`<circle cx="400" cy="140" r="60" fill="#e4775a" filter="url(#rough)"/>${hills("#e8b75a", "#7d9a4f")}<path d="M60 520v-150h120v150z" fill="#6aa6a0" filter="url(#rough)"/><path d="M50 380l70-50 70 50z" fill="#35302b" filter="url(#rough)"/><circle cx="104" cy="352" r="10" fill="#fbf3e4" filter="url(#rough)"/><circle cx="120" cy="540" r="16" fill="#9bbd5a" filter="url(#rough)"/>${fox(340, 470, .7, true)}<path d="M40 600l40-60 40 60" fill="none" stroke="#35302b" stroke-width="6" filter="url(#rough)"/>`, "#f1c9a0") },
+    { name: "the end",
+      l: paint(`${hills("#7d9a4f", "#6aa6a0")}${cabbage(120, 520, 40)}${cabbage(390, 520, 36)}${fox(250, 430, 1)}<g filter="url(#rough)"><circle cx="120" cy="120" r="6" fill="#fff8ea"/><circle cx="220" cy="80" r="4" fill="#fff8ea"/><circle cx="380" cy="110" r="5" fill="#fff8ea"/><circle cx="440" cy="60" r="3" fill="#fff8ea"/></g>`, "#3c4a6b"),
+      r: `<div class="title"><h1>The End</h1><p>Plot fourteen is still there, at the far end by the railway. If you go very early, you might see a gap under the gate, and a pear-shaped hole in a shed roof, and nobody there at all.</p><p class="imp">First published 2026 · £12.99</p></div>` },
+  ];
+  const L = document.getElementById("L"), R = document.getElementById("R"), book = document.getElementById("book");
+  const where = document.getElementById("where"), prev = document.getElementById("prev"), next = document.getElementById("next");
+  let at = 0, busy = false;
+  const set = () => { L.innerHTML = SP[at].l; R.innerHTML = SP[at].r; where.textContent = SP[at].name; prev.disabled = at === 0; next.disabled = at === SP.length - 1; };
+  const motion = () => matchMedia("(prefers-reduced-motion: no-preference)").matches && innerWidth > 760;
+  // a forward turn lifts the right page, shows the next left page on its back
+  const turn = (dir) => {
+    const to = at + dir; if (busy || to < 0 || to >= SP.length) return;
+    if (!motion()) { at = to; set(); return; }
+    busy = true;
+    const leaf = document.createElement("div");
+    leaf.className = "leaf " + (dir > 0 ? "fwd" : "back");
+    leaf.innerHTML = dir > 0
+      ? `<div class="face page r">${SP[at].r}</div><div class="face b page l">${SP[to].l}</div>`
+      : `<div class="face page l">${SP[at].l}</div><div class="face b page r">${SP[to].r}</div>`;
+    book.appendChild(leaf);
+    if (dir > 0) R.innerHTML = SP[to].r; else L.innerHTML = SP[to].l;
+    requestAnimationFrame(() => requestAnimationFrame(() => leaf.classList.add("go")));
+    leaf.addEventListener("transitionend", () => { at = to; set(); leaf.remove(); busy = false; }, { once: true });
+  };
+  prev.addEventListener("click", () => turn(-1)); next.addEventListener("click", () => turn(1));
+  document.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") turn(1); if (e.key === "ArrowLeft") turn(-1); });
+  set();
+})();
+</script>
+</body>
+</html>

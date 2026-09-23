@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skate Deck 1987 · Centiform</title>
+<style>
+/* @fonts: Metal Mania:400:block; Permanent Marker:400 */
+@font-face{font-family:"Metal Mania";font-style:normal;font-weight:400;font-display:block;src:url(fonts/metal-mania-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Permanent Marker";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/permanent-marker-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #101010;          /* shop wall, painted black */
+  --ink: #f4f1e8;         /* screen-print white */
+  --accent-1: #8cff00;    /* slime green ink */
+  --accent-2: #ff2f92;    /* hot pink ink */
+  --yel: #ffe600;         /* third screen */
+  --grip: #1b1b1b;
+  --maple: #e2c28c;
+  --u: 8px;
+  --deck-h: min(64vh, 560px);
+  /* scale: 1.333 on 18px */
+  --t-1: 13.5px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 42.6px; --t4: clamp(56px, 7.8vw, 132px);
+  --metal: "Metal Mania", "Impact", fantasy;
+  --marker: "Permanent Marker", "Comic Sans MS", cursive;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--marker); overflow-x: hidden;
+  background-image: radial-gradient(circle at 20% 10%, rgba(140, 255, 0, .06), transparent 40%), radial-gradient(circle at 80% 90%, rgba(255, 47, 146, .07), transparent 40%); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 6px; }
+
+.wall { min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; padding: calc(var(--u) * 3) calc(var(--u) * 5) calc(var(--u) * 3); gap: calc(var(--u) * 2); }
+.head { display: flex; justify-content: space-between; align-items: end; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+.head h1 { margin: 0; font: 400 var(--t4)/.85 var(--metal); color: var(--accent-1); text-shadow: 4px 3px 0 var(--accent-2); letter-spacing: .01em; transform: rotate(-2deg); }
+.head h1 span { color: var(--ink); text-shadow: 3px 2px 0 var(--accent-2); }
+.head p { margin: 0; max-width: 24em; font-size: var(--t-1); line-height: 1.5; color: #cfcabb; transform: rotate(1deg); }
+
+/* the rack: decks stand side by side, nose up */
+.rack { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: calc(var(--u) * 3); align-items: end; justify-items: center; padding-top: calc(var(--u) * 2); border-bottom: 10px solid #2a2a2a; box-shadow: 0 6px 0 #070707; }
+.deck { background: none; border: 0; padding: 0; cursor: pointer; perspective: 1400px; width: 100%; max-width: 190px; display: grid; justify-items: center; gap: var(--u); }
+.flip { position: relative; width: 100%; height: var(--deck-h); transform-style: preserve-3d; transition: transform .7s cubic-bezier(.5, 0, .2, 1); }
+.deck[aria-pressed="true"] .flip { transform: rotateY(180deg); }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.face svg { width: 100%; height: 100%; display: block; overflow: visible; filter: drop-shadow(0 12px 10px rgba(0,0,0,.6)); }
+.face.top { transform: rotateY(180deg); }
+.face.top .notes { position: absolute; inset: 20% 16% 22%; display: grid; align-content: center; gap: 6px; text-align: center; color: var(--ink); font: 400 clamp(12px, 1vw, 16px)/1.25 var(--marker); transform: rotate(-4deg); }
+.face.top .notes b { font-weight: 400; color: var(--accent-1); font-size: 1.35em; }
+.deck .nm { font: 400 var(--t1)/1 var(--metal); color: var(--ink); text-align: center; }
+.deck .nm small { display: block; font: 400 var(--t-1)/1.3 var(--marker); color: var(--accent-2); margin-top: 4px; }
+@media (prefers-reduced-motion: reduce) { .flip { transition: none; } }
+.foot { display: flex; justify-content: space-between; gap: calc(var(--u) * 3); flex-wrap: wrap; font-size: var(--t-1); color: #cfcabb; }
+.foot b { color: var(--accent-1); font-weight: 400; }
+
+/* the order page: a photocopied zine insert */
+.zine { background: var(--ink); color: #101010; margin: calc(var(--u) * 4) calc(var(--u) * 5) calc(var(--u) * 8); padding: calc(var(--u) * 5); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: calc(var(--u) * 5); transform: rotate(-.6deg);
+  background-image: radial-gradient(circle, rgba(0,0,0,.08) 1px, transparent 1.4px); background-size: 5px 5px; }
+.zine h2 { margin: 0 0 var(--u); font: 400 var(--t3)/.95 var(--metal); }
+.zine p { margin: 0 0 calc(var(--u) * 2); max-width: 34em; }
+.zine table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: var(--t0); }
+.zine th, .zine td { text-align: left; border-bottom: 2px solid #101010; padding: 6px 4px; font-weight: 400; }
+.zine td:last-child, .zine th:last-child { text-align: right; }
+.zine thead th { font-family: var(--metal); font-size: var(--t1); }
+.zine .hl { background: var(--accent-1); padding: 0 4px; }
+
+@media (min-width: 1900px) { :root { --deck-h: min(66vh, 760px); --t0: 20px; } .deck { max-width: 250px; } }
+@media (max-width: 1100px) { .rack { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: calc(var(--u) * 5); } :root { --deck-h: 440px; } .zine { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 600px) {
+  .wall { padding: calc(var(--u) * 2); }
+  .rack { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--u) * 2); }
+  :root { --deck-h: 360px; }
+  .zine { margin: calc(var(--u) * 3) calc(var(--u) * 2) calc(var(--u) * 6); padding: calc(var(--u) * 3); }
+}
+</style>
+</head>
+<body>
+<div class="wall">
+  <header class="head">
+    <h1>Rotten Harbor <span>’87</span></h1>
+    <p>Six decks, hand screened in three colours at our shop behind the Pier Liquor, Huntington Beach. Click a deck to flip it and read the grip.</p>
+  </header>
+  <main class="rack" id="rack" aria-label="1987 deck lineup"></main>
+  <footer class="foot"><span>All decks 7-ply Canadian maple · <b>no two prints line up the same</b></span><span>Dealers: call (714) 555-0187</span></footer>
+</div>
+
+<section class="zine" aria-labelledby="z">
+  <div>
+    <h2 id="z">Mail order, the old way</h2>
+    <p>Pick your deck, add $4 for shipping west of the Rockies and $6 east. Money order or cashier’s check to Rotten Harbor Skates, 1918 Pacific Coast Hwy. Allow three weeks. Free sticker pack with every deck.</p>
+    <p>Team riders get theirs first. <span class="hl">Sorry, Hawaii.</span></p>
+  </div>
+  <table>
+    <thead><tr><th>Deck</th><th>Size</th><th>Price</th></tr></thead>
+    <tbody id="tbl"></tbody>
+  </table>
+</section>
+
+<script>
+(() => {
+  // an '87 shape: wide nose, pinched waist, kicked fishtail; w is the deck width at the widest point
+  const shape = (w, fish) => {
+    const c = 50, h = w / 2;
+    return `M${c - h * .82} 40 C${c - h * .82} 6 ${c + h * .82} 6 ${c + h * .82} 40 L${c + h} 150 L${c + h * .86} 230 L${c + h} 300 ${fish ? `L${c + h * .9} 360 L${c + h * .34} 344 L${c} 362 L${c - h * .34} 344 L${c - h * .9} 360` : `C${c + h} 356 ${c - h} 356 ${c - h} 300`} L${c - h} 300 L${c - h * .86} 230 L${c - h} 150 Z`;
+  };
+  // graphics, each printed as three offset screens: pink, green, then white key
+  const ART = {
+    skull: (k) => `<path d="M50 120c-26 0-38 20-34 44 2 14 10 20 12 30v14h44v-14c2-10 10-16 12-30 4-24-8-44-34-44z" fill="${k}"/><circle cx="37" cy="158" r="9" fill="#101010"/><circle cx="63" cy="158" r="9" fill="#101010"/><path d="M50 170l-6 12h12z" fill="#101010"/><path d="M36 200v12M46 200v12M54 200v12M64 200v12" stroke="#101010" stroke-width="3"/>`,
+    snake: (k) => `<path d="M60 70c-40 10 30 50-10 70s30 50-6 70 26 44-4 74" fill="none" stroke="${k}" stroke-width="14" stroke-linecap="round"/><path d="M54 62l14 -8 6 14z" fill="${k}"/><path d="M72 60l10 -6M72 60l12 2" stroke="${k}" stroke-width="2"/>`,
+    eye: (k) => `<path d="M14 200c16-36 56-36 72 0-16 36-56 36-72 0z" fill="${k}"/><circle cx="50" cy="200" r="14" fill="#101010"/><path d="M20 174l-6-40M34 166l-2-46M50 162v-52M66 166l2-46M80 174l6-40" stroke="${k}" stroke-width="6" stroke-linecap="round"/>`,
+    dagger: (k) => `<path d="M50 60l10 40v120H40V100z" fill="${k}"/><path d="M24 220h52v10H24z" fill="${k}"/><path d="M44 230h12v50H44z" fill="${k}"/><circle cx="50" cy="290" r="10" fill="${k}"/>`,
+    bones: (k) => `<g fill="${k}"><path d="M22 150l56 80" stroke="${k}" stroke-width="12"/><path d="M78 150l-56 80" stroke="${k}" stroke-width="12"/><circle cx="18" cy="146" r="9"/><circle cx="28" cy="140" r="9"/><circle cx="82" cy="146" r="9"/><circle cx="72" cy="140" r="9"/><circle cx="18" cy="234" r="9"/><circle cx="28" cy="240" r="9"/><circle cx="82" cy="234" r="9"/><circle cx="72" cy="240" r="9"/></g>`,
+    wave: (k) => `<path d="M10 240c10-60 60-90 80-40-20-20-40 0-30 20 10 16 30 10 30 10-10 30-70 40-80 10z" fill="${k}"/><path d="M10 260h80M16 276h68M24 292h52" stroke="${k}" stroke-width="5"/>`,
+  };
+  const D = [
+    ["Harbor Rat", "Dana Ruiz pro", 10, true, "skull", "30.5 × 10", 49.95, "Mellow concave. Dana rides it in the Pit at Del Mar."],
+    ["Sidewinder", "Team model", 9.5, false, "snake", "30 × 9.5", 44.95, "Street shape, a little narrower. Good for curbs."],
+    ["Third Eye", "Kip Nakamura pro", 10.25, true, "eye", "31 × 10.25", 52.95, "Wide for pools. Kip says it sees the coping for you."],
+    ["Shiv", "Street series", 9.75, false, "dagger", "30.25 × 9.75", 46.95, "Steep kick, sharp tail. Wax that ledge."],
+    ["Boneyard", "Vert model", 10.5, true, "bones", "31.5 × 10.5", 54.95, "Our widest board. Ramps and nothing else."],
+    ["Dead Low Tide", "Lena Ostrowski pro", 10, true, "wave", "30.75 × 10", 49.95, "Surf-style fishtail. Lena’s local is the storm drain."],
+  ];
+  const deckSVG = (d, i, top) => {
+    const p = shape(d[2] * 8.4, d[3]), art = ART[d[4]];
+    if (top) return `<svg viewBox="0 0 100 370" aria-hidden="true"><defs><pattern id="grit${i}" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#1b1b1b"/><circle cx="1" cy="1" r=".7" fill="#3a3a3a"/><circle cx="3" cy="3" r=".5" fill="#050505"/></pattern></defs><path d="${p}" fill="#e2c28c"/><path d="${p}" fill="url(#grit${i})" transform="translate(50 184) scale(.96) translate(-50 -184)"/><g fill="#8a8a8a"><circle cx="44" cy="84" r="1.6"/><circle cx="56" cy="84" r="1.6"/><circle cx="44" cy="96" r="1.6"/><circle cx="56" cy="96" r="1.6"/><circle cx="44" cy="268" r="1.6"/><circle cx="56" cy="268" r="1.6"/><circle cx="44" cy="280" r="1.6"/><circle cx="56" cy="280" r="1.6"/></g></svg>`;
+    return `<svg viewBox="0 0 100 370" aria-hidden="true"><defs><clipPath id="c${i}"><path d="${p}"/></clipPath></defs><path d="${p}" fill="#101010" stroke="#e2c28c" stroke-width="2.5"/>
+      <g clip-path="url(#c${i})"><rect x="0" y="0" width="100" height="370" fill="${i % 2 ? "#1d1d1d" : "#141414"}"/><path d="M0 0H100V58c-3 0-3 14-7 14s-3-14-7-14-4 30-8 30-4-30-8-30-4 10-7 10-3-10-7-10-4 24-8 24-4-24-8-24-3 14-7 14-3-14-7-14-4 20-8 20-4-20-8-20V0z" fill="${["#8cff00", "#ff2f92", "#ffe600"][i % 3]}"/>
+      <g transform="translate(3 2)" opacity=".95">${art("#ff2f92")}</g><g transform="translate(-2 -1)" opacity=".95">${art("#8cff00")}</g><g style="mix-blend-mode:screen">${art("#f4f1e8")}</g>
+      <text x="50" y="${d[3] ? 332 : 322}" text-anchor="middle" font-family="Metal Mania, fantasy" font-size="${d[0].length > 10 ? 11.5 : 15}" fill="#ffe600" transform="translate(1.5 1)">${d[0].toUpperCase()}</text><text x="50" y="${d[3] ? 332 : 322}" text-anchor="middle" font-family="Metal Mania, fantasy" font-size="${d[0].length > 10 ? 11.5 : 15}" fill="#f4f1e8">${d[0].toUpperCase()}</text>
+      <text x="50" y="52" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="8" fill="#101010">ROTTEN HARBOR</text></g></svg>`;
+  };
+  document.getElementById("rack").innerHTML = D.map((d, i) => `<button class="deck" type="button" aria-pressed="false" aria-label="${d[0]}, ${d[5]} inches, $${d[6]}. Flip to read the grip.">
+    <span class="flip"><span class="face">${deckSVG(d, i)}</span><span class="face top">${deckSVG(d, i, true)}<span class="notes"><b>${d[5]}”</b>${d[7]}<span>$${d[6]}</span></span></span></span>
+    <span class="nm">${d[0]}<small>${d[1]}</small></span></button>`).join("");
+  document.getElementById("rack").addEventListener("click", (e) => { const b = e.target.closest(".deck"); if (b) b.setAttribute("aria-pressed", String(b.getAttribute("aria-pressed") !== "true")); });
+  document.getElementById("tbl").innerHTML = D.map((d) => `<tr><td>${d[0]}</td><td>${d[5]}”</td><td>$${d[6]}</td></tr>`).join("");
+})();
+</script>
+</body>
+</html>
