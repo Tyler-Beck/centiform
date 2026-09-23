@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Herbarium Sheets · Centiform</title>
+<style>
+/* @fonts: Cormorant:400,600,400i,500i:swap; Sometype Mono:400,500:swap */
+@font-face{font-family:"Cormorant";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/cormorant-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cormorant";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/cormorant-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cormorant";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/cormorant-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Cormorant";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/cormorant-latin-500-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sometype Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sometype-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sometype Mono";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/sometype-mono-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ece4cf;          /* rag mounting paper */
+  --ink: #3b4a2a;         /* pressed chlorophyll, faded */
+  --accent-1: #7b4a2e;    /* stamp and iron-gall ink */
+  --accent-2: #b8872b;    /* linen tape, foxing */
+  --paper: #f3ecd9;
+  --label: #f7f2e3;
+  --pencil: #5d5a55;
+  --cabinet: #2f3526;
+  --u: 8px;
+  /* scale 1.25 on 17px */
+  --t-1: 13px; --t0: 17px; --t1: 21px; --t2: 26.5px; --t3: 33px; --t4: 41.5px;
+  --serif: "Cormorant", Garamond, serif;
+  --mono: "Sometype Mono", "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--cabinet); color: var(--ink); }
+body { font: 400 var(--t0)/1.5 var(--serif); display: grid; grid-template-columns: calc(var(--u) * 36) minmax(0, 1fr); min-height: 100vh; }
+/* folder index on the left: a genus cover */
+.folder { background: #c9b98f; color: #2c2618; padding: calc(var(--u) * 4) calc(var(--u) * 3); display: flex; flex-direction: column; gap: calc(var(--u) * 2); border-right: 6px solid #a8975f;
+  background-image: repeating-linear-gradient(0deg, rgba(0,0,0,.03) 0 2px, transparent 2px 5px); }
+.folder .inst { font: 500 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+.folder h1 { margin: 0; font: 600 var(--t3)/1 var(--serif); }
+.folder h1 i { display: block; font-weight: 400; font-size: var(--t1); margin-top: 4px; }
+.folder p { margin: 0; font-size: 15px; line-height: 1.45; }
+.folder ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid #2c2618; }
+.folder li button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: grid; grid-template-columns: 5ch 1fr; gap: var(--u); padding: calc(var(--u) * 1.25) 0; border-bottom: 1px solid rgba(44,38,24,.35); font: italic 400 var(--t0)/1.2 var(--serif); }
+.folder li button span { font: 400 11px/1.9 var(--mono); font-style: normal; }
+.folder li button[aria-current="true"] { background: var(--paper); box-shadow: -8px 0 0 var(--paper), 8px 0 0 var(--paper); }
+.folder li button:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+.folder .nav { display: flex; gap: var(--u); margin-top: auto; }
+.folder .nav button { flex: 1; font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; background: #2c2618; color: #efe6cc; border: 0; padding: calc(var(--u) * 1.5); cursor: pointer; }
+.folder .nav button:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+/* the sheet */
+.desk { display: grid; place-items: center; padding: calc(var(--u) * 3); min-width: 0; }
+.sheet { position: relative; height: min(calc(100vh - 48px), 1100px); aspect-ratio: 29 / 42; max-width: 100%; background: var(--bg); box-shadow: 0 1px 0 #cfc3a4, 0 24px 40px -20px rgba(0,0,0,.6);
+  background-image: radial-gradient(circle at 82% 12%, rgba(184,135,43,.14) 0 3%, transparent 3.5%), radial-gradient(circle at 12% 86%, rgba(184,135,43,.1) 0 2%, transparent 2.6%), radial-gradient(rgba(59,74,42,.035) 1px, transparent 1.2px);
+  background-size: auto, auto, 4px 4px; container-type: size; }
+.plant { position: absolute; left: 4%; top: 8%; width: 70%; height: 80%; }
+.tape { position: absolute; width: 5.5cqw; height: 1.8cqw; background: #e9dcb8; box-shadow: 0 0 0 .5px rgba(120,90,40,.4);
+  background-image: repeating-linear-gradient(90deg, rgba(123,74,46,.14) 0 1px, transparent 1px 3px), repeating-linear-gradient(0deg, rgba(123,74,46,.12) 0 1px, transparent 1px 3px); }
+.stamp { position: absolute; right: 6%; top: 4%; border: 2px solid var(--accent-1); color: var(--accent-1); padding: .6cqw 1.4cqw; font: 500 max(10px, 2cqw)/1.25 var(--mono); text-align: center; transform: rotate(-4deg); opacity: .85; mix-blend-mode: multiply; }
+.stamp b { display: block; font-size: 1.5em; letter-spacing: .06em; }
+.packet { position: absolute; left: 6%; top: 5%; width: 16cqw; aspect-ratio: 4 / 3; background: #efe6cf; border: 1px solid #cdbf9b; clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+.packet::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 40%; background: #e5dabd; clip-path: polygon(0 0, 100% 0, 50% 100%); border-bottom: 1px solid #cdbf9b; }
+.packet span { position: absolute; bottom: 8%; left: 0; right: 0; text-align: center; font: 400 max(9px, 1.5cqw)/1.2 var(--mono); color: var(--pencil); }
+.stack { position: absolute; right: 5%; bottom: 3.5%; width: 48cqw; display: flex; flex-direction: column; align-items: flex-end; gap: 1.2cqw; }
+.dets { width: 40cqw; display: grid; gap: 1cqw; margin-right: 2cqw; }
+.det { background: #fbf7ea; border: 1px solid #d7ccae; padding: .8cqw 1.4cqw; font: 400 max(10px, 1.7cqw)/1.35 var(--mono); transform: rotate(var(--r, 0deg)); }
+.det i { font: italic 500 max(12px, 2.3cqw)/1 var(--serif); }
+.label { position: relative; width: 48cqw; background: var(--label); border: 1px solid #cbbf9f; padding: 1.6cqw 2cqw; font: 400 max(10px, 1.7cqw)/1.4 var(--mono); }
+.label h2 { margin: 0; text-align: center; font: 600 max(11px, 2.2cqw)/1.15 var(--serif); letter-spacing: .08em; text-transform: uppercase; border-bottom: 1.5px solid var(--ink); padding-bottom: .6cqw; }
+.label h2 small { display: block; font: 400 italic max(10px, 1.9cqw)/1.2 var(--serif); letter-spacing: 0; text-transform: none; }
+.label .nm { font: italic 600 max(14px, 3.2cqw)/1.1 var(--serif); margin: 1cqw 0 .2cqw; color: #26311a; }
+.label .auth { font: 400 max(11px, 1.9cqw)/1.2 var(--serif); margin-bottom: .8cqw; }
+.label dl { display: grid; grid-template-columns: auto 1fr; gap: .2cqw 1.4cqw; margin: 0; }
+.label dt { text-transform: uppercase; letter-spacing: .06em; color: #6b6a55; }
+.label dd { margin: 0; }
+.pencil { position: absolute; font: italic 500 max(13px, 2.3cqw)/1.25 var(--serif); color: var(--pencil); opacity: .85; }
+.pencil.a { left: 5%; bottom: 5%; width: 36cqw; transform: rotate(-2deg); }
+.pencil.b { left: 4%; top: 24%; width: 18cqw; transform: rotate(-88deg); transform-origin: 0 0; top: 60%; }
+.scale { position: absolute; left: 6%; top: 19%; display: flex; font: 400 max(9px, 1.4cqw)/1 var(--mono); }
+.scale span { width: 5cqw; height: .9cqw; border: 1px solid var(--ink); border-right: 0; }
+.scale span:nth-child(odd) { background: var(--ink); }
+.scale em { font-style: normal; margin-left: 1cqw; }
+@media (prefers-reduced-motion: no-preference) {
+  .sheet.turn { animation: lay .5s ease-out; }
+  @keyframes lay { from { transform: translateY(14px) rotate(.8deg); opacity: .4; } }
+}
+@media (max-width: 900px) {
+  body { grid-template-columns: minmax(0, 1fr); }
+  .folder { border-right: 0; border-bottom: 6px solid #a8975f; padding: calc(var(--u) * 2); }
+  .folder ol { display: none; }
+  .folder p { display: none; }
+  .sheet { height: auto; width: 100%; }
+  .desk { padding: calc(var(--u) * 1.5); }
+}
+</style>
+</head>
+<body>
+<aside class="folder" aria-labelledby="f-h">
+  <p class="inst">Harrowgate University Herbarium · Cabinet 14</p>
+  <h1 id="f-h">Upland Flora<i>Folder 7, Pennine collection</i></h1>
+  <p>Six sheets from the 1911–1934 surveys of the Wharfe and Nidd watersheds. Mounted with linen tape; determinations added by later hands.</p>
+  <ol id="idx"></ol>
+  <div class="nav"><button type="button" id="prev">Prev sheet</button><button type="button" id="next">Next sheet</button></div>
+</aside>
+<main class="desk">
+  <article class="sheet" id="sheet" aria-live="polite">
+    <svg class="plant" id="plant" viewBox="40 40 220 290" preserveAspectRatio="xMidYMax meet" role="img" aria-label="Pressed specimen"></svg>
+    <div id="tapes"></div>
+    <div class="packet"><span>Fragments<br>&amp; seed</span></div>
+    <div class="stamp">HARROWGATE UNIV.<b id="acc"></b>HERBARIUM</div>
+    <p class="pencil a" id="pn"></p>
+    <div class="scale" aria-hidden="true"><span></span><span></span><span></span><span></span><em>0–4 cm</em></div>
+    <div class="stack">
+    <div class="dets" id="dets"></div>
+    <section class="label" aria-label="Collection label">
+      <h2>Herbarium of Harrowgate University<small>Plants of the West Riding</small></h2>
+      <p class="nm" id="nm"></p>
+      <p class="auth" id="auth"></p>
+      <dl>
+        <dt>Loc.</dt><dd id="loc"></dd>
+        <dt>Hab.</dt><dd id="hab"></dd>
+        <dt>Alt.</dt><dd id="alt"></dd>
+        <dt>Coll.</dt><dd id="col"></dd>
+        <dt>Date</dt><dd id="dat"></dd>
+      </dl>
+    </section>
+    </div>
+  </article>
+</main>
+<script>
+(() => {
+  // name, authority, family, locality, habitat, altitude, collector & number, date, accession, pencil note, determinations, form
+  const P = [
+    ["Parnassia palustris", "L.", "Celastraceae", "Grass Wood, nr. Grassington, Wharfedale", "Wet flush on limestone, with Carex", "230 m", "E. Thackray 412", "14 Aug 1911", "048211", "Petals with green veins, 5 fringed staminodes. Abundant.", [["Parnassia palustris L.", "det. E. Thackray 1911"], ["conf. M. Pye", "1968"]], { leaf: "round", fl: "star", n: 3, col: "#e9e2c8" }],
+    ["Geranium sylvaticum", "L.", "Geraniaceae", "Hay meadow below Kettlewell, Upper Wharfedale", "Unimproved hay meadow, uncut until July", "215 m", "E. Thackray 519", "22 Jun 1912", "048377", "Flowers violet, darker than in the lowland form.", [["Geranium sylvaticum L.", "det. E. Thackray 1912"]], { leaf: "palm", fl: "cup", n: 2, col: "#8b6aa0" }],
+    ["Primula farinosa", "L.", "Primulaceae", "Malham Tarn fen, west shore", "Short turf over tufa, calcareous flush", "375 m", "A. M. Ledgard 88", "30 May 1923", "051904", "Leaves mealy white beneath. Counted 60+ in flower.", [["Primula farinosa L.", "det. A. M. Ledgard"], ["Bird’s-eye Primrose", "vern. name added 1951"]], { leaf: "rosette", fl: "umbel", n: 2, col: "#c98aa0" }],
+    ["Trollius europaeus", "L.", "Ranunculaceae", "Scar House, head of Nidderdale", "Stream bank, tall herb, lightly grazed", "340 m", "A. M. Ledgard 141", "11 Jun 1925", "052260", "Globe flower. Sepals incurved, never opening fully.", [["Trollius europaeus L.", "det. A. M. Ledgard 1925"]], { leaf: "palm", fl: "globe", n: 2, col: "#d4b44a" }],
+    ["Pinguicula vulgaris", "L.", "Lentibulariaceae", "Ingleborough, Gaping Gill beck", "Wet rock ledge, sphagnum", "405 m", "R. Oddie 27", "19 Jun 1930", "054118", "Leaves sticky, 3 small flies caught. Pressed flat with difficulty.", [["Pinguicula vulgaris L.", "det. R. Oddie"], ["conf. M. Pye", "1968"]], { leaf: "rosette", fl: "spur", n: 3, col: "#6b5aa0" }],
+    ["Briza media", "L.", "Poaceae", "Conistone Old Pasture", "Limestone grassland, south facing", "310 m", "R. Oddie 96", "02 Jul 1934", "055731", "Quaking grass. Spikelets tremble in the lightest air.", [["Briza media L.", "det. R. Oddie 1934"]], { leaf: "grass", fl: "quake", n: 4, col: "#b8a070" }]
+  ];
+  const $ = (id) => document.getElementById(id);
+  let cur = 0, seed = 1;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  const leafPath = (t, s) => ({
+    round: `M0 0 C${6*s} ${-4*s} ${12*s} ${-2*s} ${12*s} ${4*s} C${12*s} ${10*s} ${4*s} ${10*s} 0 0Z`,
+    palm: `M0 0 L${4*s} ${-10*s} L${6*s} ${-3*s} L${12*s} ${-8*s} L${9*s} 0 L${14*s} ${4*s} L${6*s} ${3*s} L${7*s} ${10*s} L${2*s} ${4*s}Z`,
+    rosette: `M0 0 C${4*s} ${-4*s} ${14*s} ${-5*s} ${20*s} ${-1*s} C${14*s} ${3*s} ${4*s} ${3*s} 0 0Z`,
+    grass: `M0 0 C${2*s} ${-8*s} ${4*s} ${-20*s} ${3*s} ${-34*s} C${2*s} ${-20*s} ${0} ${-8*s} 0 0Z`
+  })[t];
+  const flower = (f, x, y, c) => ({
+    star: `<g transform="translate(${x} ${y})">${[0,72,144,216,288].map(a => `<ellipse rx="3" ry="7" cy="-6" transform="rotate(${a})" fill="${c}" stroke="#8a8a6a" stroke-width=".4"/>`).join("")}<circle r="2" fill="#b8872b"/></g>`,
+    cup: `<g transform="translate(${x} ${y})">${[0,72,144,216,288].map(a => `<ellipse rx="4.5" ry="7" cy="-6" transform="rotate(${a})" fill="${c}" opacity=".85"/>`).join("")}<circle r="1.8" fill="#e8dcc0"/></g>`,
+    umbel: `<g transform="translate(${x} ${y})">${[-40,-20,0,20,40].map(a => `<g transform="rotate(${a})"><path d="M0 0 V-10" stroke="#3b4a2a" stroke-width=".6"/><circle cy="-12" r="3.2" fill="${c}"/><circle cy="-12" r="1" fill="#d4b44a"/></g>`).join("")}</g>`,
+    globe: `<g transform="translate(${x} ${y})"><circle r="9" fill="${c}"/><path d="M-9 0 A9 9 0 0 1 9 0 M-6 -6 Q0 -2 6 -6 M-8 4 Q0 8 8 4" stroke="#9a7b2a" stroke-width=".6" fill="none"/></g>`,
+    spur: `<g transform="translate(${x} ${y})"><path d="M0 0 C-6 -4 -8 -10 -3 -12 C0 -9 2 -12 6 -10 C8 -6 5 -2 0 0Z" fill="${c}"/><path d="M0 0 Q6 4 10 2" stroke="${c}" stroke-width="1.6" fill="none"/></g>`,
+    quake: `<g transform="translate(${x} ${y})">${Array.from({length: 7}, (_, i) => `<path d="M0 0 Q${(i-3)*4} -6 ${(i-3)*6} ${-10 - Math.abs(i-3)*2}" stroke="#6b6a55" stroke-width=".5" fill="none"/><ellipse cx="${(i-3)*6}" cy="${-12 - Math.abs(i-3)*2}" rx="2.4" ry="3.2" fill="${c}" stroke="#7b4a2e" stroke-width=".4"/>`).join("")}</g>`
+  })[f];
+  function drawPlant(p) {
+    seed = parseInt(p[8]);
+    const { leaf, fl, n, col } = p[11];
+    let out = "", tapes = [];
+    for (let i = 0; i < n; i++) {
+      const bx = 150 + (i - (n - 1) / 2) * 34 + (rnd() - .5) * 10, by = 318;
+      const top = 60 + rnd() * 60, sway = (rnd() - .5) * 90;
+      const tx = bx + sway, ty = top;
+      out += `<path d="M${bx} ${by} C${bx + sway * .1} ${by - 90} ${tx - sway * .3} ${ty + 80} ${tx} ${ty}" stroke="#4f5a36" stroke-width="${leaf === "grass" ? 1.1 : 1.8}" fill="none"/>`;
+      // roots
+      for (let r = 0; r < 5; r++) out += `<path d="M${bx} ${by} q${(rnd() - .5) * 20} ${6 + rnd() * 6} ${(rnd() - .5) * 26} ${10 + rnd() * 6}" stroke="#7b4a2e" stroke-width=".6" fill="none" opacity=".8"/>`;
+      // leaves along or at base
+      const leaves = leaf === "rosette" || leaf === "grass" ? 5 : 3;
+      for (let k = 0; k < leaves; k++) {
+        const t = leaf === "rosette" ? 1 : 1 - (k + 1) / (leaves + 1);
+        const lx = bx + (tx - bx) * (1 - t) * .9, ly = by - (by - ty) * (1 - t);
+        const a = leaf === "grass" ? (k - 2) * 12 : (k % 2 ? -1 : 1) * (40 + rnd() * 50) - 90 * (k % 2 ? 0 : 1) + (k % 2 ? -40 : 0);
+        const s = leaf === "rosette" ? 1.6 + rnd() * .5 : leaf === "grass" ? 1.6 + rnd() * .8 : 1.3 + rnd() * .6;
+        out += `<path d="${leafPath(leaf, s)}" transform="translate(${lx.toFixed(1)} ${ly.toFixed(1)}) rotate(${(leaf === "rosette" ? (k * 72 + 10) : a).toFixed(0)})" fill="#5d6b3a" fill-opacity="${.72 + rnd() * .2}" stroke="#3b4a2a" stroke-width=".5"/>`;
+      }
+      out += flower(fl, tx, ty, col);
+      tapes.push([tx - sway * .08, (ty + by) / 2 + (rnd() - .5) * 40, (rnd() - .5) * 30]);
+      tapes.push([bx, by - 26, (rnd() - .5) * 20]);
+    }
+    $("plant").innerHTML = out;
+    // map tape positions from viewBox to sheet percentages (plant box inset 6% 8% 18% 8%)
+    $("tapes").innerHTML = tapes.map(([x, y, r]) => `<span class="tape" style="left:calc(4% + ${((x - 40) / 220 * 70).toFixed(1)}% - 2.75cqw);top:calc(8% + ${((y - 40) / 290 * 80).toFixed(1)}%);transform:rotate(${r.toFixed(0)}deg)"></span>`).join("");
+  }
+  function show(i, anim) {
+    cur = (i + P.length) % P.length;
+    const p = P[cur];
+    drawPlant(p);
+    $("nm").textContent = p[0]; $("auth").textContent = p[1] + "  ·  " + p[2];
+    $("loc").textContent = p[3]; $("hab").textContent = p[4]; $("alt").textContent = p[5]; $("col").textContent = p[6]; $("dat").textContent = p[7];
+    $("acc").textContent = "No. " + p[8]; $("pn").textContent = p[9];
+    $("dets").innerHTML = p[10].map(([a, b], k) => `<div class="det" style="--r:${k % 2 ? .6 : -.8}deg"><i>${a}</i><br>${b}</div>`).join("");
+    document.querySelectorAll("#idx button").forEach((b, k) => b.setAttribute("aria-current", String(k === cur)));
+    const sh = $("sheet");
+    if (anim) { sh.classList.remove("turn"); void sh.offsetWidth; sh.classList.add("turn"); }
+  }
+  $("idx").innerHTML = P.map((p, i) => `<li><button type="button" data-i="${i}"><span>${p[8]}</span>${p[0]}</button></li>`).join("");
+  $("idx").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) show(+b.dataset.i, true); });
+  $("prev").addEventListener("click", () => show(cur - 1, true));
+  $("next").addEventListener("click", () => show(cur + 1, true));
+  show(0, false);
+})();
+</script>
+</body>
+</html>

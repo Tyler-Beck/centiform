@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Centiform</title>
+<link rel="stylesheet" href="shell/shell.css">
+</head>
+<body>
+<div class="shell" id="shell">
+  <aside class="rail" id="rail" aria-label="Designs">
+    <div class="rail-head">
+      <a class="brand" href="#001-kodachrome-lightbox">Centiform</a>
+      <span class="count" id="count"></span>
+    </div>
+    <label class="filter">
+      <span class="vh">Filter designs</span>
+      <input id="filter" type="search" placeholder="Filter  ( / )" autocomplete="off" spellcheck="false">
+    </label>
+    <nav class="list" id="list"></nav>
+    <p class="keys"><kbd>j</kbd><kbd>k</kbd> move <kbd>/</kbd> filter <kbd>f</kbd> full <kbd>o</kbd> open alone</p>
+  </aside>
+  <main class="main">
+    <header class="strip" id="strip">
+      <button class="drawer" id="drawer" type="button" aria-controls="rail" aria-expanded="false">Designs</button>
+      <p class="info" id="info"></p>
+      <a class="alone" id="alone" href="#" target="_blank" rel="noopener">open alone</a>
+    </header>
+    <div id="stage"></div>
+  </main>
+</div>
+<script src="designs.js"></script>
+<script src="shell/shell.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Split-Flap Departures · Centiform</title>
+<style>
+/* @fonts: Barlow Condensed:500,700:block; Barlow:400,600:swap */
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:500;font-display:block;src:url(fonts/barlow-condensed-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:block;src:url(fonts/barlow-condensed-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/barlow-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Barlow";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/barlow-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #1b1b1d;          /* the board housing */
+  --ink: #f2f2f0;         /* flap lettering */
+  --accent-1: #ffcf3f;    /* remarks, platform changes */
+  --accent-2: #2f2f33;    /* flap face */
+  --flap-lo: #262629;
+  --frame: #0f0f10;
+  --u: 8px;
+  --cw: min(40px, calc((100vw - 190px) / 56));   /* one flap cell */
+  --ch: calc(var(--cw) * 1.5);
+  /* scale 1.25 on 16px */
+  --t-1: 12.8px; --t0: 16px; --t1: 20px; --t2: 25px; --t3: 31px; --t4: clamp(36px, 4vw, 64px);
+  --flap: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --sans: "Barlow", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #0b0b0c; color: var(--ink); }
+body { font: 400 var(--t0)/1.5 var(--sans); min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+.hall { display: flex; justify-content: space-between; align-items: end; gap: calc(var(--u) * 3); padding: calc(var(--u) * 3) calc(var(--u) * 4) calc(var(--u) * 2); flex-wrap: wrap; }
+.hall h1 { margin: 0; font: 700 var(--t4)/.95 var(--flap); letter-spacing: .01em; text-transform: uppercase; }
+.hall h1 span { display: block; font: 500 var(--t1)/1.2 var(--flap); letter-spacing: .12em; color: #a9a9ad; }
+.tabs { display: flex; gap: 2px; }
+.tabs button { font: 700 var(--t0)/1 var(--flap); letter-spacing: .14em; text-transform: uppercase; color: #a9a9ad; background: var(--bg); border: 0; padding: 12px 18px; cursor: pointer; }
+.tabs button[aria-pressed="true"] { background: var(--accent-1); color: var(--bg); }
+.tabs button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.board { align-self: start; margin: 0 calc(var(--u) * 4); background: var(--bg); padding: calc(var(--u) * 2) calc(var(--u) * 2.5) calc(var(--u) * 3); border-radius: 6px; box-shadow: inset 0 0 0 3px var(--frame), 0 20px 50px -20px #000; overflow: hidden; }
+.cols, .row { display: grid; grid-template-columns: var(--grid); column-gap: calc(var(--cw) * .5); align-items: center; }
+.cols { font: 700 var(--t-1)/1 var(--flap); letter-spacing: .2em; color: #8d8d92; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid #333; margin-bottom: 10px; }
+.cols span:nth-child(odd) { color: var(--accent-1); }
+.row { padding: 5px 0; }
+.row + .row { border-top: 1px solid #222224; }
+.cells { display: flex; gap: 2px; }
+.c { position: relative; width: var(--cw); height: var(--ch); perspective: 300px; font: 700 calc(var(--ch) * .82)/var(--ch) var(--flap); text-align: center; color: var(--ink); }
+.c.y { color: var(--accent-1); }
+.c > span { position: absolute; left: 0; right: 0; height: 50%; overflow: hidden; background: var(--accent-2); border-radius: 2px; }
+.c > span > i { position: absolute; left: 0; right: 0; height: var(--ch); font-style: normal; }
+.c .t, .c .ft { top: 0; border-radius: 2px 2px 0 0; background: linear-gradient(#35353a, var(--accent-2)); }
+.c .b, .c .fb { bottom: 0; border-radius: 0 0 2px 2px; background: linear-gradient(var(--flap-lo), #2b2b2f); }
+.c .b > i, .c .fb > i { top: calc(var(--ch) * -.5); }
+.c .ft { transform-origin: 50% 100%; backface-visibility: hidden; z-index: 2; }
+.c .fb { transform-origin: 50% 0; backface-visibility: hidden; z-index: 2; transform: rotateX(90deg); }
+.c::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; margin-top: -.5px; background: #000; z-index: 3; }
+.c.go .ft { animation: ft var(--sp, 60ms) ease-in forwards; }
+.c.go .fb { animation: fb var(--sp, 60ms) ease-out var(--sp, 60ms) forwards; }
+@keyframes ft { to { transform: rotateX(-90deg); } }
+@keyframes fb { to { transform: rotateX(0deg); } }
+.note { align-self: end; display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u) calc(var(--u) * 3); padding: calc(var(--u) * 2) calc(var(--u) * 4) calc(var(--u) * 3); font-size: 15px; color: #b9b9bd; }
+.note b { color: var(--accent-1); font-weight: 600; }
+.clock { display: flex; gap: 2px; align-items: center; }
+.clock .sep { font: 700 var(--t3)/1 var(--flap); padding: 0 2px; color: #8d8d92; }
+@media (max-width: 1000px) {
+  :root { --cw: calc((100vw - 64px) / 21); }
+  .cols { display: none; }
+  .row { grid-template-columns: auto auto auto; grid-template-areas: "a c c" "b e f"; row-gap: 3px; justify-content: start; padding: 8px 0; }
+  .row > :nth-child(1) { grid-area: a; } .row > :nth-child(2) { grid-area: b; } .row > :nth-child(3) { grid-area: c; } .row > :nth-child(5) { grid-area: e; } .row > :nth-child(6) { grid-area: f; }
+  .board { align-self: start; margin: 0 calc(var(--u) * 1); padding: var(--u); }
+  .hide-m { display: none !important; }
+  .hall { padding: calc(var(--u) * 2); }
+}
+</style>
+</head>
+<body>
+<header class="hall">
+  <h1><span>Varenna Central · Night Train Hall</span>Departures</h1>
+  <div class="clock" id="clock" aria-label="Station time"></div>
+  <div class="tabs" role="group" aria-label="Board"><button type="button" data-b="dep" aria-pressed="true">Departures</button><button type="button" data-b="arr" aria-pressed="false">Arrivals</button></div>
+</header>
+<main class="board" aria-live="polite">
+  <div class="cols" id="cols"></div>
+  <div id="rows"></div>
+</main>
+<footer class="note">
+  <span>Sleeping cars are made up from 20:30. Show your berth ticket to the car attendant, not at the gate.</span>
+  <span><b>Yellow</b> means changed since the timetable was printed.</span>
+</footer>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const CH = " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789:.-/";
+  const COLS = [["Time", 5, ""], ["Train", 6, ""], ["Destination", 14, ""], ["Via", 12, "hide-m"], ["Pl", 2, ""], ["Remarks", 10, ""]];
+  const DEP = [
+    ["21:04", "EN 417", "LISBON", "MADRID", "3", "BOARDING", 1],
+    ["21:18", "NJ 234", "VIENNA", "SALZBURG", "7", "ON TIME", 0],
+    ["21:40", "EN 88", "STOCKHOLM", "HAMBURG", "11", "DELAY 25", 1],
+    ["21:52", "IC 902", "PALERMO", "ROME", "4", "ON TIME", 0],
+    ["22:15", "NJ 40", "AMSTERDAM", "COLOGNE", "9", "PLAT CHNG", 1],
+    ["22:31", "EN 1253", "BUDAPEST", "ZAGREB", "2", "ON TIME", 0],
+    ["22:58", "D 3120", "ATHENS", "BELGRADE", "12", "ON TIME", 0],
+    ["23:14", "EN 470", "PARIS NORD", "BASEL", "6", "ON TIME", 0],
+    ["23:40", "NJ 1410", "BERLIN", "MUNICH", "8", "CANCELLED", 1],
+    ["00:05", "EN 21", "ISTANBUL", "SOFIA", "1", "ON TIME", 0]
+  ];
+  const ARR = [
+    ["20:48", "EN 416", "LISBON", "MADRID", "3", "ARRIVED", 0],
+    ["21:10", "NJ 233", "VIENNA", "SALZBURG", "7", "EXP 21:22", 1],
+    ["21:26", "IC 901", "PALERMO", "ROME", "4", "ON TIME", 0],
+    ["21:59", "EN 87", "STOCKHOLM", "HAMBURG", "11", "ON TIME", 0],
+    ["22:20", "D 3121", "ATHENS", "BELGRADE", "12", "DELAY 40", 1],
+    ["22:44", "EN 1252", "BUDAPEST", "ZAGREB", "2", "ON TIME", 0],
+    ["23:02", "NJ 39", "AMSTERDAM", "COLOGNE", "9", "ON TIME", 0],
+    ["23:37", "EN 469", "PARIS NORD", "BASEL", "6", "ON TIME", 0],
+    ["00:12", "EN 20", "ISTANBUL", "SOFIA", "1", "ON TIME", 0],
+    ["00:30", "NJ 1409", "BERLIN", "MUNICH", "8", "ON TIME", 0]
+  ];
+  const grid = COLS.map(([, n]) => `calc(var(--cw) * ${n} + ${(n - 1) * 2}px)`).join(" ");
+  document.documentElement.style.setProperty("--grid", grid);
+  const cell = () => `<span class="c"><span class="t"><i> </i></span><span class="b"><i> </i></span><span class="ft"><i> </i></span><span class="fb"><i> </i></span></span>`;
+  $("cols").innerHTML = COLS.map(([n, , h]) => `<span class="${h}">${n}</span>`).join("");
+  $("rows").innerHTML = DEP.map(() => `<div class="row">${COLS.map(([, n, h]) => `<span class="cells ${h}">${cell().repeat(n)}</span>`).join("")}</div>`).join("");
+  $("clock").innerHTML = cell() + cell() + `<span class="sep">:</span>` + cell() + cell();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const set = (c, ch) => { c.querySelectorAll("i").forEach((i) => (i.textContent = ch)); c.dataset.v = ch; };
+  function flipTo(c, target, delay) {
+    const cur = c.dataset.v ?? " ";
+    if (cur === target) return;
+    if (reduce) { set(c, target); return; }
+    let i = CH.indexOf(cur), j = CH.indexOf(target); if (j < 0) j = 0;
+    const steps = []; let guard = 0;
+    while (i !== j && guard++ < 50) { i = (i + 1) % CH.length; steps.push(CH[i]); }
+    let k = 0;
+    const next = () => {
+      const from = c.dataset.v ?? " ", to = steps[k++];
+      c.querySelector(".t i").textContent = to; c.querySelector(".b i").textContent = from;
+      c.querySelector(".ft i").textContent = from; c.querySelector(".fb i").textContent = to;
+      c.classList.remove("go"); void c.offsetWidth; c.classList.add("go");
+      c.dataset.v = to;
+      if (k < steps.length) setTimeout(next, 55); else setTimeout(() => { c.classList.remove("go"); set(c, to); }, 130);
+    };
+    setTimeout(next, delay);
+  }
+  function show(data) {
+    [...$("rows").children].forEach((row, r) => {
+      const rec = data[r];
+      [...row.children].forEach((grp, g) => {
+        const txt = (rec[g] || "").padEnd(COLS[g][1], " ").slice(0, COLS[g][1]);
+        [...grp.children].forEach((c, k) => { c.classList.toggle("y", g === 5 && rec[6] === 1 || (g === 4 && rec[5] === "PLAT CHNG")); flipTo(c, txt[k], r * 90 + k * 25); });
+      });
+    });
+  }
+  function tick() {
+    const d = new Date(), s = String(d.getHours()).padStart(2, "0") + String(d.getMinutes()).padStart(2, "0");
+    $("clock").querySelectorAll(".c").forEach((c, i) => flipTo(c, s[i], i * 60));
+  }
+  document.querySelector(".tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    document.querySelectorAll(".tabs button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    document.querySelector(".hall h1").lastChild.textContent = b.dataset.b === "dep" ? "Departures" : "Arrivals";
+    document.querySelector(".cols span:nth-child(3)").textContent = b.dataset.b === "dep" ? "Destination" : "From";
+    show(b.dataset.b === "dep" ? DEP : ARR);
+  });
+  show(DEP); tick(); setInterval(tick, 10000);
+  // the 21:40 to Stockholm slips a little further every half minute
+  let late = 25;
+  setInterval(() => { if (document.hidden || document.querySelector('.tabs [data-b="dep"]').getAttribute("aria-pressed") !== "true") return; late = late >= 45 ? 25 : late + 5; DEP[2][5] = "DELAY " + late; show(DEP); }, 30000);
+})();
+</script>
+</body>
+</html>

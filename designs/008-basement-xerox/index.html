@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basement Xerox · Centiform</title>
+<style>
+/* @fonts: Anton:400:block; Special Elite:400:swap */
+@font-face{font-family:"Anton";font-style:normal;font-weight:400;font-display:block;src:url(fonts/anton-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Special Elite";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/special-elite-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #d9d9d4;          /* the painted cinder-block wall */
+  --ink: #0d0d0d;         /* toner */
+  --accent-1: #e8ff3a;    /* neon copy paper */
+  --accent-2: #ff3b1f;    /* red-orange copy paper */
+  --paper: #f4f4f0;
+  --grey-paper: #c9c9c2;
+  --tape: rgba(236, 228, 196, .72);
+  --u: 8px;
+  /* scale: no ratio, the photocopier's enlarge steps: 64%, 100%, 129%, 156%, 200%, 400% of 16px */
+  --t-1: 12px; --t0: 17px; --t1: 21px; --t2: 25px; --t3: 32px; --t4: 64px;
+  --shout: "Anton", Impact, sans-serif;
+  --type: "Special Elite", "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.45 var(--type); overflow-x: hidden;
+  background-image:
+    linear-gradient(rgba(13,13,13,.06) 2px, transparent 2px), linear-gradient(90deg, rgba(13,13,13,.06) 2px, transparent 2px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 80px, 160px 80px, 200px 200px; background-position: 0 0, 80px 0, 0 0; }
+.wall { position: relative; min-height: max(100vh, 940px); max-width: 2400px; margin: 0 auto; overflow: clip; }
+.frag { position: absolute; background: var(--paper); padding: calc(var(--u) * 3); transform: rotate(var(--r, 0deg)); clip-path: var(--tear); box-shadow: 0 0 0 transparent; filter: drop-shadow(2px 3px 0 rgba(13,13,13,.25)); }
+.frag.y { background: var(--accent-1); }
+.frag.o { background: var(--accent-2); }
+.frag.g { background: var(--grey-paper); }
+.frag.k { background: var(--ink); color: var(--paper); }
+/* toner speckle over every copy */
+.frag::after { content: ""; position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .26;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='t'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='1' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -9 4.2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23t)'/%3E%3C/svg%3E"); }
+.frag.k::after { mix-blend-mode: screen; opacity: .35; filter: invert(1); }
+.tape { position: absolute; width: 96px; height: 28px; background: var(--tape); z-index: 5; transform: rotate(var(--r, -8deg)); box-shadow: 0 1px 0 rgba(0,0,0,.08); clip-path: polygon(2% 10%, 98% 0, 100% 90%, 96% 100%, 0 94%, 3% 50%); }
+/* ransom letters */
+.ransom { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; margin: 0; }
+.ransom span { display: inline-block; padding: 2px 6px; line-height: 1; transform: rotate(var(--r)); background: var(--b, var(--paper)); color: var(--c, var(--ink)); font-family: var(--f, var(--shout)); font-size: var(--s, 56px); text-transform: var(--tt, uppercase); }
+.ransom .sp { width: 16px; background: none; padding: 0; }
+h1, h2, h3 { margin: 0; font-weight: 400; }
+.big { font: 400 clamp(64px, 9vw, 150px)/.86 var(--shout); text-transform: uppercase; letter-spacing: -.01em; }
+.show { font: 400 var(--t3)/.95 var(--shout); text-transform: uppercase; }
+.show small { display: block; font: 400 var(--t0)/1.3 var(--type); text-transform: none; margin-top: 6px; }
+.lineup { list-style: none; margin: 0; padding: 0; }
+.lineup li { border-top: 3px solid currentColor; padding: var(--u) 0; display: grid; grid-template-columns: 7ch 1fr; gap: var(--u) calc(var(--u) * 2); align-items: baseline; }
+.lineup b { font: 400 var(--t2)/1 var(--shout); }
+.lineup span { font: 400 var(--t3)/1 var(--shout); text-transform: uppercase; }
+.lineup em { grid-column: 2; font-style: normal; font-size: var(--t-1); }
+.typed p { margin: 0 0 var(--u); max-width: 40ch; }
+.typed .x { text-decoration: line-through; }
+.stub { display: flex; gap: 0; }
+.stub span { writing-mode: vertical-rl; transform: rotate(180deg); border-left: 2px dashed var(--ink); padding: 6px 4px; font-size: var(--t-1); }
+svg.pic { display: block; width: 100%; height: auto; }
+a { color: inherit; }
+a:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 3px; }
+.stamp { display: inline-block; border: 3px solid var(--accent-2); color: var(--accent-2); font: 400 var(--t2)/1 var(--shout); padding: 4px 10px; transform: rotate(-9deg); }
+@media (max-width: 900px) {
+  .wall { min-height: 0; padding: calc(var(--u) * 3) calc(var(--u) * 2) calc(var(--u) * 8); display: flex; flex-direction: column; align-items: center; }
+  .frag { position: relative; left: auto !important; top: auto !important; right: auto !important; width: min(100%, 420px) !important; margin-bottom: -18px; }
+  .frag:nth-child(odd) { align-self: flex-start; } .frag:nth-child(even) { align-self: flex-end; }
+  .ransom span { font-size: calc(var(--s, 56px) * .62); }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="xerox"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="saturate" values="0" result="g"/><feComposite in="SourceGraphic" in2="g" operator="arithmetic" k1="0" k2="1" k3="-.22" k4=".2" result="c"/><feComponentTransfer in="c"><feFuncR type="discrete" tableValues="0 1"/><feFuncG type="discrete" tableValues="0 1"/><feFuncB type="discrete" tableValues="0 1"/></feComponentTransfer></filter>
+</svg>
+<main class="wall" id="wall">
+
+  <section class="frag" style="left:3%;top:4%;width:41%;--r:-3deg" aria-labelledby="h-main">
+    <h1 id="h-main" class="ransom" aria-label="Basement Xerox">
+      <span style="--r:-4deg;--b:#0d0d0d;--c:#f4f4f0;--s:84px">B</span><span style="--r:3deg;--f:'Special Elite';--s:64px;--tt:lowercase">a</span><span style="--r:-2deg;--b:#ff3b1f;--s:78px">S</span><span style="--r:5deg;--b:#e8ff3a;--s:60px">E</span><span style="--r:-6deg;--f:'Special Elite';--s:70px">M</span><span style="--r:2deg;--b:#0d0d0d;--c:#e8ff3a;--s:86px">E</span><span style="--r:-3deg;--s:62px">N</span><span style="--r:6deg;--b:#c9c9c2;--f:'Special Elite';--s:66px;--tt:lowercase">t</span>
+      <span class="sp"></span>
+      <span style="--r:4deg;--b:#ff3b1f;--c:#0d0d0d;--s:92px">X</span><span style="--r:-5deg;--f:'Special Elite';--s:58px">e</span><span style="--r:2deg;--b:#0d0d0d;--c:#f4f4f0;--s:72px">R</span><span style="--r:-2deg;--b:#e8ff3a;--s:80px">O</span><span style="--r:7deg;--s:66px">X</span>
+    </h1>
+    <p style="margin:16px 0 0;font-size:21px">A show series in the basement of 22 Harrow St. Every other Friday, doors at 8, over by 11 because Mrs. Petrakis upstairs has work at 6.</p>
+  </section>
+  <span class="tape" style="left:20%;top:3%;--r:-12deg"></span>
+
+  <section class="frag y" style="left:47%;top:3%;width:27%;--r:4deg" aria-labelledby="h-fall">
+    <h2 id="h-fall" class="show">Fall Run '26<small>All ages · $5 · nobody turned away for lack of funds</small></h2>
+    <ul class="lineup" style="margin-top:14px">
+      <li><b>OCT 03</b><span>Gutter Saints</span><em>+ Mild Panic, first show ever</em></li>
+      <li><b>OCT 17</b><span>Rot Choir</span><em>+ The Landlords (acoustic, apologies)</em></li>
+      <li><b>OCT 31</b><span>Wet Paint</span><em>costumes = $3 · Rust Belt Choir</em></li>
+      <li><b>NOV 14</b><span>Dial Tone</span><em>+ Kid Radiator + DJ Photostat</em></li>
+    </ul>
+  </section>
+  <span class="tape" style="left:57%;top:1.5%;--r:6deg"></span>
+
+  <section class="frag k" style="left:76%;top:6%;width:21%;--r:-5deg">
+    <p class="big" style="color:#e8ff3a;font-size:clamp(48px,5.2vw,96px)">No<br>jerks.</p>
+    <p style="margin:8px 0 0;font-size:15px">No racism, no sexism, no homophobia, no transphobia, no moshing into people who did not ask for it. If someone makes you feel unsafe, find anyone with a pink wristband.</p>
+  </section>
+
+  <figure class="frag g" style="left:34%;top:38%;width:30%;--r:-1.5deg;margin:0;padding:12px">
+    <svg class="pic" viewBox="0 0 300 220" role="img" aria-label="Photocopied photo of a crowd with raised hands" style="filter:url(#xerox) contrast(1.1)">
+      <rect width="300" height="220" fill="#8a8a86"/>
+      <rect y="120" width="300" height="100" fill="#3a3a38"/>
+      <g fill="#111"><circle cx="30" cy="150" r="22"/><circle cx="80" cy="140" r="26"/><circle cx="135" cy="155" r="24"/><circle cx="190" cy="138" r="27"/><circle cx="245" cy="150" r="24"/><circle cx="290" cy="142" r="22"/>
+      <path d="M70 120 L62 60 l-6 -14 l8 2 l4 -12 l5 12 l6 -8 l-2 16 l-6 64Z"/><path d="M185 112 L196 50 l2 -16 l6 8 l6 -10 l2 14 l8 -4 l-8 16 l-10 56Z"/><path d="M250 128 l14 -44 l4 -12 l6 8 l6 -6 l-2 14 l-14 44Z"/>
+      <rect y="170" width="300" height="50"/></g>
+      <rect x="0" y="0" width="300" height="18" fill="#d8d8d4"/>
+      <circle cx="200" cy="28" r="40" fill="#f2f2ee" opacity=".7"/>
+    </svg>
+    <figcaption style="font-size:13px;margin-top:6px">Gutter Saints, Aug 22. Photo: Deb (the good camera).</figcaption>
+  </figure>
+  <span class="tape" style="left:46%;top:36.5%;--r:-3deg"></span>
+
+  <section class="frag o" style="left:3%;top:46%;width:28%;--r:2.5deg" aria-labelledby="h-dir">
+    <h2 id="h-dir" class="big" style="font-size:clamp(48px,5.4vw,88px)">How to<br>get in</h2>
+    <div class="typed" style="margin-top:10px">
+      <p>1. Side door on Linden, not the front. The front is somebody's house.</p>
+      <p>2. Down the stairs, knock twice, say who told you.</p>
+      <p>3. Bring your own water, <span class="x">beer</span> nothing else, we mean it.</p>
+      <p>4. Out by 11. Quiet on the street. Seriously.</p>
+    </div>
+  </section>
+  <span class="tape" style="left:14%;top:44%;--r:9deg"></span>
+
+  <section class="frag" style="left:66%;top:42%;width:31%;--r:3deg" aria-labelledby="h-want">
+    <h2 id="h-want" class="ransom" aria-label="Wanted">
+      <span style="--r:-3deg;--b:#0d0d0d;--c:#f4f4f0;--s:44px">W</span><span style="--r:4deg;--f:'Special Elite';--s:40px">a</span><span style="--r:-6deg;--b:#e8ff3a;--s:46px">N</span><span style="--r:2deg;--s:38px">T</span><span style="--r:-2deg;--b:#ff3b1f;--f:'Special Elite';--s:42px">e</span><span style="--r:5deg;--b:#0d0d0d;--c:#e8ff3a;--s:48px">D</span>
+    </h2>
+    <p style="margin:12px 0 6px">Bands for Dec &amp; Jan. Send a tape, a CD-R or a link to <b>basementxerox@hmail.net</b>. Sets are 25 min. We split the door evenly, every band, every time.</p>
+    <p style="margin:0;font-size:14px">Also wanted: a drum throne that does not wobble. And a mop.</p>
+    <div class="stub" aria-hidden="true" style="margin-top:12px"><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span><span>Harrow St</span></div>
+  </section>
+  <span class="tape" style="left:78%;top:40.5%;--r:-7deg"></span>
+
+  <section class="frag y" style="left:33%;top:72%;width:24%;--r:-4deg">
+    <p class="show">Zine table<small>Every show. Trade one, take one. This flyer was made at the 24-hr copy shop on Delancey for $1.80.</small></p>
+    <p style="margin:10px 0 0"><span class="stamp">Copy 1 of 200</span></p>
+  </section>
+
+  <section class="frag k" style="left:60%;top:73%;width:18%;--r:6deg">
+    <p class="show" style="color:#ff3b1f">$5</p>
+    <p style="margin:6px 0 0;font-size:15px">goes to the bands, the fuse box, and the Harrow St tenants’ fund.</p>
+  </section>
+  <span class="tape" style="left:66%;top:71%;--r:14deg"></span>
+</main>
+<script>
+  // Torn edges: each fragment gets its own ragged polygon, seeded so it tears the same way every load.
+  let s = 11;
+  const r = () => (s = (s * 16807) % 2147483647) / 2147483647;
+  document.querySelectorAll(".frag").forEach((el) => {
+    const pts = [], n = 18;
+    const edge = (x0, y0, x1, y1, jx, jy) => { for (let i = 0; i < n; i++) { const t = i / n; pts.push(`${(x0 + (x1 - x0) * t + (r() - .5) * jx).toFixed(2)}% ${(y0 + (y1 - y0) * t + (r() - .5) * jy).toFixed(2)}%`); } };
+    const torn = r() > .45;
+    edge(0, 0, 100, 0, 0, torn ? 3.2 : .6);
+    edge(100, 0, 100, 100, r() > .5 ? 2.4 : .4, 0);
+    edge(100, 100, 0, 100, 0, torn ? .8 : 3.4);
+    edge(0, 100, 0, 0, r() > .5 ? 2.6 : .4, 0);
+    el.style.setProperty("--tear", `polygon(${pts.join(",")})`);
+  });
+</script>
+</body>
+</html>

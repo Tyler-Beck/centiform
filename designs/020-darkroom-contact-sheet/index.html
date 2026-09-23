@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darkroom Contact Sheet · Centiform</title>
+<style>
+/* @fonts: Syncopate:400,700:block; Fragment Mono:400:swap */
+@font-face{font-family:"Syncopate";font-style:normal;font-weight:400;font-display:block;src:url(fonts/syncopate-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Syncopate";font-style:normal;font-weight:400;font-display:block;src:url(fonts/syncopate-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Syncopate";font-style:normal;font-weight:700;font-display:block;src:url(fonts/syncopate-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Syncopate";font-style:normal;font-weight:700;font-display:block;src:url(fonts/syncopate-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Fragment Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/fragment-mono-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Fragment Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/fragment-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #1a0503;          /* the darkroom under a safelight */
+  --ink: #ff3a1f;         /* safelight red: all light in the room */
+  --accent-1: #f3e9dc;    /* fibre paper, white under the enlarger */
+  --accent-2: #5c1a10;    /* shadows, the bench */
+  --film: #120201;
+  --pencil: #ffd6c2;      /* china marker on the sheet */
+  --u: 8px;
+  /* scale 1.25 on 15px mono text */
+  --t-1: 11px; --t0: 16px; --t1: 19px; --t2: 24px; --t3: 30px; --t4: clamp(28px, 3vw, 46px);
+  --wide: "Syncopate", "Arial Black", sans-serif;
+  --mono: "Fragment Mono", "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 400 var(--t0)/1.6 var(--mono); min-height: 100vh; display: grid; grid-template-columns: 300px minmax(0, 1fr) minmax(280px, 380px); gap: calc(var(--u) * 3); padding: calc(var(--u) * 3);
+  background: radial-gradient(60% 50% at 70% 0%, rgba(255,58,31,.16), transparent 70%), var(--bg); }
+.lamp { position: fixed; top: -60px; right: 22%; width: 140px; height: 90px; border-radius: 0 0 70px 70px; background: radial-gradient(circle at 50% 20%, #ff6a4a, var(--ink) 40%, #7a1208); box-shadow: 0 0 80px 30px rgba(255,58,31,.22); pointer-events: none; opacity: .9; }
+aside.rolls h1 { margin: 0; font: 700 var(--t4)/1 var(--wide); letter-spacing: .02em; text-transform: uppercase; }
+aside.rolls h1 small { display: block; font: 400 var(--t-1)/1.6 var(--wide); letter-spacing: .3em; margin-top: var(--u); }
+aside.rolls p { font-size: 15px; color: #ff8a73; margin: calc(var(--u) * 2) 0; }
+.rolls ol { list-style: none; margin: calc(var(--u) * 3) 0 0; padding: 0; border-top: 1px solid var(--accent-2); }
+.rolls button { all: unset; cursor: pointer; display: block; width: 100%; padding: calc(var(--u) * 1.5) 0; border-bottom: 1px solid var(--accent-2); }
+.rolls button b { display: block; font: 700 13px/1.3 var(--wide); letter-spacing: .08em; text-transform: uppercase; }
+.rolls button span { font-size: 13px; color: #c9412a; }
+.rolls button[aria-current="true"] b::before { content: "▶ "; }
+.rolls button:focus-visible, .fr:focus-visible, .tray button:focus-visible { outline: 2px dashed var(--pencil); outline-offset: 3px; }
+/* the contact sheet */
+.sheet { position: relative; align-self: start; background: #e9d6c6; padding: calc(var(--u) * 3); box-shadow: 0 0 0 1px #3a0d06, 0 20px 50px -20px #000; }
+.sheet::after { content: ""; position: absolute; inset: 0; background: var(--ink); mix-blend-mode: multiply; opacity: .78; pointer-events: none; }
+.sheet .hd { display: flex; justify-content: space-between; font: 400 12px/1 var(--mono); color: #2a0a05; padding-bottom: 10px; }
+.strip { position: relative; background: var(--film); padding: 14px 6px; margin-bottom: 8px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; transform: rotate(var(--r, 0deg)); }
+.strip::before, .strip::after { content: ""; position: absolute; left: 6px; right: 6px; height: 6px; background: radial-gradient(circle, transparent 0, transparent 0) , repeating-linear-gradient(90deg, #cdb9a9 0 5px, transparent 5px 11px); opacity: .55; border-radius: 1px; }
+.strip::before { top: 4px; } .strip::after { bottom: 4px; }
+.edge { position: absolute; left: 10px; right: 10px; bottom: -1px; display: flex; justify-content: space-between; font: 400 8px/1 var(--mono); color: #d8b28f; letter-spacing: .08em; pointer-events: none; z-index: 1; }
+.fr { position: relative; aspect-ratio: 3 / 2; border: 0; padding: 0; cursor: zoom-in; background: #222; }
+.fr svg { display: block; width: 100%; height: 100%; }
+.fr .n { position: absolute; top: -12px; left: 2px; font: 400 8px/1 var(--mono); color: #d8b28f; }
+.fr.pick::after { content: ""; position: absolute; inset: -7px -9px; border: 2.5px solid var(--pencil); border-radius: 46% 54% 50% 48% / 56% 44% 58% 42%; transform: rotate(-3deg); z-index: 2; }
+.fr.crop::before { content: ""; position: absolute; left: 12%; right: 18%; top: 10%; bottom: 14%; border: 1.5px dashed var(--pencil); z-index: 2; }
+.fr[aria-pressed="true"] { outline: 2px solid var(--pencil); outline-offset: 1px; }
+.x { position: absolute; font: 700 22px/1 var(--wide); color: var(--pencil); z-index: 2; }
+/* developer tray */
+.tray { align-self: start; position: sticky; top: calc(var(--u) * 3); }
+.bath { background: #2b0906; padding: 18px; border-radius: 6px; box-shadow: inset 0 0 0 3px #3e0f09, inset 0 10px 30px rgba(0,0,0,.6); }
+.print { position: relative; background: var(--accent-1); padding: 14px; aspect-ratio: 4 / 5; display: grid; }
+.print svg { width: 100%; height: 100%; display: block; }
+.print::after { content: ""; position: absolute; inset: 0; background: var(--ink); mix-blend-mode: multiply; opacity: .72; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) { .print.dev svg { animation: dev 3.2s ease-out both; } @keyframes dev { 0% { filter: brightness(2.6) contrast(.2); } 40% { filter: brightness(1.6) contrast(.5); } 100% { filter: none; } } }
+.tray h2 { margin: calc(var(--u) * 2) 0 4px; font: 700 var(--t1)/1.2 var(--wide); letter-spacing: .04em; text-transform: uppercase; }
+.tray dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; margin: var(--u) 0; font-size: 14px; }
+.tray dt { color: #b83520; } .tray dd { margin: 0; }
+.tray p { margin: 0; font-size: 15px; color: #ff8a73; }
+@media (max-width: 1200px) { body { grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); } aside.rolls { grid-column: 1 / -1; } .rolls ol { display: flex; gap: 12px; flex-wrap: wrap; border: 0; } .rolls li { flex: 1 1 200px; } }
+@media (max-width: 800px) { body { grid-template-columns: minmax(0, 1fr); padding: var(--u); } .tray { position: static; } .sheet { padding: 10px; } .strip { grid-template-columns: repeat(3, minmax(0, 1fr)); row-gap: 16px; } .lamp { display: none; } }
+</style>
+</head>
+<body>
+<span class="lamp" aria-hidden="true"></span>
+<aside class="rolls" aria-labelledby="h">
+  <h1 id="h">Ines Varga<small>Contact sheets 1978–1981</small></h1>
+  <p>Documentary work from the Baltic ports, printed by the photographer in her own darkroom on Harbour Street. Circled frames went to print. Click any frame to put it in the developer.</p>
+  <ol id="rolls"></ol>
+</aside>
+<main class="sheet" aria-label="Contact sheet">
+  <div class="hd"><span id="sh">ROLL 14</span><span>TRI-X 400 · D-76 1:1 · 9 MIN 20°C</span></div>
+  <div id="strips"></div>
+</main>
+<section class="tray" aria-live="polite">
+  <div class="bath"><div class="print" id="print"></div></div>
+  <h2 id="pt"></h2>
+  <dl id="pd"></dl>
+  <p id="pn"></p>
+</section>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const ROLLS = [
+    ["The Night Ferry", "Roll 14 · March 1978", 14, "ferry", [4, 17, 29], "The overnight boat from Klaipėda. She rode it eleven times that winter and slept in the stairwell."],
+    ["Harbour Street", "Roll 22 · July 1979", 22, "street", [8, 21, 33], "Her own street, from the upstairs window and from the kerb. The bakery, the tram stop, the men outside the seamen’s mission."],
+    ["Shift Change", "Roll 31 · Nov 1981", 31, "yard", [2, 14, 26], "Six in the morning at the shipyard gate: one shift going in, the other coming out, nobody speaking."]
+  ];
+  let seed = 1;
+  const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  function scene(kind, k) {
+    seed = k * 97 + 13; rnd();
+    const g = (v) => { const c = Math.round(v * 255); return `rgb(${c},${c},${c})`; };
+    const sky = .55 + rnd() * .35, hz = 38 + rnd() * 20;
+    let s = `<rect width="150" height="100" fill="${g(sky)}"/>`;
+    const variant = Math.floor(rnd() * 4);
+    if (kind === "ferry") {
+      s += `<rect y="${hz}" width="150" height="${100 - hz}" fill="${g(sky * .35)}"/>`;
+      if (variant < 2) s += `<path d="M${20 + rnd() * 30} ${hz} h${50 + rnd() * 30} l-8 -8 h-${40} l-4 -10 h-10 v10 h-10z" fill="${g(.06)}"/>`;
+      if (variant >= 2) { const fx = 50 + rnd() * 50; s += `<path d="M${fx} ${hz + 14} l2 -22 q4 -6 8 0 l2 22z" fill="${g(.04)}"/><circle cx="${fx + 6}" cy="${hz - 12}" r="4.5" fill="${g(.04)}"/><path d="M${fx - 4} ${hz + 14} h22" stroke="${g(.04)}" stroke-width="2"/>`; }
+      s += `<path d="M0 ${hz + 8} Q75 ${hz + 4} 150 ${hz + 10}" stroke="${g(.75)}" stroke-width="1.5" fill="none"/>`;
+      s += `<rect x="0" y="${80 + rnd() * 6}" width="150" height="4" fill="${g(.1)}"/>`;
+    } else if (kind === "street") {
+      s += `<path d="M0 100 L60 ${hz} L90 ${hz} L150 100Z" fill="${g(.3)}"/>`;
+      for (let i = 0; i < 4; i++) s += `<rect x="${10 + i * 34 + rnd() * 8}" y="${hz - 30 - rnd() * 20}" width="${10 + rnd() * 10}" height="${60 + rnd() * 20}" fill="${g(.12 + rnd() * .2)}"/>`;
+      if (variant % 2) s += `<rect x="${60 + rnd() * 20}" y="${hz - 6}" width="8" height="30" fill="${g(.02)}"/><circle cx="${64 + rnd() * 20}" cy="${hz - 10}" r="5" fill="${g(.02)}"/>`;
+      s += `<circle cx="${110}" cy="${20}" r="${4 + rnd() * 4}" fill="${g(.98)}"/>`;
+    } else {
+      s += `<rect y="${hz}" width="150" height="${100 - hz}" fill="${g(.22)}"/>`;
+      s += `<path d="M0 ${hz} L40 ${hz - 40} L60 ${hz - 40} L70 ${hz}" fill="${g(.08)}"/><path d="M100 ${hz} V${hz - 55} H140 V${hz}" fill="${g(.1)}"/>`;
+      const n = 3 + Math.floor(rnd() * 6);
+      for (let i = 0; i < n; i++) { const x = 10 + rnd() * 130, h = 22 + rnd() * 10; s += `<rect x="${x}" y="${hz + 20 - h}" width="${h * .3}" height="${h}" fill="${g(.03)}"/><circle cx="${x + h * .15}" cy="${hz + 18 - h}" r="${h * .14}" fill="${g(.03)}"/>`; }
+      s += `<path d="M0 ${hz - 1} H150" stroke="${g(.85)}" stroke-width=".8"/>`;
+    }
+    const grain = `<filter id="gr${k}"><feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="1" seed="${k}"/><feColorMatrix values="0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .22 0"/><feComposite in2="SourceGraphic" operator="in"/></filter>`;
+    return `<svg viewBox="0 0 150 100" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>${grain}</defs>${s}<rect width="150" height="100" filter="url(#gr${k})" opacity=".8"/><rect width="150" height="100" fill="none" stroke="#000" stroke-width="6" opacity=".35"/></svg>`;
+  }
+  let roll = 0, sel = 0;
+  $("rolls").innerHTML = ROLLS.map(([t, d], i) => `<li><button type="button" data-r="${i}" aria-current="${i === 0}"><b>${t}</b><span>${d}</span></button></li>`).join("");
+  function render() {
+    const [t, d, no, kind, picks] = ROLLS[roll];
+    $("sh").textContent = `ROLL ${no} · ${t.toUpperCase()}`;
+    let h = "";
+    for (let s = 0; s < 6; s++) {
+      h += `<div class="strip" style="--r:${((s * 37) % 7 - 3) * .12}deg">`;
+      for (let f = 0; f < 6; f++) {
+        const n = s * 6 + f + 1, k = no * 100 + n;
+        h += `<button class="fr${picks.includes(n) ? " pick" : ""}${picks[0] === n ? " crop" : ""}" type="button" data-n="${n}" aria-pressed="false" aria-label="Frame ${n}${picks.includes(n) ? ", circled for print" : ""}"><span class="n">${n}${n % 2 ? "" : "A"}</span>${scene(kind, k)}</button>`;
+      }
+      h += `<span class="edge" aria-hidden="true"><span>KODAK TRI-X PAN FILM 5063</span><span>▶ ${s * 6 + 3}</span><span>${no}</span></span></div>`;
+    }
+    $("strips").innerHTML = h;
+    $("rolls").querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.r === roll)));
+    develop(picks[0]);
+  }
+  function develop(n) {
+    sel = n;
+    const [t, d, no, kind, picks, note] = ROLLS[roll];
+    $("strips").querySelectorAll(".fr").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.n === n)));
+    const p = $("print");
+    p.innerHTML = scene(kind, no * 100 + n).replace('preserveAspectRatio="xMidYMid slice"', 'preserveAspectRatio="xMidYMid slice" role="img"');
+    p.classList.remove("dev"); void p.offsetWidth; p.classList.add("dev");
+    $("pt").textContent = `${t}, frame ${n}`;
+    $("pd").innerHTML = `<dt>Roll</dt><dd>${no}, ${d.split("· ")[1]}</dd><dt>Paper</dt><dd>Ilford fibre, grade ${2 + (n % 3)}</dd><dt>Exposure</dt><dd>${8 + (n % 7) * 2} s at f/8, burn sky +${3 + (n % 4)} s</dd><dt>Status</dt><dd>${picks.includes(n) ? "Circled. Printed for the 1982 show." : "Not printed."}</dd>`;
+    $("pn").textContent = note;
+  }
+  $("rolls").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { roll = +b.dataset.r; render(); } });
+  $("strips").addEventListener("click", (e) => { const b = e.target.closest(".fr"); if (b) develop(+b.dataset.n); });
+  render();
+})();
+</script>
+</body>
+</html>

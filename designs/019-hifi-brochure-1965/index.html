@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hi-Fi Brochure 1965 · Centiform</title>
+<style>
+/* @fonts: Jost:300,400,500:swap; Chivo Mono:400:swap */
+@font-face{font-family:"Jost";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/jost-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Jost";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jost-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Jost";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/jost-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Chivo Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/chivo-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #e4e2dd;          /* brochure stock, light grey */
+  --ink: #3a3a38;         /* warm graphite */
+  --accent-1: #f25c05;    /* the one orange control */
+  --accent-2: #b9b6ae;    /* aluminium, rules */
+  --white: #f4f3ef;       /* the lacquered case */
+  --ash: #c8a878;         /* elm side panels */
+  --u: 6px;               /* one module = 6 px; the grid is 4 modules */
+  /* scale 1.2 on 16px */
+  --t-1: 11.5px; --t0: 16px; --t1: 19.2px; --t2: 23px; --t3: 27.6px; --t4: clamp(40px, 4.6vw, 72px);
+  --sans: "Jost", "Futura", sans-serif;
+  --mono: "Chivo Mono", "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); }
+body { font: 400 var(--t0)/1.55 var(--sans); }
+.page { max-width: 1680px; margin: 0 auto; padding: calc(var(--u) * 6) calc(var(--u) * 10) calc(var(--u) * 12); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: calc(var(--u) * 4); }
+header { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; align-items: baseline; border-bottom: 1px solid var(--ink); padding-bottom: calc(var(--u) * 2); }
+.word { grid-column: 1 / 4; font: 500 var(--t2)/1 var(--sans); letter-spacing: .02em; }
+.word span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-1); margin-left: 4px; }
+header p { margin: 0; font: 400 var(--t-1)/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+header p:nth-of-type(1) { grid-column: 7 / 10; } header p:nth-of-type(2) { grid-column: 10 / 13; text-align: right; }
+.hero { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; margin-top: calc(var(--u) * 8); align-items: start; }
+.hero h1 { grid-column: 1 / 5; margin: 0; font: 300 var(--t4)/1.02 var(--sans); letter-spacing: -.02em; }
+.hero h1 b { font-weight: 500; }
+.hero .lede { grid-column: 1 / 5; margin: calc(var(--u) * 4) 0 0; font: 400 var(--t1)/1.5 var(--sans); max-width: 34ch; }
+.hero .intro { grid-column: 1 / 5; }
+.drawing { grid-column: 5 / -1; position: relative; }
+.drawing svg { width: 100%; height: auto; display: block; }
+.scale-note { display: flex; justify-content: space-between; font: 400 var(--t-1)/1 var(--mono); letter-spacing: .08em; margin-top: calc(var(--u) * 2); text-transform: uppercase; }
+.power { position: absolute; cursor: pointer; border: 0; padding: 0; background: transparent; border-radius: 3px; }
+.power:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) { .on #platter { animation: spin 1.8s linear infinite; transform-origin: 380px 190px; } @keyframes spin { to { transform: rotate(360deg); } } #arm { transition: transform 1.2s ease-in-out; transform-origin: 600px 80px; } .on #arm { transform: rotate(22deg); } }
+#lamp { transition: fill .3s; } .on #lamp { fill: #f25c05; }
+.rule { grid-column: 1 / -1; border: 0; border-top: 1px solid var(--ink); margin: calc(var(--u) * 10) 0 calc(var(--u) * 4); }
+.sec-h { grid-column: 1 / 4; margin: 0; font: 400 var(--t-1)/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.panel { grid-column: 4 / 10; }
+.panel svg { width: 180mm; max-width: 100%; height: auto; display: block; }
+.panel p { margin: calc(var(--u) * 2) 0 0; font: 400 var(--t-1)/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.panel-txt { grid-column: 10 / -1; margin: 0; }
+table.spec { grid-column: 4 / -1; border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.spec th, .spec td { text-align: left; font-weight: 400; padding: calc(var(--u) * 1.5) 0; border-bottom: 1px solid var(--accent-2); vertical-align: top; }
+.spec th { width: 42%; font: 400 var(--t0)/1.4 var(--sans); }
+.spec td { font: 400 15px/1.5 var(--mono); }
+.spec tr:first-child th, .spec tr:first-child td { border-top: 1px solid var(--ink); }
+.system { grid-column: 4 / -1; display: flex; align-items: flex-end; gap: calc(var(--u) * 5); border-bottom: 3px solid var(--ink); padding-bottom: 0; }
+.system figure { margin: 0; }
+.system svg { display: block; height: auto; }
+.system figcaption { font: 400 var(--t-1)/1.4 var(--mono); text-transform: uppercase; letter-spacing: .06em; margin-bottom: var(--u); }
+.system figcaption b { display: block; font: 500 var(--t0)/1.2 var(--sans); text-transform: none; letter-spacing: 0; }
+.foot { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; margin-top: calc(var(--u) * 8); font: 400 var(--t-1)/1.5 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+.foot p { grid-column: span 3; margin: 0; }
+@media (max-width: 1000px) {
+  .page { grid-template-columns: repeat(4, minmax(0, 1fr)); padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 8); column-gap: calc(var(--u) * 2); }
+  .word { grid-column: 1 / 3; } header p:nth-of-type(1) { display: none; } header p:nth-of-type(2) { grid-column: 3 / 5; }
+  .hero h1, .hero .lede, .hero .intro, .drawing, .sec-h, .panel, .panel-txt, table.spec, .system, .foot p { grid-column: 1 / -1; }
+  .drawing { margin-top: calc(var(--u) * 4); }
+  .sec-h { margin-bottom: calc(var(--u) * 2); }
+  .system { flex-wrap: wrap; gap: calc(var(--u) * 2); }
+  .system svg { max-width: 40vw; }
+  .foot p { margin-bottom: var(--u); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <span class="word">hellwig<span aria-hidden="true"></span></span>
+    <p>Hellwig Werke · Kassel</p>
+    <p>Katalog 1965 · Blatt 4</p>
+  </header>
+
+  <section class="hero" aria-labelledby="h">
+    <div class="intro">
+      <h1 id="h"><b>SK 65</b><br>Phono&shy;kombi</h1>
+      <p class="lede">A record player and a radio in one quiet case. Lacquered steel, elm sides, a lid of clear acrylic. Nothing on it that you do not need, and one orange switch so you can find it.</p>
+    </div>
+    <figure class="drawing" id="dev" style="margin:0">
+      <svg viewBox="0 0 760 330" role="img" aria-labelledby="dt"><title id="dt">Top view of the SK 65 record player and radio</title>
+        <defs><pattern id="perf" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r="2.6" fill="#3a3a38"/></pattern></defs>
+        <rect x="0" y="10" width="760" height="300" rx="4" fill="#c8a878"/>
+        <g stroke="#b08f62" stroke-width="1" opacity=".6"><path d="M0 40 C200 32 400 50 760 38 M0 280 C240 272 460 290 760 276"/></g>
+        <rect x="16" y="10" width="728" height="300" fill="#f4f3ef" stroke="#3a3a38" stroke-width="1.2"/>
+        <!-- speaker perforation -->
+        <rect x="34" y="30" width="200" height="260" fill="url(#perf)"/>
+        <!-- turntable -->
+        <circle cx="380" cy="190" r="118" fill="#d9d7d1" stroke="#3a3a38" stroke-width="1.2"/>
+        <g id="platter"><circle cx="380" cy="190" r="104" fill="#2e2e2c"/><g fill="none" stroke="#474744" stroke-width="1"><circle cx="380" cy="190" r="96"/><circle cx="380" cy="190" r="86"/><circle cx="380" cy="190" r="76"/><circle cx="380" cy="190" r="62"/></g><circle cx="380" cy="190" r="30" fill="#f25c05" opacity=".0"/><circle cx="380" cy="190" r="28" fill="#e4e2dd"/><path d="M366 184 h28 M370 196 h20" stroke="#3a3a38" stroke-width="2"/><circle cx="380" cy="190" r="3" fill="#b9b6ae"/></g>
+        <!-- tonearm -->
+        <g id="arm"><circle cx="600" cy="80" r="16" fill="#b9b6ae" stroke="#3a3a38"/><path d="M600 80 L600 210 L566 238" stroke="#3a3a38" stroke-width="5" fill="none" stroke-linecap="round"/><rect x="552" y="232" width="20" height="12" rx="2" fill="#3a3a38" transform="rotate(-40 562 238)"/></g>
+        <!-- controls -->
+        <g><circle cx="560" cy="276" r="12" fill="#b9b6ae" stroke="#3a3a38"/><circle cx="600" cy="276" r="12" fill="#b9b6ae" stroke="#3a3a38"/><circle cx="640" cy="276" r="12" fill="#b9b6ae" stroke="#3a3a38"/><rect x="676" y="264" width="46" height="24" rx="3" fill="#f25c05"/><circle id="lamp" cx="690" cy="40" r="5" fill="#b9b6ae"/></g>
+        <g font-family="Chivo Mono" font-size="9" fill="#3a3a38" text-anchor="middle"><text x="560" y="302">VOL</text><text x="600" y="302">TON</text><text x="640" y="302">UKW</text><text x="699" y="302">EIN</text></g>
+        <path d="M660 60 h70 M660 76 h70" stroke="#3a3a38"/><g font-family="Chivo Mono" font-size="8" fill="#3a3a38"><text x="660" y="56">88 · 94 · 100</text><text x="660" y="90">MW · LW · UKW</text></g>
+      </svg>
+      <button class="power" id="pw" type="button" aria-pressed="false" aria-label="Power switch" style="left:88.9%;top:80%;width:6.1%;height:7.3%"></button>
+      <figcaption class="scale-note"><span>Top view, scale 1:4</span><span>Press the orange switch</span></figcaption>
+    </figure>
+  </section>
+
+  <hr class="rule">
+  <h2 class="sec-h">Control panel<br>at 1:1</h2>
+  <div class="panel">
+    <svg viewBox="0 0 180 40" role="img" aria-label="The control panel at full size"><rect width="180" height="40" fill="#f4f3ef" stroke="#3a3a38" stroke-width=".3"/><g fill="#b9b6ae" stroke="#3a3a38" stroke-width=".3"><circle cx="22" cy="20" r="9"/><circle cx="52" cy="20" r="9"/><circle cx="82" cy="20" r="9"/></g><g stroke="#3a3a38" stroke-width=".6"><path d="M22 12 v4 M52 12 v4 M82 12 v4"/></g><rect x="108" y="11" width="30" height="18" rx="2" fill="#f25c05"/><g font-family="Chivo Mono" font-size="3" fill="#3a3a38" text-anchor="middle"><text x="22" y="36">VOL</text><text x="52" y="36">TON</text><text x="82" y="36">UKW</text><text x="123" y="36">EIN</text></g><circle cx="160" cy="20" r="2.2" fill="#3a3a38"/><text x="160" y="36" font-family="Chivo Mono" font-size="3" text-anchor="middle" fill="#3a3a38">33 · 45</text></svg>
+    <p>180 × 40 mm, anodised aluminium on steel</p>
+  </div>
+  <p class="panel-txt">Three knobs of the same size, spaced 30 mm apart. The largest thing on the panel is the switch, and it is orange because it is the first thing you touch.</p>
+
+  <hr class="rule">
+  <h2 class="sec-h">Technical data</h2>
+  <table class="spec">
+    <tbody>
+      <tr><th scope="row">Turntable</th><td>4-speed, 16 · 33⅓ · 45 · 78 rpm, belt drive</td></tr>
+      <tr><th scope="row">Pick-up</th><td>Crystal, 7 g tracking, turnover stylus</td></tr>
+      <tr><th scope="row">Radio</th><td>UKW 87.5–104 MHz, MW, LW, 7 valves, 10 circuits</td></tr>
+      <tr><th scope="row">Output</th><td>2 × 4 W music power, 2.5 % distortion</td></tr>
+      <tr><th scope="row">Loudspeaker</th><td>Oval 18 × 13 cm, behind 598 perforations</td></tr>
+      <tr><th scope="row">Case</th><td>Steel, white lacquer, sides in elm, acrylic lid</td></tr>
+      <tr><th scope="row">Dimensions</th><td>58 × 29 × 24 cm, 11.4 kg</td></tr>
+      <tr><th scope="row">Price</th><td>DM 495, lid DM 28 extra</td></tr>
+    </tbody>
+  </table>
+
+  <hr class="rule">
+  <h2 class="sec-h">The system<br>on one shelf</h2>
+  <div class="system">
+    <figure><figcaption><b>SK 65</b>Phonokombi</figcaption><svg width="232" viewBox="0 0 232 100" aria-hidden="true"><rect x="0" y="26" width="232" height="74" fill="#c8a878"/><rect x="6" y="26" width="220" height="74" fill="#f4f3ef" stroke="#3a3a38"/><rect x="0" y="0" width="232" height="26" fill="none" stroke="#3a3a38" stroke-dasharray="3 3"/><rect x="14" y="38" width="60" height="52" fill="url(#perf2)"/><rect x="180" y="80" width="18" height="8" fill="#f25c05"/></svg></figure>
+    <figure><figcaption><b>L 10</b>Speaker, pair</figcaption><svg width="104" viewBox="0 0 104 140" aria-hidden="true"><defs><pattern id="perf2" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="1.7" fill="#3a3a38"/></pattern></defs><rect x="0" y="0" width="104" height="140" fill="#c8a878"/><rect x="6" y="6" width="92" height="128" fill="#f4f3ef" stroke="#3a3a38"/><rect x="14" y="14" width="76" height="112" fill="url(#perf2)"/></svg></figure>
+    <figure><figcaption><b>TS 45</b>Radio tuner</figcaption><svg width="168" viewBox="0 0 168 64" aria-hidden="true"><rect width="168" height="64" fill="#f4f3ef" stroke="#3a3a38"/><rect x="10" y="12" width="96" height="20" fill="#e4e2dd" stroke="#3a3a38"/><path d="M20 22 h76" stroke="#3a3a38" stroke-dasharray="2 4"/><circle cx="130" cy="22" r="9" fill="#b9b6ae" stroke="#3a3a38"/><circle cx="150" cy="44" r="5" fill="#b9b6ae" stroke="#3a3a38"/></svg></figure>
+  </div>
+
+  <footer class="foot">
+    <p>Hellwig Werke GmbH<br>Frankfurter Straße 90, Kassel</p>
+    <p>Design: Abteilung Formgebung,<br>K. Ostermann, 1964</p>
+    <p>Available from<br>specialist radio dealers</p>
+    <p>Subject to technical<br>changes · Printed 9/65</p>
+  </footer>
+</div>
+<script>
+  document.getElementById("pw").addEventListener("click", (e) => {
+    const on = document.getElementById("dev").classList.toggle("on");
+    e.currentTarget.setAttribute("aria-pressed", String(on));
+  });
+</script>
+</body>
+</html>

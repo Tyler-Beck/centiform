@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Farmer's Almanac · Centiform</title>
+<style>
+/* @fonts: Sorts Mill Goudy:400,400i:swap; Alegreya SC:400,700:swap */
+@font-face{font-family:"Sorts Mill Goudy";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/sorts-mill-goudy-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Sorts Mill Goudy";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/sorts-mill-goudy-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya SC";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/alegreya-sc-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Alegreya SC";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/alegreya-sc-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f1e6c8;          /* rag paper, foxed */
+  --ink: #2b2118;         /* black forme */
+  --accent-1: #a33b20;    /* red forme: Sundays, holy days, best days */
+  --accent-2: #5b6b3a;    /* field green, used for the planting key only */
+  --rule: 1px solid var(--ink);
+  --u: 6px;
+  /* the printer's sizes: minion 7, brevier 8, long primer 10, small pica 11, pica 12, english 14, great primer 18, double pica 22 */
+  --t-1: 13px; --t0: 17px; --t1: 20px; --t2: 26px; --t3: 34px; --t4: clamp(40px, 5vw, 72px);
+  --roman: "Sorts Mill Goudy", Georgia, serif;
+  --caps: "Alegreya SC", "Sorts Mill Goudy", serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #d9caa2; color: var(--ink); }
+body { font: 400 var(--t0)/1.4 var(--roman); padding: calc(var(--u) * 3); }
+.page { max-width: 1760px; margin: 0 auto; background: var(--bg); padding: calc(var(--u) * 4); border: 1px solid #c2af80; box-shadow: 0 10px 24px -12px rgba(43,33,24,.5);
+  background-image: radial-gradient(circle at 8% 90%, rgba(163,59,32,.07), transparent 12%), radial-gradient(circle at 94% 6%, rgba(120,90,40,.1), transparent 10%); }
+.frame { border: 3px double var(--ink); padding: calc(var(--u) * 3); }
+header.top { display: grid; grid-template-columns: 140px minmax(0, 1fr) 140px; align-items: center; gap: calc(var(--u) * 3); border-bottom: 3px double var(--ink); padding-bottom: calc(var(--u) * 2); }
+header.top svg { width: 100%; height: auto; display: block; }
+.title { text-align: center; }
+.title p { margin: 0; font: 400 var(--t-1)/1.3 var(--caps); letter-spacing: .1em; }
+.title h1 { margin: 4px 0; font: 700 var(--t4)/1 var(--caps); letter-spacing: .02em; }
+.title h1 span { color: var(--accent-1); }
+.title .it { font: italic 400 var(--t1)/1.3 var(--roman); letter-spacing: 0; }
+nav.months { display: flex; flex-wrap: wrap; justify-content: center; gap: 0; margin: calc(var(--u) * 2) 0; border-top: var(--rule); border-bottom: var(--rule); }
+nav.months button { all: unset; cursor: pointer; font: 400 var(--t0)/1 var(--caps); padding: 8px 12px; letter-spacing: .06em; }
+nav.months button + button { border-left: 1px solid rgba(43,33,24,.3); }
+nav.months button[aria-pressed="true"] { color: var(--bg); background: var(--accent-1); }
+nav.months button:focus-visible, .crops button:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+.body { display: grid; grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr); gap: calc(var(--u) * 4); }
+.mhead { display: flex; align-items: baseline; justify-content: space-between; gap: calc(var(--u) * 2); border-bottom: 2px solid var(--ink); padding-bottom: 4px; }
+.mhead h2 { margin: 0; font: 700 var(--t3)/1 var(--caps); }
+.mhead h2 small { font: italic 400 var(--t1)/1 var(--roman); margin-left: 8px; }
+.mhead p { margin: 0; font: italic 400 var(--t-1)/1.3 var(--roman); text-align: right; }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums oldstyle-nums; }
+thead th { font: 400 12px/1.15 var(--caps); letter-spacing: .04em; border-bottom: var(--rule); padding: 4px 3px; vertical-align: bottom; text-align: center; }
+tbody td { padding: 1px 4px; border-bottom: 1px solid rgba(43,33,24,.2); text-align: center; font-size: 16px; line-height: 1.35; white-space: nowrap; }
+tbody td + td { border-left: 1px solid rgba(43,33,24,.3); }
+td.asp { text-align: left; white-space: normal; font-style: italic; width: 44%; }
+td.asp b { font-style: normal; font-family: var(--caps); font-weight: 400; color: var(--accent-1); }
+tr.sun td:nth-child(-n+2) { color: var(--accent-1); }
+tr.best td { background: rgba(91,107,58,.16); }
+tr.best td:first-child { box-shadow: inset 3px 0 0 var(--accent-2); }
+td.moon svg { width: 16px; height: 16px; vertical-align: -3px; }
+aside section { border: var(--rule); padding: calc(var(--u) * 2); margin-bottom: calc(var(--u) * 3); }
+aside h3 { margin: 0 0 var(--u); font: 700 var(--t1)/1.1 var(--caps); text-align: center; border-bottom: 1px solid var(--ink); padding-bottom: 4px; }
+.phases { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: var(--u); }
+.phases svg { width: 40px; height: 40px; display: block; margin: 0 auto 4px; }
+.phases span { font: 400 12px/1.2 var(--caps); display: block; }
+.phases b { font: 400 var(--t0)/1 var(--roman); }
+.crops { display: grid; gap: 4px; }
+.crops button { all: unset; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: var(--u); padding: 4px 6px; border-bottom: 1px dotted rgba(43,33,24,.4); font-size: 16px; }
+.crops button span { font: 400 12px/1.8 var(--caps); color: var(--accent-2); }
+.crops button[aria-pressed="true"] { background: rgba(91,107,58,.2); }
+.verse { font-style: italic; text-align: center; margin: 0; line-height: 1.5; }
+.key { font-size: 14px; margin: var(--u) 0 0; }
+.key i { display: inline-block; width: 14px; height: 10px; background: rgba(91,107,58,.35); border-left: 3px solid var(--accent-2); margin-right: 4px; }
+.dropcap::first-letter { float: left; font: 700 48px/.8 var(--caps); color: var(--accent-1); margin: 4px 6px 0 0; }
+.foot { text-align: center; font: 400 12px/1.4 var(--caps); letter-spacing: .08em; margin-top: calc(var(--u) * 2); border-top: 3px double var(--ink); padding-top: var(--u); }
+@media (max-width: 1100px) { .body { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 700px) {
+  body { padding: 0; }
+  .page { padding: calc(var(--u) * 1.5); }
+  .frame { padding: calc(var(--u) * 1.5); }
+  header.top { grid-template-columns: 56px minmax(0, 1fr) 56px; gap: var(--u); }
+  .title h1 { font-size: 30px; }
+  th.hide, td.hide { display: none; }
+  td.asp { width: auto; font-size: 14px; }
+  tbody td { padding: 1px 2px; font-size: 14px; }
+  .mhead { flex-direction: column; }
+  .mhead p { text-align: left; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <pattern id="hatch" width="3" height="3" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><line x1="0" y1="0" x2="0" y2="3" stroke="#2b2118" stroke-width="1"/></pattern>
+</svg>
+<div class="page"><div class="frame">
+  <header class="top">
+    <svg viewBox="0 0 120 120" role="img" aria-label="Woodcut sun">
+      <g stroke="#2b2118" stroke-width="2.2" id="rays"></g>
+      <circle cx="60" cy="60" r="30" fill="#f1e6c8" stroke="#2b2118" stroke-width="3"/>
+      <circle cx="60" cy="60" r="30" fill="url(#hatch)" opacity=".35"/>
+      <path d="M48 54c3-3 6-3 8 0M64 54c3-3 6-3 8 0" stroke="#2b2118" stroke-width="2.4" fill="none"/>
+      <path d="M58 58l-2 8h5" stroke="#2b2118" stroke-width="2" fill="none"/>
+      <path d="M49 72c6 5 16 5 22 0" stroke="#a33b20" stroke-width="2.6" fill="none"/>
+    </svg>
+    <div class="title">
+      <p>Being the Year of Our Lord 2027 · Calculated for the Meridian of Hollow Township</p>
+      <h1>The <span>Hollow Creek</span> Almanack</h1>
+      <p class="it">Containing the Rising and Setting of the Sun, the Moon’s Changes, Planting Days, &amp; Sundry Useful Tables. Price Twelve Cents.</p>
+    </div>
+    <svg viewBox="0 0 120 120" role="img" aria-label="Woodcut crescent moon">
+      <path d="M78 16a46 46 0 1 0 0 88a38 38 0 1 1 0-88z" fill="#f1e6c8" stroke="#2b2118" stroke-width="3"/>
+      <path d="M78 16a46 46 0 1 0 0 88a38 38 0 1 1 0-88z" fill="url(#hatch)" opacity=".5"/>
+      <path d="M40 52c3-2 6-1 7 2M36 70c4 3 9 3 12 0" stroke="#2b2118" stroke-width="2.2" fill="none"/>
+      <g fill="#2b2118"><path d="M100 30l2 5 5 1-4 3 1 5-4-3-4 3 1-5-4-3 5-1z"/><path d="M104 84l1.5 3.5 3.5.5-2.6 2.2.8 3.6-3.2-2-3.2 2 .8-3.6-2.6-2.2 3.5-.5z"/></g>
+    </svg>
+  </header>
+  <nav class="months" id="months" aria-label="Month"></nav>
+  <div class="body">
+    <main>
+      <div class="mhead"><h2 id="mh"></h2><p id="mp"></p></div>
+      <table aria-describedby="mh">
+        <thead><tr><th scope="col">Day<br>of M.</th><th scope="col">Day<br>of W.</th><th scope="col">Sun<br>rises</th><th scope="col">Sun<br>sets</th><th scope="col" class="hide">Length<br>of day</th><th scope="col">Moon’s<br>age</th><th scope="col">Phase</th><th scope="col">Aspects, Feasts, Farm Work &amp; Weather</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p class="key"><i></i>Best planting day for the crop chosen in the Planting Table. Sundays and feasts in red.</p>
+    </main>
+    <aside>
+      <section aria-labelledby="ph-h"><h3 id="ph-h">The Moon’s Changes</h3><div class="phases" id="phases"></div></section>
+      <section aria-labelledby="cr-h"><h3 id="cr-h">Planting Table</h3><div class="crops" id="crops"></div></section>
+      <section aria-labelledby="fc-h"><h3 id="fc-h">Farmer’s Calendar</h3><p class="dropcap" id="cal" style="margin:0"></p></section>
+      <section><p class="verse" id="verse"></p></section>
+    </aside>
+  </div>
+  <p class="foot">Printed &amp; sold by Josiah Tuttle &amp; Sons, at the Sign of the Plough, Hollow Creek · Lat. 42° 21′ N · Long. 72° 40′ W</p>
+</div></div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const MN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const DW = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+  const ROM = ["i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x", "xi", "xii"];
+  const LAT = 42.35 * Math.PI / 180, SYN = 29.530588853, NEW0 = Date.UTC(2000, 0, 6, 18, 14);
+  const ageOf = (d) => (((d - NEW0) / 864e5) % SYN + SYN) % SYN;
+  // crop: waxing (above ground) or waning (roots); months when sown here
+  const CROPS = [["Peas", "wax", [3, 4]], ["Lettuce", "wax", [3, 4, 5, 8]], ["Corn", "wax", [4, 5]], ["Beans", "wax", [4, 5, 6]], ["Potatoes", "wane", [3, 4]], ["Carrots", "wane", [3, 4, 5, 6]], ["Turnips", "wane", [6, 7]], ["Garlic", "wane", [9]], ["Onion sets", "wane", [2, 3]], ["Winter rye", "wax", [8, 9]]];
+  const NOTES = {
+    "0-1": ["<b>Circumcision.</b> New Year.", "Mend harness by the fire."], "0-6": ["<b>Epiphany.</b>"], "0-20": ["Cold snaps; look to the ewes."],
+    "1-2": ["<b>Candlemas.</b> Half your wood and half your hay."], "1-14": ["St. Valentine."], "2-17": ["St. Patrick. Sow onion sets if the ground allows."],
+    "2-20": ["<b>Equinox.</b> Tap the last maples."], "3-1": ["Mud time. Keep off the lower field."], "3-15": ["Peas in, if the soil crumbles."],
+    "4-1": ["May Day. Mind the frost pocket."], "4-20": ["Plant corn when oak leaves are the size of a squirrel’s ear."], "5-21": ["<b>Solstice.</b> First cut of hay."],
+    "5-24": ["St. John Baptist."], "6-4": ["Independence."], "6-15": ["Dog days begin; mow early."], "7-15": ["Assumption."], "7-24": ["St. Bartholomew. Cool nights."],
+    "8-22": ["<b>Equinox.</b> Sow winter rye."], "8-29": ["Michaelmas."], "9-12": ["Dig potatoes in dry weather."], "9-31": ["All Hallows’ Eve."],
+    "10-1": ["<b>All Saints.</b>"], "10-25": ["Thanksgiving. Settle accounts."], "11-21": ["<b>Solstice.</b> Shortest day."], "11-25": ["<b>Christmas.</b>"]
+  };
+  const WEATHER = [["Clear & sharp.", "Snow, then thaw.", "Raw winds.", "Snow squalls.", "Bitter at night."], ["Raw winds.", "Showers.", "Fair.", "Frost in low places.", "Mud and more mud."], ["Warm & close.", "Thunder about.", "Fine for haying.", "Showers.", "Hot, still."], ["Fog at morn.", "Frost in low places.", "Gales.", "Mild spell.", "Fair & cool."]];
+  function sunTimes(y, m, d) {
+    const N = Math.round((Date.UTC(y, m, d) - Date.UTC(y, 0, 0)) / 864e5);
+    const dec = 23.44 * Math.PI / 180 * Math.sin(2 * Math.PI * (284 + N) / 365);
+    const w = Math.acos(-Math.tan(LAT) * Math.tan(dec) - 0.0145 / Math.cos(LAT) / Math.cos(dec)) * 180 / Math.PI;
+    const B = 2 * Math.PI * (N - 81) / 364, eot = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+    const noon = 12 * 60 - eot + (72.67 - 75) * 4;          // local mean time, Eastern meridian
+    const half = w / 15 * 60;
+    return [noon - half, noon + half, half * 2];
+  }
+  const hm = (min) => `${Math.floor(min / 60) % 12 || 12}&#8201;${String(Math.round(min % 60)).padStart(2, "0")}`;
+  function moon(age, sz) {
+    const f = age / SYN, r = sz / 2 - 1, c = sz / 2;
+    const k = Math.cos(f * 2 * Math.PI), rx = Math.abs(k) * r;
+    const wax = f < .5;
+    const lit = `M${c} ${c - r} A${r} ${r} 0 0 ${wax ? 1 : 0} ${c} ${c + r} A${rx} ${r} 0 0 ${wax ? (k > 0 ? 0 : 1) : (k > 0 ? 1 : 0)} ${c} ${c - r}Z`;
+    return `<svg viewBox="0 0 ${sz} ${sz}" aria-hidden="true"><circle cx="${c}" cy="${c}" r="${r}" fill="#2b2118"/><path d="${lit}" fill="#f1e6c8"/><circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="#2b2118" stroke-width="1"/></svg>`;
+  }
+  let month = new Date().getMonth(), crop = Math.max(0, CROPS.findIndex((c) => c[2].includes(month)));
+  $("months").innerHTML = MN.map((m, i) => `<button type="button" data-m="${i}" aria-pressed="false">${m.slice(0, 3)}</button>`).join("");
+  $("crops").innerHTML = CROPS.map(([c, w], i) => `<button type="button" data-c="${i}" aria-pressed="${i === crop}">${c}<span>${w === "wax" ? "Moon waxing" : "Moon waning"}</span></button>`).join("");
+  function render() {
+    const y = 2027, days = new Date(y, month + 1, 0).getDate();
+    document.querySelectorAll("#months button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.m === month)));
+    document.querySelectorAll("#crops button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.c === crop)));
+    $("mh").innerHTML = `${ROM[month].toUpperCase()}. ${MN[month]} <small>hath ${days} days</small>`;
+    const [cn, cw, cm] = CROPS[crop];
+    $("mp").textContent = cm.includes(month) ? `${cn}: sow on the green days below.` : `${cn} is not sown in ${MN[month]} in this country.`;
+    let rows = "", changes = [];
+    for (let d = 1; d <= days; d++) {
+      const dt = new Date(y, month, d), age = ageOf(Date.UTC(y, month, d, 12)), prev = ageOf(Date.UTC(y, month, d - 1, 12));
+      const [r, s, len] = sunTimes(y, month, d);
+      const q = Math.floor(age / (SYN / 4)), pq = Math.floor(prev / (SYN / 4));
+      if (q !== pq) changes.push([["New Moon", "First Qr.", "Full Moon", "Last Qr."][q], d, age]);
+      const waxing = age < SYN / 2;
+      const best = cm.includes(month) && (cw === "wax" ? waxing && age > 1 : !waxing && age < SYN - 1);
+      const key = `${month}-${d}`, note = (NOTES[key] || []).join(" ") || (d % 3 === 0 ? WEATHER[[0,0,1,1,1,2,2,2,3,3,3,0][month]][(d + month) % 5] : "");
+      rows += `<tr class="${dt.getDay() === 0 || (NOTES[key] && NOTES[key][0].includes("<b>")) ? "sun" : ""}${best ? " best" : ""}"><td>${d}</td><td>${DW[dt.getDay()]}</td><td>${hm(r)}</td><td>${hm(s)}</td><td class="hide">${Math.floor(len / 60)}&#8201;${String(Math.round(len % 60)).padStart(2, "0")}</td><td>${Math.floor(age) + 1}</td><td class="moon">${moon(age, 16)}</td><td class="asp">${note}</td></tr>`;
+    }
+    $("rows").innerHTML = rows;
+    $("phases").innerHTML = changes.slice(0, 4).map(([n, d, a]) => `<div>${moon(a, 40)}<span>${n}</span><b>${d}</b></div>`).join("");
+    const CAL = ["Now the snow lies deep upon the upland pasture, and the wise man looks to his woodpile.", "The days lengthen and the cold strengthens. Sharpen the saws; order seed from the catalogue before the rush.", "Sap runs when the nights freeze and the days thaw. Boil it down in the open, not in the kitchen, if you value the ceiling.", "Mud to the axle on the county road. Turn the cows out only when the grass will bear a hoof.", "Plant by the moon and hoe by the sun. A cold May fills the barn.", "Hay while it shines, and mind the thunderheads that build over Tuttle’s Ridge after three.", "The corn should be knee-high by the Fourth, and higher on the bottom land.", "Early apples for sauce; the Baldwins are not ready, whatever the children say.", "Dig the potatoes before the frost reaches the hill. Store them dark, dry and cool.", "Bank the house with leaves and brush. Put up the storm windows while the weather is kind.", "Butchering weather when the nights are cold enough to set the meat. Share the fresh with neighbours.", "Rest the ground, rest the team, and read the seed catalogues by the lamp."];
+    $("cal").textContent = CAL[month];
+    const V = ["When the days begin to lengthen,<br>then the cold begins to strengthen.", "If Candlemas be fair and bright,<br>winter will have another flight.", "March comes in with adders’ heads<br>and goes out with peacocks’ tails.", "Sweet April showers<br>do spring May flowers.", "Ne’er cast a clout<br>till May be out.", "Calm weather in June<br>sets corn in tune.", "If the first of July be rainy weather,<br>it will rain four weeks together.", "Dry August and warm<br>doth harvest no harm.", "September blow soft<br>till the fruit’s in the loft.", "Much rain in October,<br>much wind in December.", "Ice in November to bear a duck,<br>the rest of the winter is slush and muck.", "A green Christmas<br>makes a fat churchyard."];
+    $("verse").innerHTML = V[month];
+  }
+  $("months").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { month = +b.dataset.m; render(); } });
+  $("crops").addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { crop = +b.dataset.c; render(); } });
+  $("rays").innerHTML = Array.from({ length: 24 }, (_, i) => { const a = i * 15 * Math.PI / 180, r1 = 36, r2 = i % 2 ? 50 : 58; return `<line x1="${60 + Math.cos(a) * r1}" y1="${60 + Math.sin(a) * r1}" x2="${60 + Math.cos(a) * r2}" y2="${60 + Math.sin(a) * r2}"/>`; }).join("");
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Punch Card Batch · Centiform</title>
+<style>
+/* @fonts: IBM Plex Mono:400,600:swap; IBM Plex Sans:400,600,400i:swap */
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"IBM Plex Sans";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-sans-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f0e7c6;          /* manila card stock */
+  --ink: #1f2a44;         /* card printing, listing ribbon */
+  --accent-1: #c6d9b8;    /* greenbar band */
+  --accent-2: #d23c2a;    /* red: warnings, abend codes */
+  --desk: #e4e0d4;
+  --paper: #fbfbf5;
+  --u: 8px;
+  /* scale 1.2 on 16px */
+  --t-1: 12px; --t0: 16px; --t1: 19.2px; --t2: 23px; --t3: 27.6px; --t4: clamp(30px, 3.2vw, 46px);
+  --mono: "IBM Plex Mono", "Courier New", monospace;
+  --sans: "IBM Plex Sans", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--desk); color: var(--ink); }
+body { font: 400 var(--t0)/1.6 var(--sans); display: grid; grid-template-columns: 280px minmax(0, 1fr); min-height: 100vh; }
+nav { position: sticky; top: 0; height: 100vh; overflow: auto; padding: calc(var(--u) * 3); background: var(--ink); color: var(--bg); }
+nav .sys { font: 600 var(--t-1)/1.4 var(--mono); letter-spacing: .12em; color: var(--accent-1); }
+nav h1 { margin: calc(var(--u) * 1.5) 0 calc(var(--u) * 3); font: 600 var(--t2)/1.15 var(--sans); }
+nav ol { list-style: none; margin: 0; padding: 0; counter-reset: s; }
+nav li { counter-increment: s; }
+nav a { display: grid; grid-template-columns: 4ch 1fr; padding: 7px 0; border-top: 1px solid rgba(240,231,198,.2); color: var(--bg); text-decoration: none; font: 400 15px/1.3 var(--mono); }
+nav a::before { content: "4." counter(s); color: var(--accent-1); }
+nav a:hover, nav a:focus-visible { color: #fff; outline: none; text-decoration: underline; }
+nav .rev { margin-top: calc(var(--u) * 3); font: 400 12px/1.5 var(--mono); color: #b7bccb; }
+main { padding: calc(var(--u) * 4) calc(var(--u) * 6) calc(var(--u) * 10); max-width: 1180px; }
+.card { display: block; width: 100%; max-width: 940px; height: auto; filter: drop-shadow(1px 2px 0 rgba(31,42,68,.18)); }
+.card.hd { margin: calc(var(--u) * 6) 0 calc(var(--u) * 2); }
+.card.hd:first-child { margin-top: 0; }
+p { max-width: 66ch; margin: 0 0 calc(var(--u) * 2); }
+code { font: 400 .92em/1 var(--mono); background: rgba(31,42,68,.07); padding: 1px 4px; }
+.deck { position: relative; max-width: 940px; margin: calc(var(--u) * 3) 0; }
+.deck .card { margin-top: -26%; }
+.deck .card:first-child { margin-top: 0; }
+.deck .card:hover { transform: translateY(-6px); }
+.lbl { font: 600 var(--t-1)/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; margin: calc(var(--u) * 3) 0 var(--u); }
+table.parm { border-collapse: collapse; width: 100%; max-width: 940px; font-size: 15px; margin: calc(var(--u) * 2) 0; }
+.parm th { text-align: left; font: 600 12px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding: 6px 8px 6px 0; }
+.parm td { padding: 8px 8px 8px 0; border-bottom: 1px solid rgba(31,42,68,.2); vertical-align: top; }
+.parm td:first-child { font: 600 14px/1.5 var(--mono); white-space: nowrap; }
+/* greenbar listing */
+.listing { position: relative; max-width: 1000px; margin: calc(var(--u) * 3) 0; background: var(--paper); padding: 0 42px; box-shadow: 0 10px 20px -12px rgba(31,42,68,.5); }
+.listing::before, .listing::after { content: ""; position: absolute; top: 0; bottom: 0; width: 42px; background: radial-gradient(circle at 21px 12px, var(--desk) 0 5px, transparent 5.5px) 0 0 / 42px 24px repeat-y, var(--paper); }
+.listing::before { left: 0; border-right: 1px dashed #c9c9bd; } .listing::after { right: 0; border-left: 1px dashed #c9c9bd; }
+.listing pre { margin: 0; padding: 0 0 0 8px; font: 400 14px/24px var(--mono); overflow-x: auto; background: repeating-linear-gradient(var(--accent-1) 0 72px, var(--paper) 72px 144px); color: #262c3c; }
+.listing pre b { color: var(--accent-2); font-weight: 600; }
+.warn { display: grid; grid-template-columns: auto 1fr; gap: calc(var(--u) * 2); border: 2px solid var(--accent-2); padding: calc(var(--u) * 2); max-width: 940px; background: rgba(210,60,42,.05); }
+.warn b { font: 600 var(--t-1)/1.4 var(--mono); color: var(--accent-2); letter-spacing: .1em; }
+.warn p { margin: 0; }
+@media (max-width: 900px) {
+  body { grid-template-columns: minmax(0, 1fr); }
+  nav { position: static; height: auto; }
+  nav ol { display: none; }
+  main { padding: calc(var(--u) * 2); }
+  .listing { padding: 0 22px; } .listing::before, .listing::after { width: 22px; background-size: 22px 24px; background-position: -10px 0; }
+  .listing pre { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+<nav aria-label="Section 4">
+  <p class="sys">MERIDIAN M-68 / OS REL 2.1</p>
+  <h1>Job Control Language<br>Reference, Section 4</h1>
+  <ol>
+    <li><a href="#s1">The JOB card</a></li>
+    <li><a href="#s2">EXEC and DD cards</a></li>
+    <li><a href="#s3">A complete deck</a></li>
+    <li><a href="#s4">Reading the listing</a></li>
+  </ol>
+  <p class="rev">Form MR-2204-3 · Third edition, August 1968 · Meridian Data Machines, Poughkeepsie Road, Kingsbury NY</p>
+</nav>
+<main>
+  <section id="s1" aria-labelledby="h1">
+    <svg class="card hd" data-card="4.1 THE JOB CARD" data-c="#f0e7c6" role="img" aria-labelledby="h1"><title id="h1">4.1 The JOB card</title></svg>
+    <p>Every job begins with one JOB card. It names the job, says who pays for it, and tells the operator how urgent it is. The machine reads it before anything else in the deck, and will not start a job without one.</p>
+    <p>Columns 1 and 2 must hold two slashes. The job name starts in column 3 and may be up to eight characters. Leave column 11 blank. Keypunch operators: set the program drum so that column 72 stops you.</p>
+    <table class="parm">
+      <thead><tr><th scope="col">Field</th><th scope="col">Columns</th><th scope="col">Meaning</th></tr></thead>
+      <tbody>
+        <tr><td>//name</td><td>1–10</td><td>Job name, letters and digits, first a letter.</td></tr>
+        <tr><td>(acct)</td><td>16–</td><td>Account number, four digits, from your department’s budget sheet.</td></tr>
+        <tr><td>'programmer'</td><td>after acct</td><td>Your name, in quotes, so the operator can find you when the job fails.</td></tr>
+        <tr><td>CLASS=</td><td>any</td><td>A for jobs under 2 minutes; C overnight; P only for payroll.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="s2" aria-labelledby="h2">
+    <svg class="card hd" data-card="4.2 EXEC AND DD CARDS" data-c="#f0e7c6" role="img" aria-labelledby="h2"><title id="h2">4.2 EXEC and DD cards</title></svg>
+    <p>An <code>EXEC</code> card runs one program. Each <code>DD</code> card after it connects the program to one file: a tape on drive 2, a disk pack, the card reader, or the printer. A program that asks for a file with no DD card ends with code <b style="color:#d23c2a">S013</b>.</p>
+    <div class="warn"><b>OPERATOR<br>NOTE</b><p>Tape mounts after 18:00 need a signed request at the window. Do not write <code>VOL=SER=SCR001</code> unless you mean a scratch tape: it will be overwritten.</p></div>
+  </section>
+
+  <section id="s3" aria-labelledby="h3">
+    <svg class="card hd" data-card="4.3 A COMPLETE DECK" data-c="#f0e7c6" role="img" aria-labelledby="h3"><title id="h3">4.3 A complete deck</title></svg>
+    <p>This is the payroll deck for the Kingsbury plant as it goes into the reader, top card first. Cards with a red stripe are control cards; plain cards are data. Hover a card to lift it from the deck.</p>
+    <div class="deck" id="deck"></div>
+  </section>
+
+  <section id="s4" aria-labelledby="h4">
+    <svg class="card hd" data-card="4.4 READING THE LISTING" data-c="#f0e7c6" role="img" aria-labelledby="h4"><title id="h4">4.4 Reading the listing</title></svg>
+    <p>The printer returns your deck’s output on 14⅞-inch greenbar paper. The bands are there so your eye stays on one line across 132 columns. Condition codes above 4 are printed in red on printers with a two-colour ribbon.</p>
+    <p class="lbl">Output, job PAYRL04</p>
+    <div class="listing"><pre id="out"></pre></div>
+  </section>
+</main>
+<script>
+(() => {
+  // IBM 029 keypunch code: rows are 12, 11, 0, 1..9 (index 0..11)
+  const H = {};
+  const R = (s) => s.split("-").map((r) => ({ "12": 0, "11": 1, "0": 2 })[r] ?? +r + 2);
+  "ABCDEFGHI".split("").forEach((c, i) => (H[c] = R("12-" + (i + 1))));
+  "JKLMNOPQR".split("").forEach((c, i) => (H[c] = R("11-" + (i + 1))));
+  "STUVWXYZ".split("").forEach((c, i) => (H[c] = R("0-" + (i + 2))));
+  "0123456789".split("").forEach((c) => (H[c] = R(c)));
+  Object.assign(H, { "&": R("12"), "-": R("11"), "/": R("0-1"), ".": R("12-3-8"), "(": R("12-5-8"), "+": R("12-6-8"), "$": R("11-3-8"), "*": R("11-4-8"), ")": R("11-5-8"), ",": R("0-3-8"), ":": R("2-8"), "#": R("3-8"), "'": R("5-8"), "=": R("6-8") });
+  const W = 740, HGT = 326, X0 = 18, DX = 8.8, Y0 = 44, DY = 22.4;
+  function card(text, { stripe, seq } = {}) {
+    const t = text.toUpperCase().padEnd(80).slice(0, 80);
+    let s = `<path d="M18 0 H${W} V${HGT} H0 V18 Z" fill="#f0e7c6" stroke="#cdbf8e" stroke-width="1"/>`;
+    if (stripe) s += `<rect x="0" y="${HGT - 16}" width="${W}" height="6" fill="#d23c2a" opacity=".85"/>`;
+    // printed row digits
+    for (let r = 2; r < 12; r++) { const d = r - 2; let row = ""; for (let c = 0; c < 80; c++) row += `<tspan x="${X0 + c * DX + 4.4}">${d}</tspan>`; s += `<text y="${Y0 + r * DY + 4}" font-size="7" fill="#1f2a44" opacity=".45" text-anchor="middle">${row}</text>`; }
+    s += `<text y="${Y0 + 11 * DY + 16}" font-size="5.5" fill="#1f2a44" opacity=".45" text-anchor="middle">${Array.from({ length: 80 }, (_, c) => `<tspan x="${X0 + c * DX + 4.4}">${c + 1}</tspan>`).join("")}</text>`;
+    // interpreted print along the top edge
+    s += `<text y="16" font-size="10.5" font-weight="600" fill="#1f2a44" text-anchor="middle">${t.split("").map((ch, c) => ch === " " ? "" : `<tspan x="${X0 + c * DX + 4.4}">${ch.replace("&", "&amp;").replace("'", "&#39;")}</tspan>`).join("")}</text>`;
+    // punches
+    for (let c = 0; c < 80; c++) for (const r of H[t[c]] || []) s += `<rect x="${X0 + c * DX + 1.6}" y="${Y0 + r * DY - 6}" width="5.6" height="12" rx="1" fill="#1f2a44"/>`;
+    s += `<text x="${W - 14}" y="${HGT - 24}" font-size="8" fill="#1f2a44" opacity=".6" text-anchor="end">MERIDIAN 5081${seq ? " · " + seq : ""}</text>`;
+    return s;
+  }
+  document.querySelectorAll("svg[data-card]").forEach((el) => { el.setAttribute("viewBox", `0 0 ${W} ${HGT}`); el.insertAdjacentHTML("beforeend", card(el.dataset.card)); });
+  const DECK = [
+    ["//PAYRL04 JOB (4471),'R OKAFOR',CLASS=P,MSGLEVEL=1", 1],
+    ["//STEP1   EXEC PGM=PAYCALC,REGION=64K", 1],
+    ["//TIMECRD DD   UNIT=2400,VOL=SER=TC0819,DISP=OLD", 1],
+    ["//MASTER  DD   DSN=PAY.MASTER,DISP=SHR", 1],
+    ["//CHECKS  DD   SYSOUT=C", 1],
+    ["//SYSIN   DD   *", 1],
+    ["WEEK=34 PLANT=KINGSBURY RATE.TABLE=B", 0],
+    ["ADJUST 11207 +3.50 OVERTIME", 0],
+    ["/*", 1]
+  ];
+  document.getElementById("deck").innerHTML = DECK.map(([t, st], i) => `<svg class="card" viewBox="0 0 ${W} ${HGT}" role="img" aria-label="${t.replace(/'/g, "&#39;")}">${card(t, { stripe: st, seq: String(i + 1).padStart(4, "0") })}</svg>`).join("");
+  document.getElementById("out").innerHTML = [
+    "1 MERIDIAN M-68 OS REL 2.1          JOB PAYRL04   ACCT 4471   22 AUG 68   02.14.07",
+    "  IEF236I ALLOC. FOR PAYRL04 STEP1",
+    "  IEF237I 182  ALLOCATED TO TIMECRD     VOL SER TC0819",
+    "  IEF237I 231  ALLOCATED TO MASTER",
+    "  IEF142I PAYRL04 STEP1 - STEP WAS EXECUTED - COND CODE 0004",
+    "  PAYCALC 3.2   WEEK 34   PLANT KINGSBURY   EMPLOYEES READ    1,206",
+    "                                            CHECKS WRITTEN    1,204",
+    "  <b>WARN  11207  OVERTIME EXCEEDS 20.0 HRS    HELD FOR REVIEW</b>",
+    "  <b>WARN  30418  NO TIME CARD FOUND          HELD FOR REVIEW</b>",
+    "                         GROSS PAY TOTAL   $   112,904.38",
+    "                         TAX WITHHELD      $    17,215.90",
+    "  IEF285I   PAY.MASTER                     KEPT",
+    "  IEF285I   VOL SER NOS= TC0819.",
+    "  STEP1    CPU  0 MIN 41.06 SEC   MAIN  58K   CARDS READ  11",
+    "  JOB PAYRL04 ENDED   COND CODE 0004     LINES PRINTED  1,318"
+  ].join("\n");
+})();
+</script>
+</body>
+</html>
