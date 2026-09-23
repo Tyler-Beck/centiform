@@ -85,7 +85,7 @@ window.CENTIFORM = [
     fonts: ["DotGothic16","M PLUS 1p"], swatch: ["#e9e6df","#2b2b2b","#e4572e","#8a9a7b"],
     grammar: "Device illustration at centre, leader lines to keys, numbered steps",
     motif: "CSS seven-segment LCD digits on a grey-green display",
-    status: "planned" },
+    status: "done" },
   { n: 13, slug: "013-glass-cockpit", title: "Glass Cockpit", family: "Instruments",
     subject: "Training module for a fictional regional airliner.", format: "dashboard", mode: "dark",
     thesis: "1980s EFIS symbology: magenta, cyan, green on black",

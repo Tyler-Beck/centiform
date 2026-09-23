@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pocket Calculator Manual · Centiform</title>
+<style>
+/* @fonts: DotGothic16:400:block; M PLUS 1p:400,700:swap:latin */
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-58-400-normal.woff2) format("woff2");unicode-range:U+2105,U+2109-210a,U+210f,U+2116,U+2121,U+2126-2127,U+212b,U+212e,U+2135,U+213b,U+2194-2199,U+21b8-21b9,U+21c4-21c6,U+21cb-21cc,U+21d0,U+21e6-21e9,U+21f5,U+2202-2203,U+2205-2206,U+2208-220b,U+220f,U+2211,U+2213,U+2215,U+221a,U+221d,U+2220,U+2223,U+2225-2226,U+2228,U+222a-222e,U+2234-2237,U+223d,U+2243,U+2245,U+2248,U+224c,U+2260,U+2262,U+2264-2265,U+226e-226f,U+2272-2273,U+2276-2277,U+2283-2287,U+228a-228b,U+2295-2299,U+22a0,U+22a5,U+22bf,U+22da-22db,U+22ef,U+2305-2307,U+2318,U+2329-232a,U+23b0-23b1,U+23be-23cc,U+23ce,U+23da-23db,U+2423,U+2469-24d0;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-59-400-normal.woff2) format("woff2");unicode-range:U+a1-a4,U+a6-a7,U+aa,U+ac-ad,U+b5-b6,U+b8-ba,U+bc-c8,U+ca-cc,U+ce-d5,U+d9-db,U+dd-df,U+e6,U+ee,U+f0,U+f5,U+f7,U+f9,U+fb,U+fe-102,U+110-113,U+11a-11b,U+128-12b,U+143-144,U+147-148,U+14c,U+14e-14f,U+152-153,U+168-16d,U+192,U+1a0-1a1,U+1af,U+1cd-1dc,U+1f8-1f9,U+251,U+261,U+2bb,U+2c7,U+2c9,U+2ea-2eb,U+304,U+307,U+30c,U+1e3e-1e3f,U+1ea0-1ebe,U+1ec0-1ec6,U+1ec8-1ef9,U+2011-2012,U+2016,U+2018-201a,U+201e,U+2021,U+2030,U+2033,U+2035,U+2042,U+2047,U+2051,U+2074,U+20a9,U+20ab-20ac,U+20dd-20de,U+2100;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-86-400-normal.woff2) format("woff2");unicode-range:U+24,U+2022,U+2212,U+221f,U+2665,U+4ecf,U+5100,U+51cd,U+52d8,U+5378,U+53f6,U+574a,U+5982,U+5996,U+5c1a,U+5e1d,U+5f84,U+609f,U+61a7,U+61f8,U+6398,U+63ee,U+6676,U+6691,U+6eb6,U+7126,U+71e5,U+7687,U+7965,U+7d17,U+80a1,U+8107,U+8266,U+85a6,U+8987,U+8ca2,U+8cab,U+8e0a,U+9042,U+95c7,U+9810,U+9867,U+98fc,U+ff52-ff54,U+ff61,U+ff77,U+ff98-ff99;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-87-400-normal.woff2) format("woff2");unicode-range:U+b0,U+226a,U+2462,U+4e39,U+4fc3,U+4fd7,U+50be,U+50da,U+5200,U+5211,U+54f2,U+5618,U+596a,U+5b22,U+5bb4,U+5d50,U+60a3,U+63fa,U+658e,U+65e8,U+6669,U+6795,U+679d,U+67a0,U+6b3a,U+6e09,U+757f,U+7cd6,U+7dbe,U+7ffb,U+83cc,U+83f1,U+840c,U+845b,U+8846,U+8972,U+8a34,U+8a50,U+8a87,U+8edf,U+8ff0,U+90a6,U+9154,U+95a3,U+9663,U+9686,U+96c7,U+ff3c,U+ff7c,U+ff8a;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-89-400-normal.woff2) format("woff2");unicode-range:U+a5,U+4e80,U+4f34,U+4f73,U+4f75,U+511f,U+5192,U+52aa,U+53c8,U+570f,U+57cb,U+596e,U+5d8b,U+5f66,U+5fd9,U+62db,U+62f6,U+6328,U+633f,U+63a7,U+6469,U+6bbf,U+6c41,U+6c57,U+6d44,U+6dbc,U+706f,U+72c2,U+72ed,U+7551,U+75f4,U+7949,U+7e26,U+7fd4,U+8150,U+8af8,U+8b0e,U+8b72,U+8ca7,U+934b,U+9a0e,U+9a12,U+9b42,U+ff41,U+ff43,U+ff45,U+ff49,U+ff4f,U+ff62-ff63;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-90-400-normal.woff2) format("woff2");unicode-range:U+4e18,U+4fb5,U+5104,U+52c7,U+5353,U+5374,U+53e5,U+587e,U+594f,U+5a20,U+5de1,U+5f18,U+5fcd,U+6291,U+62ab,U+6355,U+6392,U+63da,U+63e1,U+656c,U+6687,U+68b0-68b1,U+68d2,U+68da,U+6b27,U+6cbc,U+7159,U+7344,U+73cd,U+76df,U+790e,U+7cf8,U+8102,U+88c1,U+8aa0,U+8e0f,U+9178,U+92ad,U+9670,U+96c5,U+9cf4,U+9db4,U+ff3e,U+ff6f,U+ff72,U+ff78,U+ff7d,U+ff84,U+ff8c;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-91-400-normal.woff2) format("woff2");unicode-range:U+60,U+2200,U+226b,U+2461,U+517c,U+526f,U+5800,U+5b97,U+5bf8,U+5c01,U+5d29,U+5e4c,U+5e81,U+6065,U+61d0,U+667a,U+6696,U+6843,U+6c99,U+6d99,U+6ec5,U+6f22,U+6f6e,U+6fa4,U+6fef,U+71c3,U+72d9,U+7384,U+78e8,U+7a1a,U+7a32,U+7a3c,U+7adc,U+7ca7,U+7d2b,U+7dad,U+7e4b,U+80a9,U+8170,U+81ed,U+820e,U+8a17,U+8afe,U+90aa,U+914e,U+963f,U+99c4,U+9eba,U+9f3b,U+ff38;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-102-400-normal.woff2) format("woff2");unicode-range:U+3d,U+5e,U+25cf,U+4e0e,U+4e5d,U+4e73,U+4e94,U+4f3c,U+5009,U+5145,U+51ac,U+5238,U+524a,U+53f3,U+547c,U+5802,U+5922,U+5a66,U+5c0e,U+5de6,U+5fd8,U+5feb,U+6797,U+685c,U+6b7b,U+6c5f-6c60,U+6cc9,U+6ce2,U+6d17,U+6e21,U+7167,U+7642,U+76db,U+8001,U+821e,U+8857,U+89d2,U+8b1b,U+8b70,U+8cb4,U+8cde,U+8f03,U+8f2a,U+968e,U+9b54,U+9e7f,U+9ebb,U+ff05,U+ff33;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-105-400-normal.woff2) format("woff2");unicode-range:U+25,U+25a0,U+4e26,U+4f4e,U+5341,U+56f2,U+5bbf,U+5c45,U+5c55,U+5c5e,U+5dee,U+5e9c,U+5f7c,U+6255,U+627f,U+62bc,U+65cf,U+661f,U+666e,U+66dc,U+67fb,U+6975,U+6a4b,U+6b32,U+6df1,U+6e29,U+6fc0,U+738b,U+7686,U+7a76,U+7a81,U+7c73,U+7d75,U+7dd2,U+82e5,U+82f1,U+85ac,U+888b,U+899a,U+8a31,U+8a8c,U+8ab0,U+8b58,U+904a,U+9060,U+9280,U+95b2,U+984d,U+9ce5,U+ff18;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-106-400-normal.woff2) format("woff2");unicode-range:U+30f6,U+50ac,U+5178,U+51e6,U+5224,U+52dd,U+5883,U+5897,U+590f,U+5a5a,U+5bb3,U+5c65,U+5e03,U+5e2b,U+5e30,U+5eb7,U+6271,U+63f4,U+64ae,U+6574,U+672b,U+679a,U+6a29-6a2a,U+6ca2,U+6cc1,U+6d0b,U+713c,U+74b0,U+7981,U+7a0b,U+7bc0,U+7d1a,U+7d61,U+7fd2,U+822c,U+8996,U+89aa,U+8cac,U+8cbb,U+8d77,U+8def,U+9020,U+9152,U+9244,U+9662,U+967a,U+96e3,U+9759,U+ff16;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-107-400-normal.woff2) format("woff2");unicode-range:U+23,U+3c,U+2192,U+4e45,U+4efb,U+4f50,U+4f8b,U+4fc2,U+5024,U+5150,U+5272,U+5370,U+53bb,U+542b,U+56db,U+56e3,U+57ce,U+5bc4,U+5bcc,U+5f71,U+60aa,U+6238,U+6280,U+629c,U+6539,U+66ff,U+670d,U+677e-677f,U+6839,U+69cb,U+6b4c,U+6bb5,U+6e96,U+6f14,U+72ec,U+7389,U+7814,U+79cb,U+79d1,U+79fb,U+7a0e,U+7d0d,U+85e4,U+8d64,U+9632,U+96e2,U+9805,U+99ac,U+ff1e;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-110-400-normal.woff2) format("woff2");unicode-range:U+40,U+4e86,U+4e95,U+4f01,U+4f1d,U+4fbf,U+5099,U+5171,U+5177,U+53cb,U+53ce,U+53f0,U+5668,U+5712,U+5ba4,U+5ca1,U+5f85,U+60f3,U+653e,U+65ad,U+65e9,U+6620,U+6750,U+6761,U+6b62,U+6b74,U+6e08,U+6e80,U+7248,U+7531,U+7533,U+753a,U+77f3,U+798f,U+7f6e,U+8449,U+88fd,U+89b3,U+8a55,U+8ac7,U+8b77,U+8db3,U+8efd,U+8fd4,U+9031-9032,U+9580,U+9589,U+96d1,U+985e;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-111-400-normal.woff2) format("woff2");unicode-range:U+2b,U+d7,U+300e-300f,U+4e07,U+4e8c,U+512a,U+5149,U+518d,U+5236,U+52b9,U+52d9,U+5468,U+578b,U+57fa,U+5b8c,U+5ba2,U+5c02,U+5de5,U+5f37,U+5f62,U+623b,U+63d0,U+652f,U+672a,U+6848,U+6d41,U+7136,U+7537,U+754c,U+76f4,U+79c1,U+7ba1,U+7d44,U+7d4c,U+7dcf,U+7dda,U+7de8,U+82b1,U+897f,U+8ca9,U+8cfc,U+904e,U+9664,U+982d,U+9858,U+98a8,U+9a13,U+ff13,U+ff5c;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-112-400-normal.woff2) format("woff2");unicode-range:U+4e16,U+4e3b,U+4ea4,U+4ee4,U+4f4d,U+4f4f,U+4f55,U+4f9b,U+5317,U+5358,U+53c2,U+53e4,U+548c,U+571f,U+59cb,U+5cf6,U+5e38,U+63a2,U+63b2,U+6559,U+662d,U+679c,U+6c7a,U+72b6,U+7523,U+767d,U+770c,U+7a2e,U+7a3f,U+7a7a,U+7b2c,U+7b49,U+7d20,U+7d42,U+8003,U+8272,U+8a08,U+8aac,U+8cb7,U+8eab,U+8ee2,U+9054-9055,U+90fd,U+914d,U+91cd,U+969b,U+97f3,U+984c,U+ff06;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-113-400-normal.woff2) format("woff2");unicode-range:U+26,U+5f,U+2026,U+203b,U+4e09,U+4eac,U+4ed5,U+4fa1,U+5143,U+5199,U+5207,U+539f,U+53e3,U+53f7,U+5411,U+5473,U+5546,U+55b6,U+5929,U+597d,U+5bb9,U+5c11,U+5c4b,U+5ddd,U+5f97,U+5fc5,U+6295,U+6301,U+6307,U+671b,U+76f8,U+78ba,U+795e,U+7d30,U+7d39,U+7d9a,U+89e3,U+8a00,U+8a73,U+8a8d,U+8a9e,U+8aad,U+8abf,U+8cea,U+8eca,U+8ffd,U+904b,U+9650,U+ff11-ff12;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-114-400-normal.woff2) format("woff2");unicode-range:U+3e,U+3005,U+4e0d,U+4e88,U+4ecb,U+4ee3,U+4ef6,U+4fdd,U+4fe1,U+500b,U+50cf,U+5186,U+5316,U+53d7,U+540c,U+544a,U+54e1,U+5728,U+58f2,U+5973,U+5b89,U+5c71,U+5e02,U+5e97,U+5f15,U+5fc3,U+5fdc,U+601d,U+611b,U+611f,U+671f,U+6728,U+6765,U+683c,U+6b21,U+6ce8,U+6d3b,U+6d77,U+7530,U+7740,U+7acb,U+7d50,U+826f,U+8f09,U+8fbc,U+9001,U+9053,U+91ce,U+9762,U+98df;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-115-400-normal.woff2) format("woff2");unicode-range:U+7c,U+3080,U+4ee5,U+5148,U+516c,U+521d,U+5225,U+529b,U+52a0,U+53ef,U+56de,U+56fd,U+5909,U+591a,U+5b66,U+5b9f,U+5bb6,U+5bfe,U+5e73,U+5e83,U+5ea6,U+5f53,U+6027,U+610f,U+6210,U+6240,U+660e,U+66f4,U+66f8,U+6709,U+6771,U+697d,U+69d8,U+6a5f,U+6c34,U+6cbb,U+73fe,U+756a,U+7684,U+771f,U+793a,U+7f8e,U+898f,U+8a2d,U+8a71,U+8fd1,U+9078,U+9577,U+96fb,U+ff5e;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-116-400-normal.woff2) format("woff2");unicode-range:U+a9,U+3010-3011,U+30e2,U+4e0b,U+4eca,U+4ed6,U+4ed8,U+4f53,U+4f5c,U+4f7f,U+53d6,U+540d,U+54c1,U+5730,U+5916,U+5b50,U+5c0f,U+5f8c,U+624b,U+6570,U+6587,U+6599,U+691c,U+696d,U+6cd5,U+7269,U+7279,U+7406,U+767a-767b,U+77e5,U+7d04,U+7d22,U+8005,U+80fd,U+81ea,U+8868,U+8981,U+89a7,U+901a,U+9023,U+90e8,U+91d1,U+9332,U+958b,U+96c6,U+9ad8,U+ff1a,U+ff1f;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-117-400-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-118-400-normal.woff2) format("woff2");unicode-range:U+21-22,U+27-2a,U+2c-3b,U+3f,U+41-4d,U+4f-5d,U+61-7b,U+7d,U+ab,U+ae,U+b2-b3,U+b7,U+bb,U+c9,U+cd,U+d6,U+d8,U+dc,U+e0-e5,U+e7-ed,U+ef,U+f1-f4,U+f6,U+f8,U+fa,U+fc-fd,U+103,U+14d,U+1b0,U+300-301,U+1ebf,U+1ec7,U+2013-2014,U+201c-201d,U+2039-203a,U+203c,U+2048-2049,U+2113,U+2122,U+65e5,U+6708,U+70b9;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-119-400-normal.woff2) format("woff2");unicode-range:U+20,U+2027,U+3001-3002,U+3041-307f,U+3081-308f,U+3091-3093,U+3099-309a,U+309d-309e,U+30a1-30e1,U+30e3-30ed,U+30ef-30f0,U+30f2-30f4,U+30fb-30fe,U+ff0c,U+ff0e;}
+@font-face{font-family:"DotGothic16";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dotgothic16-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"M PLUS 1p";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/m-plus-1p-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"M PLUS 1p";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/m-plus-1p-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #e9e6df;          /* manual paper */
+  --ink: #2b2b2b;
+  --accent-1: #e4572e;    /* the one orange: = key, step numbers */
+  --accent-2: #8a9a7b;    /* LCD grey-green */
+  --lcd-on: #1f2a1c;
+  --lcd-off: rgba(31,42,28,.09);
+  --body: #cfcbc2;        /* calculator case, warm grey plastic */
+  --key: #3b3b3b;
+  --u: 8px;
+  /* scale 1.2 on 16px */
+  --t-1: 12px; --t0: 16px; --t1: 19.2px; --t2: 23px; --t3: 27.6px; --t4: clamp(30px, 3vw, 44px);
+  --dot: "DotGothic16", monospace;
+  --sans: "M PLUS 1p", "Hiragino Sans", sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: #d6d2c8; color: var(--ink); }
+body { font: 400 var(--t0)/1.6 var(--sans); padding: calc(var(--u) * 2); }
+.book { max-width: 1600px; margin: 0 auto; background: var(--bg); display: grid; grid-template-columns: 220px minmax(0, 1fr) 300px; min-height: calc(100vh - 32px); box-shadow: 0 1px 0 #bdb8ac, 0 18px 30px -18px rgba(0,0,0,.4); }
+.toc { border-right: 1px solid var(--ink); padding: calc(var(--u) * 3); display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+.brand { font: 400 var(--t3)/1 var(--dot); letter-spacing: .12em; }
+.brand small { display: block; font: 400 var(--t-1)/1.4 var(--sans); letter-spacing: .1em; margin-top: 6px; }
+.toc h2 { margin: 0; font: 700 var(--t-1)/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+.toc ol { margin: 0; padding: 0; list-style: none; counter-reset: c; }
+.toc li { counter-increment: c; }
+.toc a { display: grid; grid-template-columns: 26px 1fr auto; gap: 6px; padding: 6px 0; border-bottom: 1px dotted #9b978e; color: inherit; text-decoration: none; font-size: 15px; }
+.toc a::before { content: counter(c); font: 400 14px/1.6 var(--dot); color: var(--accent-1); }
+.toc a span { font: 400 13px/1.8 var(--dot); }
+.toc a:focus-visible, .key:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+.jp { font: 400 var(--t1)/1.3 var(--dot); letter-spacing: .1em; margin-top: auto; }
+main { padding: calc(var(--u) * 3) calc(var(--u) * 5); min-width: 0; }
+.sec { display: flex; align-items: center; gap: calc(var(--u) * 1.5); margin: 0 0 calc(var(--u) * 2); font: 700 var(--t2)/1.2 var(--sans); }
+.sec b { display: inline-grid; place-items: center; width: 36px; height: 36px; background: var(--ink); color: var(--bg); font: 400 20px/1 var(--dot); }
+.lead { margin: 0 0 calc(var(--u) * 3); max-width: 64ch; }
+/* diagram */
+.fig { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: calc(var(--u) * 4); align-items: center; }
+.fig svg.lead-lines { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; z-index: 2; }
+.calls { list-style: none; margin: 0; padding: 0; display: grid; gap: calc(var(--u) * 2); font-size: 15px; line-height: 1.4; }
+.calls li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; align-items: start; }
+.calls.r li { grid-template-columns: 26px 1fr; }
+.calls.l { text-align: right; }
+.calls.l li { grid-template-columns: 1fr 26px; }
+.calls.l li i { order: 2; }
+.calls i { font-style: normal; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--ink); display: grid; place-items: center; font: 400 13px/1 var(--dot); background: var(--bg); }
+.calls b { display: block; font-weight: 700; }
+/* the device */
+.calc { width: 300px; background: linear-gradient(#d8d4cb, var(--body)); border-radius: 18px 18px 26px 26px; padding: 18px 20px 24px; box-shadow: inset 0 2px 0 rgba(255,255,255,.6), inset 0 -3px 0 rgba(0,0,0,.12), 0 0 0 1.5px var(--ink); position: relative; }
+.top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.top .nm { font: 400 15px/1 var(--dot); letter-spacing: .16em; }
+.solar { display: grid; grid-template-columns: repeat(4, 16px); gap: 2px; padding: 3px; background: #2d2622; border-radius: 2px; }
+.solar i { height: 14px; background: linear-gradient(135deg, #5a3a44, #2a1c24); }
+.lcd { background: var(--accent-2); border-radius: 4px; padding: 10px 10px 8px; box-shadow: inset 0 2px 4px rgba(0,0,0,.35), 0 0 0 5px #3a3a3a; display: flex; justify-content: flex-end; gap: 4px; align-items: flex-end; position: relative; }
+.lcd .ann { position: absolute; left: 10px; top: 6px; font: 400 10px/1 var(--dot); color: var(--lcd-on); display: flex; gap: 6px; }
+.lcd .ann span { opacity: .1; } .lcd .ann span.on { opacity: 1; }
+.dg { position: relative; width: 24px; height: 44px; }
+.dg i { position: absolute; background: var(--lcd-off); }
+.dg i.on { background: var(--lcd-on); }
+.dg .a, .dg .d, .dg .g { left: 4px; right: 4px; height: 4px; clip-path: polygon(4px 0, calc(100% - 4px) 0, 100% 50%, calc(100% - 4px) 100%, 4px 100%, 0 50%); }
+.dg .a { top: 0; } .dg .g { top: 20px; } .dg .d { bottom: 0; }
+.dg .b, .dg .c, .dg .e, .dg .f { width: 4px; height: 20px; clip-path: polygon(50% 0, 100% 4px, 100% calc(100% - 4px), 50% 100%, 0 calc(100% - 4px), 0 4px); }
+.dg .f { left: 1px; top: 2px; } .dg .b { right: 1px; top: 2px; } .dg .e { left: 1px; bottom: 2px; } .dg .c { right: 1px; bottom: 2px; }
+.dg .p { right: -4px; bottom: 0; width: 4px; height: 4px; border-radius: 50%; }
+.keys { display: grid; grid-template-columns: repeat(5, 1fr); gap: 9px; margin-top: 18px; }
+.key { height: 36px; border: 0; border-radius: 5px; background: linear-gradient(#4a4a4a, var(--key)); color: #f0eee8; font: 400 15px/1 var(--dot); cursor: pointer; box-shadow: 0 3px 0 #1c1c1c; }
+.key:active { transform: translateY(2px); box-shadow: 0 1px 0 #1c1c1c; }
+.key.lt { background: linear-gradient(#f2efe8, #dcd8cf); color: var(--ink); box-shadow: 0 3px 0 #9b978e; }
+.key.or { background: linear-gradient(#ef6b43, var(--accent-1)); box-shadow: 0 3px 0 #9c3517; }
+.key.tall { grid-row: span 2; height: auto; }
+/* example table */
+table { width: 100%; border-collapse: collapse; margin-top: calc(var(--u) * 2); font-size: 15px; }
+th { text-align: left; font: 700 12px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; border-top: 2px solid var(--ink); border-bottom: 1px solid var(--ink); padding: 6px 8px; }
+td { padding: 8px; border-bottom: 1px solid #b9b5ab; vertical-align: middle; }
+td kbd { display: inline-block; min-width: 24px; text-align: center; padding: 3px 5px; margin: 1px; border-radius: 3px; background: var(--key); color: #f0eee8; font: 400 13px/1 var(--dot); }
+td kbd.or { background: var(--accent-1); }
+td .disp { display: inline-block; background: var(--accent-2); padding: 3px 8px; font: 400 16px/1 var(--dot); letter-spacing: .1em; color: var(--lcd-on); min-width: 110px; text-align: right; }
+td button { border: 1px solid var(--ink); background: none; font: 400 12px/1 var(--dot); padding: 5px 7px; cursor: pointer; }
+td button:focus-visible { outline: 2px solid var(--accent-1); }
+aside.side { border-left: 1px solid var(--ink); padding: calc(var(--u) * 3); display: grid; gap: calc(var(--u) * 3); align-content: start; }
+.box { border: 1.5px solid var(--ink); padding: calc(var(--u) * 2); font-size: 14px; line-height: 1.55; }
+.box h3 { margin: 0 0 8px; display: flex; gap: 8px; align-items: center; font: 700 14px/1.2 var(--sans); letter-spacing: .06em; }
+.box h3 svg { width: 22px; height: 20px; flex: none; }
+.box ul { margin: 0; padding-left: 18px; }
+.spec { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; margin: 0; font-size: 14px; }
+.spec dt { font-weight: 700; }
+.spec dd { margin: 0; }
+.pg { font: 400 12px/1 var(--dot); text-align: center; padding-top: var(--u); }
+@media (max-width: 1240px) { .book { grid-template-columns: 200px minmax(0, 1fr); } aside.side { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--ink); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); } }
+@media (max-width: 860px) {
+  body { padding: 0; }
+  .book { grid-template-columns: minmax(0, 1fr); }
+  .toc { border-right: 0; border-bottom: 1px solid var(--ink); }
+  .toc ol, .jp { display: none; }
+  main { padding: calc(var(--u) * 2); }
+  .fig { grid-template-columns: minmax(0, 1fr); justify-items: center; }
+  .fig svg.lead-lines { display: none; }
+  .calls.l { text-align: left; order: 2; } .calls.l li { grid-template-columns: 26px 1fr; } .calls.l li i { order: 0; }
+  .calls.r { order: 3; }
+  table th:nth-child(3), table td:nth-child(3) { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="book">
+  <nav class="toc" aria-label="Contents">
+    <div class="brand">KANADE<small>Solar Calculator EL-812 · 1983</small></div>
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#p1">Names of parts<span>p.2</span></a></li>
+      <li><a href="#p2">Power and light<span>p.4</span></a></li>
+      <li><a href="#p3">Example calculations<span>p.5</span></a></li>
+      <li><a href="#p4">Memory<span>p.7</span></a></li>
+      <li><a href="#p5">Specifications<span>p.9</span></a></li>
+    </ol>
+    <p class="jp" lang="ja">取扱説明書<br>電卓 EL-812</p>
+  </nav>
+  <main>
+    <h1 class="sec" id="p1"><b>1</b>Names of parts</h1>
+    <p class="lead">Thank you for choosing the Kanade EL-812. Please read this manual before use and keep it with the case. The keys on the drawing work: try them.</p>
+    <div class="fig" id="fig">
+      <svg class="lead-lines" id="lines" aria-hidden="true"></svg>
+      <ol class="calls l">
+        <li data-t="solar"><i>1</i><span><b>Solar cell</b>Works under room light of 50 lux or more.</span></li>
+        <li data-t="lcd"><i>2</i><span><b>Display</b>8 digits, liquid crystal, with M and E signs.</span></li>
+        <li data-t="k-C"><i>3</i><span><b>Clear key</b>Press once to clear the entry, twice for all.</span></li>
+        <li data-t="k-7"><i>4</i><span><b>Number keys</b>Soft rubber contacts, 0.3 mm travel.</span></li>
+      </ol>
+      <div class="calc" id="calc">
+        <div class="top"><span class="nm">KANADE</span><span class="solar" id="solar" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+        <div class="lcd" id="lcd" role="status" aria-live="polite" aria-label="Display"><span class="ann"><span id="aM">M</span><span id="aE">E</span><span id="aN">−</span></span></div>
+        <div class="keys" id="keys"></div>
+      </div>
+      <ol class="calls r">
+        <li data-t="k-M+"><i>5</i><span><b>Memory keys</b>M+ adds, M− subtracts, MR recalls.</span></li>
+        <li data-t="k-√"><i>6</i><span><b>Square root</b>Works on the number shown.</span></li>
+        <li data-t="k-%"><i>7</i><span><b>Percent key</b>For mark-ups, discounts and tax.</span></li>
+        <li data-t="k-="><i>8</i><span><b>Equals key</b>Orange, so you can find it in the dark.</span></li>
+      </ol>
+    </div>
+
+    <h2 class="sec" id="p3" style="margin-top:40px"><b>3</b>Example calculations</h2>
+    <p class="lead">Press the keys in the order shown. Your display should read as in the right-hand column. Press <b>Try</b> to see it on the drawing.</p>
+    <table>
+      <thead><tr><th scope="col">Example</th><th scope="col">Key operation</th><th scope="col">Display</th><th scope="col"></th></tr></thead>
+      <tbody id="ex"></tbody>
+    </table>
+    <p class="pg">- 5 -</p>
+  </main>
+  <aside class="side">
+    <section class="box" id="p2">
+      <h3><svg viewBox="0 0 22 20" aria-hidden="true"><path d="M11 1 L21 19 H1Z" fill="none" stroke="#2b2b2b" stroke-width="2"/><path d="M11 7 v6 M11 15 v2" stroke="#e4572e" stroke-width="2"/></svg>Caution</h3>
+      <ul>
+        <li>Do not leave the calculator in a car in summer. The display may turn black above 60 °C.</li>
+        <li>Do not press the display. It is glass.</li>
+        <li>Clean with a soft, dry cloth. Never use thinner or benzine.</li>
+      </ul>
+    </section>
+    <section class="box" id="p4">
+      <h3>Memory, in short</h3>
+      <p style="margin:0">When a number is in memory, a small <b>M</b> shows at the top left of the display. Press <b>MR</b> twice to clear the memory.</p>
+    </section>
+    <section class="box" id="p5">
+      <h3>Specifications</h3>
+      <dl class="spec">
+        <dt>Model</dt><dd>EL-812</dd>
+        <dt>Digits</dt><dd>8</dd>
+        <dt>Power</dt><dd>Amorphous solar cell, no battery</dd>
+        <dt>Size</dt><dd>54 × 88 × 6.8 mm</dd>
+        <dt>Weight</dt><dd>38 g with case</dd>
+        <dt>Temp.</dt><dd>0 °C – 40 °C</dd>
+        <dt>Price</dt><dd>¥3,900</dd>
+      </dl>
+    </section>
+    <p style="font-size:12px;margin:0">Kanade Electric Co., Ltd. · Osaka · Printed in Japan · 83-06-A</p>
+  </aside>
+</div>
+<script>
+(() => {
+  const $ = (id) => document.getElementById(id);
+  const SEG = { "0": "abcdef", "1": "bc", "2": "abged", "3": "abgcd", "4": "fgbc", "5": "afgcd", "6": "afgedc", "7": "abc", "8": "abcdefg", "9": "abcdfg", "-": "g", "E": "adefg", " ": "" };
+  const lcd = $("lcd");
+  lcd.insertAdjacentHTML("beforeend", Array.from({ length: 8 }, () => `<span class="dg">${"abcdefgp".split("").map((s) => `<i class="${s}"></i>`).join("")}</span>`).join(""));
+  const digits = [...lcd.querySelectorAll(".dg")];
+  function show(str, mem, err) {
+    let s = str, neg = s.startsWith("-"); if (neg) s = s.slice(1);
+    const dot = s.indexOf("."); const ds = s.replace(".", "");
+    const pad = 8 - ds.length;
+    digits.forEach((d, i) => {
+      const ch = i >= pad ? ds[i - pad] : " ";
+      const on = SEG[ch] ?? "";
+      d.querySelectorAll("i").forEach((seg) => seg.classList.toggle("on", on.includes(seg.className.split(" ")[0])));
+      d.querySelector(".p").classList.toggle("on", dot >= 0 ? i - pad === dot - 1 : i === 7);
+    });
+    $("aM").classList.toggle("on", !!mem); $("aE").classList.toggle("on", !!err); $("aN").classList.toggle("on", neg);
+    lcd.setAttribute("aria-label", "Display " + (neg ? "minus " : "") + str.replace("-", ""));
+  }
+  const K = [["C", "lt"], ["√", ""], ["%", ""], ["÷", ""], ["MR", "lt"], ["7", ""], ["8", ""], ["9", ""], ["×", ""], ["M−", "lt"], ["4", ""], ["5", ""], ["6", ""], ["−", ""], ["M+", "lt"], ["1", ""], ["2", ""], ["3", ""], ["+", "tall"], ["=", "or tall"], ["0", ""], ["00", ""], [".", ""]];
+  $("keys").innerHTML = K.map(([k, c]) => `<button type="button" class="key ${c}" id="k-${k}" data-k="${k}">${k}</button>`).join("");
+  let cur = "0", acc = null, op = null, fresh = true, mem = 0, err = false, lastC = false;
+  const fmt = (n) => { if (!isFinite(n) || Math.abs(n) >= 1e8) { err = true; return "0"; } let s = String(+n.toPrecision(8)); if (s.includes("e")) s = n.toFixed(7); if (s.replace(/[-.]/g, "").length > 8) s = s.slice(0, s.includes(".") ? 9 + s.startsWith("-") : 8); return s; };
+  const calc = (a, b, o) => o === "+" ? a + b : o === "−" ? a - b : o === "×" ? a * b : o === "÷" ? a / b : b;
+  function press(k) {
+    if (err && k !== "C") return;
+    if (/^\d+$/.test(k) || k === ".") {
+      if (fresh) { cur = k === "." ? "0." : k === "00" ? "0" : k; fresh = false; }
+      else if (cur.replace(/[-.]/g, "").length < 8 && !(k === "." && cur.includes("."))) cur = cur === "0" && k !== "." ? (k === "00" ? "0" : k) : cur + k;
+    } else if ("+−×÷".includes(k)) { if (op && !fresh) cur = fmt(calc(acc, +cur, op)); acc = +cur; op = k; fresh = true; }
+    else if (k === "=") { if (op) { cur = fmt(calc(acc, +cur, op)); op = null; } fresh = true; }
+    else if (k === "%") { if (op) { const b = +cur; cur = fmt(op === "+" || op === "−" ? calc(acc, acc * b / 100, op) : calc(acc, b / 100, op)); op = null; } fresh = true; }
+    else if (k === "√") { cur = +cur < 0 ? (err = true, "0") : fmt(Math.sqrt(+cur)); fresh = true; }
+    else if (k === "M+") { mem += +cur; fresh = true; } else if (k === "M−") { mem -= +cur; fresh = true; }
+    else if (k === "MR") { if (fresh && cur === fmt(mem) && mem) mem = 0; cur = fmt(mem); fresh = true; }
+    else if (k === "C") { if (lastC || fresh) { acc = null; op = null; err = false; } cur = "0"; fresh = true; }
+    lastC = k === "C";
+    show(cur, mem, err);
+  }
+  $("keys").addEventListener("click", (e) => { const b = e.target.closest(".key"); if (b) press(b.dataset.k); });
+  show("0", 0, false);
+  const EX = [["Addition: 12 + 45.5", ["C", "C", "1", "2", "+", "4", "5", ".", "5", "="], "57.5"], ["Tax: 3,900 + 5%", ["C", "C", "3", "9", "0", "0", "+", "5", "%"], "4095."], ["Division: 1 ÷ 7", ["C", "C", "1", "÷", "7", "="], "0.1428571"], ["Square root of 2", ["C", "C", "2", "√"], "1.4142135"], ["Memory: 120 + 85, recall", ["C", "C", "1", "2", "0", "M+", "8", "5", "M+", "MR"], "205."]];
+  $("ex").innerHTML = EX.map(([n, ks, d], i) => `<tr><td>${n}</td><td>${ks.map((k) => `<kbd${k === "=" ? ' class="or"' : ""}>${k}</kbd>`).join("")}</td><td><span class="disp">${d}</span></td><td><button type="button" data-x="${i}">Try</button></td></tr>`).join("");
+  $("ex").addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; EX[+b.dataset.x][1].forEach((k, j) => setTimeout(() => { const el = $("k-" + k); el.classList.add("hit"); press(k); }, j * 180)); });
+  // leader lines from each callout number to its part
+  function lines() {
+    const f = $("fig").getBoundingClientRect(); let out = "";
+    document.querySelectorAll(".calls li").forEach((li) => {
+      const t = $(li.dataset.t); if (!t) return;
+      const a = li.querySelector("i").getBoundingClientRect(), b = t.getBoundingClientRect();
+      const left = li.parentElement.classList.contains("l");
+      const x1 = (left ? a.right + 4 : a.left - 4) - f.left, y1 = a.top + a.height / 2 - f.top;
+      const x2 = b.left + b.width / 2 - f.left, y2 = b.top + b.height / 2 - f.top;
+      const xm = left ? b.left - f.left - 14 : b.right - f.left + 14;
+      out += `<polyline points="${x1},${y1} ${xm},${y1} ${x2},${y2}" fill="none" stroke="#2b2b2b" stroke-width="1"/><circle cx="${x2}" cy="${y2}" r="2.5" fill="#e4572e"/>`;
+    });
+    $("lines").innerHTML = out;
+  }
+  addEventListener("resize", lines); document.fonts.ready.then(lines); lines();
+})();
+</script>
+</body>
+</html>
