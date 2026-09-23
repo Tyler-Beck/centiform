@@ -43,7 +43,7 @@ window.CENTIFORM = [
     fonts: ["Cormorant","Sometype Mono"], swatch: ["#ece4cf","#3b4a2a","#7b4a2e","#b8872b"],
     grammar: "One specimen sheet per view, label block fixed bottom-right, pencil notes in margins",
     motif: "Linen tape strips and accession-number stamps",
-    status: "planned" },
+    status: "done" },
   { n: 7, slug: "007-transit-annual-1972", title: "Transit Annual 1972", family: "Paper & Print",
     subject: "Annual report of a fictional regional transit authority.", format: "editorial", mode: "light",
     thesis: "1972 corporate modernism: heavy black band, big numerals, modular grid",

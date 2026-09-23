@@ -17,3 +17,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Old Standard TT | OFL-1.1 | https://fontsource.org/fonts/old-standard-tt | 004-exposition-broadsheet |
 | Josefin Sans | OFL-1.1 | https://fontsource.org/fonts/josefin-sans | 005-triband-paperbacks |
 | Crimson Pro | OFL-1.1 | https://fontsource.org/fonts/crimson-pro | 005-triband-paperbacks |
+| Cormorant | OFL-1.1 | https://fontsource.org/fonts/cormorant | 006-herbarium-sheets |
+| Sometype Mono | OFL-1.1 | https://fontsource.org/fonts/sometype-mono | 006-herbarium-sheets |
