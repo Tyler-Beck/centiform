@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tin Robot Box · Centiform</title>
+<style>
+/* @fonts: Dela Gothic One:400:block; Kosugi:400 */
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-85-400-normal.woff2) format("woff2");unicode-range:U+25c7,U+3007,U+504f,U+507d,U+51a0,U+52a3,U+5410,U+5510,U+559a,U+5782,U+582a,U+5c0a,U+5c3f,U+5c48,U+5f6b,U+6176,U+622f,U+6279,U+62bd,U+62dd,U+65ed,U+67b6,U+6817,U+6850,U+6d6a,U+6deb,U+6ea2,U+6edd,U+6f5c,U+72e9,U+73a9,U+7573,U+76bf,U+7950,U+7956,U+7f8a,U+7ffc,U+80a2,U+80c3,U+83ca,U+8a02,U+8a13,U+8df5,U+9375,U+983b,U+99b4,U+ff4e,U+ff71,U+ff89,U+ff97;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-95-400-normal.woff2) format("woff2");unicode-range:U+2193,U+25b2,U+4e4b,U+516d,U+51c4,U+529f,U+52c9,U+5360,U+5442,U+5857,U+5915,U+59eb,U+5a9b,U+5c3b,U+6012,U+61b6,U+62b1,U+6311,U+6577,U+65e2,U+65ec,U+6613,U+6790,U+6cb9,U+7372,U+76ae,U+7d5e,U+7fcc,U+88ab,U+88d5,U+8caf,U+8ddd,U+8ecd,U+8f38,U+8f9e,U+8feb,U+9063,U+90f5,U+93e1,U+968a,U+968f,U+98fe,U+9ec4,U+ff1d,U+ff27,U+ff2a,U+ff36,U+ff3b,U+ff3d,U+ffe5;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-107-400-normal.woff2) format("woff2");unicode-range:U+23,U+3c,U+2192,U+4e45,U+4efb,U+4f50,U+4f8b,U+4fc2,U+5024,U+5150,U+5272,U+5370,U+53bb,U+542b,U+56db,U+56e3,U+57ce,U+5bc4,U+5bcc,U+5f71,U+60aa,U+6238,U+6280,U+629c,U+6539,U+66ff,U+670d,U+677e-677f,U+6839,U+69cb,U+6b4c,U+6bb5,U+6e96,U+6f14,U+72ec,U+7389,U+7814,U+79cb,U+79d1,U+79fb,U+7a0e,U+7d0d,U+85e4,U+8d64,U+9632,U+96e2,U+9805,U+99ac,U+ff1e;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-109-400-normal.woff2) format("woff2");unicode-range:U+266a,U+4f11,U+533a,U+5343,U+534a,U+53cd,U+5404,U+56f3,U+5b57-5b58,U+5bae,U+5c4a,U+5e0c,U+5e2f,U+5eab,U+5f35,U+5f79,U+614b,U+6226,U+629e,U+65c5,U+6625,U+6751,U+6821,U+6b69,U+6b8b,U+6bce,U+6c42,U+706b,U+7c21,U+7cfb,U+805e,U+80b2,U+82b8,U+843d,U+8853,U+88c5,U+8a3c,U+8a66,U+8d8a,U+8fba,U+9069,U+91cf,U+9752,U+975e,U+9999,U+ff0f-ff10,U+ff14-ff15;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-110-400-normal.woff2) format("woff2");unicode-range:U+40,U+4e86,U+4e95,U+4f01,U+4f1d,U+4fbf,U+5099,U+5171,U+5177,U+53cb,U+53ce,U+53f0,U+5668,U+5712,U+5ba4,U+5ca1,U+5f85,U+60f3,U+653e,U+65ad,U+65e9,U+6620,U+6750,U+6761,U+6b62,U+6b74,U+6e08,U+6e80,U+7248,U+7531,U+7533,U+753a,U+77f3,U+798f,U+7f6e,U+8449,U+88fd,U+89b3,U+8a55,U+8ac7,U+8b77,U+8db3,U+8efd,U+8fd4,U+9031-9032,U+9580,U+9589,U+96d1,U+985e;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-111-400-normal.woff2) format("woff2");unicode-range:U+2b,U+d7,U+300e-300f,U+4e07,U+4e8c,U+512a,U+5149,U+518d,U+5236,U+52b9,U+52d9,U+5468,U+578b,U+57fa,U+5b8c,U+5ba2,U+5c02,U+5de5,U+5f37,U+5f62,U+623b,U+63d0,U+652f,U+672a,U+6848,U+6d41,U+7136,U+7537,U+754c,U+76f4,U+79c1,U+7ba1,U+7d44,U+7d4c,U+7dcf,U+7dda,U+7de8,U+82b1,U+897f,U+8ca9,U+8cfc,U+904e,U+9664,U+982d,U+9858,U+98a8,U+9a13,U+ff13,U+ff5c;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-117-400-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Dela Gothic One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/dela-gothic-one-119-400-normal.woff2) format("woff2");unicode-range:U+20,U+2027,U+3001-3002,U+3041-307f,U+3081-308f,U+3091-3093,U+3099-309a,U+309d-309e,U+30a1-30e1,U+30e3-30ed,U+30ef-30f0,U+30f2-30f4,U+30fb-30fe,U+ff0c,U+ff0e;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-85-400-normal.woff2) format("woff2");unicode-range:U+25c7,U+3007,U+504f,U+507d,U+51a0,U+52a3,U+5410,U+5510,U+559a,U+5782,U+582a,U+5c0a,U+5c3f,U+5c48,U+5f6b,U+6176,U+622f,U+6279,U+62bd,U+62dd,U+65ed,U+67b6,U+6817,U+6850,U+6d6a,U+6deb,U+6ea2,U+6edd,U+6f5c,U+72e9,U+73a9,U+7573,U+76bf,U+7950,U+7956,U+7f8a,U+7ffc,U+80a2,U+80c3,U+83ca,U+8a02,U+8a13,U+8df5,U+9375,U+983b,U+99b4,U+ff4e,U+ff71,U+ff89,U+ff97;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-95-400-normal.woff2) format("woff2");unicode-range:U+2193,U+25b2,U+4e4b,U+516d,U+51c4,U+529f,U+52c9,U+5360,U+5442,U+5857,U+5915,U+59eb,U+5a9b,U+5c3b,U+6012,U+61b6,U+62b1,U+6311,U+6577,U+65e2,U+65ec,U+6613,U+6790,U+6cb9,U+7372,U+76ae,U+7d5e,U+7fcc,U+88ab,U+88d5,U+8caf,U+8ddd,U+8ecd,U+8f38,U+8f9e,U+8feb,U+9063,U+90f5,U+93e1,U+968a,U+968f,U+98fe,U+9ec4,U+ff1d,U+ff27,U+ff2a,U+ff36,U+ff3b,U+ff3d,U+ffe5;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-107-400-normal.woff2) format("woff2");unicode-range:U+23,U+3c,U+2192,U+4e45,U+4efb,U+4f50,U+4f8b,U+4fc2,U+5024,U+5150,U+5272,U+5370,U+53bb,U+542b,U+56db,U+56e3,U+57ce,U+5bc4,U+5bcc,U+5f71,U+60aa,U+6238,U+6280,U+629c,U+6539,U+66ff,U+670d,U+677e-677f,U+6839,U+69cb,U+6b4c,U+6bb5,U+6e96,U+6f14,U+72ec,U+7389,U+7814,U+79cb,U+79d1,U+79fb,U+7a0e,U+7d0d,U+85e4,U+8d64,U+9632,U+96e2,U+9805,U+99ac,U+ff1e;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-109-400-normal.woff2) format("woff2");unicode-range:U+266a,U+4f11,U+533a,U+5343,U+534a,U+53cd,U+5404,U+56f3,U+5b57-5b58,U+5bae,U+5c4a,U+5e0c,U+5e2f,U+5eab,U+5f35,U+5f79,U+614b,U+6226,U+629e,U+65c5,U+6625,U+6751,U+6821,U+6b69,U+6b8b,U+6bce,U+6c42,U+706b,U+7c21,U+7cfb,U+805e,U+80b2,U+82b8,U+843d,U+8853,U+88c5,U+8a3c,U+8a66,U+8d8a,U+8fba,U+9069,U+91cf,U+9752,U+975e,U+9999,U+ff0f-ff10,U+ff14-ff15;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-110-400-normal.woff2) format("woff2");unicode-range:U+40,U+4e86,U+4e95,U+4f01,U+4f1d,U+4fbf,U+5099,U+5171,U+5177,U+53cb,U+53ce,U+53f0,U+5668,U+5712,U+5ba4,U+5ca1,U+5f85,U+60f3,U+653e,U+65ad,U+65e9,U+6620,U+6750,U+6761,U+6b62,U+6b74,U+6e08,U+6e80,U+7248,U+7531,U+7533,U+753a,U+77f3,U+798f,U+7f6e,U+8449,U+88fd,U+89b3,U+8a55,U+8ac7,U+8b77,U+8db3,U+8efd,U+8fd4,U+9031-9032,U+9580,U+9589,U+96d1,U+985e;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-111-400-normal.woff2) format("woff2");unicode-range:U+2b,U+d7,U+300e-300f,U+4e07,U+4e8c,U+512a,U+5149,U+518d,U+5236,U+52b9,U+52d9,U+5468,U+578b,U+57fa,U+5b8c,U+5ba2,U+5c02,U+5de5,U+5f37,U+5f62,U+623b,U+63d0,U+652f,U+672a,U+6848,U+6d41,U+7136,U+7537,U+754c,U+76f4,U+79c1,U+7ba1,U+7d44,U+7d4c,U+7dcf,U+7dda,U+7de8,U+82b1,U+897f,U+8ca9,U+8cfc,U+904e,U+9664,U+982d,U+9858,U+98a8,U+9a13,U+ff13,U+ff5c;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-117-400-normal.woff2) format("woff2");unicode-range:U+4e,U+a0,U+3000,U+300c-300d,U+4e00,U+4e0a,U+4e2d,U+4e8b,U+4eba,U+4f1a,U+5165,U+5168,U+5185,U+51fa,U+5206,U+5229,U+524d,U+52d5,U+5408,U+554f,U+5831,U+5834,U+5927,U+5b9a,U+5e74,U+5f0f,U+60c5,U+65b0,U+65b9,U+6642,U+6700,U+672c,U+682a,U+6b63,U+6c17,U+7121,U+751f,U+7528,U+753b,U+76ee,U+793e,U+884c,U+898b,U+8a18,U+9593,U+95a2,U+ff01,U+ff08-ff09;}
+@font-face{font-family:"Kosugi";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/kosugi-119-400-normal.woff2) format("woff2");unicode-range:U+20,U+2027,U+3001-3002,U+3041-307f,U+3081-308f,U+3091-3093,U+3099-309a,U+309d-309e,U+30a1-30e1,U+30e3-30ed,U+30ef-30f0,U+30f2-30f4,U+30fb-30fe,U+ff0c,U+ff0e;}
+/* @fonts-end */
+:root {
+  --bg: #e9dcc0;          /* box board, the inside of the carton */
+  --ink: #1c2b4a;         /* litho navy, the key plate */
+  --accent-1: #e63b2e;    /* tomato red */
+  --accent-2: #f2b705;    /* chrome yellow */
+  --tin: #c9ccd1; --tin-hi: #f4f5f6; --tin-lo: #7c828c;
+  --sky: #2f6fb1;
+  --cut: #1c2b4a;         /* die-cut line */
+  --u: 8px;
+  --fold: 2px dashed rgba(28, 43, 74, .55);
+  /* scale: 1.25 on 17px */
+  --t-2: 10.9px; --t-1: 13.6px; --t0: 17px; --t1: 21.3px; --t2: 26.6px; --t3: 33.2px; --t4: clamp(34px, 3.8vw, 68px);
+  --dela: "Dela Gothic One", "Arial Black", sans-serif;
+  --kos: "Kosugi", "Hiragino Sans", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.6 var(--kos); overflow-x: hidden;
+  background-image: repeating-linear-gradient(90deg, rgba(120, 90, 40, .05) 0 1px, transparent 1px 3px); }
+button, a { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 3px; }
+
+/* the carton, cut flat: top flap over the front, sides either side, back on the end, glue tab */
+.net { display: grid; grid-template-columns: 34px minmax(0, .52fr) minmax(0, 1.3fr) minmax(0, .52fr) minmax(0, .9fr); grid-template-rows: 110px minmax(calc(100svh - 110px - 90px - 48px), auto) 90px; padding: 24px calc(var(--u) * 4); min-height: 100svh; }
+.p { position: relative; overflow: hidden; min-width: 0; }
+.p + .p, .row2 .p { border-left: var(--fold); }
+.glue { grid-column: 1; grid-row: 2; background: repeating-linear-gradient(45deg, rgba(28,43,74,.08) 0 6px, transparent 6px 12px); clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 90%); border: 1.5px solid var(--cut); border-right: var(--fold); }
+.topflap { grid-column: 3; grid-row: 1; background: var(--accent-1); color: #fff; clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%); display: grid; place-items: center; border-bottom: var(--fold); }
+.topflap span { font: 400 var(--t2)/1 var(--dela); letter-spacing: .08em; }
+.botflap { grid-column: 3; grid-row: 3; background: var(--accent-2); clip-path: polygon(0 0, 100% 0, 94% 100%, 6% 100%); display: flex; align-items: center; justify-content: center; gap: calc(var(--u) * 3); border-top: var(--fold); font: 400 var(--t-1)/1.3 var(--kos); letter-spacing: .1em; }
+.side, .front, .back { grid-row: 2; border: 1.5px solid var(--cut); border-left: var(--fold); }
+.side.l { grid-column: 2; } .front { grid-column: 3; } .side.r { grid-column: 4; } .back { grid-column: 5; }
+
+/* tin litho: a fine screen and a cold sheen over every printed panel */
+.litho::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, rgba(255,255,255,.22), transparent 28% 64%, rgba(255,255,255,.16) 78%, transparent), radial-gradient(circle, rgba(0,0,0,.08) 28%, transparent 30%) 0 0 / 4px 4px; mix-blend-mode: soft-light; }
+
+/* front: the box art */
+.front { background: var(--sky); color: #fff; display: grid; grid-template-rows: auto 1fr auto; }
+.front .rays { position: absolute; inset: 0; background: repeating-conic-gradient(from 0deg at 62% 58%, rgba(242,183,5,.9) 0 7deg, transparent 7deg 18deg); }
+.front .band { position: relative; z-index: 2; background: var(--ink); padding: calc(var(--u) * 1.5) calc(var(--u) * 3); display: flex; justify-content: space-between; align-items: center; gap: var(--u); border-bottom: 5px solid var(--accent-2); }
+.front .band b { font: 400 var(--t-1)/1 var(--dela); letter-spacing: .12em; color: var(--accent-2); }
+.front .band span { font: 400 var(--t-1)/1 var(--kos); letter-spacing: .1em; }
+.front h1 { position: relative; z-index: 2; margin: 0; white-space: nowrap; padding: calc(var(--u) * 2) calc(var(--u) * 3) 0; font: 400 var(--t4)/.9 var(--dela); color: var(--accent-2); -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--accent-1); }
+.front h1 small { display: block; font-size: .42em; letter-spacing: .06em; color: #fff; text-shadow: 3px 3px 0 var(--ink); margin-top: 6px; }
+.robot { position: absolute; z-index: 1; right: 3%; bottom: 4%; height: 68%; width: auto; }
+.front .claim { position: relative; z-index: 2; align-self: end; margin: 0 calc(var(--u) * 3) calc(var(--u) * 3); display: flex; gap: calc(var(--u) * 2); flex-wrap: wrap; align-items: end; }
+.stamp { background: var(--accent-1); color: #fff; font: 400 var(--t-1)/1.2 var(--dela); padding: 10px 12px; border: 3px solid #fff; outline: 3px solid var(--ink); transform: rotate(-6deg); letter-spacing: .06em; }
+.stamp small { display: block; font: 400 var(--t-2)/1.3 var(--kos); letter-spacing: .1em; }
+.key { background: none; border: 0; padding: 0; cursor: pointer; display: grid; justify-items: center; font: 400 var(--t-2)/1.2 var(--kos); letter-spacing: .12em; color: #fff; }
+.key svg { width: 84px; height: 84px; }
+
+/* sides: the printed small print */
+.side { background: var(--accent-2); padding: calc(var(--u) * 3) calc(var(--u) * 2.5); display: grid; align-content: start; gap: calc(var(--u) * 2); }
+.side.r { background: var(--accent-1); color: #fff; }
+.side h2 { margin: 0; font: 400 var(--t1)/1.1 var(--dela); writing-mode: vertical-rl; text-orientation: upright; letter-spacing: .1em; justify-self: end; position: absolute; right: 12px; top: calc(var(--u) * 3); }
+.side .body { padding-right: 44px; font-size: var(--t-1); line-height: 1.6; }
+.side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--u); }
+.side li { display: grid; grid-template-columns: 22px 1fr; gap: 8px; }
+.side li i { width: 18px; height: 18px; background: var(--ink); color: var(--accent-2); font: 400 11px/18px var(--dela); text-align: center; font-style: normal; }
+.side.r li i { background: #fff; color: var(--accent-1); }
+.seal { border: 3px double currentColor; padding: 8px; text-align: center; font: 400 var(--t-2)/1.4 var(--kos); letter-spacing: .12em; }
+
+/* back: the reissue */
+.back { background: #f6efdc; padding: calc(var(--u) * 3); display: grid; align-content: start; gap: calc(var(--u) * 2); }
+.back h2 { margin: 0; font: 400 var(--t2)/1.1 var(--dela); }
+.back p { margin: 0; max-width: 34em; }
+.back table { border-collapse: collapse; width: 100%; font-size: var(--t-1); font-variant-numeric: tabular-nums; }
+.back th, .back td { text-align: left; border-bottom: 1px solid rgba(28,43,74,.3); padding: 4px 0; font-weight: 400; }
+.back td { text-align: right; }
+.buy { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--accent-2); padding: 12px 18px; text-decoration: none; font: 400 var(--t0)/1 var(--dela); letter-spacing: .06em; justify-self: start; }
+.buy:hover { background: var(--accent-1); color: #fff; }
+.bar { height: 44px; width: 160px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 12px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .walking .robot { animation: walk .5s steps(2, jump-none) infinite; }
+  .walking .spark { animation: spark .25s steps(2, jump-none) infinite; }
+  .walking .arm-l { animation: swing .5s steps(2, jump-none) infinite; transform-origin: 30px 120px; }
+  .walking .arm-r { animation: swing .5s steps(2, jump-none) infinite reverse; transform-origin: 170px 120px; }
+  .turning .keybit { animation: wind .9s steps(6, end) 1; transform-origin: 36px 36px; }
+  @keyframes walk { from { transform: translateX(0) rotate(-2deg); } to { transform: translateX(-10px) rotate(2deg); } }
+  @keyframes spark { from { opacity: 1; } to { opacity: .1; } }
+  @keyframes swing { from { transform: rotate(-12deg); } to { transform: rotate(12deg); } }
+  @keyframes wind { to { transform: rotate(360deg); } }
+}
+.walking .spark { opacity: 1; }
+
+@media (min-width: 1900px) { :root { --t0: 19px; --t-1: 15px; } }
+@media (max-width: 1100px) {
+  .net { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto; padding: calc(var(--u) * 2); }
+  .glue { display: none; }
+  .topflap { grid-column: 1 / -1; grid-row: 1; height: 80px; }
+  .front { grid-column: 1 / -1; grid-row: 2; min-height: 80svh; }
+  .botflap { grid-column: 1 / -1; grid-row: 3; height: 70px; }
+  .side.l { grid-column: 1; grid-row: 4; } .side.r { grid-column: 2; grid-row: 4; } .back { grid-column: 1 / -1; grid-row: 5; }
+}
+@media (max-width: 600px) {
+  .front { min-height: calc(100svh - 110px); }
+  .front h1 { -webkit-text-stroke: 2px var(--ink); text-shadow: 3px 3px 0 var(--accent-1); }
+  .robot { height: 56%; right: -4%; }
+  .side.l, .side.r { grid-column: 1 / -1; }
+  .side.r { grid-row: 5; } .back { grid-row: 6; }
+}
+</style>
+</head>
+<body>
+<main class="net" id="net">
+  <div class="p glue" aria-hidden="true"></div>
+  <div class="p topflap litho"><span>ホシノ玩具 · HOSHINO</span></div>
+
+  <section class="p side l litho" aria-labelledby="s1">
+    <h2 id="s1">ゼンマイ式</h2>
+    <div class="body">
+      <ul>
+        <li><i>1</i><span>Wind the key six turns. Never more.</span></li>
+        <li><i>2</i><span>Set Komet on a flat table, feet together.</span></li>
+        <li><i>3</i><span>He walks 40 seconds. Arms swing, chest sparks behind red celluloid.</span></li>
+        <li><i>4</i><span>Flint is replaceable. Two spares inside the lid.</span></li>
+      </ul>
+    </div>
+    <p class="seal body">No batteries · no plastic gears · tinplate 0.25 mm</p>
+  </section>
+
+  <article class="p front" id="front" aria-labelledby="t">
+    <div class="rays" aria-hidden="true"></div>
+    <div class="band"><b>MECHANICAL · SPACE PATROL</b><span>No. 1961-R</span></div>
+    <h1 id="t">コメット・セブン<small>KOMET-7 SPACE PATROL ROBOT</small></h1>
+    <svg class="robot" viewBox="0 0 200 330" role="img" aria-label="Tin robot mid-stride">
+      <defs>
+        <linearGradient id="tin" x1="0" x2="1"><stop offset="0" stop-color="#7c828c"/><stop offset=".35" stop-color="#f4f5f6"/><stop offset=".6" stop-color="#c9ccd1"/><stop offset="1" stop-color="#7c828c"/></linearGradient>
+      </defs>
+      <path d="M100 6v20" stroke="#1c2b4a" stroke-width="4"/><circle cx="100" cy="6" r="6" fill="#e63b2e" stroke="#1c2b4a" stroke-width="3"/>
+      <rect x="54" y="26" width="92" height="74" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/>
+      <rect x="66" y="42" width="68" height="28" fill="#f2b705" stroke="#1c2b4a" stroke-width="3"/>
+      <circle cx="84" cy="56" r="7" fill="#1c2b4a"/><circle cx="116" cy="56" r="7" fill="#1c2b4a"/>
+      <path d="M72 84h56" stroke="#1c2b4a" stroke-width="3" stroke-dasharray="6 4"/>
+      <rect x="44" y="30" width="10" height="30" fill="#e63b2e" stroke="#1c2b4a" stroke-width="3"/><rect x="146" y="30" width="10" height="30" fill="#e63b2e" stroke="#1c2b4a" stroke-width="3"/>
+      <rect x="84" y="100" width="32" height="12" fill="#7c828c" stroke="#1c2b4a" stroke-width="3"/>
+      <rect x="40" y="112" width="120" height="120" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/>
+      <rect x="58" y="126" width="84" height="56" fill="#1c2b4a"/>
+      <g class="spark" style="opacity:.25"><path d="M100 132l6 16 14-6-8 14 14 6-16 4 2 14-12-10-12 10 2-14-16-4 14-6-8-14 14 6z" fill="#f2b705"/><circle cx="100" cy="154" r="6" fill="#fff"/></g>
+      <rect x="58" y="126" width="84" height="56" fill="#e63b2e" opacity=".35"/>
+      <g fill="#f2b705" stroke="#1c2b4a" stroke-width="2"><circle cx="64" cy="202" r="7"/><circle cx="84" cy="202" r="7"/><rect x="104" y="196" width="36" height="12"/></g>
+      <path d="M50 222h100" stroke="#1c2b4a" stroke-width="2"/>
+      <g class="arm-l"><rect x="14" y="116" width="26" height="80" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/><path d="M14 196h26l-4 18h-18z" fill="#e63b2e" stroke="#1c2b4a" stroke-width="3"/></g>
+      <g class="arm-r"><rect x="160" y="116" width="26" height="80" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/><path d="M160 196h26l-4 18h-18z" fill="#e63b2e" stroke="#1c2b4a" stroke-width="3"/></g>
+      <rect x="54" y="232" width="34" height="66" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/><rect x="112" y="232" width="34" height="66" fill="url(#tin)" stroke="#1c2b4a" stroke-width="4"/>
+      <path d="M44 298h52v22H38zM104 298h52l6 22h-58z" fill="#1c2b4a"/>
+    </svg>
+    <div class="claim">
+      <p class="stamp">WALKS! SPARKS!<small>ゼンマイ · 歩く · 火花</small></p>
+      <button class="key" type="button" id="key" aria-pressed="false">
+        <svg viewBox="0 0 72 72" aria-hidden="true"><g class="keybit"><path d="M36 36 L36 10" stroke="#1c2b4a" stroke-width="8"/><path d="M36 30c-22-26-34 8-10 12h20c24-4 12-38-10-12z" fill="#f2b705" stroke="#1c2b4a" stroke-width="3" transform="rotate(0 36 36)"/><circle cx="36" cy="36" r="5" fill="#e63b2e" stroke="#1c2b4a" stroke-width="2"/></g></svg>
+        <span id="keylab">WIND THE KEY</span>
+      </button>
+    </div>
+  </article>
+
+  <section class="p side r litho" aria-labelledby="s2">
+    <h2 id="s2">ロボット</h2>
+    <div class="body">
+      <ul>
+        <li><i>A</i><span>Height 23 cm, weight 410 g. Printed tin, five colours and a varnish.</span></li>
+        <li><i>B</i><span>Drawn in 1961 by Kenji Arai for Hoshino, Sumida-ku, Tokyo. 12,000 made.</span></li>
+        <li><i>C</i><span>Reissued from the original litho sheets, rescanned at 1200 dpi, registration kept a hair loose.</span></li>
+      </ul>
+    </div>
+    <p class="seal body">CAUTION · sharp tin edges · not for children under 8</p>
+  </section>
+
+  <section class="p back litho" aria-labelledby="b">
+    <h2 id="b">The 2026 reissue</h2>
+    <p>Each Komet-7 is pressed on the same tinplate gauge as 1961, tabs bent by hand in Katsushika, and packed in this box, printed from a scan of the last unopened carton we could find.</p>
+    <table>
+      <tbody>
+        <tr><th scope="row">Edition</th><td>1,961 numbered</td></tr>
+        <tr><th scope="row">Price</th><td>¥28,600 · $189</td></tr>
+        <tr><th scope="row">Ships</th><td>November 2026</td></tr>
+        <tr><th scope="row">Spare flints</th><td>¥440 for 10</td></tr>
+      </tbody>
+    </table>
+    <a class="buy" href="#b">Reserve a box →</a>
+    <div class="bar" aria-hidden="true"></div>
+    <p style="font-size:var(--t-2);letter-spacing:.12em">HOSHINO TOYS · SUMIDA · TOKYO · MADE IN JAPAN</p>
+  </section>
+
+  <div class="p botflap litho"><span>OPEN THIS END</span><span>▲</span><span>このはしをあける</span></div>
+</main>
+<script>
+(() => {
+  // wind the key: six stepped turns, then the robot walks for as long as the spring lasts
+  const key = document.getElementById("key"), front = document.getElementById("front"), lab = document.getElementById("keylab");
+  let t = null;
+  key.addEventListener("click", () => {
+    clearTimeout(t);
+    front.classList.remove("walking"); key.classList.remove("turning"); void key.offsetWidth;
+    key.classList.add("turning"); key.setAttribute("aria-pressed", "true"); lab.textContent = "WINDING";
+    t = setTimeout(() => { front.classList.add("walking"); lab.textContent = "WALKING";
+      t = setTimeout(() => { front.classList.remove("walking"); key.classList.remove("turning"); key.setAttribute("aria-pressed", "false"); lab.textContent = "WIND THE KEY"; }, 8000); }, 900);
+  });
+})();
+</script>
+</body>
+</html>

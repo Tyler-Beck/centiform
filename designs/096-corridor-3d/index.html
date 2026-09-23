@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Corridor 3D · Centiform</title>
+<style>
+/* @fonts: Unica One:400:block; Mukta:400,600 */
+@font-face{font-family:"Unica One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/unica-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mukta";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mukta-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mukta";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/mukta-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #0b0b10;          /* the dark beyond the lights */
+  --ink: #f5f5f5;         /* plaque white */
+  --accent-1: #ff5b3a;    /* the red sold dot, the exit sign */
+  --accent-2: #3a3a4a;    /* wall grey */
+  --wall: #23232d; --floor: #121219; --line: #2e2e3b;
+  --u: 8px;
+  /* corridor geometry, in CSS pixels; the script may narrow it on small screens */
+  --W: 1200px; --H: 720px; --L: 7200px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(48px, 7vw, 120px);
+  --unica: "Unica One", "Arial Narrow", sans-serif;
+  --mukta: "Mukta", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.55 var(--mukta); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 4px; }
+
+/* the scroll track: its length is the corridor’s length; the stage stays put */
+.track { height: calc(100svh + var(--L) * .75); position: relative; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; perspective: 760px; perspective-origin: 50% 46%; }
+.stage::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 46%, transparent 18%, rgba(11, 11, 16, .35) 62%, #0b0b10 100%); }
+.world { position: absolute; left: 50%; top: 46%; width: 0; height: 0; transform-style: preserve-3d; transform: translateZ(var(--cam, 0px)); }
+.pl { position: absolute; left: 0; top: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: visible; }
+.wall { width: var(--L); height: var(--H); background: linear-gradient(90deg, transparent 0 calc(100% - 1px), rgba(255,255,255,.035) 0) 0 0 / 600px 100%, linear-gradient(transparent 88%, #101016 88%), var(--wall); }
+.wall.l { transform: translate3d(calc(var(--W) / -2), calc(var(--H) / -2), 0) rotateY(90deg); }
+.wall.r { transform: translate3d(calc(var(--W) / 2), calc(var(--H) / -2), calc(var(--L) * -1)) rotateY(-90deg); }
+.floor { width: var(--W); height: var(--L); transform: translate3d(calc(var(--W) / -2), calc(var(--H) / 2), 0) rotateX(-90deg);
+  background: linear-gradient(90deg, transparent calc(50% - 1px), rgba(255, 91, 58, .25) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)), repeating-linear-gradient(0deg, var(--line) 0 2px, transparent 2px 240px), var(--floor); }
+.ceil { width: var(--W); height: var(--L); transform: translate3d(calc(var(--W) / -2), calc(var(--H) / -2), 0) rotateX(-90deg);
+  background: repeating-linear-gradient(0deg, transparent 0 560px, rgba(255, 244, 220, .22) 560px 600px), #0d0d12; }
+.end { width: var(--W); height: var(--H); transform: translate3d(calc(var(--W) / -2), calc(var(--H) / -2), calc(var(--L) * -1)); background: #121219; display: grid; place-items: center; text-align: center; padding: 60px; }
+.end h2 { margin: 0; font: 400 72px/1 var(--unica); letter-spacing: .08em; }
+.end p { margin: 16px auto 0; max-width: 30em; font-size: 22px; color: #c9c9d4; }
+.exit { display: inline-block; margin-top: 20px; font: 400 28px/1 var(--unica); letter-spacing: .2em; color: var(--accent-1); border: 2px solid var(--accent-1); padding: 8px 18px; text-decoration: none; }
+.banner { width: calc(var(--W) * .8); transform: translate3d(calc(var(--W) * -.4), calc(var(--H) * -.34), -520px); text-align: center; }
+.banner h1 { margin: 0; font: 400 118px/.9 var(--unica); letter-spacing: .1em; }
+.banner p { margin: 14px 0 0; font: 400 20px/1.4 var(--mukta); letter-spacing: .2em; text-transform: uppercase; color: #c9c9d4; }
+.banner p b { color: var(--accent-1); font-weight: 600; }
+
+/* a painting hangs on the wall; near the camera it swings out to face you */
+.work { position: absolute; top: 150px; transform-origin: 50% 50%; transform: rotateY(var(--turn, 0deg)); transform-style: preserve-3d; }
+.work::before { content: ""; position: absolute; left: -160px; right: -160px; top: -200px; bottom: -120px; background: radial-gradient(ellipse at 50% 18%, rgba(255, 238, 205, .2), rgba(255, 238, 205, .06) 40%, transparent 68%); transform: translateZ(-1px); pointer-events: none; }
+.canvas { width: var(--w); height: var(--h); border: 10px solid #0a0a0a; outline: 2px solid #2d2d38; box-shadow: 0 30px 60px rgba(0,0,0,.6); background: var(--art); }
+.plaque { position: absolute; top: calc(var(--h) - 40px); width: 210px; padding: 12px 14px; background: #efefea; color: #141418; font: 400 14px/1.4 var(--mukta); }
+.plaque b { display: block; font: 400 20px/1.1 var(--unica); letter-spacing: .04em; }
+.plaque .sold::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-1); margin-right: 6px; vertical-align: 0; }
+.l .plaque { left: calc(var(--w) + 40px); } .r .plaque { right: calc(var(--w) + 40px); }
+.hud { position: absolute; left: calc(var(--u) * 3); right: calc(var(--u) * 3); bottom: calc(var(--u) * 2.5); display: flex; justify-content: space-between; gap: calc(var(--u) * 2); font: 400 var(--t-1)/1.3 var(--mukta); letter-spacing: .14em; text-transform: uppercase; color: #b9b9c6; z-index: 3; flex-wrap: wrap; }
+.hud b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.bar { position: absolute; left: 0; bottom: 0; height: 3px; width: calc(var(--p, 0) * 100%); background: var(--accent-1); z-index: 3; }
+
+/* after the corridor: the practical page, flat */
+.visit { padding: calc(var(--u) * 10) calc(var(--u) * 5); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 5); border-top: 1px solid var(--accent-2); }
+.visit h2 { grid-column: 1 / -1; margin: 0; font: 400 var(--t4)/1 var(--unica); letter-spacing: .06em; }
+.visit h3 { margin: 0 0 var(--u); font: 400 var(--t2)/1.1 var(--unica); letter-spacing: .06em; color: var(--accent-1); }
+.visit p { margin: 0 0 calc(var(--u) * 2); color: #d6d6de; max-width: 34em; }
+.visit ol { margin: 0; padding-left: 1.2em; color: #d6d6de; }
+@media (max-width: 600px) { .hud span:last-child { display: none; } }
+@media (max-width: 800px) { .visit { grid-template-columns: minmax(0, 1fr); padding-inline: calc(var(--u) * 2.5); } }
+</style>
+</head>
+<body>
+<div class="track" id="track">
+  <div class="stage" id="stage">
+    <div class="world" id="world">
+      <div class="pl floor" aria-hidden="true"></div>
+      <div class="pl ceil" aria-hidden="true"></div>
+      <div class="pl wall l" id="wl"></div>
+      <div class="pl wall r" id="wr"></div>
+      <header class="pl banner"><h1>Night Water</h1><p>Ines Dauber · paintings 2019–2026 · <b>scroll to walk</b></p></header>
+      <section class="pl end" aria-labelledby="endh"><div><h2 id="endh">End of the hall</h2><p>Eight paintings, one corridor. The originals hang at Galleria Ferrante, Via dei Tintori 12, Florence, until 31 January 2027.</p><a class="exit" href="#visit">Exit</a></div></section>
+    </div>
+    <div class="hud"><span>Galleria Ferrante · online hall</span><span>Work <b id="now">0</b> of 8</span><span>Scroll, or use the arrow keys</span></div>
+    <div class="bar" id="bar"></div>
+  </div>
+</div>
+<main class="visit" id="visit" aria-labelledby="vh">
+  <h2 id="vh">Visit the paintings in Florence</h2>
+  <div><h3>The show</h3><p>Ines Dauber paints the Arno at night from the same bench below Ponte Santa Trinita, one canvas a year, always in November. This is the first time all eight have hung together.</p></div>
+  <div><h3>Opening hours</h3><p>Tuesday to Sunday, 11:00 to 19:00. Thursdays until 22:00, with the lights in the hall turned down to one lamp per painting.</p><p>Entry €8, free under 18.</p></div>
+  <div><h3>Enquiries</h3><p>Three works are for sale. Prices are on each plaque; a red dot means sold. Write to the gallery for the condition report and shipping.</p><ol><li>Night Water VI, €14,500</li><li>Night Water VII, €16,000</li><li>Night Water VIII, €18,500</li></ol></div>
+</main>
+<script>
+(() => {
+  // the eight works: which wall, how far along, size, and a painted surface made of gradients
+  const WORKS = [
+    ["l", 1100, 380, 470, "I", 2019, "linear-gradient(#0c1a2e 0 58%, #ff8a3d 58% 59%, #11263f 59%)", "Oil on linen, 100 × 120 cm", "Private collection"],
+    ["r", 1700, 420, 330, "II", 2020, "radial-gradient(circle at 70% 30%, #f2e6b3 0 6%, transparent 7%), linear-gradient(#1a1a3a, #2b4a6b 60%, #0e1520)", "Oil on linen, 110 × 90 cm", "Museo Civico, Prato"],
+    ["l", 2500, 300, 440, "III", 2021, "repeating-linear-gradient(0deg, #13243a 0 18px, #1d3553 18px 22px), linear-gradient(#000, #000)", "Oil on board, 80 × 115 cm", "Private collection"],
+    ["r", 3100, 460, 360, "IV", 2022, "linear-gradient(160deg, #3a1d2e, #0b0b18 55%, #ff5b3a 55% 56%, #0b0b18 57%)", "Oil on linen, 120 × 95 cm", "Sold"],
+    ["l", 3900, 340, 460, "V", 2023, "radial-gradient(ellipse at 50% 80%, #d9b36a 0 8%, transparent 30%), linear-gradient(#050510, #182a44)", "Oil on linen, 90 × 120 cm", "Sold"],
+    ["r", 4600, 400, 400, "VI", 2024, "conic-gradient(from 200deg at 40% 60%, #0a1422, #28405e, #0a1422 40%, #13243a), linear-gradient(#000, #000)", "Oil on linen, 105 × 105 cm", "€14,500"],
+    ["l", 5400, 460, 340, "VII", 2025, "linear-gradient(#0b1b2a 0 46%, #c3d0dc 46% 47%, #0b1b2a 47% 70%, #1c3148 70%)", "Oil on linen, 120 × 90 cm", "€16,000"],
+    ["r", 6200, 360, 480, "VIII", 2026, "radial-gradient(circle at 50% 42%, #ffcf8a 0 3%, rgba(255, 140, 60, .25) 4% 16%, transparent 17%), linear-gradient(#06070d, #102035 70%, #0a0a12)", "Oil on linen, 95 × 125 cm", "€18,500"],
+  ];
+  const root = document.documentElement, world = document.getElementById("world");
+  const px = (n) => n + "px";
+  let L = 7200;
+  const build = () => {
+    const narrow = innerWidth < 700;
+    root.style.setProperty("--W", px(narrow ? 760 : 1200));
+    ["wl", "wr"].forEach((id) => { document.getElementById(id).innerHTML = ""; });
+    WORKS.forEach(([side, d, w, h, n, y, art, med, st], i) => {
+      const el = document.createElement("figure");
+      el.className = "work " + side; el.dataset.d = d; el.style.margin = "0";
+      el.style.setProperty("--w", px(w)); el.style.setProperty("--h", px(h)); el.style.setProperty("--art", art);
+      el.style.left = px(side === "l" ? d - w / 2 : L - d - w / 2); el.style.top = px((720 - h) / 2 - 30);
+      el.innerHTML = `<div class="canvas" role="img" aria-label="Night Water ${n}, ${y}"></div><figcaption class="plaque"><b>Night Water ${n}</b>${y}. ${med}.<br><span class="${st === "Sold" ? "sold" : ""}">${st}</span></figcaption>`;
+      document.getElementById(side === "l" ? "wl" : "wr").appendChild(el);
+    });
+  };
+  build();
+  const works = () => [...document.querySelectorAll(".work")];
+  let list = works();
+  const motion = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  const track = document.getElementById("track"), bar = document.getElementById("bar"), now = document.getElementById("now");
+  let cam = 0, target = 0, raf = 0;
+  const progress = () => { const r = track.getBoundingClientRect(), span = track.offsetHeight - innerHeight; return Math.min(1, Math.max(0, -r.top / span)); };
+  const draw = () => {
+    world.style.setProperty("--cam", px(cam));
+    const p = cam / (L - 900); bar.style.setProperty("--p", p.toFixed(4));
+    let seen = 0;
+    list.forEach((el) => {
+      const d = +el.dataset.d, rel = d - cam, side = el.classList.contains("l") ? 1 : -1;
+      if (rel < 1400) seen++;
+      // swing out as it nears, flat again once passed
+      const k = motion ? Math.max(0, Math.min(1, 1 - Math.abs(rel - 650) / 800)) : .55;
+      el.style.setProperty("--turn", (side * -58 * k).toFixed(2) + "deg");
+    });
+    now.textContent = Math.min(8, seen);
+  };
+  const loop = () => { cam += (target - cam) * (motion ? .12 : 1); draw(); raf = Math.abs(target - cam) > .5 && !document.hidden ? requestAnimationFrame(loop) : 0; if (!raf) { cam = target; draw(); } };
+  const onScroll = () => { target = progress() * (L - 900); if (!raf) raf = requestAnimationFrame(loop); };
+  addEventListener("scroll", onScroll, { passive: true });
+  addEventListener("resize", () => { build(); list = works(); onScroll(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); scrollBy({ top: (e.key === "ArrowDown" ? 1 : -1) * 420, behavior: motion ? "smooth" : "auto" }); } });
+  onScroll(); cam = target; draw();
+})();
+</script>
+</body>
+</html>

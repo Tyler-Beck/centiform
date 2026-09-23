@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One-Bit Desktop · Centiform</title>
+<style>
+/* @fonts: Silkscreen:400:block; Jersey 10:400:block */
+@font-face{font-family:"Silkscreen";font-style:normal;font-weight:400;font-display:block;src:url(fonts/silkscreen-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Jersey 10";font-style:normal;font-weight:400;font-display:block;src:url(fonts/jersey-10-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ffffff;          /* a lit pixel */
+  --ink: #000000;         /* an unlit one */
+  --accent-1: #000000;    /* one bit has no accent but black */
+  --accent-2: #ffffff;    /* and white */
+  /* greys are dither patterns, never colours */
+  --d50: repeating-conic-gradient(#000 0 25%, #fff 0 50%) 0 0 / 2px 2px;
+  --d25: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Crect width='4' height='4' fill='%23fff'/%3E%3Crect width='1' height='1'/%3E%3Crect x='2' y='2' width='1' height='1'/%3E%3C/svg%3E") 0 0 / 4px 4px;
+  --d12: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Crect width='4' height='4' fill='%23fff'/%3E%3Crect width='1' height='1'/%3E%3C/svg%3E") 0 0 / 4px 4px;
+  --stripe: repeating-linear-gradient(#000 0 1px, #fff 1px 2px);
+  --px: 1px;              /* one screen pixel; the whole screen is scaled by a whole number */
+  --sw: 512; --sh: 342;   /* the screen, in pixels */
+  /* scale in screen pixels: Silkscreen on its 8 px grid, Jersey 10 at 16 and 24 */
+  --t8: 8px; --t16: 16px; --t24: 24px; --t32: 32px; --t48: 48px;
+  --menu: "Silkscreen", monospace;
+  --doc: "Jersey 10", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--d25); color: var(--ink); overflow: hidden; display: grid; place-items: center; font: 400 var(--t16)/1 var(--doc); }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: default; }
+:focus-visible { outline: 1px dotted #000; outline-offset: 1px; }
+
+/* the monitor: a black bezel round a screen of fixed size */
+.bezel { background: #000; padding: 12px; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; }
+.fit { width: calc(var(--sw) * var(--k, 1) * 1px); height: calc(var(--sh) * var(--k, 1) * 1px); overflow: hidden; }
+.screen { width: calc(var(--sw) * 1px); height: calc(var(--sh) * 1px); transform: scale(var(--k, 1)); transform-origin: 0 0; position: relative; background: var(--d50); overflow: hidden; image-rendering: pixelated; -webkit-font-smoothing: none; font-smooth: never; }
+
+/* menu bar */
+.bar { position: absolute; left: 0; right: 0; top: 0; height: 20px; background: #fff; border-bottom: 1px solid #000; display: flex; align-items: stretch; padding-left: 8px; z-index: 20; }
+.bar > div { position: relative; }
+.bar .m { font: 400 var(--t8)/20px var(--menu); padding: 0 7px; height: 20px; display: flex; align-items: center; }
+.bar .m svg { width: 12px; height: 12px; shape-rendering: crispEdges; }
+.bar .m[aria-expanded="true"] { background: #000; color: #fff; }
+.bar .m[aria-expanded="true"] svg path { fill: #fff; }
+.menu { position: absolute; top: 20px; left: 0; min-width: 120px; background: #fff; border: 1px solid #000; box-shadow: 2px 2px 0 #000; display: none; padding: 2px 0; z-index: 30; }
+.menu.open { display: block; }
+.menu button { display: flex; justify-content: space-between; gap: 12px; width: 100%; text-align: left; font: 400 var(--t8)/16px var(--menu); padding: 0 10px 0 14px; white-space: nowrap; }
+.menu button:hover, .menu button:focus-visible { background: #000; color: #fff; outline: 0; }
+.menu button[disabled] { color: #000; background: var(--d50); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.menu hr { border: 0; height: 1px; margin: 3px 0; background: var(--d50); }
+.menu .on::before { content: "\2022"; position: absolute; margin-left: -10px; }
+.clock { margin-left: auto; font: 400 var(--t8)/20px var(--menu); padding: 0 10px; font-variant-numeric: tabular-nums; }
+
+/* desktop icons */
+.ico { position: absolute; right: 12px; display: grid; justify-items: center; gap: 2px; width: 72px; }
+.ico svg { width: 32px; height: 32px; shape-rendering: crispEdges; }
+.ico span { font: 400 var(--t8)/10px var(--menu); background: #fff; padding: 0 2px; }
+.ico.sel svg { filter: invert(1); } .ico.sel span { background: #000; color: #fff; }
+
+/* windows */
+.win { position: absolute; background: #fff; border: 1px solid #000; box-shadow: 1px 1px 0 #000; display: grid; grid-template-rows: 19px auto 1fr; }
+.win .tb { position: relative; height: 19px; border-bottom: 1px solid #000; display: flex; align-items: center; justify-content: center; cursor: grab; touch-action: none; }
+.win .tb::before { content: ""; position: absolute; left: 2px; right: 2px; top: 4px; height: 11px; background: var(--stripe); }
+.win .tb span { position: relative; background: #fff; padding: 0 6px; font: 400 var(--t8)/1 var(--menu); }
+.win .close { position: absolute; left: 8px; top: 4px; width: 11px; height: 11px; border: 1px solid #000; background: #fff; box-shadow: 0 0 0 1px #fff; z-index: 1; }
+.win.inactive .tb::before { display: none; }
+.ruler { height: 18px; border-bottom: 1px solid #000; background: linear-gradient(90deg, #000 1px, transparent 1px) 8px 12px / 8px 6px repeat-x, linear-gradient(90deg, #000 1px, transparent 1px) 8px 8px / 64px 10px repeat-x; position: relative; }
+.ruler i { position: absolute; top: 1px; width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid #000; }
+.body { display: grid; grid-template-columns: 1fr 16px; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+.page { padding: 8px 12px; font: 400 var(--t16)/18px var(--doc); overflow-y: auto; scrollbar-width: none; outline: 0; white-space: pre-wrap; }
+.page.u { text-decoration: underline; }
+.page.o { color: #fff; text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000; }
+.page.s { text-shadow: 1px 1px 0 #000, 2px 2px 0 #000; }
+.page.o.s { text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000, 2px 2px 0 #000; }
+.page h1 { font: 400 var(--t24)/24px var(--doc); margin: 0 0 6px; }
+.page p { margin: 0 0 8px; }
+.sb { border-left: 1px solid #000; display: grid; grid-template-rows: 15px 1fr 15px; }
+.sb .track { background: var(--d50); position: relative; }
+.sb .thumb { position: absolute; left: 0; right: 0; top: 20%; height: 15px; background: #fff; border-top: 1px solid #000; border-bottom: 1px solid #000; }
+.sb svg { width: 15px; height: 15px; shape-rendering: crispEdges; }
+.sb .dn { border-top: 1px solid #000; } .sb .up { border-bottom: 1px solid #000; }
+.status { font: 400 var(--t8)/14px var(--menu); border-top: 1px solid #000; padding: 0 6px; display: flex; justify-content: space-between; grid-column: 1 / -1; }
+
+/* the dialog box: double border, default button with a heavy ring */
+.dlg { position: absolute; background: #fff; border: 1px solid #000; outline: 1px solid #fff; box-shadow: 0 0 0 2px #000, 3px 3px 0 2px #000; padding: 12px 14px; display: none; z-index: 40; }
+.dlg.open { display: grid; }
+.dlg .in { border: 2px solid #000; padding: 10px 12px; display: grid; gap: 8px; }
+.dlg h2 { margin: 0; font: 400 var(--t24)/24px var(--doc); }
+.dlg p { margin: 0; font: 400 var(--t16)/18px var(--doc); }
+.dlg .ok { justify-self: end; font: 400 var(--t8)/1 var(--menu); border: 1px solid #000; border-radius: 6px; padding: 5px 18px; box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; border-radius: 6px; margin: 4px; }
+.dlg .ok:active { background: #000; color: #fff; }
+.outline { position: absolute; border: 1px dashed #000; pointer-events: none; display: none; z-index: 50; mix-blend-mode: difference; border-color: #fff; }
+@media (max-aspect-ratio: 3/4) { :root { --sw: 256; --sh: 400; } .ico { display: none; } #w1 { left: 6px !important; width: calc(var(--sw) * 1px - 12px) !important; height: calc(var(--sh) * 1px - 34px) !important; } .bar .m { padding: 0 5px; } }
+</style>
+</head>
+<body>
+<div class="bezel">
+  <div class="fit" id="fit">
+    <div class="screen" id="screen">
+      <nav class="bar" id="bar" aria-label="Menu bar">
+        <div><button class="m" type="button" aria-expanded="false" aria-label="ScribeWrite menu" data-menu="apple"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M9 0h2v2H9zM7 2h2v2H7zM5 4h2v2H5zM3 6h2v2H3zM1 8h2v3H1zM1 11h4v1H1z"/></svg></button>
+          <div class="menu" id="menu-apple" role="menu"><button type="button" role="menuitem" data-act="about">About ScribeWrite…</button><hr><button type="button" role="menuitem" disabled>Calculator</button><button type="button" role="menuitem" disabled>Note Pad</button></div></div>
+        <div><button class="m" type="button" aria-expanded="false" data-menu="file">File</button>
+          <div class="menu" id="menu-file" role="menu"><button type="button" role="menuitem" disabled>New</button><button type="button" role="menuitem" disabled>Open…</button><button type="button" role="menuitem" data-act="save">Save<span>S</span></button><hr><button type="button" role="menuitem" disabled>Print…</button><hr><button type="button" role="menuitem" data-act="quit">Quit<span>Q</span></button></div></div>
+        <div><button class="m" type="button" aria-expanded="false" data-menu="edit">Edit</button>
+          <div class="menu" id="menu-edit" role="menu"><button type="button" role="menuitem" disabled>Undo<span>Z</span></button><hr><button type="button" role="menuitem" disabled>Cut<span>X</span></button><button type="button" role="menuitem" disabled>Copy<span>C</span></button><button type="button" role="menuitem" disabled>Paste<span>V</span></button></div></div>
+        <div><button class="m" type="button" aria-expanded="false" data-menu="style">Style</button>
+          <div class="menu" id="menu-style" role="menu"><button type="button" role="menuitemcheckbox" data-st="plain" class="on">Plain Text</button><hr><button type="button" role="menuitemcheckbox" data-st="u">Underline</button><button type="button" role="menuitemcheckbox" data-st="o">Outline</button><button type="button" role="menuitemcheckbox" data-st="s">Shadow</button></div></div>
+        <span class="clock" id="clock">10:24</span>
+      </nav>
+
+      <div class="ico" style="top:30px" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M4 2h22l4 4v24H2V2h2zM8 2v10h16V2zM18 4h4v6h-4zM6 18h20v10H6z" fill="#fff"/><path d="M2 2h24v1H3v26h26V7h1v24H2zM26 2l4 4h-1l-3-3zM8 2h1v9h14V2h1v10H8zM18 4h4v6h-4zM6 17h20v12H6zm1 1v10h18V18zM9 20h14v1H9zM9 23h14v1H9z"/></svg>
+        <span>Lisle Disk</span>
+      </div>
+      <div class="ico" style="top:calc(var(--sh) * 1px - 60px)" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M8 6h16v2H8zM6 8h20v2H6zM8 10h16v20H8z" fill="#fff"/><path d="M12 3h8v1h-8zM11 4h1v2h-1zM20 4h1v2h-1zM6 6h20v1H6zM6 9h20v1H6zM6 7h1v2H6zM25 7h1v2h-1zM8 10h1v20H8zM23 10h1v20h-1zM8 30h16v1H8zM12 13h1v14h-1zM16 13h1v14h-1zM20 13h1v14h-1z"/></svg>
+        <span>Trash</span>
+      </div>
+
+      <section class="win" id="w1" style="left:10px;top:30px;width:calc(var(--sw) * 1px - 104px);height:calc(var(--sh) * 1px - 42px)" aria-labelledby="w1t">
+        <div class="tb" data-drag="w1"><button class="close" type="button" aria-label="Close window" data-act="quit"></button><span id="w1t">Letter to Aunt Vera</span></div>
+        <div class="ruler" aria-hidden="true"><i style="left:4px"></i><i style="left:124px"></i><i style="left:220px"></i></div>
+        <div class="body">
+          <div class="page" id="page" contenteditable="true" spellcheck="false" role="textbox" aria-multiline="true" aria-label="Document"><h1>Dear Aunt Vera,</h1><p>I am writing this on the new Lisle 128 that Dad brought home from the office for the weekend. It has a picture on the screen of a real sheet of paper, and a little box you push around the desk called a mouse.</p><p>The letters come out exactly as they will print. I can make them underlined, outlined or with a shadow, from the Style menu. There are no colours, only black and white, but the grey bits are made of tiny dots, like newspaper photos.</p><p>We saved this letter on a disk the size of a coaster. It holds 400K. Dad says that is more than enough for everything he will ever write.</p><p>Love from Pip<br>Saturday 14 April 1984</p></div>
+          <div class="sb" aria-hidden="true">
+            <div class="up"><svg viewBox="0 0 15 15"><path d="M7 3h1v1h1v1h1v1h1v1h1v1H9v3H6V8H3V7h1V6h1V5h1V4h1z" fill="none" stroke="#000"/></svg></div>
+            <div class="track"><div class="thumb"></div></div>
+            <div class="dn"><svg viewBox="0 0 15 15"><path d="M6 3h3v3h3v1h-1v1h-1v1H9v1H8v1H7v-1H6V9H5V8H4V7H3V6h3z" fill="none" stroke="#000"/></svg></div>
+          </div>
+          <div class="status"><span id="words">0 words</span><span>Page 1 · 12 pt · Jersey</span></div>
+        </div>
+      </section>
+
+      <div class="dlg" id="dlg" role="dialog" aria-modal="true" aria-labelledby="dlgt" style="left:calc(var(--sw) * .5px - 120px);top:80px;width:240px">
+        <div class="in">
+          <h2 id="dlgt">ScribeWrite 1.0</h2>
+          <p id="dlgp">© 1984 Lisle Computer Company, Cupertino Road, Palo Verde. Written by R. Moss and J. Tanaka. 128K RAM, 400K disk.</p>
+          <button class="ok" type="button" id="ok">OK</button>
+        </div>
+      </div>
+      <div class="outline" id="outline"></div>
+    </div>
+  </div>
+</div>
+<script>
+(() => {
+  const fitEl = document.getElementById("fit"), screen = document.getElementById("screen");
+  // whole-number scaling keeps every pixel square; very small screens take what fits
+  const fit = () => {
+    const cs = getComputedStyle(document.documentElement), sw = +cs.getPropertyValue("--sw"), sh = +cs.getPropertyValue("--sh");
+    const raw = Math.min((innerWidth - 40) / sw, (innerHeight - 40) / sh);
+    const k = raw >= 2 ? Math.floor(raw) : Math.max(.5, raw);
+    document.documentElement.style.setProperty("--k", k);
+  };
+  fit(); addEventListener("resize", fit);
+
+  // menus: press to open, press an item to act
+  const bar = document.getElementById("bar"), page = document.getElementById("page"), dlg = document.getElementById("dlg");
+  const closeMenus = () => { bar.querySelectorAll(".m").forEach((m) => m.setAttribute("aria-expanded", "false")); bar.querySelectorAll(".menu").forEach((m) => m.classList.remove("open")); };
+  bar.addEventListener("click", (e) => {
+    const m = e.target.closest(".m");
+    if (m) { const open = m.getAttribute("aria-expanded") === "true"; closeMenus(); if (!open) { m.setAttribute("aria-expanded", "true"); document.getElementById("menu-" + m.dataset.menu).classList.add("open"); } return; }
+    const it = e.target.closest(".menu button"); if (!it || it.disabled) return;
+    if (it.dataset.st) {
+      if (it.dataset.st === "plain") { page.className = "page"; bar.querySelectorAll("[data-st]").forEach((b) => b.classList.toggle("on", b.dataset.st === "plain")); }
+      else { page.classList.toggle(it.dataset.st); it.classList.toggle("on"); bar.querySelector('[data-st="plain"]').classList.toggle("on", page.classList.length === 1); }
+    }
+    if (it.dataset.act) act(it.dataset.act);
+    closeMenus();
+  });
+  document.addEventListener("pointerdown", (e) => { if (!e.target.closest(".bar")) closeMenus(); });
+  const act = (a) => {
+    const p = document.getElementById("dlgp"), h = document.getElementById("dlgt");
+    if (a === "about") { h.textContent = "ScribeWrite 1.0"; p.textContent = "© 1984 Lisle Computer Company, Cupertino Road, Palo Verde. Written by R. Moss and J. Tanaka. 128K RAM, 400K disk."; }
+    if (a === "save") { h.textContent = "Saved"; p.textContent = "“Letter to Aunt Vera” was saved on Lisle Disk. 391K free."; }
+    if (a === "quit") { h.textContent = "Save changes?"; p.textContent = "Save changes to “Letter to Aunt Vera” before closing? Press OK to save and keep writing."; }
+    dlg.classList.add("open"); document.getElementById("ok").focus();
+  };
+  document.getElementById("ok").addEventListener("click", () => dlg.classList.remove("open"));
+  document.querySelector(".close").addEventListener("click", () => act("quit"));
+
+  // dragging a window shows a dotted outline, and the window jumps when you let go
+  const out = document.getElementById("outline");
+  let drag = null;
+  screen.addEventListener("pointerdown", (e) => {
+    const tb = e.target.closest("[data-drag]"); if (!tb || e.target.closest("button")) return;
+    const w = document.getElementById(tb.dataset.drag), k = +getComputedStyle(document.documentElement).getPropertyValue("--k") || 1;
+    drag = { w, k, x0: e.clientX, y0: e.clientY, l: w.offsetLeft, t: w.offsetTop };
+    Object.assign(out.style, { display: "block", left: drag.l + "px", top: drag.t + "px", width: w.offsetWidth + "px", height: w.offsetHeight + "px" });
+    tb.setPointerCapture(e.pointerId);
+  });
+  screen.addEventListener("pointermove", (e) => { if (!drag) return;
+    const dx = Math.round((e.clientX - drag.x0) / drag.k), dy = Math.round((e.clientY - drag.y0) / drag.k);
+    out.style.left = drag.l + dx + "px"; out.style.top = Math.max(20, drag.t + dy) + "px"; });
+  screen.addEventListener("pointerup", () => { if (!drag) return; drag.w.style.left = out.style.left; drag.w.style.top = out.style.top; out.style.display = "none"; drag = null; });
+
+  // word count and the menu-bar clock
+  const count = () => { const n = (page.innerText.match(/\S+/g) || []).length; document.getElementById("words").textContent = n + " words"; };
+  page.addEventListener("input", count); count();
+  const clock = document.getElementById("clock");
+  const tick = () => { const d = new Date(); clock.textContent = String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); };
+  tick(); setInterval(tick, 20000);
+})();
+</script>
+</body>
+</html>

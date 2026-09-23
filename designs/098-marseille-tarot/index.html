@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Marseille Tarot · Centiform</title>
+<style>
+/* @fonts: Grenze Gotisch:600:block; Grenze:400,600 */
+@font-face{font-family:"Grenze Gotisch";font-style:normal;font-weight:600;font-display:block;src:url(fonts/grenze-gotisch-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Grenze";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/grenze-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Grenze";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/grenze-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f3e6c8;          /* rag card stock */
+  --ink: #161616;         /* the woodblock key line */
+  --accent-1: #2a5fb0;    /* stencil blue */
+  --accent-2: #e4b100;    /* stencil yellow */
+  --red: #c8412f; --flesh: #f1c9a0; --green: #5b8a4a; --cream: #fbf3df;
+  --u: 6px;
+  --card-w: min(188px, 12.4vw);
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(44px, 5vw, 86px);
+  --goth: "Grenze Gotisch", "Old English Text MT", serif;
+  --gren: "Grenze", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--gren); overflow-x: hidden;
+  background-image: radial-gradient(circle at 30% 20%, rgba(160, 120, 40, .08), transparent 45%), radial-gradient(circle at 85% 85%, rgba(160, 120, 40, .1), transparent 45%); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 4px; }
+
+.wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(300px, 380px); grid-template-rows: auto 1fr; gap: calc(var(--u) * 4) calc(var(--u) * 6); padding: calc(var(--u) * 4) calc(var(--u) * 7); min-height: 100svh; }
+/* the page head is itself a card banner: a ruled band with the title set in the gap */
+.head { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: calc(var(--u) * 3); }
+.head::before, .head::after { content: ""; height: 14px; border-top: 3px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.head h1 { margin: 0; font: 600 var(--t4)/1 var(--goth); text-align: center; }
+.head::after { grid-column: 3; grid-row: 1; }
+.head p { grid-row: 2; grid-column: 1 / -1; margin: 0; text-align: center; font-size: var(--t-1); letter-spacing: .18em; text-transform: uppercase; }
+
+.deck { display: grid; grid-template-columns: repeat(5, var(--card-w)); gap: calc(var(--u) * 3); justify-content: center; align-content: start; }
+.card { width: var(--card-w); aspect-ratio: 64 / 121; padding: 0; border: 0; background: none; cursor: pointer; position: relative; transition: transform .2s; }
+.card svg { width: 100%; height: 100%; display: block; filter: drop-shadow(2px 3px 0 rgba(22, 22, 22, .18)); }
+.card:hover { transform: translateY(-4px) rotate(-1deg); }
+.card[aria-pressed="true"] { transform: translateY(-8px); }
+.card[aria-pressed="true"] svg { filter: drop-shadow(0 0 0 var(--accent-1)) drop-shadow(4px 6px 0 rgba(42, 95, 176, .35)); }
+/* the colour stencils sit a little off the key block; hover nudges them further */
+.stencil { transition: transform .35s steps(3, end); }
+@media (prefers-reduced-motion: no-preference) { .card:hover .stencil { transform: translate(-3px, 3px); } }
+@media (prefers-reduced-motion: reduce) { .card, .stencil { transition: none; } }
+
+/* the plate: a larger card beside its description */
+.plate { display: grid; gap: calc(var(--u) * 3); align-content: start; border-left: 1px solid var(--ink); padding-left: calc(var(--u) * 5); }
+.plate .big { width: min(100%, 230px); aspect-ratio: 64 / 121; justify-self: center; }
+.plate .big svg { width: 100%; height: 100%; }
+.plate h2 { margin: 0; font: 600 var(--t3)/1 var(--goth); }
+.plate .num { font: 600 var(--t-1)/1 var(--gren); letter-spacing: .2em; color: var(--accent-1); text-transform: uppercase; }
+.plate p { margin: 0; }
+.plate dl { display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--u) * 3); margin: 0; font-size: var(--t-1); font-variant-numeric: lining-nums; }
+.plate dt { font-weight: 600; }
+.plate dd { margin: 0; }
+.buy { display: flex; gap: calc(var(--u) * 2); align-items: center; flex-wrap: wrap; }
+.buy a { background: var(--ink); color: var(--cream); padding: 10px 18px; text-decoration: none; font: 600 var(--t0)/1 var(--gren); letter-spacing: .06em; }
+.buy a:hover { background: var(--accent-1); }
+.buy span { font: 600 var(--t1)/1 var(--gren); }
+
+@media (min-width: 1900px) { :root { --card-w: 230px; --t0: 20px; } }
+@media (max-width: 1150px) { .wrap { grid-template-columns: minmax(0, 1fr); } .plate { border-left: 0; border-top: 1px solid var(--ink); padding: calc(var(--u) * 4) 0 0; grid-template-columns: 200px minmax(0, 1fr); column-gap: calc(var(--u) * 4); } .plate .big { grid-row: span 6; } :root { --card-w: min(160px, 17vw); } }
+@media (max-width: 640px) {
+  .wrap { padding: calc(var(--u) * 3) calc(var(--u) * 2.5); }
+  .deck { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 2); } .card { width: 100%; }
+  .plate { grid-template-columns: minmax(0, 1fr); } .plate .big { grid-row: auto; width: 180px; }
+  .head::before, .head::after { display: none; } .head { grid-template-columns: minmax(0, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="head">
+    <h1>Le Tarot d’Arles</h1>
+    <p>After the pearwood blocks of Jean-Mathieu Rollin, 1742 · reissued by Atelier Rollin &amp; Filles, 2026</p>
+  </header>
+  <main class="deck" id="deck" aria-label="The trumps"></main>
+  <aside class="plate" id="plate" aria-live="polite"></aside>
+</div>
+<script>
+(() => {
+  const K = "#161616", B = "#2a5fb0", Y = "#e4b100", R = "#c8412f", F = "#f1c9a0", G = "#5b8a4a", C = "#fbf3df";
+  // each trump: numeral, name, stencil fills, key-block lines; all on a 128 x 242 block
+  const T = [
+    { n: "I", nm: "Le Bateleur", fills: [[R, "M44 60h40v60H44z"], [B, "M40 120h48l6 40H34z"], [Y, "M18 150h92v14H18z"], [F, "M52 40a12 12 0 1 1 24 0 12 12 0 1 1-24 0z"]],
+      lines: "M52 40a12 12 0 1 1 24 0 12 12 0 1 1-24 0zM44 60h40v60H44zM40 120h48l6 40H34zM18 150h92v14H18zM24 164v44M104 164v44M30 142a6 6 0 1 1 12 0zM56 142a6 6 0 1 1 12 0zM82 142a6 6 0 1 1 12 0zM44 30l20-12 20 12", say: "The juggler at his table: cups, a knife, a coin. The first trump, and the one every set of blocks wore out first." },
+    { n: "II", nm: "La Papesse", fills: [[B, "M34 70h60v130H34z"], [R, "M44 60h40v30H44z"], [Y, "M50 20h28l4 24H46z"], [F, "M54 48h20v16H54z"]],
+      lines: "M34 70h60v130H34zM50 20h28l4 24H46zM54 48h20v16H54zM44 110h34v40H44zM48 118h26M48 126h26M48 134h26", say: "A seated woman with an open book. Rollin cut her veil so fine that most later prints lost it." },
+    { n: "IIII", nm: "L’Empereur", fills: [[R, "M40 80h50v110H40z"], [Y, "M46 30h36l-4 20H50z"], [B, "M20 150h30v50H20z"], [F, "M52 52h24v22H52z"]],
+      lines: "M40 80h50v110H40zM46 30h36l-4 20H50zM52 52h24v22H52zM20 150h30v50H20zM35 175a10 10 0 1 1 .1 0M90 70v-40M84 30h12", say: "Numbered IIII, as the old cutters wrote it, never IV. He sits side-on with his shield at his feet." },
+    { n: "VI", nm: "L’Amoureux", fills: [[Y, "M20 20h88v40H20z"], [B, "M24 110h24v90H24z"], [R, "M80 110h24v90H80z"], [G, "M52 110h24v90H52z"]],
+      lines: "M20 20h88v40H20zM24 110h24v90H24zM52 110h24v90H52zM80 110h24v90H80zM64 30l-18 22M52 46l12-8 4 14M36 100a10 10 0 1 1 .1 0M64 100a10 10 0 1 1 .1 0M92 100a10 10 0 1 1 .1 0", say: "Three figures and a choice; above them a small archer takes aim out of a sun." },
+    { n: "VII", nm: "Le Chariot", fills: [[B, "M28 36h72v14H28z"], [R, "M36 90h56v60H36z"], [Y, "M20 190a18 18 0 1 1 36 0 18 18 0 1 1-36 0zM72 190a18 18 0 1 1 36 0 18 18 0 1 1-36 0z"], [F, "M52 60h24v24H52z"]],
+      lines: "M28 36h72v14H28zM34 50v100M94 50v100M36 90h56v60H36zM52 60h24v24H52zM20 190a18 18 0 1 1 36 0 18 18 0 1 1-36 0zM72 190a18 18 0 1 1 36 0 18 18 0 1 1-36 0zM36 150h56", say: "A crowned driver under a canopy, two horses who pull in different directions." },
+    { n: "VIIII", nm: "L’Hermite", fills: [[B, "M40 50l30-10 20 150H30z"], [Y, "M86 70h16v22H86z"], [R, "M44 190h48v12H44z"], [F, "M58 30h18v18H58z"]],
+      lines: "M40 50l30-10 20 150H30zM58 30h18v18H58zM86 70h16v22H86zM94 92v112M44 190h48v12H44zM90 66l6-8 6 8", say: "An old man with a lantern held up at arm’s length. Numbered VIIII: nine strokes, cut as one block." },
+    { n: "X", nm: "La Roue de Fortune", fills: [[Y, "M24 110a40 40 0 1 1 80 0 40 40 0 1 1-80 0z"], [B, "M40 170h48v30H40z"], [R, "M56 40h16v20H56z"]],
+      lines: "M24 110a40 40 0 1 1 80 0 40 40 0 1 1-80 0zM64 70v80M24 110h80M36 82l56 56M92 82l-56 56M56 40h16v20H56zM64 150v20M40 170h48v30H40z", say: "A wheel on a stand with small beasts riding it round, one going up, one coming down." },
+    { n: "XIII", nm: "", fills: [[G, "M16 200h96v10H16z"], [F, "M40 60h20v20H40z"], [B, "M56 90l30 70-10 6-30-66z"]],
+      lines: "M16 200h96v10H16zM40 60h20v20H40zM50 80v80l-16 40M50 160l16 40M60 90l40-50M88 40c14 0 24 10 22 26M56 90l30 70", say: "The one card with no name on its lower banner. By old custom its title is not printed." },
+    { n: "XVII", nm: "L’Étoile", fills: [[Y, "M64 18l8 20 22 2-16 14 6 22-20-12-20 12 6-22-16-14 22-2z"], [B, "M10 190c20-10 40 10 60 0s40-10 58 0v20H10z"], [R, "M40 150h14v20H40zM74 150h14v20H74z"], [F, "M52 110h24v40H52z"]],
+      lines: "M64 18l8 20 22 2-16 14 6 22-20-12-20 12 6-22-16-14 22-2zM52 110h24v40H52zM40 150h14v20H40zM74 150h14v20H74zM47 170v14M81 170v14M22 30l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1zM104 60l3 7 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1zM10 190c20-10 40 10 60 0s40-10 58 0", say: "A great star with small stars round it, and water poured from two jugs into a stream." },
+    { n: "XVIIII", nm: "Le Soleil", fills: [[Y, "M64 26a30 30 0 1 1-.1 0z"], [R, "M20 160h88v14H20z"], [B, "M20 174h88v30H20z"], [F, "M40 120h18v40H40zM70 120h18v40H70z"]],
+      lines: "M64 26a30 30 0 1 1-.1 0zM64 10v10M64 92v10M28 56h10M90 56h10M38 30l8 8M90 30l-8 8M38 82l8-8M90 82l-8-8M20 160h88v14H20zM20 174h88v30H20zM40 120h18v40H40zM70 120h18v40H70z", say: "Two children before a low wall, under a sun that drops coloured tears. Numbered XVIIII, not XIX." },
+  ];
+  // a card: banners top and bottom, stencil colours set off the key block by a few points
+  const card = (t, i, big) => `<svg viewBox="0 0 128 242" role="img" aria-label="${t.n}${t.nm ? ", " + t.nm : ", the unnamed trump"}">
+    <rect x="1" y="1" width="126" height="240" fill="${C}" stroke="${K}" stroke-width="2"/>
+    <g class="stencil" transform="translate(${2 + (i % 3)} ${-1 - (i % 2) * 1.5})">${t.fills.map(([c, d]) => `<path d="${d}" fill="${c}"/>`).join("")}</g>
+    <path d="${t.lines}" fill="none" stroke="${K}" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M8 8h112v14H8zM8 220h112v14H8z" fill="${C}" stroke="${K}" stroke-width="1.8"/>
+    <text x="64" y="19" text-anchor="middle" font-family="Grenze, serif" font-weight="600" font-size="11" fill="${K}" letter-spacing="1">${t.n}</text>
+    <text x="64" y="231" text-anchor="middle" font-family="Grenze, serif" font-weight="600" font-size="${t.nm.length > 14 ? 8.2 : 9.5}" fill="${K}" letter-spacing=".6">${t.nm.toUpperCase()}</text>
+    <path d="M5 5h118v232H5z" fill="none" stroke="${K}" stroke-width=".6"/></svg>`;
+  const deck = document.getElementById("deck"), plate = document.getElementById("plate");
+  deck.innerHTML = T.map((t, i) => `<button class="card" type="button" data-i="${i}" aria-pressed="false">${card(t, i)}</button>`).join("");
+  const show = (i) => {
+    const t = T[i];
+    deck.querySelectorAll(".card").forEach((c) => c.setAttribute("aria-pressed", String(+c.dataset.i === i)));
+    plate.innerHTML = `<div class="big">${card(t, i, true)}</div><span class="num">Trump ${t.n}</span><h2>${t.nm || "Sans nom"}</h2><p>${t.say}</p>
+      <dl><dt>Block</dt><dd>Pearwood, recut from a 1742 proof</dd><dt>Stencils</dt><dd>${t.fills.length} colours, laid by hand, a little off the line</dd><dt>Card</dt><dd>64 × 121 mm, 400 g rag</dd></dl>
+      <div class="buy"><span>€96</span><a href="#plate">The full deck of 78</a></div><p style="font-size:var(--t-1)">Single trumps as framing prints, €18 each. Atelier Rollin &amp; Filles, 7 rue de la Calade, Arles.</p>`;
+  };
+  deck.addEventListener("click", (e) => { const c = e.target.closest(".card"); if (c) show(+c.dataset.i); });
+  show(8);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlour Board Game · Centiform</title>
+<style>
+/* @fonts: Holtwood One SC:400:block; Arbutus Slab:400 */
+@font-face{font-family:"Holtwood One SC";font-style:normal;font-weight:400;font-display:block;src:url(fonts/holtwood-one-sc-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Arbutus Slab";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/arbutus-slab-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f2e6c9;          /* board card, varnished */
+  --ink: #2a2a2a;
+  --accent-1: #d9412b;    /* pillar-box red */
+  --accent-2: #2c7a4b;    /* baize green */
+  --mustard: #e3a92b; --sea: #3f7fa6; --card: #faf3e1;
+  --u: 6px;
+  /* scale: 1.25 on 18px */
+  --t-2: 11.5px; --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: clamp(30px, 3vw, 46px);
+  --holt: "Holtwood One SC", "Rockwell Extra Bold", serif;
+  --slab: "Arbutus Slab", "Rockwell", serif;
+}
+* { box-sizing: border-box; }
+html { background: #7c3b24; }
+body { margin: 0; background: #7c3b24; color: var(--ink); font: 400 var(--t0)/1.55 var(--slab); overflow-x: hidden;
+  background-image: repeating-linear-gradient(92deg, rgba(0,0,0,.06) 0 3px, transparent 3px 11px), repeating-linear-gradient(88deg, rgba(255,255,255,.04) 0 2px, transparent 2px 17px); }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
+
+/* the board: a loop of spaces round the rim, the centre is the rulebook */
+.board { margin: calc(var(--u) * 2) auto; width: min(100% - 24px, calc((100svh - 24px) * 1.42)); aspect-ratio: 1.42; min-height: 560px; background: var(--bg); border: 10px solid var(--ink); box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--ink), 0 20px 40px rgba(0,0,0,.45);
+  display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); gap: 0; position: relative; }
+.sp { position: relative; border: 2px solid var(--ink); margin: -1px; background: var(--c, var(--card)); display: grid; grid-template-rows: auto 1fr auto; justify-items: center; align-items: center; padding: 4px; text-align: center; min-width: 0; min-height: 0; overflow: hidden; }
+.sp .no { font: 400 var(--t-2)/1 var(--holt); opacity: .75; }
+.sp .lab { font: 400 clamp(10px, .95vw, 15px)/1.05 var(--holt); letter-spacing: .02em; }
+.sp svg { width: min(52%, 46px); height: auto; }
+.sp.red { --c: var(--accent-1); color: #fff; } .sp.grn { --c: var(--accent-2); color: #fff; } .sp.mus { --c: var(--mustard); } .sp.sea { --c: var(--sea); color: #fff; }
+.sp.sec { box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 6px var(--ink); }
+.sp:hover { filter: brightness(1.08); }
+.sp[aria-current="true"] { outline: 4px solid var(--ink); outline-offset: -8px; }
+.pawn { position: absolute; right: 6%; bottom: 8%; width: 30%; max-width: 30px; z-index: 3; filter: drop-shadow(1px 3px 0 rgba(0,0,0,.35)); pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) { .pawn { animation: hop .16s ease-out; } @keyframes hop { from { transform: translateY(-40%); } to { transform: none; } } }
+
+.centre { grid-column: 2 / 8; grid-row: 2 / 6; padding: calc(var(--u) * 4) calc(var(--u) * 5); display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr auto; gap: calc(var(--u) * 2) calc(var(--u) * 4); min-height: 0; position: relative;
+  background: radial-gradient(ellipse at 70% 40%, rgba(63, 127, 166, .18), transparent 60%), var(--bg); }
+.centre .title { grid-column: 1 / -1; display: flex; align-items: baseline; justify-content: space-between; gap: calc(var(--u) * 2); flex-wrap: wrap; border-bottom: 3px double var(--ink); padding-bottom: var(--u); }
+.centre h1 { margin: 0; font: 400 var(--t3)/1 var(--holt); color: var(--accent-1); text-shadow: 2px 2px 0 var(--ink); letter-spacing: .02em; }
+.centre .maker { font-size: var(--t-1); font-style: italic; }
+.card { background: var(--card); border: 2px solid var(--ink); padding: calc(var(--u) * 3); box-shadow: 5px 5px 0 var(--ink); overflow: auto; min-height: 0; align-self: start; max-height: 100%; }
+.card h2 { margin: 0 0 var(--u); font: 400 var(--t1)/1.1 var(--holt); color: var(--accent-2); }
+.card .kind { font: 400 var(--t-2)/1 var(--holt); letter-spacing: .14em; color: var(--accent-1); margin: 0 0 var(--u); }
+.card p { margin: 0 0 calc(var(--u) * 1.5); max-width: 36em; }
+.card ul { margin: 0; padding-left: 1.2em; }
+.dicebox { display: grid; justify-items: center; align-content: start; gap: calc(var(--u) * 2); }
+.die { width: 84px; height: 84px; background: #fffdf5; border: 3px solid var(--ink); border-radius: 14px; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); padding: 10px; box-shadow: inset -4px -5px 0 rgba(0,0,0,.1), 4px 5px 0 var(--ink); }
+.die i { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); place-self: center; visibility: hidden; }
+.die i.on { visibility: visible; }
+.roll { background: var(--accent-1); color: #fff; border: 3px solid var(--ink); padding: 10px 18px; font: 400 var(--t-1)/1 var(--holt); letter-spacing: .06em; box-shadow: 3px 3px 0 var(--ink); }
+.roll:hover { background: var(--accent-2); }
+.roll:disabled { opacity: .6; cursor: wait; }
+.log { font-size: var(--t-1); text-align: center; max-width: 12em; margin: 0; min-height: 3em; }
+.foot { grid-column: 1 / -1; font-size: var(--t-2); letter-spacing: .1em; display: flex; justify-content: space-between; gap: var(--u); flex-wrap: wrap; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  .board { aspect-ratio: auto; width: calc(100% - 16px); min-height: 0; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: auto; }
+  .sp { grid-area: auto !important; height: 80px; }
+  .centre { grid-column: 1 / -1 !important; grid-row: auto !important; order: -1; grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 3); }
+  .dicebox { grid-template-columns: auto auto; align-items: center; justify-content: start; }
+  .log { text-align: left; max-width: none; grid-column: 1 / -1; }
+  .card { max-height: none; }
+}
+@media (max-width: 600px) { .board { grid-template-columns: repeat(4, minmax(0, 1fr)); } .sp .lab { font-size: 11px; } }
+</style>
+</head>
+<body>
+<main class="board" id="board" aria-label="Harbour Run board">
+  <section class="centre" aria-live="polite">
+    <div class="title"><h1>Harbour Run</h1><span class="maker">A family game of sail &amp; fortune · Pemberton &amp; Dale, Leicester, 1962</span></div>
+    <article class="card" id="card"></article>
+    <div class="dicebox">
+      <div class="die" id="die" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <button class="roll" type="button" id="roll">Roll the die</button>
+      <p class="log" id="log">Your red boat waits at Start.</p>
+    </div>
+    <div class="foot"><span>For 2 to 6 players · ages 7 to 97</span><span>Board No. 4471</span></div>
+  </section>
+</main>
+<script>
+(() => {
+  // 24 spaces clockwise from the bottom-right corner; the big ones are the rulebook
+  const ICON = {
+    anchor: '<svg viewBox="0 0 40 40"><circle cx="20" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 12v24M10 18h20M6 26c2 8 8 10 14 10s12-2 14-10" fill="none" stroke="currentColor" stroke-width="3"/></svg>',
+    wave: '<svg viewBox="0 0 40 40"><path d="M2 16c6-6 12 6 18 0s12 6 18 0M2 26c6-6 12 6 18 0s12 6 18 0" fill="none" stroke="currentColor" stroke-width="3"/></svg>',
+    sail: '<svg viewBox="0 0 40 40"><path d="M20 4v26M20 6l14 22H20zM18 8L6 28h12" fill="currentColor"/><path d="M4 32h32l-4 5H8z" fill="currentColor"/></svg>',
+    storm: '<svg viewBox="0 0 40 40"><path d="M8 20c-6 0-6-10 2-10 2-8 16-8 18 0 8 0 8 10 2 10z" fill="currentColor"/><path d="M20 22l-6 10h6l-4 8 10-12h-6l4-6z" fill="currentColor"/></svg>',
+    fish: '<svg viewBox="0 0 40 40"><path d="M4 20c8-12 22-12 28 0-6 12-20 12-28 0zM32 20l6-7v14z" fill="currentColor"/><circle cx="12" cy="18" r="2" fill="#f2e6c9"/></svg>',
+    coin: '<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="3"/><path d="M20 11v18M15 15h8a3 3 0 010 6h-6a3 3 0 000 6h9" fill="none" stroke="currentColor" stroke-width="2.5"/></svg>',
+    light: '<svg viewBox="0 0 40 40"><path d="M16 36l2-24h4l2 24z" fill="currentColor"/><rect x="15" y="6" width="10" height="6" fill="currentColor"/><path d="M26 8l10-4M26 10l10 4M14 8L4 4M14 10L4 14" stroke="currentColor" stroke-width="2"/></svg>',
+    box: '<svg viewBox="0 0 40 40"><rect x="5" y="12" width="30" height="22" fill="none" stroke="currentColor" stroke-width="3"/><path d="M5 12l6-6h18l6 6M20 12v22" fill="none" stroke="currentColor" stroke-width="3"/></svg>',
+  };
+  const S = [
+    { lab: "Start", ic: "anchor", k: "red", sec: { kind: "Space 1 · Start", h: "Welcome aboard", p: ["Harbour Run is a race from Pemberton Quay round the lighthouse and home again, first published in the autumn of 1962 and played on the parlour table ever since.", "This board is also the rulebook. Roll the die or press any space to sail there."] } },
+    { lab: "Fair wind", ic: "sail", k: "", t: "Fair wind! Advance two spaces." },
+    { lab: "Rules", ic: "wave", k: "grn", sec: { kind: "Space 3 · How to play", h: "The rules, in brief", p: ["Each player takes a boat and three cargo cards. Roll one die, sail that many spaces clockwise. Land on a harbour to trade cargo for coins.", "First boat home with ten coins wins. Storms send you back; the lighthouse lets you roll again."] } },
+    { lab: "Mackerel", ic: "fish", k: "", t: "A shoal of mackerel. Take one cargo card." },
+    { lab: "Squall", ic: "storm", k: "sea", t: "A squall. Miss your next turn." },
+    { lab: "Pieces", ic: "sail", k: "mus", sec: { kind: "Space 6 · In the box", h: "What you will find", p: ["Six turned-wood boats in red, green, yellow, blue, white and black. One ivory-coloured die. Forty-eight cargo cards. Sixty card coins in three values. This folding board, linen-hinged."], list: ["Boats: beech, hand-painted", "Die: 16 mm, rounded corners", "Board: 20 × 14 in folded twice"] } },
+    { lab: "Toll", ic: "coin", k: "", t: "Harbour dues. Pay one coin to the bank." },
+    { lab: "Lighthouse", ic: "light", k: "red", sec: { kind: "Space 8 · Roll again", h: "The Skerry lighthouse", p: ["Rounding the light is the turning point of every game. Land here exactly and you roll again, and every other player must pass you one cargo card, grumbling."] } },
+    { lab: "Calm", ic: "wave", k: "", t: "Becalmed. Roll a six to move on." },
+    { lab: "Oysters", ic: "fish", k: "mus", t: "Oysters at the bar. Take two cargo cards." },
+    { lab: "History", ic: "anchor", k: "grn", sec: { kind: "Space 11 · 1962", h: "Made in Leicester", p: ["Pemberton & Dale printed games in a former hosiery works on Frog Island from 1931 to 1979. Harbour Run was drawn by Edna Dale on her kitchen table; the lighthouse is the one she saw from her aunt’s house at Skegness.", "It sold 212,000 copies before decimal coins made the money cards look old-fashioned."] } },
+    { lab: "Gale", ic: "storm", k: "sea", t: "A gale! Go back four spaces." },
+    { lab: "Trade", ic: "coin", k: "", t: "Market day. Swap a card with any player." },
+    { lab: "Scoring", ic: "coin", k: "red", sec: { kind: "Space 14 · Coins", h: "Keeping count", p: ["Coins come in 1, 5 and 10. A boat needs ten to finish. You may not pass Pemberton Quay with fewer; sail round again, and mind the gale."] } },
+    { lab: "Driftwood", ic: "wave", k: "", t: "Driftwood. Nothing happens; admire the view." },
+    { lab: "Crabs", ic: "fish", k: "mus", t: "Crab pots. Take a cargo card from the pile." },
+    { lab: "Fog", ic: "storm", k: "sea", t: "Fog. Next turn, roll and halve it, rounding down." },
+    { lab: "Buy", ic: "box", k: "grn", sec: { kind: "Space 18 · 2026 edition", h: "The new old box", p: ["Reprinted from Edna Dale’s original artwork on the same heavy board, with beech boats turned in Derbyshire. £34 from good toyshops, or £38 posted from Pemberton & Dale, 9 Frog Island, Leicester LE3 5AG."] } },
+    { lab: "Tailwind", ic: "sail", k: "", t: "Tailwind. Advance three spaces." },
+    { lab: "Quay", ic: "anchor", k: "mus", t: "Pemberton Quay is in sight. Sell all your cargo." },
+    { lab: "Reef", ic: "storm", k: "sea", t: "The reef! Lose a cargo card." },
+    { lab: "Seals", ic: "fish", k: "", t: "Seals on the rocks. Everyone waves; nothing else happens." },
+    { lab: "The Bar", ic: "wave", k: "mus", t: "Crossing the harbour bar. If you rolled a one, roll again." },
+    { lab: "Home", ic: "light", k: "red", t: "Nearly home. One more roll." },
+  ];
+  // perimeter slots in an 8 x 6 grid, clockwise from the bottom-right corner
+  const C = 8, R = 6, slots = [];
+  for (let c = C; c >= 1; c--) slots.push([R, c]);
+  for (let r = R - 1; r >= 1; r--) slots.push([r, 1]);
+  for (let c = 2; c <= C; c++) slots.push([1, c]);
+  for (let r = 2; r <= R - 1; r++) slots.push([r, C]);
+  const board = document.getElementById("board");
+  const pawn = '<svg class="pawn" viewBox="0 0 30 40" aria-hidden="true"><path d="M8 38h14l-3-10c4-2 5-6 3-10l-5-2 5-2c2-6-2-12-7-12S5 8 7 14l5 2-5 2c-2 4-1 8 3 10z" fill="#d9412b" stroke="#2a2a2a" stroke-width="2"/></svg>';
+  board.insertAdjacentHTML("afterbegin", S.map((s, i) => `<button class="sp ${s.k}${s.sec ? " sec" : ""}" type="button" data-i="${i}" style="grid-area:${slots[i][0]} / ${slots[i][1]}" aria-label="Space ${i + 1}: ${s.lab}"><span class="no">${i + 1}</span>${ICON[s.ic]}<span class="lab">${s.lab}</span></button>`).join(""));
+  const spaces = [...board.querySelectorAll(".sp")], card = document.getElementById("card"), log = document.getElementById("log");
+  let at = 0;
+  const show = (i) => {
+    const s = S[i];
+    spaces.forEach((b, k) => b.setAttribute("aria-current", String(k === i)));
+    board.querySelectorAll(".pawn").forEach((p) => p.remove());
+    spaces[i].insertAdjacentHTML("beforeend", pawn);
+    if (s.sec) card.innerHTML = `<p class="kind">${s.sec.kind}</p><h2>${s.sec.h}</h2>${s.sec.p.map((p) => `<p>${p}</p>`).join("")}${s.sec.list ? `<ul>${s.sec.list.map((l) => `<li>${l}</li>`).join("")}</ul>` : ""}`;
+    else card.innerHTML = `<p class="kind">Space ${i + 1}</p><h2>${s.lab}</h2><p>${s.t}</p><p style="font-size:var(--t-1)">The rulebook spaces are ringed twice: Start, Rules, Pieces, Lighthouse, History, Scoring and Buy.</p>`;
+  };
+  // the die: pips laid out on a 3 x 3 grid
+  const PIPS = { 1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8] };
+  const pips = [...document.querySelectorAll("#die i")];
+  const face = (n) => pips.forEach((p, k) => p.classList.toggle("on", PIPS[n].includes(k)));
+  const motion = matchMedia("(prefers-reduced-motion: no-preference)").matches;
+  const walk = (to, done) => { if (!motion) { at = to; show(at); return done(); }
+    const step = () => { if (at === to) return done(); at = (at + 1) % S.length; show(at); setTimeout(step, 170); }; step(); };
+  const btn = document.getElementById("roll");
+  btn.addEventListener("click", () => {
+    btn.disabled = true; const n = 1 + Math.floor(Math.random() * 6);
+    let t0 = 0, last = 0;
+    const tumble = (t) => { if (!t0) t0 = t; if (t - last > 70) { last = t; face(1 + Math.floor(Math.random() * 6)); }
+      if (motion && t - t0 < 650) return requestAnimationFrame(tumble);
+      face(n); log.textContent = `You rolled a ${n}.`;
+      walk((at + n) % S.length, () => { btn.disabled = false; log.textContent = `You rolled a ${n} and landed on ${S[at].lab}.`; }); };
+    requestAnimationFrame(tumble);
+  });
+  board.addEventListener("click", (e) => { const b = e.target.closest(".sp"); if (b) { at = +b.dataset.i; show(at); log.textContent = `You sailed straight to ${S[at].lab}.`; } });
+  face(5); show(0);
+})();
+</script>
+</body>
+</html>

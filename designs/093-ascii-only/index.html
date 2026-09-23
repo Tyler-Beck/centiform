@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASCII Only · Centiform</title>
+<style>
+/* @fonts: Inconsolata:400,700 */
+@font-face{font-family:"Inconsolata";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inconsolata-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Inconsolata";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inconsolata-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #0d0d0d;          /* the terminal */
+  --ink: #d0d0d0;         /* default foreground */
+  --accent-1: #ffb86b;    /* amber: headings, links, the prompt */
+  --accent-2: #6b6b6b;    /* dim: every box-drawing character */
+  --ok: #9ccf7a;
+  --u: 1ch;               /* the grid is the character cell; every gap is whole columns */
+  --lh: 1.5;
+  /* scale in cells: 1 row of text is the unit; sizes step by whole points */
+  --t0: 16px; --t1: 18px; --t2: 20px; --t3: 24px; --t4: 32px;
+  --mono: "Inconsolata", "Consolas", monospace;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/var(--lh) var(--mono); overflow-x: hidden; }
+a { color: var(--accent-1); text-decoration: none; }
+a:hover, a:focus-visible { background: var(--accent-1); color: var(--bg); outline: 0; }
+.cols { display: grid; gap: 0 2ch; padding: 1.5em 2ch 3em; justify-content: center; align-items: start; }
+pre { margin: 0 0 1.5em; font: inherit; white-space: pre; overflow: hidden; }
+.b { color: var(--accent-2); }
+.h { display: inline; font: inherit; color: var(--accent-1); font-weight: 700; }
+.a { color: var(--accent-1); }
+.k { color: var(--ok); }
+.d { color: var(--accent-2); }
+.cur { display: inline-block; width: 1ch; background: var(--ink); color: var(--bg); }
+@media (prefers-reduced-motion: no-preference) { .cur { animation: blink 1.06s steps(1, end) infinite; } @keyframes blink { 50% { background: transparent; color: var(--ink); } } }
+@media (min-width: 1900px) { :root { --t0: 19px; } }
+</style>
+</head>
+<body>
+<main class="cols" id="out" aria-label="burrow documentation"></main>
+<script>
+(() => {
+  const out = document.getElementById("out");
+  const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const wrap = (text, w) => { const words = text.split(/\s+/), lines = []; let cur = "";
+    for (const wd of words) { if ((cur + " " + wd).trim().length > w) { lines.push(cur); cur = wd; } else cur = (cur + " " + wd).trim(); }
+    if (cur) lines.push(cur); return lines; };
+  const pad = (s, w) => s + " ".repeat(Math.max(0, w - s.length));
+  const FIG = [
+    " _                                     ",
+    "| |__  _   _ _ __ _ __ _____      __   ",
+    "| '_ \\| | | | '__| '__/ _ \\ \\ /\\ / /   ",
+    "| |_) | |_| | |  | | | (_) \\ V  V /    ",
+    "|_.__/ \\__,_|_|  |_|  \\___/ \\_/\\_/     ",
+  ];
+  // each panel: a title in the top rule, then paragraphs, code, tables or a diagram
+  const P = [
+    { id: "name", t: "NAME", nav: true, c: [["p", "burrow - keep your dotfiles in one hole, and copy them to every machine you own."], ["p", "Version 2.3.1, released 9 September 2026. Written by Ida Marsh and friends. MIT licence."]] },
+    { id: "synopsis", t: "SYNOPSIS", nav: true, c: [["code", ["burrow <command> [flags] [path...]", "", "burrow dig      # start a burrow here", "burrow stash    # move files in, link", "burrow fetch    # pull and relink", "burrow status   # what changed"]]] },
+    { id: "install", t: "INSTALL", nav: true, c: [["p", "burrow is one static binary, 3.1 MB, with no runtime. Pick one:"], ["code", ["$ brew install burrow", "$ apt install burrow", "$ cargo install burrow --locked"]], ["p", "Check it with burrow --version. It should print 2.3.1 and the build date."]] },
+    { id: "quick", t: "QUICK START", nav: true, c: [["term", [["$", "burrow dig ~/burrow"], ["", "created ~/burrow  (git, branch: main)"], ["$", "burrow stash ~/.zshrc ~/.gitconfig"], ["", "moved   ~/.zshrc      -> zsh/.zshrc"], ["", "moved   ~/.gitconfig  -> git/.gitconfig"], ["", "linked  2 files"], ["$", "burrow status"], ["", "clean   2 tracked, 0 changed"], ["$", ""]]]] },
+    { id: "how", t: "HOW IT WORKS", nav: true, c: [["diagram"], ["p", "Your files live in one git repository. burrow replaces each original with a symbolic link into it. On a new machine, fetch clones the repository and makes the same links, so every program still finds its file where it expects."]] },
+    { id: "config", t: "CONFIG", nav: true, c: [["p", "Optional. burrow reads ~/.burrow.toml if it exists."], ["code", ["[burrow]", "path    = \"~/burrow\"", "remote  = \"origin\"", "", "[hosts.laptop]", "skip    = [\"x11/*\"]", "", "[hosts.studio]", "extra   = [\"midi/*.syx\"]"]]] },
+    { id: "flags", t: "FLAGS", nav: true, c: [["table", ["flag", "does"], [["-n, --dry-run", "show what would happen"], ["-f, --force", "replace existing files"], ["-q, --quiet", "print errors only"], ["--host NAME", "act as another host"], ["--no-git", "do not commit"], ["-v, --verbose", "say everything"]]]] },
+    { id: "exit", t: "EXIT CODES", nav: true, c: [["table", ["code", "meaning"], [["0", "all good"], ["1", "a file would be overwritten"], ["2", "not inside a burrow"], ["3", "git failed; see message"], ["64", "bad flags"]]]] },
+    { id: "see", t: "SEE ALSO", nav: true, c: [["p", "git(1), ln(1), stow(8). Bug reports go to the tracker; please paste the output of burrow status --verbose. The name comes from a rabbit, who keeps everything in one hole and has doors on many hills."]] },
+  ];
+  const DIA_WIDE = [
+    "  +----------+        +-------------+        +----------+",
+    "  |  laptop  |  push  |   ~/burrow  |  pull  |  studio  |",
+    "  |  ~/.zshrc|------->|  git repo   |<-------|  ~/.zshrc|",
+    "  |   (link) |        |  zsh/.zshrc |        |   (link) |",
+    "  +----------+        +-------------+        +----------+",
+    "       |                     ^                     |",
+    "       +-------- ln -s ------+------ ln -s --------+",
+  ];
+  const DIA_NARROW = [
+    "   +------------+",
+    "   |   laptop   | ~/.zshrc (link)",
+    "   +------------+",
+    "         | push",
+    "         v",
+    "   +------------+",
+    "   |  ~/burrow  | git repo",
+    "   +------------+",
+    "         | pull",
+    "         v",
+    "   +------------+",
+    "   |   studio   | ~/.zshrc (link)",
+    "   +------------+",
+  ];
+  const hl = (s) => { // colour box characters dim, keep words bright
+    return esc(s).replace(/([+\-|<>^v]{1,}(?=[\s+\-|<>]|$))/g, (m) => /[a-z]/i.test(m) && m.length > 1 ? m : `<span class="b">${m}</span>`); };
+  const panel = (p, W) => {
+    const iw = W - 4, L = [];
+    const head = `+--[ <span class="h" role="heading" aria-level="2" id="${p.id}">${esc(p.t)}</span> ]` + "-".repeat(Math.max(1, W - p.t.length - 8)) + "+";
+    L.push(head.replace(/^\+--\[ /, '<span class="b">+--[</span> ').replace(/ \](-+\+)$/, (m, a) => ` <span class="b">]${a}</span>`));
+    const line = (inner) => `<span class="b">|</span> ${inner} <span class="b">|</span>`;
+    const blank = () => L.push(line(" ".repeat(iw)));
+    p.c.forEach(([kind, a, b], k) => {
+      if (k) blank();
+      if (kind === "p") wrap(a, iw).forEach((l) => L.push(line(esc(pad(l, iw)))));
+      if (kind === "code") a.forEach((l) => { const s = l.slice(0, iw); const m = s.indexOf("#"); L.push(line(m > -1 ? esc(pad(s.slice(0, m), 0)) + `<span class="d">${esc(pad(s.slice(m), iw - m))}</span>` : `<span class="a">${esc(pad(s, iw))}</span>`)); });
+      if (kind === "term") a.forEach(([pr, cmd], i) => {
+        if (!pr) return L.push(line(`<span class="d">${esc(pad("  " + cmd, iw))}</span>`));
+        if (i === a.length - 1) return L.push(line(`<span class="a">$</span> <span class="cur" aria-hidden="true">_</span>${" ".repeat(iw - 3)}`));
+        L.push(line(`<span class="a">$</span> <span class="k">${esc(pad(cmd, iw - 2))}</span>`)); });
+      if (kind === "table") {
+        const rows = [a, ...b], w0 = Math.max(...rows.map((r) => r[0].length));
+        if (w0 + 7 + Math.max(...rows.map((r) => r[1].length)) <= iw) {
+          const w1 = iw - w0 - 3, rule = `<span class="b">${"-".repeat(w0)}-+-${"-".repeat(w1 - 1)}</span>`;
+          rows.forEach((r, i) => { L.push(line(`${i ? `<span class="a">${esc(pad(r[0], w0))}</span>` : `<b>${esc(pad(r[0].toUpperCase(), w0))}</b>`} <span class="b">|</span> ${esc(pad(i ? r[1] : r[1].toUpperCase(), w1 - 1))}`)); if (!i) L.push(line(rule)); });
+        } else b.forEach((r) => { L.push(line(`<span class="a">${esc(pad(r[0], iw))}</span>`)); wrap(r[1], iw - 4).forEach((l) => L.push(line(esc(pad("    " + l, iw))))); });
+      }
+      if (kind === "diagram") (iw >= 60 ? DIA_WIDE : DIA_NARROW).forEach((l) => L.push(line(hl(pad(l, iw)))));
+    });
+    L.push(`<span class="b">+${"-".repeat(W - 2)}+</span>`);
+    return `<section aria-labelledby="${p.id}"><pre>${L.join("\n")}</pre></section>`;
+  };
+  const nav = (W) => {
+    const iw = W - 4, L = [`<span class="b">+--[</span> <span class="h">MAN BURROW(1)</span> <span class="b">]${"-".repeat(Math.max(1, W - 21))}+</span>`];
+    const line = (inner) => `<span class="b">|</span> ${inner} <span class="b">|</span>`;
+    FIG.forEach((f) => L.push(line(`<span class="a">${esc(pad(f.slice(0, iw), iw))}</span>`)));
+    L.push(line(" ".repeat(iw)));
+    P.forEach((p, i) => { const lab = `${String(i + 1).padStart(2, " ")}. ${p.t.toLowerCase()}`; L.push(line(`<a href="#${p.id}">${esc(lab)}</a>${" ".repeat(Math.max(0, iw - lab.length))}`)); });
+    L.push(line(" ".repeat(iw)));
+    wrap("General Commands Manual. Press a line to jump. Nothing on this page is drawn with a border; it is all characters.", iw).forEach((l) => L.push(line(`<span class="d">${esc(pad(l, iw))}</span>`)));
+    L.push(`<span class="b">+${"-".repeat(W - 2)}+</span>`);
+    return `<nav aria-label="Sections"><pre>${L.join("\n")}</pre></nav>`;
+  };
+  // lay out by whole columns: measure one character, count how many fit
+  const render = () => {
+    const probe = document.createElement("span"); probe.textContent = "0".repeat(100); probe.style.cssText = "position:absolute;visibility:hidden;white-space:pre"; document.body.appendChild(probe);
+    const ch = probe.getBoundingClientRect().width / 100; probe.remove();
+    const cols = Math.floor((innerWidth - ch * 4) / ch);
+    let html;
+    if (cols >= 160) {
+      const n = 44, m = 84, r = Math.min(66, cols - n - m - 4);
+      out.style.gridTemplateColumns = `${n}ch ${m}ch ${r}ch`;
+      html = `<div>${nav(n)}</div><div>${P.slice(0, 6).map((p) => panel(p, m)).join("")}</div><div>${P.slice(6).map((p) => panel(p, r)).join("")}</div>`;
+    } else if (cols >= 110) {
+      const n = 44, m = Math.min(84, cols - n - 2);
+      out.style.gridTemplateColumns = `${n}ch ${m}ch`;
+      html = `<div>${nav(n)}${P.slice(6).map((p) => panel(p, n)).join("")}</div><div>${P.slice(0, 6).map((p) => panel(p, m)).join("")}</div>`;
+    } else {
+      const w = Math.min(84, cols);
+      out.style.gridTemplateColumns = `${w}ch`;
+      html = `<div>${nav(w)}${P.map((p) => panel(p, w)).join("")}</div>`;
+    }
+    out.innerHTML = html;
+  };
+  render();
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(render);
+  let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(render, 80); });
+})();
+</script>
+</body>
+</html>

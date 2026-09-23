@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lipogram · Centiform</title>
+<style>
+/* @fonts: Gloock:400:block; Schibsted Grotesk:400,700 */
+@font-face{font-family:"Gloock";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gloock-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/schibsted-grotesk-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Schibsted Grotesk";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/schibsted-grotesk-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #e8eef5;          /* cool coated stock */
+  --ink: #1c1c1c;
+  --accent-1: #d1495b;    /* the strike through the missing glyph */
+  --accent-2: #8aa1b8;    /* rules, folios, quiet blue */
+  --page: #f4f7fb;
+  --muted: #4a5360;
+  --u: 8px;
+  --gut: calc(var(--u) * 6);
+  /* scale: 1.333 on 18px */
+  --t-1: 13.5px; --t0: 18px; --t1: 24px; --t2: 32px; --t3: 42.6px; --t4: clamp(64px, 8.4vw, 150px);
+  --gloock: "Gloock", "Didot", serif;
+  --grot: "Schibsted Grotesk", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.55 var(--grot); overflow-x: hidden; }
+a { color: inherit; text-decoration-color: var(--accent-1); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 3px; }
+
+/* a spread: two pages and a gutter */
+.spread { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; padding: calc(var(--u) * 3); min-height: 100svh; }
+.pg { background: var(--page); padding: calc(var(--u) * 5) var(--gut) calc(var(--u) * 7); position: relative; display: grid; align-content: start; gap: calc(var(--u) * 4); }
+.pg.l { box-shadow: inset -24px 0 24px -20px rgba(28, 28, 28, .16); }
+.pg.r { box-shadow: inset 24px 0 24px -20px rgba(28, 28, 28, .16); }
+.folio { position: absolute; bottom: calc(var(--u) * 3); font: 700 var(--t-1)/1 var(--grot); letter-spacing: .12em; color: var(--accent-2); text-transform: uppercase; }
+.l .folio { left: var(--gut); } .r .folio { right: var(--gut); }
+
+/* the masthead and the counter */
+.top { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 2); border-bottom: 2px solid var(--ink); padding-bottom: var(--u); font: 700 var(--t-1)/1.3 var(--grot); letter-spacing: .12em; text-transform: uppercase; flex-wrap: wrap; }
+.count { font-variant-numeric: tabular-nums; color: var(--accent-1); }
+.count output { color: var(--ink); }
+h1 { margin: 0; font: 400 var(--t4)/.86 var(--gloock); letter-spacing: -.02em; }
+.tag { margin: 0; font: 400 var(--t1)/1.3 var(--gloock); color: var(--muted); max-width: 22em; }
+/* the only ornament: that glyph, struck out */
+.orn { display: flex; align-items: center; gap: calc(var(--u) * 3); }
+.orn::before, .orn::after { content: ""; flex: 1; height: 1px; background: var(--accent-2); }
+.orn span { position: relative; font: 400 var(--t3)/1 var(--gloock); color: var(--ink); width: 1ch; text-align: center; }
+.orn span::before { content: "e"; }
+.orn span::after { content: ""; position: absolute; left: -18%; right: -18%; top: 55%; height: 4px; background: var(--accent-1); transform: rotate(-24deg); }
+nav h2, .ads h2, .who h2 { margin: 0 0 var(--u); font: 700 var(--t-1)/1.3 var(--grot); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-1); }
+nav ol { list-style: none; margin: 0; padding: 0; counter-reset: c; }
+nav li { display: grid; grid-template-columns: 2.4em 1fr auto; gap: var(--u); padding: calc(var(--u) * 1.2) 0; border-top: 1px solid var(--accent-2); font: 400 var(--t1)/1.2 var(--gloock); }
+nav li span { font: 700 var(--t-1)/2 var(--grot); color: var(--accent-2); font-variant-numeric: tabular-nums; }
+nav li a { text-decoration: none; } nav li a:hover { text-decoration: underline; }
+.pull { margin: 0; font: 400 var(--t2)/1.15 var(--gloock); border-top: 6px solid var(--ink); padding-top: calc(var(--u) * 2); }
+.pull cite { display: block; margin-top: var(--u); font: 700 var(--t-1)/1.3 var(--grot); font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+
+/* right page: story in columns, lyric, small ads */
+.kick { margin: 0; font: 700 var(--t-1)/1 var(--grot); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-1); }
+.story h2 { margin: 0 0 var(--u); font: 400 var(--t3)/1 var(--gloock); letter-spacing: -.01em; }
+.dek { margin: 0 0 calc(var(--u) * 3); font: 400 var(--t1)/1.3 var(--gloock); color: var(--muted); }
+.cols { columns: 2 17em; column-gap: calc(var(--u) * 4); column-rule: 1px solid var(--accent-2); }
+.cols p { margin: 0 0 calc(var(--u) * 1.5); hanging-punctuation: first; }
+.cols p:first-child::first-letter { float: left; font: 400 4.2em/.8 var(--gloock); margin: .06em .08em 0 0; color: var(--accent-1); }
+.cols .by { font-weight: 700; font-size: var(--t-1); letter-spacing: .08em; text-transform: uppercase; }
+.duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: calc(var(--u) * 4); border-top: 2px solid var(--ink); padding-top: calc(var(--u) * 2); }
+.lyric p { margin: 0; font: 400 var(--t0)/1.6 var(--gloock); font-style: normal; white-space: pre-line; }
+.lyric .by { margin-top: var(--u); font: 700 var(--t-1)/1.3 var(--grot); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.ads ul { list-style: none; margin: 0; padding: 0; font-size: var(--t-1); line-height: 1.45; }
+.ads li { padding: var(--u) 0; border-bottom: 1px dotted var(--accent-2); }
+.ads li b { text-transform: uppercase; letter-spacing: .08em; }
+.who p { margin: 0; font-size: var(--t-1); }
+
+@media (min-width: 1900px) { :root { --t0: 20px; --t-1: 15px; } }
+@media (max-width: 1000px) { .spread { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 1.5); } .pg.l, .pg.r { box-shadow: none; } .pg.r { border-top: 1px solid var(--accent-2); } }
+@media (max-width: 560px) { .pg { padding: calc(var(--u) * 4) calc(var(--u) * 2.5) calc(var(--u) * 7); } .duo { grid-template-columns: minmax(0, 1fr); } :root { --gut: calc(var(--u) * 2.5); } }
+</style>
+</head>
+<body>
+<main class="spread">
+  <section class="pg l" aria-label="Front">
+    <div class="top"><span>No. 41 · Autumn 2026 · €14</span><span class="count">Fifth-glyph count: <output id="n">0</output> · scanning <output id="s">0</output></span></div>
+    <h1>Blank Folio</h1>
+    <p class="tag">A journal of constraint, trick and play, out of Oslo and Lyon.</p>
+    <div class="orn" aria-hidden="true"><span></span></div>
+    <nav aria-label="What is in it">
+      <h2>What is in it</h2>
+      <ol>
+        <li><span>04</span><a href="#story">Writing Around a Missing Sound</a><span>story</span></li>
+        <li><span>11</span><a href="#lyric">Six short lyrics</a><span>Min-ji Oh</span></li>
+        <li><span>18</span><a href="#story">A night at an Oulipo lunch</a><span>diary</span></li>
+        <li><span>26</span><a href="#ads">Small ads</a><span>and a crossword</span></li>
+      </ol>
+    </nav>
+    <blockquote class="pull"><p style="margin:0">“A constraint is a door, not a wall.”</p><cite>Aud Brakstad, story, folio 6</cite></blockquote>
+    <span class="folio">Blank Folio · 2</span>
+  </section>
+
+  <section class="pg r" aria-label="Story">
+    <article class="story" id="story">
+      <p class="kick">Our main story</p>
+      <h2>Writing Around a Missing Sound</h2>
+      <p class="dek">Four authors, a lost glyph, and a jury that will not bring it back.</p>
+      <div class="cols">
+        <p>Our autumn copy is a lipogram. In it you will find no fifth symbol of our common ABC: not in a caption, not in a folio, not in any word of this story. A small counting script, up in our top bar, is watching for it, and it has found nothing.</p>
+        <p>Why do it? In 1969 a Paris author put out a full, long book this way, and it is still in print. What a constraint forbids, it also brings about: you find words you would not think of, and short, sharp syntax you would not risk.</p>
+        <p>Four authors took on our task: 200 words, no fifth symbol, a month to do it. Aud Brakstad sat down with a list of cooking words and lost half of it: no salt pan, only a pot; no fork, only a spoon.</p>
+        <p>Lucas Moraud built a whodunit about a lost cat, which by its final paragraph you will want found. Tomas Vilk, in Tartu, did it all in rhyming pairs and will not admit how long it took.</p>
+        <p class="by">Story by our staff · photographs: nil</p>
+      </div>
+    </article>
+    <div class="duo">
+      <div class="lyric" id="lyric">
+        <p>A cat sat still on a warm stair,
+a paw of shadow, half of air;
+what it was watching, nobody knows.
+It sat, and sat, until it slid
+down into sun, as all cats do,
+and that is all this lyric did.</p>
+        <p class="by">Min-ji Oh, Busan · lyric 3 of 6</p>
+      </div>
+      <div>
+        <div class="ads" id="ads">
+          <h2>Small ads</h2>
+          <ul>
+            <li><b>Typist</b>, prompt, will avoid any symbol you ask. Box 12.</li>
+            <li><b>Buying</b>: a manual typing unit, any condition. Oslo, Box 31.</li>
+            <li><b>Oulipo study group</b>, Thursdays, Lyon. Bring a dictionary and a sharp pin.</li>
+          </ul>
+        </div>
+        <div class="who" style="margin-top:24px">
+          <h2>Who did this</h2>
+          <p>Aud Brakstad, Oslo · Lucas Moraud, Lyon · Min-ji Oh, Busan · Tomas Vilk, Tartu. Subscription: €48 annually, post paid, from Folio Books, Rua do Carmo 18, Lisbon.</p>
+        </div>
+      </div>
+    </div>
+    <span class="folio">3 · Autumn 2026</span>
+  </section>
+</main>
+<script>
+(() => {
+  // count that glyph in all visibly printed words; it should stay at nothing
+  const txt = document.body.innerText, target = String.fromCharCode(101), n = [...txt.toLowerCase()].filter((c) => c === target).length;
+  document.getElementById("n").textContent = n;
+  const s = document.getElementById("s"), total = txt.replace(/\s/g, "").length;
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) { s.textContent = total.toLocaleString("en-GB"); return; }
+  let t0 = 0;
+  const run = (t) => { if (!t0) t0 = t; const k = Math.min(1, (t - t0) / 1600); s.textContent = Math.round(total * k).toLocaleString("en-GB"); if (k < 1 && !document.hidden) requestAnimationFrame(run); else s.textContent = total.toLocaleString("en-GB"); };
+  requestAnimationFrame(run);
+})();
+</script>
+</body>
+</html>

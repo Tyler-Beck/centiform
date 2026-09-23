@@ -153,3 +153,47 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Encode Sans | OFL-1.1 | https://fontsource.org/fonts/encode-sans | 074-transit-diagram |
 | Libre Caslon Display | OFL-1.1 | https://fontsource.org/fonts/libre-caslon-display | 075-engraved-score |
 | Noto Music | OFL-1.1 | https://fontsource.org/fonts/noto-music | 075-engraved-score |
+| Commissioner | OFL-1.1 | https://fontsource.org/fonts/commissioner | 076-labanotation |
+| Belleza | OFL-1.1 | https://fontsource.org/fonts/belleza | 077-paint-fan-deck |
+| Albert Sans | OFL-1.1 | https://fontsource.org/fonts/albert-sans | 077-paint-fan-deck |
+| Oswald | OFL-1.1 | https://fontsource.org/fonts/oswald | 078-film-call-sheet |
+| Courier Prime | OFL-1.1 | https://fontsource.org/fonts/courier-prime | 078-film-call-sheet |
+| Libre Bodoni | OFL-1.1 | https://fontsource.org/fonts/libre-bodoni | 079-philately-sheet |
+| Stint Ultra Expanded | OFL-1.1 | https://fontsource.org/fonts/stint-ultra-expanded | 079-philately-sheet |
+| Domine | OFL-1.1 | https://fontsource.org/fonts/domine | 080-reykjavik-1972 |
+| Noto Sans Symbols 2 | OFL-1.1 | https://fontsource.org/fonts/noto-sans-symbols-2 | 080-reykjavik-1972 |
+| Faster One | OFL-1.1 | https://fontsource.org/fonts/faster-one | 081-pinball-backglass |
+| Bowlby One | OFL-1.1 | https://fontsource.org/fonts/bowlby-one | 081-pinball-backglass |
+| Alfa Slab One | OFL-1.1 | https://fontsource.org/fonts/alfa-slab-one | 082-holo-trading-card |
+| Mada | OFL-1.1 | https://fontsource.org/fonts/mada | 082-holo-trading-card |
+| Bangers | OFL-1.1 | https://fontsource.org/fonts/bangers | 083-benday-comic |
+| Patrick Hand | OFL-1.1 | https://fontsource.org/fonts/patrick-hand | 083-benday-comic |
+| Dela Gothic One | OFL-1.1 | https://fontsource.org/fonts/dela-gothic-one | 084-tin-robot-box |
+| Kosugi | Apache-2.0 | https://fontsource.org/fonts/kosugi | 084-tin-robot-box |
+| Rye | OFL-1.1 | https://fontsource.org/fonts/rye | 085-chromolitho-circus |
+| Glass Antiqua | OFL-1.1 | https://fontsource.org/fonts/glass-antiqua | 085-chromolitho-circus |
+| Chewy | Apache-2.0 | https://fontsource.org/fonts/chewy | 086-claymation-studio |
+| Baloo 2 | OFL-1.1 | https://fontsource.org/fonts/baloo-2 | 086-claymation-studio |
+| Grandstander | OFL-1.1 | https://fontsource.org/fonts/grandstander | 087-rainbow-stationery |
+| Mali | OFL-1.1 | https://fontsource.org/fonts/mali | 087-rainbow-stationery |
+| Metal Mania | OFL-1.1 | https://fontsource.org/fonts/metal-mania | 088-skate-deck-1987 |
+| Permanent Marker | Apache-2.0 | https://fontsource.org/fonts/permanent-marker | 088-skate-deck-1987 |
+| Holtwood One SC | OFL-1.1 | https://fontsource.org/fonts/holtwood-one-sc | 089-parlour-board-game |
+| Arbutus Slab | OFL-1.1 | https://fontsource.org/fonts/arbutus-slab | 089-parlour-board-game |
+| Gluten | OFL-1.1 | https://fontsource.org/fonts/gluten | 090-gouache-picture-book |
+| Andika | OFL-1.1 | https://fontsource.org/fonts/andika | 090-gouache-picture-book |
+| Anybody | OFL-1.1 | https://fontsource.org/fonts/anybody | 091-kinetic-variable |
+| Silkscreen | OFL-1.1 | https://fontsource.org/fonts/silkscreen | 092-one-bit-desktop |
+| Jersey 10 | OFL-1.1 | https://fontsource.org/fonts/jersey-10 | 092-one-bit-desktop |
+| Inconsolata | OFL-1.1 | https://fontsource.org/fonts/inconsolata | 093-ascii-only |
+| Archivo | OFL-1.1 | https://fontsource.org/fonts/archivo | 094-single-hue |
+| Unica One | OFL-1.1 | https://fontsource.org/fonts/unica-one | 096-corridor-3d |
+| Mukta | OFL-1.1 | https://fontsource.org/fonts/mukta | 096-corridor-3d |
+| Gloock | OFL-1.1 | https://fontsource.org/fonts/gloock | 097-lipogram |
+| Schibsted Grotesk | OFL-1.1 | https://fontsource.org/fonts/schibsted-grotesk | 097-lipogram |
+| Grenze Gotisch | OFL-1.1 | https://fontsource.org/fonts/grenze-gotisch | 098-marseille-tarot |
+| Grenze | OFL-1.1 | https://fontsource.org/fonts/grenze | 098-marseille-tarot |
+| Bricolage Grotesque | OFL-1.1 | https://fontsource.org/fonts/bricolage-grotesque | 099-solarpunk-coop |
+| Source Serif 4 | OFL-1.1 | https://fontsource.org/fonts/source-serif-4 | 099-solarpunk-coop |
+| Philosopher | OFL-1.1 | https://fontsource.org/fonts/philosopher | 100-sundial-hours |
+| Nunito Sans | OFL-1.1 | https://fontsource.org/fonts/nunito-sans | 100-sundial-hours |

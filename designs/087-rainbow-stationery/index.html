@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rainbow Stationery · Centiform</title>
+<style>
+/* @fonts: Grandstander:400,800:block; Mali:400,600 */
+@font-face{font-family:"Grandstander";font-style:normal;font-weight:400;font-display:block;src:url(fonts/grandstander-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Grandstander";font-style:normal;font-weight:800;font-display:block;src:url(fonts/grandstander-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mali";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/mali-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Mali";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/mali-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fff5fb;          /* bubblegum paper */
+  --ink: #3a1d5c;         /* grape ink */
+  --accent-1: #ff4fa3;    /* hot pink */
+  --accent-2: #34d1bf;    /* sea-foam */
+  --sun: #ffd23a; --lav: #b58cff; --sky: #5ab8ff; --lime: #9be15d;
+  --rainbow: linear-gradient(115deg, #ff4fa3 0%, #ff8a3d 18%, #ffd23a 34%, #9be15d 50%, #34d1bf 66%, #5ab8ff 80%, #b58cff 100%);
+  --vinyl: #2c1747;
+  --u: 8px;
+  /* scale: 1.25 on 18px */
+  --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(48px, 6.4vw, 110px);
+  --grand: "Grandstander", "Comic Sans MS", cursive;
+  --mali: "Mali", "Trebuchet MS", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.55 var(--mali); overflow-x: hidden;
+  background-image: radial-gradient(circle, rgba(181, 140, 255, .18) 2px, transparent 2.5px); background-size: 28px 28px; }
+button, a { font: inherit; color: inherit; }
+:focus-visible { outline: 4px dashed var(--accent-1); outline-offset: 4px; }
+
+.desk { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: calc(var(--u) * 4); padding: calc(var(--u) * 3) calc(var(--u) * 4); min-height: 100svh; align-items: stretch; }
+
+/* the trapper: vinyl binder, rainbow cover, velcro tab */
+.trapper { position: relative; background: var(--vinyl); padding: calc(var(--u) * 2.5); border-radius: 18px 26px 26px 18px; box-shadow: inset 8px 0 0 #1c0d30, 0 12px 0 #1c0d30; display: grid; }
+.cover { position: relative; background: var(--rainbow); border-radius: 10px 18px 18px 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; padding: calc(var(--u) * 4); min-height: 540px; }
+.cover::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(115deg, rgba(255,255,255,.18) 0 2px, transparent 2px 18px); }
+.cover .brand { position: relative; font: 800 var(--t-1)/1 var(--grand); letter-spacing: .2em; text-transform: uppercase; color: #fff; text-shadow: 2px 2px 0 var(--ink); }
+.cover h1 { position: relative; margin: 0; align-self: end; font: 800 var(--t4)/.9 var(--grand); color: #fff; text-shadow: 4px 4px 0 var(--ink), 8px 8px 0 var(--accent-1); letter-spacing: -.01em; }
+.cover h1 span { display: block; font-size: .4em; letter-spacing: .06em; text-shadow: 3px 3px 0 var(--ink); }
+.leopard { position: absolute; right: -4%; top: 14%; width: 62%; height: auto; }
+.tab { position: absolute; right: -2px; top: 42%; width: 70px; height: 110px; background: var(--vinyl); border-radius: 18px 0 0 18px; box-shadow: inset 0 0 0 3px #1c0d30; z-index: 3; }
+.tab::after { content: ""; position: absolute; inset: 18px 12px 18px 14px; border-radius: 8px; background: repeating-linear-gradient(0deg, #ddd 0 2px, #bbb 2px 4px); }
+.glitter { position: absolute; inset: 0; pointer-events: none; }
+.glitter i { position: absolute; width: 10px; height: 10px; background: #fff; clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%); }
+@media (prefers-reduced-motion: no-preference) {
+  .glitter i { animation: tw 1.8s ease-in-out infinite; animation-delay: calc(var(--d) * -1s); }
+  @keyframes tw { 0%, 100% { opacity: 0; transform: scale(.3); } 50% { opacity: 1; transform: scale(1); } }
+}
+
+/* the sticker sheet: kiss-cut puffies on a backing card */
+.sheet { background: #fff; border-radius: 6px; padding: calc(var(--u) * 3); box-shadow: 0 0 0 2px var(--ink), 8px 8px 0 var(--accent-2); display: grid; grid-template-rows: auto 1fr auto; gap: calc(var(--u) * 2); position: relative; }
+.sheet::before { content: ""; position: absolute; left: 0; right: 0; top: 64px; border-top: 2px dashed rgba(58, 29, 92, .3); }
+.sheet header { display: flex; justify-content: space-between; align-items: baseline; gap: var(--u); flex-wrap: wrap; }
+.sheet h2 { margin: 0; font: 800 var(--t2)/1 var(--grand); }
+.sheet header span { font: 600 var(--t-1)/1 var(--mali); background: var(--sun); padding: 4px 10px; border-radius: 99px; }
+.stickers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 2); align-content: center; padding-top: calc(var(--u) * 2); }
+.st { position: relative; background: none; border: 0; padding: 0; cursor: pointer; display: grid; justify-items: center; gap: 4px; }
+.st .slot { width: 100%; aspect-ratio: 1; display: grid; place-items: center; position: relative; }
+.st .slot::before { content: ""; position: absolute; inset: 8%; border: 2px dashed transparent; border-radius: 50%; }
+.st svg { width: 88%; height: 88%; filter: drop-shadow(0 4px 0 rgba(58, 29, 92, .25)); transition: transform .45s cubic-bezier(.3, 1.6, .5, 1), filter .3s; }
+.st:hover svg { transform: translateY(-3px) scale(1.04); }
+.st[aria-pressed="true"] svg { transform: translate(18%, -30%) rotate(-24deg) scale(.8); filter: drop-shadow(6px 12px 0 rgba(58, 29, 92, .22)); opacity: .95; }
+.st[aria-pressed="true"] .slot::before { border-color: rgba(58, 29, 92, .35); background: rgba(52, 209, 191, .1); }
+.st small { font: 600 12px/1.2 var(--mali); text-align: center; }
+.st small b { display: block; color: var(--accent-1); font-size: 14px; }
+@media (prefers-reduced-motion: reduce) { .st svg { transition: none; } }
+.bag { display: flex; gap: calc(var(--u) * 2); align-items: center; justify-content: space-between; flex-wrap: wrap; border-top: 2px solid var(--ink); padding-top: calc(var(--u) * 2); }
+.bag p { margin: 0; font-size: var(--t-1); }
+.bag output { font: 800 var(--t2)/1 var(--grand); font-variant-numeric: tabular-nums; }
+.order { background: var(--accent-1); color: #fff; border: 3px solid var(--ink); padding: 10px 20px; border-radius: 99px; font: 800 var(--t0)/1 var(--grand); text-decoration: none; box-shadow: 0 5px 0 var(--ink); }
+.order:hover { background: var(--lav); }
+
+/* catalogue page: two columns of items with item numbers */
+.cat { padding: calc(var(--u) * 5) calc(var(--u) * 4) calc(var(--u) * 7); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: calc(var(--u) * 5); }
+.cat h2 { margin: 0 0 var(--u); font: 800 var(--t3)/1 var(--grand); background: var(--rainbow); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-stroke: 1px var(--ink); }
+.cat p { margin: 0 0 calc(var(--u) * 2); max-width: 30em; }
+.items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: calc(var(--u) * 2) calc(var(--u) * 4); list-style: none; margin: 0; padding: 0; }
+.items li { display: grid; grid-template-columns: 56px 1fr auto; gap: calc(var(--u) * 2); align-items: center; padding: calc(var(--u) * 1.5); background: #fff; border-radius: 12px 4px 12px 4px; box-shadow: 0 0 0 2px var(--ink); }
+.items i { width: 56px; height: 56px; border-radius: 50%; background: var(--c); box-shadow: inset -5px -6px 0 rgba(0,0,0,.12), inset 5px 5px 0 rgba(255,255,255,.5); }
+.items b { display: block; font: 800 var(--t0)/1.2 var(--grand); }
+.items small { font-size: 13px; }
+.items span { font: 800 var(--t1)/1 var(--grand); color: var(--accent-1); font-variant-numeric: tabular-nums; }
+footer { text-align: center; padding: 0 calc(var(--u) * 4) calc(var(--u) * 5); font-size: var(--t-1); }
+
+@media (min-width: 1900px) { :root { --t0: 20px; } .desk, .cat { padding-inline: calc(var(--u) * 12); } }
+@media (max-width: 1000px) { .desk, .cat { grid-template-columns: minmax(0, 1fr); } .cover { min-height: 70svh; } }
+@media (max-width: 560px) {
+  .desk { padding: calc(var(--u) * 2); } .cat { padding-inline: calc(var(--u) * 2); }
+  .cover { min-height: calc(100svh - 80px); padding: calc(var(--u) * 3); }
+  .leopard { width: 92%; top: 18%; right: -12%; }
+  .stickers { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .items { grid-template-columns: minmax(0, 1fr); }
+  .tab { width: 44px; height: 80px; }
+}
+</style>
+</head>
+<body>
+<div class="desk">
+  <section class="trapper" aria-labelledby="t">
+    <div class="cover">
+      <div class="glitter" id="glitter" aria-hidden="true"></div>
+      <p class="brand">Glitterpeak Stationery Co. · Catalogue No. 7</p>
+      <svg class="leopard" viewBox="0 0 400 300" aria-hidden="true">
+        <defs>
+          <linearGradient id="fur" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffd23a"/><stop offset=".5" stop-color="#ff4fa3"/><stop offset="1" stop-color="#b58cff"/></linearGradient>
+        </defs>
+        <path d="M40 200c10-60 70-90 150-86 40-40 90-50 130-24 20 4 36 18 40 36 4 18-8 26-24 22-10 30-40 42-70 40l6 60h-30l-14-52c-30 10-70 10-100 0l-6 56H92l4-62c-28-2-50-8-56 10z" fill="url(#fur)" stroke="#3a1d5c" stroke-width="6" stroke-linejoin="round"/>
+        <path d="M320 90l14-30 14 34" fill="#ff4fa3" stroke="#3a1d5c" stroke-width="6" stroke-linejoin="round"/>
+        <circle cx="336" cy="120" r="8" fill="#3a1d5c"/><circle cx="339" cy="117" r="3" fill="#fff"/>
+        <path d="M358 140q6 8 0 12" fill="none" stroke="#3a1d5c" stroke-width="5" stroke-linecap="round"/>
+        <path d="M40 200c-30-6-40-40-20-60" fill="none" stroke="#3a1d5c" stroke-width="16" stroke-linecap="round"/><path d="M40 200c-30-6-40-40-20-60" fill="none" stroke="#34d1bf" stroke-width="9" stroke-linecap="round"/>
+        <g fill="#3a1d5c"><path d="M150 150q10-12 20 0q-10 10-20 0z"/><path d="M200 140q10-12 20 0q-10 10-20 0z"/><path d="M250 160q10-12 20 0q-10 10-20 0z"/><path d="M120 190q10-12 20 0q-10 10-20 0z"/><path d="M180 186q10-12 20 0q-10 10-20 0z"/><path d="M236 196q10-12 20 0q-10 10-20 0z"/><path d="M280 130q8-10 16 0q-8 8-16 0z"/></g>
+      </svg>
+      <h1 id="t">Back to School ’94<span>Rainbow Leopard Collection</span></h1>
+      <div class="tab" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <section class="sheet" aria-labelledby="sh">
+    <header><h2 id="sh">Puffy Sticker Sheet No. 12</h2><span>Peel to add to your order</span></header>
+    <div class="stickers" id="stickers"></div>
+    <div class="bag">
+      <p>Peeled: <output id="count">0</output> · Order total <output id="total">$0.00</output></p>
+      <a class="order" href="#cat">Fill in the order form</a>
+    </div>
+  </section>
+</div>
+
+<section class="cat" id="cat" aria-labelledby="c">
+  <div>
+    <h2 id="c">Also in this catalogue</h2>
+    <p>Every item ships in our famous holographic mailer. Orders over $15 get a free scratch-and-sniff sheet (grape, strawberry or root beer, while supplies last).</p>
+    <p>Order by phone: 1-800-GLITTER, 8 a.m. to 8 p.m., Monday to Saturday. Or mail the form on page 31 with a check payable to Glitterpeak Stationery Co., PO Box 1994, Boise, Idaho.</p>
+  </div>
+  <ul class="items">
+    <li><i style="--c:#ff4fa3"></i><div><b>Rainbow Leopard Trapper</b><small>Item TK-94 · 3 rings, velcro tab, 2 pockets</small></div><span>$6.99</span></li>
+    <li><i style="--c:#34d1bf"></i><div><b>Scented Gel Pens, 10-pack</b><small>Item GP-10 · neon, milky and glitter</small></div><span>$4.49</span></li>
+    <li><i style="--c:#ffd23a"></i><div><b>Calculator Pencil Case</b><small>Item PC-8 · solar calculator in the lid</small></div><span>$8.99</span></li>
+    <li><i style="--c:#b58cff"></i><div><b>Eraser Zoo, set of 6</b><small>Item EZ-6 · strawberry scented</small></div><span>$1.99</span></li>
+    <li><i style="--c:#5ab8ff"></i><div><b>Dolphin Dreams Folders</b><small>Item FD-3 · pack of 3, holographic</small></div><span>$2.49</span></li>
+    <li><i style="--c:#9be15d"></i><div><b>Pencil Toppers, set of 4</b><small>Item PT-4 · troll, star, cloud, heart</small></div><span>$1.49</span></li>
+  </ul>
+</section>
+<footer>Glitterpeak Stationery Co. · Boise, Idaho · Prices good through 31 October 1994 · Allow 4 to 6 weeks for delivery</footer>
+
+<script>
+(() => {
+  // puffies: white die-cut border, rainbow fill, one glossy highlight
+  const SH = {
+    star: "M50 6l12 28 30 2-23 20 8 30-27-17-27 17 8-30L8 36l30-2z",
+    heart: "M50 88C20 66 6 48 10 30c4-18 28-24 40-6 12-18 36-12 40 6 4 18-10 36-40 58z",
+    cloud: "M22 70c-14 0-18-20-4-24-2-16 18-24 28-12 6-14 30-12 30 6 16-2 20 22 4 30z",
+    dolphin: "M10 60c20-30 60-40 82-24-6 2-8 6-6 10-14-4-20 4-18 12-10-8-24-4-26 6-8-8-20-8-32-4z",
+    rainbow: "M8 76a42 42 0 0 1 84 0H76a26 26 0 0 0-52 0z",
+    pencil: "M16 84l6-22 50-50 16 16-50 50zM16 84l18-6-12-12z",
+    moon: "M62 10a40 40 0 1 0 28 60A32 32 0 1 1 62 10z",
+    bolt: "M56 6L22 54h22l-8 40 36-52H50z",
+    cone: "M28 46a22 22 0 0 1 44 0zM28 50h44L50 94z",
+    gem: "M50 6l36 30-36 58-36-58z",
+    note: "M40 20l40-10v54a12 10 0 1 1-8-10V28l-24 6v36a12 10 0 1 1-8-10z",
+    sparkle: "M50 6c6 26 18 38 44 44-26 6-38 18-44 44-6-26-18-38-44-44 26-6 38-18 44-44z",
+  };
+  const S = [["star", "Star", "#ffd23a", "#ff8a3d", .15], ["heart", "Heart", "#ff4fa3", "#b58cff", .15], ["dolphin", "Dolphin", "#34d1bf", "#5ab8ff", .25], ["rainbow", "Rainbow", "#ff4fa3", "#34d1bf", .2],
+    ["cloud", "Cloud", "#ffffff", "#b58cff", .1], ["pencil", "Pencil", "#ffd23a", "#ff4fa3", .1], ["moon", "Moon", "#b58cff", "#5ab8ff", .15], ["bolt", "Bolt", "#9be15d", "#ffd23a", .1],
+    ["cone", "Ice cream", "#ff8a3d", "#ff4fa3", .2], ["gem", "Gem", "#34d1bf", "#b58cff", .25], ["note", "Note", "#5ab8ff", "#3a1d5c", .1], ["sparkle", "Sparkle", "#ffd23a", "#34d1bf", .15]];
+  const el = document.getElementById("stickers");
+  el.innerHTML = S.map(([k, nm, a, b, p], i) => `<button class="st" type="button" aria-pressed="false" data-p="${p}" aria-label="${nm} sticker, ${p.toFixed(2)} dollars">
+    <span class="slot"><svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs>
+    <path d="${SH[k]}" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round"/><path d="${SH[k]}" fill="url(#g${i})" stroke="#3a1d5c" stroke-width="3" stroke-linejoin="round"/>
+    <ellipse cx="38" cy="36" rx="10" ry="5" fill="#fff" opacity=".75" transform="rotate(-30 38 36)"/></svg></span>
+    <small><b>$${p.toFixed(2)}</b>${nm}</small></button>`).join("");
+  let n = 0, tot = 0;
+  el.addEventListener("click", (e) => { const b = e.target.closest(".st"); if (!b) return;
+    const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(on));
+    n += on ? 1 : -1; tot += (on ? 1 : -1) * +b.dataset.p;
+    document.getElementById("count").textContent = n; document.getElementById("total").textContent = "$" + Math.abs(tot).toFixed(2); });
+  // glitter flecks scattered over the cover
+  const g = document.getElementById("glitter"); let h = "";
+  for (let i = 0; i < 26; i++) { const x = (i * 37) % 97, y = (i * 53) % 91; h += `<i style="left:${x}%;top:${y}%;--d:${(i * .37) % 1.8}"></i>`; }
+  g.innerHTML = h;
+})();
+</script>
+</body>
+</html>

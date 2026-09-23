@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Philately Sheet · Centiform</title>
+<style>
+/* @fonts: Libre Bodoni:400,700,400i; Stint Ultra Expanded:400 */
+@font-face{font-family:"Libre Bodoni";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/libre-bodoni-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Libre Bodoni";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/libre-bodoni-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Libre Bodoni";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/libre-bodoni-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Stint Ultra Expanded";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/stint-ultra-expanded-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #efeae0;          /* album leaf, rag paper */
+  --ink: #2a2a2a;
+  --accent-1: #b03a2e;    /* carmine, the 1d value */
+  --accent-2: #2e5e4e;    /* bottle green, the ½d value */
+  --quad: rgba(46, 94, 78, .14);   /* the faint quadrille ruling */
+  --quad-hi: rgba(46, 94, 78, .28);
+  --mount: #1b1b1b;
+  --paper: #fbf8f0;       /* stamp paper, gummed */
+  --muted: #5b5750;
+  --u: 5px;               /* one quadrille square is 2u (10px, as on a Lighthouse leaf) */
+  /* scale: 1.25 on 18px */
+  --t-2: 11.5px; --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: 35px; --t4: clamp(38px, 3.8vw, 64px);
+  --bod: "Libre Bodoni", "Bodoni 72", Didot, serif;
+  --stint: "Stint Ultra Expanded", "Arial", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: #d8d1c3; }
+body { margin: 0; background: #d8d1c3; color: var(--ink); font: 400 var(--t0)/1.5 var(--bod); overflow-x: hidden; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 4px; }
+
+/* an open album: two leaves and a gutter */
+.album { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; padding: calc(var(--u) * 4); min-height: 100svh; }
+.leaf { background-color: var(--bg); position: relative; padding: calc(var(--u) * 8) calc(var(--u) * 10) calc(var(--u) * 7);
+  background-image: linear-gradient(var(--quad-hi) 1px, transparent 1px), linear-gradient(90deg, var(--quad-hi) 1px, transparent 1px), linear-gradient(var(--quad) 1px, transparent 1px), linear-gradient(90deg, var(--quad) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px; background-position: -1px -1px; box-shadow: inset 0 0 0 26px var(--bg), inset 0 0 0 27px var(--quad-hi); }
+.leaf:first-child { box-shadow: inset 0 0 0 26px var(--bg), inset 0 0 0 27px var(--quad-hi), inset -30px 0 30px -24px rgba(60, 40, 10, .28); }
+.leaf:last-child { box-shadow: inset 0 0 0 26px var(--bg), inset 0 0 0 27px var(--quad-hi), inset 30px 0 30px -24px rgba(60, 40, 10, .28); }
+.leaf > header { text-align: center; margin-bottom: calc(var(--u) * 6); }
+.leaf h1, .leaf h2 { margin: 0; font: 400 var(--t4)/1 var(--bod); letter-spacing: .08em; text-transform: uppercase; }
+.leaf h2 { font-size: var(--t3); }
+.leaf .sub { font: 400 var(--t-2)/1.6 var(--stint); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: var(--u); }
+.leaf .sub i { font: italic 400 var(--t-1) var(--bod); text-transform: none; letter-spacing: 0; }
+.folio { position: absolute; bottom: calc(var(--u) * 8); font: 400 var(--t-2) var(--stint); letter-spacing: .12em; color: var(--muted); }
+.leaf:first-child .folio { left: calc(var(--u) * 10); } .leaf:last-child .folio { right: calc(var(--u) * 10); }
+
+#r1 { max-width: 560px; margin-inline: auto; }
+.row { display: flex; justify-content: center; align-items: flex-start; gap: calc(var(--u) * 6); flex-wrap: wrap; margin-bottom: calc(var(--u) * 6); }
+.slot { display: grid; justify-items: center; gap: calc(var(--u) * 1.5); width: 150px; }
+.slot.wide { width: 220px; }
+.cap { font: 400 10.5px/1.5 var(--stint); letter-spacing: .06em; text-align: center; font-variant-numeric: tabular-nums; }
+.cap b { display: block; font: 700 var(--t-1)/1.2 var(--bod); letter-spacing: 0; }
+
+/* the mount: black backing under a clear film strip */
+.mount { padding: 4px; background: var(--mount); position: relative; border: 0; cursor: pointer; transition: transform .2s; }
+.mount::after { content: ""; position: absolute; inset: 0; background: linear-gradient(160deg, rgba(255,255,255,.22) 0 22%, transparent 34% 70%, rgba(255,255,255,.1) 82%); pointer-events: none; }
+.mount:hover { transform: translateY(-2px) rotate(-.6deg); }
+.mount[aria-pressed="true"] { outline: 2px solid var(--accent-1); outline-offset: 5px; }
+
+/* the stamp: paper with perforations bitten from every edge */
+.stamp { --perf: 10px; display: block; width: 132px; height: 158px; padding: 10px; background: var(--paper); color: var(--c); position: relative;
+  -webkit-mask: linear-gradient(#000 0 0) center / calc(100% - var(--perf)) calc(100% - var(--perf)) no-repeat, radial-gradient(circle, transparent 3.2px, #000 3.7px) calc(var(--perf) / -2) calc(var(--perf) / -2) / var(--perf) var(--perf) round;
+          mask: linear-gradient(#000 0 0) center / calc(100% - var(--perf)) calc(100% - var(--perf)) no-repeat, radial-gradient(circle, transparent 3.2px, #000 3.7px) calc(var(--perf) / -2) calc(var(--perf) / -2) / var(--perf) var(--perf) round; }
+.wide .stamp { width: 204px; height: 158px; }
+.stamp svg { width: 100%; height: 100%; display: block; }
+.stamp .cancel { position: absolute; inset: 0; pointer-events: none; }
+
+/* write-up card: the collector's notes under the stamps */
+.write { border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); padding: calc(var(--u) * 3) 0; margin: calc(var(--u) * 2) auto calc(var(--u) * 6); max-width: 34em; }
+.write h3 { margin: 0 0 var(--u); font: 700 var(--t1)/1.2 var(--bod); }
+.write p { margin: 0 0 calc(var(--u) * 2); }
+.write dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px calc(var(--u) * 3); margin: 0; font: 400 11px/1.9 var(--stint); letter-spacing: .06em; }
+.write dt { color: var(--muted); text-transform: uppercase; }
+.write dd { margin: 0; }
+.soc { text-align: center; max-width: 30em; margin: 0 auto; font-size: var(--t-1); }
+.soc b { font: 400 11px var(--stint); letter-spacing: .2em; text-transform: uppercase; display: block; margin-bottom: var(--u); color: var(--accent-2); }
+.lead { max-width: 30em; margin: 0 auto calc(var(--u) * 6); text-align: center; font-style: italic; }
+
+@media (min-width: 1900px) { .slot { width: 164px; } .slot.wide { width: 244px; } .stamp { width: 156px; height: 186px; padding: 12px; } .wide .stamp { width: 236px; height: 186px; } }
+@media (max-width: 1100px) { .album { grid-template-columns: minmax(0, 1fr); } .leaf:first-child, .leaf:last-child { box-shadow: inset 0 0 0 26px var(--bg), inset 0 0 0 27px var(--quad-hi); } }
+@media (max-width: 560px) {
+  .album { padding: 0; }
+  .leaf { padding: calc(var(--u) * 9) calc(var(--u) * 6) calc(var(--u) * 12); box-shadow: inset 0 0 0 12px var(--bg), inset 0 0 0 13px var(--quad-hi) !important; }
+  .row { gap: calc(var(--u) * 4) calc(var(--u) * 3); }
+  .slot { width: 140px; } .stamp { width: 124px; height: 148px; } .slot.wide { width: 200px; } .wide .stamp { width: 190px; height: 148px; }
+  .leaf:first-child .folio, .leaf:last-child .folio { left: calc(var(--u) * 6); right: auto; }
+}
+</style>
+</head>
+<body>
+<main class="album">
+  <section class="leaf" aria-labelledby="p1">
+    <header>
+      <h1 id="p1">Isle of Varrow</h1>
+      <p class="sub">Definitive issue · 2 January 1934 · <i>recess, Bradbury Wilkinson</i></p>
+    </header>
+    <p class="lead">The first stamps of the island’s own post office, engraved from drawings by the schoolmaster Tobias Kell and printed in sheets of sixty.</p>
+    <div class="row" id="r1"></div>
+    <span class="folio">VARROW · LEAF 7</span>
+  </section>
+  <section class="leaf" aria-labelledby="p2">
+    <header>
+      <h2 id="p2">Harbour Centenary</h2>
+      <p class="sub">Commemorative issue · 14 July 1938 · <i>perf. 13½ × 14</i></p>
+    </header>
+    <div class="row" id="r3"></div>
+    <article class="write" aria-live="polite">
+      <h3 id="wt"></h3>
+      <p id="wp"></p>
+      <dl id="wd"></dl>
+    </article>
+    <div class="soc"><b>The Varrow Study Circle · founded 1951</b>Members meet on the second Tuesday at the Guildhall, Porth Varrow. Approval books go out by registered post each quarter; the 1938 inverted-lamp error is not for sale.</div>
+    <span class="folio">LEAF 8 · VARROW</span>
+  </section>
+</main>
+<script>
+(() => {
+  // vignettes: engraved line work, filled with ruled hatching in the stamp colour
+  const V = {
+    puffin: `<ellipse cx="30" cy="42" rx="12" ry="16" fill="url(#hh)"/><circle cx="30" cy="24" r="9" fill="currentColor"/><circle cx="27" cy="23" r="4.5" fill="#fbf8f0"/><circle cx="27" cy="23" r="1.5" fill="currentColor"/><path d="M36 22l10 3-10 5z" fill="url(#hv)" stroke="currentColor" stroke-width=".8"/><path d="M4 58h52M8 62h44" stroke="currentColor" stroke-width="1"/><path d="M18 56l6-4h14l6 4" fill="none" stroke="currentColor"/>`,
+    profile: `<ellipse cx="30" cy="36" rx="22" ry="26" fill="url(#hh)"/><path d="M36 58c-2-6-1-9 1-12 3-1 5-3 4-6l3-2-3-3c1-7-3-15-11-15-7 0-12 5-12 12 0 4 2 7 1 10-2 4-6 7-6 16z" fill="currentColor"/><path d="M20 14c6-6 18-6 22 2" fill="none" stroke="currentColor" stroke-width="1.4"/>`,
+    schooner: `<path d="M8 50h44l-6 8H14z" fill="currentColor"/><path d="M22 48V10M36 48V14" stroke="currentColor" stroke-width="1.4"/><path d="M22 12l12 34H22zM36 16l12 30H36z" fill="url(#hv)" stroke="currentColor" stroke-width=".8"/><path d="M22 12L8 44h14" fill="url(#hh)" stroke="currentColor" stroke-width=".8"/><path d="M0 62c5-3 10 3 15 0s10-3 15 0 10 3 15 0 10-3 15 0" fill="none" stroke="currentColor"/>`,
+    lamp: `<path d="M24 58l3-40h6l3 40z" fill="url(#hh)" stroke="currentColor" stroke-width="1"/><rect x="25" y="10" width="10" height="8" fill="currentColor"/><path d="M22 10h16l-8-6z" fill="currentColor"/><path d="M36 14l20-6M36 15l20 4M24 14L4 8M24 15L4 19" stroke="currentColor" stroke-width=".8"/><path d="M26 30h8M25.5 42h9" stroke="#fbf8f0" stroke-width="2"/><path d="M0 60c6-3 12 3 18 0s12-3 18 0 12 3 24 0" fill="none" stroke="currentColor"/>`,
+    map: `<path d="M14 20c6-8 18-10 26-4 6 4 10 2 12 10s-4 12 0 18-6 12-14 10-10 4-18 0-10-10-8-16-4-12 2-18z" fill="url(#hh)" stroke="currentColor" stroke-width="1.2"/><circle cx="36" cy="30" r="2.4" fill="currentColor"/><path d="M4 8h10M46 62h10M52 4v8M48 8h8" stroke="currentColor"/><path d="M18 44l6-3 4 5" stroke="currentColor" fill="none"/>`,
+    crane: `<path d="M16 58V20h6v38zM22 22l30 8M19 20l6-12 27 22M44 29v16" stroke="currentColor" stroke-width="1.3" fill="none"/><rect x="40" y="45" width="9" height="7" fill="currentColor"/><path d="M16 26l6 6M16 34l6 6M16 42l6 6M16 50l6 6" stroke="currentColor" stroke-width=".8"/><rect x="0" y="58" width="60" height="6" fill="url(#hh)"/>`,
+  };
+  // one stamp: frame, country, value tablets, vignette
+  const stamp = (s, i) => {
+    const wide = s.wide, W = wide ? 158 : 98, H = 120;
+    const cancel = s.used ? `<svg class="cancel" viewBox="0 0 ${W + 18} 138" aria-hidden="true"><g fill="none" stroke="#1d1d1d" stroke-width="1.6" opacity=".72">${[0, 1, 2, 3, 4].map((k) => `<path d="M${W * .45} ${58 + k * 9} c8 -6 16 6 24 0 s16 -6 24 0 s16 6 24 0 s16 -6 24 0"/>`).join("")}<circle cx="${W * .3}" cy="78" r="24"/><circle cx="${W * .3}" cy="78" r="15"/></g><defs><path id="ring${i}" d="M${W * .3 - 19.5} 78 a19.5 19.5 0 1 1 39 0"/></defs><text font-family="Stint Ultra Expanded, sans-serif" font-size="5" fill="#1d1d1d" opacity=".75" letter-spacing=".5"><textPath href="#ring${i}">${s.town}</textPath></text><text x="${W * .3}" y="81" text-anchor="middle" font-family="Libre Bodoni, serif" font-size="7" fill="#1d1d1d" opacity=".75">${s.date}</text></svg>` : "";
+    return `<div class="slot${wide ? " wide" : ""}"><button class="mount" type="button" data-i="${i}" aria-pressed="false" aria-label="${s.sg}, ${s.val} ${s.col}"><span class="stamp" style="--c:${s.hex}"><svg viewBox="0 0 ${W} ${H}" aria-hidden="true">
+      <defs><pattern id="hh${i}" width="2" height="2" patternUnits="userSpaceOnUse"><rect width="2" height=".9" fill="currentColor"/></pattern><pattern id="hv${i}" width="2" height="2" patternUnits="userSpaceOnUse"><rect width=".9" height="2" fill="currentColor"/></pattern><pattern id="bg${i}" width="3" height="3" patternUnits="userSpaceOnUse"><rect width="3" height=".5" fill="currentColor" opacity=".55"/></pattern></defs>
+      <rect x="1" y="1" width="${W - 2}" height="${H - 2}" fill="none" stroke="currentColor" stroke-width="2"/>
+      <rect x="4" y="4" width="${W - 8}" height="${H - 8}" fill="none" stroke="currentColor" stroke-width=".6"/>
+      <rect x="4" y="4" width="${W - 8}" height="14" fill="currentColor"/>
+      <text x="${W / 2}" y="14" text-anchor="middle" font-family="Libre Bodoni, serif" font-weight="700" font-size="${wide ? 8.4 : 7.2}" letter-spacing="1.2" fill="#fbf8f0">ISLE OF VARROW</text>
+      <rect x="8" y="22" width="${W - 16}" height="${H - 50}" fill="url(#bg${i})"/>
+      <g transform="translate(${(W - 60) / 2} ${22 + (H - 50 - 64) / 2}) scale(1 ${(H - 50) / 70})"><g${s.flaw ? ' transform="rotate(180 30 34)"' : ""}>${V[s.v].replaceAll("#hh", "#hh" + i).replaceAll("#hv", "#hv" + i)}</g></g>
+      <rect x="8" y="22" width="${W - 16}" height="${H - 50}" fill="none" stroke="currentColor" stroke-width="1"/>
+      <text x="${W / 2}" y="${H - 18}" text-anchor="middle" font-family="Libre Bodoni, serif" font-size="6.4" letter-spacing="1.4" fill="currentColor">${s.leg}</text>
+      <path d="M4 ${H - 14}h${W - 8}" stroke="currentColor" stroke-width=".6"/>
+      <text x="10" y="${H - 5}" font-family="Libre Bodoni, serif" font-weight="700" font-size="9" fill="currentColor">${s.val}</text>
+      <text x="${W - 10}" y="${H - 5}" text-anchor="end" font-family="Libre Bodoni, serif" font-weight="700" font-size="9" fill="currentColor">${s.val}</text>
+    </svg>${cancel}</span></button><p class="cap"><b>${s.val} ${s.col}</b>${s.sg} · ${s.used ? "used" : "mint"} · ${s.price}</p></div>`;
+  };
+  const S = [
+    { sg: "SG 1", val: "½d", col: "bottle green", hex: "#2e5e4e", v: "puffin", leg: "PUFFIN · SKERRY", price: "£0.80", note: "The commonest stamp of the island and the one every collection starts with. Kell drew the puffin from a bird kept by the lighthouse keeper’s daughter.", perf: "13½", wmk: "Crown and V, sideways", qty: "1,210,000" },
+    { sg: "SG 2", val: "1d", col: "carmine", hex: "#b03a2e", v: "profile", leg: "DUCHESS ELIN", price: "£1.10", used: true, town: "PORTH VARROW · ISLE OF VARROW ·", date: "3 JA 34", note: "First-day use, with a clear Porth Varrow datestamp. The Duchess sat for Kell once, for twenty minutes, and never liked the result.", perf: "13½", wmk: "Crown and V", qty: "2,400,000" },
+    { sg: "SG 3", val: "1½d", col: "sepia", hex: "#7a4a2a", v: "schooner", leg: "THE MARY KELYNACK", price: "£1.60", note: "The mail schooner that carried the island’s post to the mainland until 1952, twice a week in summer, once in winter.", perf: "13½", wmk: "Crown and V", qty: "640,000" },
+    { sg: "SG 4", val: "2d", col: "orange", hex: "#b8601c", v: "lamp", leg: "SKERRY LIGHT", price: "£2.40", used: true, town: "SKERRY · ISLE OF VARROW · ", date: "19 AU 36", note: "Used from the lighthouse sub-office, which opened for one hour on Thursdays. Skerry postmarks are scarce; this one is clear.", perf: "13½", wmk: "Crown and V", qty: "380,000" },
+    { sg: "SG 5", val: "3d", col: "ultramarine", hex: "#2f4f86", v: "map", leg: "MAP OF THE ISLE", price: "£3.75", note: "The map places Porth Varrow a mile too far north. It was never corrected.", perf: "13½", wmk: "Crown and V", qty: "300,000" },
+    { sg: "SG 6", val: "6d", col: "violet", hex: "#5d3f73", v: "crane", leg: "EAST QUAY", price: "£6.50", note: "The top value of the set. Mint copies with full original gum are hard to find; the island’s damp air did the rest.", perf: "13½", wmk: "Crown and V", qty: "120,000" },
+    { sg: "SG 14", val: "1d", col: "carmine", hex: "#b03a2e", v: "crane", leg: "1838 · HARBOUR · 1938", price: "£1.20", wide: true, note: "The centenary of the East Quay. The same crane as the 6d, redrawn larger with the date tablet.", perf: "13½ × 14", wmk: "Crown and V, sideways", qty: "900,000" },
+    { sg: "SG 15", val: "2½d", col: "blue", hex: "#2f4f86", v: "schooner", leg: "1838 · HARBOUR · 1938", price: "£2.90", wide: true, used: true, town: "PORTH VARROW · PAQUEBOT · ", date: "14 JY 38", note: "First day of issue, with the rare paquebot cancel from the Mary Kelynack’s last centenary run.", perf: "13½ × 14", wmk: "Crown and V, sideways", qty: "420,000" },
+    { sg: "SG 16a", val: "5s", col: "black", hex: "#1f1f1f", v: "lamp", leg: "1838 · HARBOUR · 1938", price: "£1,850", wide: true, flaw: true, note: "The inverted-lamp error: one row of one sheet was printed with the lantern plate upside down, so the light shines into the sea. Eleven copies are recorded. This is number 4.", perf: "13½ × 14", wmk: "Crown and V, sideways", qty: "11 recorded" },
+  ];
+  const put = (id, a, b) => { document.getElementById(id).innerHTML = S.slice(a, b).map((s, k) => stamp(s, a + k)).join(""); };
+  put("r1", 0, 6); put("r3", 6, 9);
+  const show = (i) => {
+    const s = S[i];
+    document.querySelectorAll(".mount").forEach((m) => m.setAttribute("aria-pressed", String(+m.dataset.i === i)));
+    document.getElementById("wt").textContent = `${s.sg} · ${s.val} ${s.col}`;
+    document.getElementById("wp").textContent = s.note;
+    document.getElementById("wd").innerHTML = `<dt>Perf.</dt><dd>${s.perf}</dd><dt>Wmk.</dt><dd>${s.wmk}</dd><dt>Printed</dt><dd>${s.qty}</dd><dt>State</dt><dd>${s.used ? "Used, " + s.date : "Mint, hinged once"}</dd><dt>Circle price</dt><dd>${s.price}</dd>`;
+  };
+  document.addEventListener("click", (e) => { const m = e.target.closest(".mount"); if (m) show(+m.dataset.i); });
+  show(8);
+})();
+</script>
+</body>
+</html>

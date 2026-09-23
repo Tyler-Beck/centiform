@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Film Call Sheet · Centiform</title>
+<style>
+/* @fonts: Oswald:500,700:block; Courier Prime:400,700 */
+@font-face{font-family:"Oswald";font-style:normal;font-weight:500;font-display:block;src:url(fonts/oswald-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Oswald";font-style:normal;font-weight:700;font-display:block;src:url(fonts/oswald-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Courier Prime";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/courier-prime-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Courier Prime";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/courier-prime-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fcfcf7;          /* 20 lb bond from the production office copier */
+  --ink: #111111;
+  --accent-1: #f2c200;    /* yellow revision pages and the highlighter */
+  --accent-2: #4a6fa5;    /* blue revision, second pass */
+  --slate: #161616;       /* the clapperboard face */
+  --chalk: #f4f2ea;
+  --line: #111111;
+  --tint: #efeee6;
+  --u: 4px;               /* the form is ruled on a 4px grid */
+  /* scale: typewriter points, 9 / 11 / 12 / 14 / 18 / 24 / 36 at 1.333px per pt */
+  --t9: 12px; --t10: 14.7px; --t12: 16px; --t14: 18.7px; --t18: 24px; --t24: 32px; --t36: clamp(36px, 3.4vw, 60px);
+  --type: "Courier Prime", "Courier New", monospace;
+  --cond: "Oswald", "Arial Narrow", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t12)/1.4 var(--type); overflow-x: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 1px; }
+.sheet { padding: calc(var(--u) * 5) calc(var(--u) * 8) calc(var(--u) * 6); position: relative; }
+.sheet::before { content: "REV. YELLOW 21 SEP"; position: absolute; top: calc(var(--u) * 1); right: calc(var(--u) * 8); font: 700 var(--t9)/1 var(--type); background: var(--accent-1); padding: 2px 6px; letter-spacing: .08em; }
+
+/* the form: one rule weight, boxed fields, labels in the corner */
+.grid { display: grid; gap: 0; border: 2px solid var(--line); }
+.box { border: 1px solid var(--line); margin: -1px 0 0 -1px; padding: calc(var(--u) * 1.5) calc(var(--u) * 2) calc(var(--u) * 2); min-width: 0; position: relative; }
+.lab { display: block; font: 500 var(--t9)/1.2 var(--cond); letter-spacing: .14em; text-transform: uppercase; margin-bottom: var(--u); }
+.big { font: 700 var(--t36)/.95 var(--cond); letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+.mid { font: 700 var(--t18)/1.1 var(--cond); }
+.top { grid-template-columns: minmax(0, 1fr) minmax(360px, 1.3fr) minmax(0, 1fr); }
+.prod h1 { margin: 0; font: 700 var(--t24)/1 var(--cond); text-transform: uppercase; letter-spacing: .02em; }
+.prod p { margin: var(--u) 0 0; font-size: var(--t10); }
+.day { text-align: right; }
+.day .big span { font-size: .5em; }
+
+/* clapperboard */
+.clap { padding: calc(var(--u) * 2); background: var(--tint); overflow: hidden; }
+.board { position: relative; padding-top: 72px; }
+.stick, .jaw { height: 30px; background: repeating-linear-gradient(115deg, var(--chalk) 0 22px, var(--slate) 22px 44px); border: 2px solid var(--slate); }
+.stick { position: absolute; top: 38px; left: 0; right: 0; transform-origin: 3px 100%; transform: rotate(-7deg); }
+.jaw { background: repeating-linear-gradient(65deg, var(--chalk) 0 22px, var(--slate) 22px 44px); }
+.stick::before { content: ""; position: absolute; left: -2px; bottom: -6px; width: 12px; height: 12px; border-radius: 50%; background: #8d8d88; border: 2px solid var(--slate); }
+.face { background: var(--slate); color: var(--chalk); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); font-family: var(--cond); }
+.face > div { border: 1px solid #5d5d58; padding: 4px 8px 6px; min-width: 0; }
+.face .lab { color: #bdbbb2; margin: 0; }
+.face .w { grid-column: 1 / -1; }
+.face output { display: block; font: 700 var(--t24)/1 var(--cond); font-variant-numeric: tabular-nums; }
+.face .w output { font-size: var(--t14); font-weight: 500; letter-spacing: .06em; }
+.ctl { display: flex; gap: calc(var(--u) * 2); margin-top: calc(var(--u) * 2); flex-wrap: wrap; }
+.ctl button { background: var(--bg); border: 2px solid var(--line); padding: 4px 12px; font: 700 var(--t10)/1.2 var(--type); text-transform: uppercase; letter-spacing: .06em; }
+.ctl button:hover { background: var(--accent-1); }
+@media (prefers-reduced-motion: no-preference) {
+  .stick.snap { animation: snap .38s cubic-bezier(.7, 0, 1, .6) 1; }
+  @keyframes snap { 0% { transform: rotate(-7deg); } 45% { transform: rotate(0); } 60% { transform: rotate(-1.4deg); } 72% { transform: rotate(0); } 100% { transform: rotate(-7deg); } }
+}
+
+.row2 { grid-template-columns: repeat(6, minmax(0, 1fr)); border-top: 0; }
+.row2 .box:nth-child(1) { background: var(--accent-1); }
+.note { font-size: var(--t10); }
+.row3 { grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr); border-top: 0; }
+table { border-collapse: collapse; width: 100%; font-size: var(--t10); font-variant-numeric: tabular-nums; }
+th { font: 500 var(--t9)/1.2 var(--cond); letter-spacing: .12em; text-transform: uppercase; text-align: left; border-bottom: 2px solid var(--line); padding: 2px 6px 4px 0; }
+td { border-bottom: 1px solid #b9b8b0; padding: 5px 6px 5px 0; vertical-align: top; }
+td.n { font-weight: 700; }
+tr.done td:not(:last-child) { text-decoration: line-through; text-decoration-thickness: 2px; color: #555; }
+tr.now td { background: linear-gradient(transparent 18%, rgba(242, 194, 0, .55) 18% 86%, transparent 86%); }
+.rev { color: var(--accent-2); font-weight: 700; }
+.tick { background: none; border: 2px solid var(--line); width: 26px; height: 26px; padding: 0; font: 700 16px/1 var(--type); }
+.tick[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.tot { display: flex; justify-content: space-between; gap: var(--u); margin-top: calc(var(--u) * 2); font-weight: 700; flex-wrap: wrap; }
+.map svg { width: 100%; height: auto; display: block; }
+.row4 { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); border-top: 0; }
+.dept { columns: 2; column-gap: calc(var(--u) * 6); font-size: var(--t10); }
+.dept p { margin: 0; break-inside: avoid; display: flex; justify-content: space-between; gap: var(--u); border-bottom: 1px dotted #9c9b93; padding: 2px 0; }
+.dept b { font-weight: 700; }
+.adv { background: repeating-linear-gradient(-45deg, transparent 0 8px, rgba(74, 111, 165, .07) 8px 16px); }
+.foot { display: flex; justify-content: space-between; gap: calc(var(--u) * 4); flex-wrap: wrap; margin-top: calc(var(--u) * 3); font-size: var(--t9); letter-spacing: .06em; text-transform: uppercase; }
+.wrapx { overflow-x: auto; }
+
+@media (min-width: 1900px) { :root { --t12: 18px; --t10: 15px; --t9: 13px; } .sheet { padding-inline: calc(var(--u) * 16); } }
+@media (max-width: 1100px) {
+  .top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .clap { grid-column: 1 / -1; order: 3; }
+  .row2 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .row3, .row4 { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .sheet { padding: calc(var(--u) * 6) calc(var(--u) * 4) calc(var(--u) * 6); }
+  .sheet::before { right: calc(var(--u) * 4); }
+  .top { grid-template-columns: minmax(0, 1fr); } .day { text-align: left; } .clap { order: 0; }
+  .row2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dept { columns: 1; }
+  .hide-s { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header class="grid top">
+    <div class="box prod">
+      <span class="lab">Production</span>
+      <h1>Salt Road</h1>
+      <p>Low Tide Pictures Ltd<br>Unit base: The Old Creamery, Porthkerris TR12 6UF<br>Office 01326 290 441</p>
+      <p>Dir. Nadia Okonkwo-Bell · Prod. Sam Varley<br>1st AD Theo March 07700 914 226</p>
+    </div>
+    <div class="box clap" aria-label="Slate">
+      <div class="board">
+        <div class="stick" id="stick" aria-hidden="true"></div>
+        <div class="jaw" aria-hidden="true"></div>
+        <div class="face">
+          <div class="w"><span class="lab">Prod.</span><output>SALT ROAD</output></div>
+          <div><span class="lab">Roll</span><output id="roll">A047</output></div>
+          <div><span class="lab">Scene</span><output id="scene">41</output></div>
+          <div><span class="lab">Take</span><output id="take">1</output></div>
+          <div><span class="lab">Dir.</span><output style="font-size:var(--t14)">OKONKWO-BELL</output></div>
+          <div><span class="lab">Cam.</span><output style="font-size:var(--t14)">H. LUND</output></div>
+          <div><span class="lab">Date</span><output style="font-size:var(--t14)">22·09·26</output></div>
+        </div>
+      </div>
+      <div class="ctl"><button type="button" id="mark">Mark it</button><button type="button" id="next">Next scene</button><button type="button" id="reset">Reset takes</button></div>
+    </div>
+    <div class="box day">
+      <span class="lab">Shoot day</span>
+      <div class="big">12 <span>of 24</span></div>
+      <p class="mid" style="margin:8px 0 0">Tuesday 22 September 2026</p>
+      <p class="note" style="margin:4px 0 0">Crew call <b>06:30</b> at unit base</p>
+    </div>
+  </header>
+
+  <section class="grid row2" aria-label="Calls and conditions">
+    <div class="box"><span class="lab">General call</span><div class="big">06:30</div></div>
+    <div class="box"><span class="lab">Shooting call</span><div class="big">07:45</div></div>
+    <div class="box"><span class="lab">Lunch (hot, 1 hr)</span><div class="mid">13:15</div><p class="note" style="margin:2px 0 0">Catering: Pasty &amp; Pan</p></div>
+    <div class="box"><span class="lab">Sunrise · sunset</span><div class="mid">07:02 · 19:14</div><p class="note" style="margin:2px 0 0">Golden hour 18:20</p></div>
+    <div class="box"><span class="lab">Weather</span><div class="mid">14 °C, SW 18 mph</div><p class="note" style="margin:2px 0 0">Showers after 16:00. <span class="rev">*</span>Tide low 11:48</p></div>
+    <div class="box"><span class="lab">Nearest A&amp;E</span><div class="mid">Treliske</div><p class="note" style="margin:2px 0 0">Royal Cornwall, TR1 3LJ · 38 min</p></div>
+  </section>
+
+  <section class="grid row3">
+    <div class="box">
+      <span class="lab">Scenes · tick when the last take is printed</span>
+      <div class="wrapx">
+      <table>
+        <thead><tr><th>Sc.</th><th>Set and description</th><th>D/N</th><th>Pages</th><th>Cast</th><th class="hide-s">Location</th><th>Shot</th></tr></thead>
+        <tbody id="scenes"></tbody>
+      </table>
+      </div>
+      <div class="tot"><span id="tally"></span><span>Scene 44 moved to Day 14 <span class="rev">*</span></span></div>
+    </div>
+    <div class="box map">
+      <span class="lab">Location 2 · Porthkerris slipway</span>
+      <svg viewBox="0 0 300 190" role="img" aria-label="Hand map from unit base to the slipway">
+        <rect x="0" y="0" width="300" height="190" fill="#fcfcf7"/>
+        <path d="M0 150 C60 140 90 160 140 150 S230 120 300 132 V190 H0Z" fill="#4a6fa5" opacity=".18"/>
+        <path d="M0 150 C60 140 90 160 140 150 S230 120 300 132" fill="none" stroke="#4a6fa5" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M34 40 L110 62 L168 64 L214 120" fill="none" stroke="#111" stroke-width="3"/>
+        <path d="M34 40 L110 62 L168 64 L214 120" fill="none" stroke="#fcfcf7" stroke-width="1" stroke-dasharray="3 3"/>
+        <rect x="14" y="24" width="34" height="24" fill="#f2c200" stroke="#111" stroke-width="2"/>
+        <text x="16" y="18" font-family="Courier Prime, monospace" font-size="11" font-weight="700">UNIT BASE</text>
+        <rect x="200" y="112" width="30" height="30" fill="none" stroke="#111" stroke-width="2"/><path d="M204 116l22 22M226 116l-22 22" stroke="#111" stroke-width="2"/>
+        <text x="152" y="108" font-family="Courier Prime, monospace" font-size="11" font-weight="700">SET</text>
+        <text x="110" y="54" font-family="Courier Prime, monospace" font-size="10">B3304 · 0.8 mi</text>
+        <circle cx="140" cy="84" r="7" fill="none" stroke="#111" stroke-width="2"/><text x="152" y="88" font-family="Courier Prime, monospace" font-size="10">P crew parking</text>
+        <path d="M268 20 v26 M262 30 l6 -10 6 10" stroke="#111" stroke-width="2" fill="none"/><text x="264" y="60" font-family="Oswald, sans-serif" font-size="11">N</text>
+        <text x="16" y="178" font-family="Courier Prime, monospace" font-size="10" fill="#111">No vehicles on the slip after 11:00 (tide)</text>
+      </svg>
+      <p class="note" style="margin:8px 0 0">Walkies: ch. 1 production, ch. 2 camera, ch. 4 locations. Pick up radio from Tamsin at base.</p>
+    </div>
+  </section>
+
+  <section class="grid row4">
+    <div class="box">
+      <span class="lab">Cast</span>
+      <div class="wrapx">
+      <table>
+        <thead><tr><th>#</th><th>Cast</th><th>Character</th><th>Status</th><th>Pick-up</th><th>H/MU</th><th>On set</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td>Ruth Penrose</td><td>MAGGIE</td><td>W</td><td>06:15</td><td>06:45</td><td>07:40</td></tr>
+          <tr><td class="n">2</td><td>Kwame Addo</td><td>LEWIS</td><td>W</td><td>06:40</td><td>07:10</td><td>07:40</td></tr>
+          <tr><td class="n">4</td><td>Elsie Tregear</td><td>YOUNG MAGGIE</td><td>SW</td><td>08:30</td><td>09:15</td><td>10:30</td></tr>
+          <tr><td class="n">7</td><td>Dafydd Rhys <span class="rev">*</span></td><td>HARBOURMASTER</td><td>WF</td><td>11:00</td><td>11:30</td><td>14:15</td></tr>
+          <tr><td class="n">&nbsp;</td><td colspan="6">Chaperone for #4: J. Tregear. Licence CH-2026-118 on file. Max 5 hrs on set.</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+    <div class="box">
+      <span class="lab">Crew calls</span>
+      <div class="dept">
+        <p><span>Camera</span><b>06:30</b></p><p><span>Grip &amp; elec.</span><b>06:15</b></p><p><span>Sound</span><b>07:00</b></p><p><span>Art dept.</span><b>06:00</b></p>
+        <p><span>Costume</span><b>06:30</b></p><p><span>Hair &amp; MU</span><b>06:30</b></p><p><span>Locations</span><b>05:45</b></p><p><span>Unit drivers</span><b>05:45</b></p>
+        <p><span>Safety boat</span><b>10:30</b></p><p><span>Unit medic</span><b>06:30</b></p>
+      </div>
+    </div>
+    <div class="box adv">
+      <span class="lab">Advance · Day 13, Wed 23 Sept</span>
+      <p class="note" style="margin:0">Sc. 12, 13, 13A · INT. MAGGIE’S KITCHEN · D · 3 2/8 pp · Cast 1, 2, 5. Crew call 07:30 at the Creamery. Rain cover: Sc. 30 (INT. BOAT SHED).</p>
+      <p class="note" style="margin:8px 0 0"><b>Closed set Sc. 43.</b> No phones on the slip. No forced calls this week.</p>
+    </div>
+  </section>
+  <footer class="foot"><span>Call sheet 12 · Please read it all</span><span>Prepared by T. March, 1st AD · approved S. Varley</span><span>Page 1 of 1</span></footer>
+</div>
+<script>
+(() => {
+  // pages are counted in eighths, the way scripts are broken down
+  const SC = [
+    ["41", "EXT. SLIPWAY · Maggie drags the dinghy down against the tide", "D", 13, "1, 2", "Porthkerris slip"],
+    ["41A", "EXT. SLIPWAY · Insert: rope burns on Maggie’s hands", "D", 1, "1", "Porthkerris slip"],
+    ["42", "EXT. HARBOUR WALL · Lewis watches; does not help", "D", 6, "2", "North wall"],
+    ["18", "EXT. BEACH · Young Maggie finds the float (flashback)", "D", 10, "4", "Kennack Sands"],
+    ["43", "EXT. SLIPWAY · The harbourmaster reads the letter aloud", "D", 11, "1, 7", "Porthkerris slip"],
+    ["45", "EXT. SLIPWAY · Dusk. Empty dinghy returns on the swell", "N", 2, "–", "Porthkerris slip"],
+  ];
+  const e8 = (n) => { const w = Math.floor(n / 8), r = n % 8; return (w ? w + " " : "") + (r ? r + "/8" : w ? "" : "0"); };
+  const body = document.getElementById("scenes");
+  body.innerHTML = SC.map(([n, set, dn, p, cast, loc], i) => `<tr data-i="${i}"${i === 0 ? ' class="now"' : ""}><td class="n">${n}</td><td>${set}</td><td>${dn}</td><td>${e8(p)}</td><td>${cast}</td><td class="hide-s">${loc}</td><td><button class="tick" type="button" aria-pressed="false" aria-label="Scene ${n} shot">&nbsp;</button></td></tr>`).join("");
+  const tally = () => { let done = 0, all = 0; body.querySelectorAll("tr").forEach((r) => { const p = SC[r.dataset.i][3]; all += p; if (r.classList.contains("done")) done += p; });
+    document.getElementById("tally").textContent = `Shot ${e8(done)} of ${e8(all)} pages`; };
+  const rows = [...body.querySelectorAll("tr")];
+  const sceneOut = document.getElementById("scene"), takeOut = document.getElementById("take"), rollOut = document.getElementById("roll");
+  let take = 1, cur = 0, roll = 47, clapped = 0;
+  const setNow = () => { rows.forEach((r, i) => r.classList.toggle("now", i === cur)); sceneOut.textContent = SC[cur][0]; };
+  body.addEventListener("click", (e) => {
+    const b = e.target.closest(".tick"); if (!b) return;
+    const on = b.getAttribute("aria-pressed") !== "true"; b.setAttribute("aria-pressed", String(on)); b.textContent = on ? "✓" : " ";
+    b.closest("tr").classList.toggle("done", on); tally();
+  });
+  // mark it: the sticks meet, then the take goes up for the next one
+  const stick = document.getElementById("stick");
+  document.getElementById("mark").addEventListener("click", () => {
+    stick.classList.remove("snap"); void stick.offsetWidth; stick.classList.add("snap");
+    setTimeout(() => { take++; takeOut.textContent = take; clapped++; if (clapped % 9 === 0) { roll++; rollOut.textContent = "A0" + roll; } }, 380);
+  });
+  document.getElementById("next").addEventListener("click", () => {
+    const next = rows.findIndex((r, i) => i > cur && !r.classList.contains("done"));
+    cur = next === -1 ? (rows.findIndex((r) => !r.classList.contains("done")) + 1 || 1) - 1 : next; take = 1; takeOut.textContent = take; setNow();
+  });
+  document.getElementById("reset").addEventListener("click", () => { take = 1; takeOut.textContent = take; });
+  tally();
+})();
+</script>
+</body>
+</html>

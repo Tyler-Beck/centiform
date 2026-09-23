@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Labanotation · Centiform</title>
+<style>
+/* @fonts: Commissioner:300,400,600 */
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/commissioner-latin-300-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/commissioner-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/commissioner-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ecefe9;          /* archive board, grey-green */
+  --ink: #161616;         /* notator's pen */
+  --accent-1: #5b3fc4;    /* the reading line, violet pencil */
+  --accent-2: #d7c9a8;    /* aged score paper */
+  --paper: #f4f5f1;
+  --rule: #9aa097;
+  --muted: #4b4f49;
+  --u: 8px;               /* one count on the staff is 3u */
+  /* scale: 1.25 (major third) on 18px */
+  --t-2: 11.5px; --t-1: 14.4px; --t0: 18px; --t1: 22.5px; --t2: 28px; --t3: clamp(35px, 3.6vw, 56px);
+  --face: "Commissioner", "Segoe UI", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 300 var(--t0)/1.55 var(--face); overflow-x: hidden; }
+:focus-visible { outline: 2px solid var(--accent-1); outline-offset: 2px; }
+button { font: inherit; color: inherit; }
+
+/* catalogue strip: the archive card, top edge */
+.card { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: calc(var(--u) * 3); align-items: end; padding: calc(var(--u) * 2) calc(var(--u) * 4); border-bottom: 1px solid var(--ink); }
+.card .no { font: 600 var(--t-1)/1.3 var(--face); letter-spacing: .08em; font-variant-numeric: tabular-nums; }
+.card h1 { margin: 0; font: 600 var(--t3)/1 var(--face); letter-spacing: -.01em; }
+.card h1 span { font-weight: 300; }
+.card .by { font-size: var(--t-1); line-height: 1.4; text-align: right; color: var(--muted); }
+
+/* the page is a row of staves; each stave is read from the bottom */
+main { display: grid; grid-template-columns: minmax(240px, .85fr) minmax(0, .8fr) minmax(0, 1.2fr) minmax(0, 1.1fr); column-gap: calc(var(--u) * 6); padding: calc(var(--u) * 3) calc(var(--u) * 4) calc(var(--u) * 2); min-height: calc(100svh - 150px); }
+.stave { display: flex; flex-direction: column-reverse; justify-content: flex-start; min-width: 0; position: relative; }
+.stave + .stave::before { content: ""; position: absolute; left: calc(var(--u) * -3); top: 0; bottom: 0; width: 1px;
+  background: repeating-linear-gradient(to top, var(--rule) 0 1px, transparent 1px calc(var(--u) * 12)), linear-gradient(var(--rule), var(--rule)); background-size: 9px 100%, 1px 100%; background-position: -4px 0, 0 0; background-repeat: repeat-y, no-repeat; width: 1px; overflow: visible; }
+.stave > h2 { margin: 0; padding-top: calc(var(--u) * 1); font: 600 var(--t-1)/1.3 var(--face); letter-spacing: .12em; text-transform: uppercase; display: flex; gap: var(--u); align-items: baseline; }
+.stave > h2 b { font-weight: 600; color: var(--accent-1); font-variant-numeric: tabular-nums; }
+.start { height: 5px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); margin: calc(var(--u) * 1) 0 calc(var(--u) * 2); }
+.stave p { margin: 0 0 calc(var(--u) * 2); max-width: 36em; }
+.stave h3 { margin: 0 0 var(--u); font: 600 var(--t1)/1.2 var(--face); }
+.note { font-size: var(--t-1); color: var(--muted); }
+
+/* stave 1: the score itself */
+.score { flex: 1 1 auto; min-height: 520px; display: flex; flex-direction: column; justify-content: flex-end; }
+#staff { width: 100%; height: 100%; max-height: calc(100svh - 230px); min-height: 500px; display: block; }
+.play { align-self: flex-start; margin-bottom: calc(var(--u) * 2); background: none; border: 1px solid var(--ink); padding: calc(var(--u) * .5) calc(var(--u) * 1.5); font-size: var(--t-1); cursor: pointer; display: inline-flex; gap: var(--u); align-items: center; }
+.play:hover { background: var(--paper); }
+.sym { stroke: var(--ink); stroke-width: 1.2; }
+.sym.low { fill: var(--ink); }
+.sym.mid { fill: var(--paper); }
+.sym.high { fill: url(#hatch); }
+.dot { fill: var(--ink); }
+.g.on .sym { stroke: var(--accent-1); stroke-width: 2.4; }
+.g.on .sym.low { fill: var(--accent-1); }
+.g.on .dot { fill: var(--accent-1); }
+.g.pick .sym { stroke: var(--accent-1); stroke-width: 2.4; }
+.g.pick .sym.mid { fill: #dcd5f5; }
+.read { stroke: var(--accent-1); stroke-width: 1.5; }
+.staff { stroke: var(--ink); stroke-width: 1; }
+.bar { stroke: var(--ink); stroke-width: 1; }
+.mno { font: 400 11px var(--face); fill: var(--muted); }
+.cue { font: 600 10px var(--face); fill: var(--muted); letter-spacing: .06em; }
+
+/* stave 2: key of directions, three levels stacked low to high */
+.key { display: flex; flex-direction: column-reverse; gap: calc(var(--u) * 2); }
+.lvl { display: grid; grid-template-columns: 5.5em repeat(3, 34px); grid-template-rows: repeat(3, 40px); gap: 4px 6px; align-items: center; }
+.lvl .name { grid-row: 1 / 4; grid-column: 1; align-self: end; font-size: var(--t-1); line-height: 1.3; }
+.lvl .name b { display: block; font-weight: 600; }
+.k { width: 34px; height: 40px; padding: 3px; background: none; border: 1px solid transparent; cursor: pointer; display: grid; place-items: center; }
+.k:hover, .k[aria-pressed="true"] { border-color: var(--accent-1); background: var(--paper); }
+.k svg { width: 22px; height: 32px; overflow: visible; }
+
+table { border-collapse: collapse; width: 100%; font-size: var(--t-1); font-variant-numeric: tabular-nums; margin-bottom: calc(var(--u) * 2); }
+th, td { text-align: left; padding: calc(var(--u) * .5) 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+th { font-weight: 600; width: 38%; padding-right: var(--u); }
+.log li { margin-bottom: var(--u); font-size: var(--t-1); }
+.log { padding-left: 0; list-style: none; margin: 0 0 calc(var(--u) * 2); border-left: 3px solid var(--accent-2); padding-left: calc(var(--u) * 2); }
+.log time { font-weight: 600; font-variant-numeric: tabular-nums; margin-right: var(--u); }
+
+footer { display: flex; justify-content: space-between; gap: calc(var(--u) * 2); flex-wrap: wrap; padding: calc(var(--u) * 1.5) calc(var(--u) * 4); border-top: 1px solid var(--ink); font-size: var(--t-2); letter-spacing: .1em; text-transform: uppercase; }
+footer .up { color: var(--accent-1); font-weight: 600; }
+
+@media (min-width: 1900px) { :root { --t0: 20px; --t-1: 16px; } }
+@media (max-width: 1100px) { main { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: calc(var(--u) * 6); } .stave:nth-child(3)::before { display: none; } }
+@media (max-width: 640px) {
+  .card { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); gap: var(--u); }
+  .card .by { text-align: left; }
+  main { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); min-height: 0; }
+  .stave + .stave::before { display: none; }
+  .stave + .stave { border-top: 1px solid var(--ink); padding-top: calc(var(--u) * 2); }
+  #staff { max-height: 72svh; min-height: 440px; }
+  footer { padding: calc(var(--u) * 1.5) calc(var(--u) * 2); }
+}
+</style>
+</head>
+<body>
+<header class="card">
+  <div class="no">HDNA · 1958 / 014<br>Sheet 3 of 11</div>
+  <h1>Lanterns for Nine <span>· Solo II</span></h1>
+  <div class="by">Choreography Ilse Varga, 1958<br>Notated by Moira Kettering, 1961 · rev. 1994</div>
+</header>
+<main>
+  <section class="stave" aria-labelledby="s1">
+    <h2 id="s1"><b>A</b> The score, bars 1–8</h2>
+    <div class="start" aria-hidden="true"></div>
+    <div class="score">
+      <button class="play" id="play" type="button" aria-pressed="false"><svg width="10" height="12" viewBox="0 0 10 12" aria-hidden="true"><path d="M1 11V1l8 5z" fill="currentColor"/></svg><span>Read at ♩ = 72</span></button>
+      <svg id="staff" role="img" aria-label="Labanotation staff for bars 1 to 8, read from the bottom"></svg>
+    </div>
+  </section>
+
+  <section class="stave" aria-labelledby="s2">
+    <h2 id="s2"><b>B</b> Key: direction and level</h2>
+    <div class="start" aria-hidden="true"></div>
+    <div class="key" id="key"></div>
+    <p class="note">The shape says where; the shading says how high. Press a sign to find it in the score.</p>
+  </section>
+
+  <section class="stave" aria-labelledby="s3">
+    <h2 id="s3"><b>C</b> Reading this sheet</h2>
+    <div class="start" aria-hidden="true"></div>
+    <p>Start at the double line and read up. Time runs toward the top of the page; the length of a sign is the length of the movement. A sign two counts long is a slow step.</p>
+    <p>The centre line is the dancer’s spine. Signs just beside it carry the weight: these are the supports. The next columns out are leg gestures, then the torso, and outside the staff, the arms. Left is left, right is right, as if you stand behind the dancer.</p>
+    <p>A gap in both support columns is a jump. A leaning shape with slanted ends is a turn; the slant tells you which way. A small ring after an arm sign means hold it there until something else is written.</p>
+    <p>Varga counted in fours but danced across the bar. Kettering wrote exactly what she saw in the 1961 studio film, including the late weight shift in bar 6, which later dancers had smoothed out.</p>
+  </section>
+
+  <section class="stave" aria-labelledby="s4">
+    <h2 id="s4"><b>D</b> Record</h2>
+    <div class="start" aria-hidden="true"></div>
+    <table>
+      <tbody>
+        <tr><th scope="row">Work</th><td>Lanterns for Nine, second solo</td></tr>
+        <tr><th scope="row">Premiere</th><td>Albion Rooms, Leeds, 14 March 1958</td></tr>
+        <tr><th scope="row">Tempo</th><td>♩ = 72, 4/4, 8 bars shown</td></tr>
+        <tr><th scope="row">Music</th><td>Piano, Oskar Ferrand, “Lamplighter”</td></tr>
+        <tr><th scope="row">Source</th><td>16 mm film reel HDNA-F-203, 3 min 40 s</td></tr>
+        <tr><th scope="row">Shelf</th><td>Case 7, drawer C, folder 14</td></tr>
+      </tbody>
+    </table>
+    <ol class="log">
+      <li><time>1961</time>First full score, pencil on tracing linen, 11 sheets.</li>
+      <li><time>1979</time>Inked for the Northern Ballet revival; bar 6 queried.</li>
+      <li><time>1994</time>Checked against the film by R. Achebe; bar 6 restored.</li>
+      <li><time>2026</time>Digitised. Scanning grant from the Arden Trust.</li>
+    </ol>
+  </section>
+</main>
+<footer><span class="up">Read upward ↑</span><span>Holloway Dance Notation Archive · 22 Cable Street, Leeds</span><span>Reading room open Tue–Thu, 10–4, by letter</span></footer>
+
+<script>
+(() => {
+  const NS = "http://www.w3.org/2000/svg";
+  // columns: x of the left edge of each 16-unit column; C = centre line
+  const C = 130, W = 16;
+  const COL = { LA: 22, LB: 62, LG: 88, LS: C - 20, RS: C + 4, RG: C + 26, RB: C + 52, RA: C + 92 };
+  const U = 24, B = 4, BARS = 8, BASE = 60 + BARS * B * U, TOP = 30;
+  // [column, start count, length, direction, level]
+  const S = [
+    ["LS", -1.6, 1, "place", "mid"], ["RS", -1.6, 1, "place", "mid"],
+    ["RS", 0, 1, "fwd", "mid"], ["LS", 1, 1, "fwd", "mid"], ["RS", 2, 1, "fwd", "mid"], ["LS", 3, 1, "fwd", "mid"],
+    ["LA", 0, 4, "fwd", "high"], ["RA", 0, 2, "place", "low"],
+    ["RS", 4, 1, "right", "mid"], ["LS", 5, 1, "place", "mid"], ["RS", 6, 1, "right", "mid"], ["LS", 7, 1, "place", "low"],
+    ["LA", 4, 2, "left", "mid"], ["RA", 4, 2, "right", "mid"],
+    ["RS", 8, 2, "place", "high"], ["LG", 8, 2, "fwd", "mid"], ["LA", 8, 4, "place", "high"], ["RA", 8, 4, "place", "high"],
+    ["RS", 10, 2, "back", "mid"], ["LS", 10.5, 1.5, "place", "mid"],
+    ["LS", 13, 1, "place", "low"], ["RS", 13, 1, "place", "low"], ["LS", 14, 1, "back", "mid"], ["RS", 15, 1, "back", "mid"],
+    ["LB", 12, 2, "fwd", "mid"], ["RB", 12, 2, "fwd", "mid"], ["LA", 12, 4, "place", "low"], ["RA", 12, 4, "place", "low"],
+    ["RS", 16, 1, "rf", "mid"], ["LS", 17, 1, "rf", "mid"], ["RS", 18, 1, "rf", "mid"], ["LS", 19, 1, "place", "mid"],
+    ["RA", 16, 3, "rf", "high"], ["LA", 16, 3, "lb", "mid"],
+    ["LS", 20, 1, "left", "mid"], ["RS", 21.5, 0.5, "place", "mid"], ["LS", 22, 2, "left", "low"], ["RG", 22, 2, "right", "high"],
+    ["LA", 20, 4, "left", "high"], ["RA", 20, 4, "right", "high"],
+    ["RS", 24, 2, "place", "high"], ["LS", 26, 2, "lf", "mid"], ["LB", 24, 4, "left", "mid"], ["RA", 24, 2, "fwd", "mid"], ["LA", 24, 2, "fwd", "mid"],
+    ["LS", 28, 1, "back", "mid"], ["RS", 29, 1, "back", "mid"], ["LS", 30, 2, "place", "low"], ["RS", 30, 2, "place", "low"],
+    ["LA", 28, 4, "place", "low"], ["RA", 28, 4, "place", "low"],
+  ];
+  const TURNS = [["LS", 8, 2, 1], ["LS", 24, 2, -1]];
+  const HOLDS = [["LA", 16], ["RA", 16], ["LA", 32], ["RA", 32]];
+  const LEFT = (col) => col[0] === "L";
+
+  // one sign: the outline is the direction, the fill is the level
+  const shape = (x, y, w, h, dir, mirror) => {
+    const n = Math.min(6, h / 3), c = w * .8, r = x + w, b = y + h;
+    const P = {
+      place: [[x, y], [r, y], [r, b], [x, b]],
+      fwd: mirror ? [[x, y], [r - n, y], [r - n, y + n], [r, y + n], [r, b], [x, b]] : [[x + n, y], [r, y], [r, b], [x, b], [x, y + n], [x + n, y + n]],
+      back: mirror ? [[x, y], [r, y], [r, b - n], [r - n, b - n], [r - n, b], [x, b]] : [[x, y], [r, y], [r, b], [x + n, b], [x + n, b - n], [x, b - n]],
+      left: [[r, y], [r, b], [x, y + h / 2]],
+      right: [[x, y], [r, y + h / 2], [x, b]],
+      rf: [[x, y + c], [r, y], [r, b], [x, b]],
+      lf: [[x, y], [r, y + c], [r, b], [x, b]],
+      rb: [[x, y], [r, y], [r, b], [x, b - c]],
+      lb: [[x, y], [r, y], [r, b - c], [x, b]],
+    }[dir];
+    return "M" + P.map((p) => p.join(" ")).join("L") + "Z";
+  };
+  const sign = (x, y, w, h, dir, lvl, mirror) => {
+    let o = `<path class="sym ${lvl}" d="${shape(x, y, w, h, dir, mirror)}"/>`;
+    if (lvl === "mid") o += `<circle class="dot" cx="${x + w / 2 + (dir === "left" ? w / 6 : dir === "right" ? -w / 6 : 0)}" cy="${y + h / 2}" r="2.2"/>`;
+    return o;
+  };
+  const yOf = (count) => BASE - count * U;
+  const svg = document.getElementById("staff");
+  const H = BASE + 60;
+  svg.setAttribute("viewBox", `0 0 280 ${H}`);
+  svg.setAttribute("preserveAspectRatio", "xMidYMax meet");
+  let o = `<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#f4f5f1"/><line x1="0" y1="0" x2="0" y2="5" stroke="#161616" stroke-width="1.6"/></pattern></defs>`;
+  // three staff lines, the double start line, bar lines crossing only the staff
+  const L0 = C - 44, L1 = C + 44;
+  for (const x of [L0, C, L1]) o += `<line class="staff" x1="${x}" x2="${x}" y1="${BASE}" y2="${yOf(BARS * B) - 12}"/>`;
+  o += `<line class="bar" x1="${L0}" x2="${L1}" y1="${BASE}" y2="${BASE}"/><line class="bar" x1="${L0}" x2="${L1}" y1="${BASE + 4}" y2="${BASE + 4}"/>`;
+  o += `<line class="bar" x1="${L0}" x2="${L1}" y1="${yOf(BARS * B) - 12}" y2="${yOf(BARS * B) - 12}"/><line class="bar" x1="${L0}" x2="${L1}" y1="${yOf(BARS * B) - 16}" y2="${yOf(BARS * B) - 16}" stroke-width="3"/>`;
+  for (let m = 1; m < BARS; m++) { const y = yOf(m * B); o += `<line class="bar" x1="${L0}" x2="${L1}" y1="${y}" y2="${y}"/><text class="mno" x="${L0 - 16}" y="${y + 4}" text-anchor="end">${m + 1}</text>`; }
+  o += `<text class="mno" x="${L0 - 16}" y="${BASE - 4}" text-anchor="end">1</text>`;
+  for (let k = 1; k < BARS * B; k++) if (k % B) { const y = yOf(k); o += `<line class="staff" x1="${C - 3}" x2="${C + 3}" y1="${y}" y2="${y}"/>`; }
+  o += `<text class="cue" x="${COL.LA - 2}" y="${H - 18}">L ARM</text><text class="cue" x="${C - 13}" y="${H - 18}">SUPP.</text><text class="cue" x="${COL.RA - 10}" y="${H - 18}">R ARM</text>`;
+  S.forEach(([col, s, d, dir, lvl], i) => {
+    const x = COL[col], y = s < 0 ? BASE + 10 : yOf(s + d) + 2, h = d * U - 4;
+    o += `<g class="g" data-i="${i}" data-k="${dir}-${lvl}">${sign(x, s < 0 ? y : y, W, h, dir, lvl, LEFT(col))}</g>`;
+  });
+  TURNS.forEach(([col, s, d, way]) => { const x = COL[col], y = yOf(s + d) + 2, h = d * U - 4, k = 6 * way;
+    o += `<path class="sym mid" d="M${x} ${y + (k > 0 ? k : 0)}L${x + W} ${y + (k > 0 ? 0 : -k)}L${x + W} ${y + h - (k > 0 ? k : 0)}L${x} ${y + h + (k > 0 ? 0 : k)}Z"/>`; });
+  HOLDS.forEach(([col, s]) => { o += `<circle cx="${COL[col] + W / 2}" cy="${yOf(s) + 6}" r="3.4" fill="none" stroke="#161616" stroke-width="1.2"/>`; });
+  o += `<line class="read" id="read" x1="12" x2="268" y1="${BASE}" y2="${BASE}" opacity="0"/>`;
+  svg.innerHTML = o;
+
+  // key: three 3 x 3 compasses; low at the bottom, high at the top
+  const keyEl = document.getElementById("key");
+  const LV = [["low", "Low", "sunk, knees bent"], ["mid", "Middle", "standing height"], ["high", "High", "on the toes, reaching"]];
+  const GRID = [["lf", "fwd", "rf"], ["left", "place", "right"], ["lb", "back", "rb"]];
+  const NAME = { place: "place", fwd: "forward", back: "backward", left: "left", right: "right", rf: "right forward", lf: "left forward", rb: "right backward", lb: "left backward" };
+  keyEl.innerHTML = LV.map(([lvl, nm, note]) => `<div class="lvl"><div class="name"><b>${nm}</b>${note}</div>${GRID.flat().map((dir) =>
+    `<button class="k" type="button" aria-pressed="false" data-k="${dir}-${lvl}" aria-label="${NAME[dir]}, ${nm.toLowerCase()} level"><svg viewBox="0 0 22 32"><defs><pattern id="h-${dir}-${lvl}" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#f4f5f1"/><line x1="0" y1="0" x2="0" y2="5" stroke="#161616" stroke-width="1.6"/></pattern></defs>${sign(3, 2, 16, 28, dir, lvl, false).replace('class="sym high"', `class="sym" fill="url(#h-${dir}-${lvl})"`)}</svg></button>`).join("")}</div>`).join("");
+  const groups = [...svg.querySelectorAll(".g")];
+  keyEl.addEventListener("click", (e) => {
+    const b = e.target.closest(".k"); if (!b) return;
+    const on = b.getAttribute("aria-pressed") !== "true";
+    keyEl.querySelectorAll(".k").forEach((x) => x.setAttribute("aria-pressed", "false"));
+    b.setAttribute("aria-pressed", String(on));
+    groups.forEach((g) => g.classList.toggle("pick", on && g.dataset.k === b.dataset.k));
+  });
+
+  // the reading line rises at the marked tempo and lights what is danced now
+  const btn = document.getElementById("play"), line = document.getElementById("read");
+  const motion = matchMedia("(prefers-reduced-motion: no-preference)");
+  let run = false, t0 = 0, raf = 0, last = -1;
+  const frame = (t) => {
+    if (!run) return;
+    if (document.hidden) { t0 = 0; raf = requestAnimationFrame(frame); return; }
+    if (!t0) t0 = t - (last > 0 ? last * 60000 / 72 : 0);
+    const count = ((t - t0) / (60000 / 72)) % (BARS * B);
+    last = count;
+    const y = yOf(count);
+    line.setAttribute("y1", y); line.setAttribute("y2", y);
+    groups.forEach((g) => { const [, s, d] = S[g.dataset.i]; g.classList.toggle("on", count >= s && count < s + d); });
+    raf = requestAnimationFrame(frame);
+  };
+  const set = (on) => {
+    run = on; btn.setAttribute("aria-pressed", String(on));
+    btn.querySelector("span").textContent = on ? "Stop reading" : "Read at ♩ = 72";
+    line.setAttribute("opacity", on ? "1" : "0");
+    if (on) { t0 = 0; raf = requestAnimationFrame(frame); } else { cancelAnimationFrame(raf); groups.forEach((g) => g.classList.remove("on")); }
+  };
+  btn.addEventListener("click", () => set(!run));
+  if (motion.matches) set(true);
+})();
+</script>
+</body>
+</html>
