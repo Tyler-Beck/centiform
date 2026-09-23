@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nouveau Whiplash · Centiform</title>
+<style>
+/* @fonts: Federant:400:block; Linden Hill:400,400i:swap */
+@font-face{font-family:"Federant";font-style:normal;font-weight:400;font-display:block;src:url(fonts/federant-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Linden Hill";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/linden-hill-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Linden Hill";font-style:italic;font-weight:400;font-display:swap;src:url(fonts/linden-hill-latin-400-italic.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #efe4c8;          /* lithograph cream */
+  --ink: #3d2b1f;         /* sepia key line */
+  --accent-1: #8a9a5b;    /* sage */
+  --accent-2: #c46b4a;    /* terracotta */
+  --gold: #c9a55a;
+  --pale: #f6eedb;
+  --u: 8px;
+  /* scale: 1.25 on 19px */
+  --t-1: 15px; --t0: 19px; --t1: 24px; --t2: 30px; --t3: 37px; --t4: clamp(56px, 7.5vw, 128px);
+  --disp: "Federant", serif;
+  --text: "Linden Hill", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 400 var(--t0)/1.55 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 4px; }
+/* tall arched panels, key-lined twice, the way a lithographer framed them */
+.arch { position: relative; border: 3px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 5px; border-radius: 50% 50% 0 0 / var(--rr, 22%) var(--rr, 22%) 0 0; background: var(--pale); padding: calc(var(--u) * 9) calc(var(--u) * 5) calc(var(--u) * 5); text-align: center; }
+.vine { position: absolute; inset: -18px; width: calc(100% + 36px); height: calc(100% + 36px); pointer-events: none; overflow: visible; }
+.vine path { fill: none; stroke: var(--accent-1); stroke-width: 3.2; stroke-linecap: round; }
+.vine path.k { stroke: var(--ink); stroke-width: 1.4; }
+.vine .fl { fill: var(--accent-2); stroke: var(--ink); stroke-width: 1.2; }
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr); gap: calc(var(--u) * 6); padding: calc(var(--u) * 6) calc(var(--u) * 6) calc(var(--u) * 4); align-items: end; min-height: 100vh; }
+.hero .main { --rr: 34%; min-height: calc(100vh - var(--u) * 12); display: flex; flex-direction: column; justify-content: space-between; background: radial-gradient(circle at 50% 36%, var(--bg) 0 23%, var(--gold) 23.3% 24%, var(--pale) 24.3% 27%, var(--accent-1) 27.3% 28%, transparent 28.3%), var(--pale); }
+.maker { font: 400 var(--t-1)/1.4 var(--text); letter-spacing: .24em; text-transform: uppercase; }
+h1 { margin: 0; font: 400 var(--t4)/.9 var(--disp); color: var(--ink); letter-spacing: .02em; }
+h1 small { display: block; font: 400 var(--t1)/1.2 var(--disp); color: var(--accent-2); margin-top: var(--u); }
+.bottle { width: 34%; margin: 0 auto; display: block; }
+.hero .side { --rr: 40%; min-height: 64vh; display: flex; flex-direction: column; justify-content: flex-end; text-align: left; }
+.side h2 { margin: 0 0 var(--u); font: 400 var(--t2)/1.1 var(--disp); color: var(--accent-2); text-align: center; }
+.side p { margin: 0 0 var(--u); }
+.side em { font-style: italic; }
+.btn { display: inline-block; align-self: center; margin-top: calc(var(--u) * 2); background: var(--ink); color: var(--pale); text-decoration: none; padding: calc(var(--u) * 1.5) calc(var(--u) * 3); font: 400 var(--t0)/1 var(--disp); border-radius: 999px 999px 4px 4px; }
+.btn:hover { background: var(--accent-2); }
+.bot { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 6); padding: calc(var(--u) * 8) calc(var(--u) * 6); }
+.bot .arch { --rr: 46%; }
+.bot svg.plant { width: 70%; height: 240px; display: block; margin: 0 auto calc(var(--u) * 2); }
+.bot h3 { margin: 0; font: 400 var(--t2)/1.1 var(--disp); }
+.bot .lat { font-style: italic; color: #5d4a3a; }
+.bot p { text-align: left; }
+.frieze { margin: 0 calc(var(--u) * 6) calc(var(--u) * 8); border: 3px solid var(--ink); outline: 1px solid var(--ink); outline-offset: 5px; background: var(--accent-1); color: var(--pale); padding: calc(var(--u) * 4) calc(var(--u) * 6); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 4); border-radius: 60px 60px 0 0; }
+.frieze b { display: block; font: 400 var(--t1)/1.2 var(--disp); color: var(--bg); }
+.frieze span { font-size: 17px; }
+footer { text-align: center; padding: 0 calc(var(--u) * 3) calc(var(--u) * 6); font-size: var(--t-1); letter-spacing: .1em; }
+@media (prefers-reduced-motion: no-preference) {
+  .vine { animation: grow 3.2s cubic-bezier(.4,0,.2,1) both; }
+  .vine .fl { opacity: 0; animation: bloom .8s 2.6s forwards; }
+  @keyframes grow { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes bloom { to { opacity: 1; } }
+}
+@media (max-width: 1000px) {
+  .hero { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 4) calc(var(--u) * 3); gap: calc(var(--u) * 6); }
+  .hero .main { order: -1; min-height: 88vh; }
+  .hero .side { min-height: 0; }
+  .bot { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 4) calc(var(--u) * 3); }
+  .frieze { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0 calc(var(--u) * 3) calc(var(--u) * 6); padding: calc(var(--u) * 4) calc(var(--u) * 3); }
+  .arch { padding: calc(var(--u) * 7) calc(var(--u) * 3) calc(var(--u) * 4); }
+}
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <article class="arch side" aria-labelledby="a-h">
+      <h2 id="a-h">The Tonic</h2>
+      <p>Liane is a bitter botanical tonic, steeped for forty days in the cellars of the Maison Verlaque at Nancy. There is no wormwood in it and no alcohol: only verbena, angelica, bitter orange, and patience.</p>
+      <p><em>Take a small glass before dinner, over ice, with a twist of peel.</em></p>
+    </article>
+    <header class="arch main">
+      <div class="maker">Maison Verlaque · Nancy · 1897</div>
+      <svg class="bottle" viewBox="0 0 120 260" role="img" aria-label="A tall bottle of Liane with a vine label">
+        <path d="M48 6 h24 v44 c0 16 28 26 28 60 v130 q0 14 -14 14 h-52 q-14 0 -14 -14 v-130 c0 -34 28 -44 28 -60z" fill="#8a9a5b" stroke="#3d2b1f" stroke-width="3"/>
+        <rect x="46" y="0" width="28" height="14" rx="3" fill="#c46b4a" stroke="#3d2b1f" stroke-width="2"/>
+        <path d="M26 130 q34 -18 68 0 v70 q-34 14 -68 0z" fill="#efe4c8" stroke="#3d2b1f" stroke-width="2"/>
+        <path d="M40 186 C40 160 70 176 60 150 C54 136 78 136 80 150" fill="none" stroke="#c46b4a" stroke-width="2.4"/>
+        <text x="60" y="176" text-anchor="middle" font-family="Federant, serif" font-size="18" fill="#3d2b1f">Liane</text>
+        <path d="M34 70 q10 -6 12 -30" stroke="#f6eedb" stroke-width="3" opacity=".6" fill="none"/>
+      </svg>
+      <div><h1>Liane<small>Tonique aux plantes amères</small></h1></div>
+    </header>
+    <article class="arch side" aria-labelledby="b-h">
+      <h2 id="b-h">Where to Find It</h2>
+      <p>At good grocers and cafés in Nancy, Metz and Strasbourg, and by post from the Maison. A bottle of 70 cl makes about twenty-five glasses.</p>
+      <a class="btn" href="#order">Order a case</a>
+    </article>
+  </section>
+
+  <section class="bot" aria-label="The three plants">
+    <article class="arch"><svg class="plant" viewBox="0 0 200 240" aria-hidden="true"><path d="M100 240 C100 180 60 170 80 120 C96 80 140 90 120 40" fill="none" stroke="#3d2b1f" stroke-width="3"/><g fill="#8a9a5b" stroke="#3d2b1f" stroke-width="1.5"><path d="M86 160 q-40 -10 -50 -40 q36 4 50 40z"/><path d="M96 110 q40 -10 50 -40 q-36 4 -50 40z"/><path d="M84 190 q34 -20 60 -10 q-30 22 -60 10z"/></g><g fill="#c46b4a" stroke="#3d2b1f"><circle cx="120" cy="36" r="6"/><circle cx="110" cy="30" r="5"/><circle cx="128" cy="26" r="5"/><circle cx="118" cy="20" r="4"/></g></svg>
+      <h3>Verbena</h3><div class="lat">Aloysia citrodora</div><p>Picked in July above Lunéville. It gives the lemon at the front of the glass.</p></article>
+    <article class="arch"><svg class="plant" viewBox="0 0 200 240" aria-hidden="true"><path d="M100 240 V120 M100 120 C80 90 50 90 44 60 M100 120 C120 90 150 90 156 60 M100 120 V50" fill="none" stroke="#3d2b1f" stroke-width="3"/><g fill="#8a9a5b" stroke="#3d2b1f" stroke-width="1.2"><circle cx="44" cy="56" r="14"/><circle cx="156" cy="56" r="14"/><circle cx="100" cy="44" r="18"/></g><g fill="#efe4c8"><circle cx="94" cy="40" r="3"/><circle cx="104" cy="36" r="3"/><circle cx="106" cy="48" r="3"/><circle cx="40" cy="52" r="2.5"/><circle cx="160" cy="52" r="2.5"/></g><path d="M100 200 q-40 -10 -56 -40 q40 0 56 40z M100 180 q40 -10 56 -40 q-40 0 -56 40z" fill="#8a9a5b" stroke="#3d2b1f" stroke-width="1.5"/></svg>
+      <h3>Angelica</h3><div class="lat">Angelica archangelica</div><p>The root, dug in its second autumn. It carries the long, musky middle.</p></article>
+    <article class="arch"><svg class="plant" viewBox="0 0 200 240" aria-hidden="true"><path d="M100 240 C96 200 120 180 104 140 C92 110 60 110 70 70" fill="none" stroke="#3d2b1f" stroke-width="3"/><g fill="#8a9a5b" stroke="#3d2b1f" stroke-width="1.5"><path d="M104 170 q40 -6 56 -34 q-40 0 -56 34z"/><path d="M92 124 q-40 -4 -54 -30 q40 -2 54 30z"/><path d="M72 76 q-20 -30 0 -60 q20 30 0 60z"/></g><circle cx="130" cy="96" r="24" fill="#c46b4a" stroke="#3d2b1f" stroke-width="2"/><path d="M122 86 q6 -4 12 0" stroke="#efe4c8" stroke-width="2" fill="none"/></svg>
+      <h3>Bitter Orange</h3><div class="lat">Citrus aurantium</div><p>Peel only, dried in the sun at Menton. It closes the glass, dry and long.</p></article>
+  </section>
+
+  <section class="frieze" id="order" aria-label="Order">
+    <div><b>70 cl bottle</b><span>14 francs at the cellar door</span></div>
+    <div><b>Case of six</b><span>78 francs, carriage paid in Lorraine</span></div>
+    <div><b>Cellar visits</b><span>Saturdays at three, rue des Glacis</span></div>
+    <div><b>By letter</b><span>Maison Verlaque, 12 rue des Glacis, Nancy</span></div>
+  </section>
+</main>
+<footer>Printed for the Maison by Imprimerie Berger-Levrault, Nancy · Poster no. 4 of the 1901 series</footer>
+<script>
+(() => {
+  // whiplash vines climb each arch: long S-curves that snap back on themselves
+  document.querySelectorAll(".arch").forEach((a, n) => {
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("class", "vine"); svg.setAttribute("viewBox", "0 0 100 160"); svg.setAttribute("preserveAspectRatio", "none"); svg.setAttribute("aria-hidden", "true");
+    const side = (m) => { const X = (x) => (m ? 100 - x * .55 : x * .55).toFixed(1);
+      return `<path vector-effect="non-scaling-stroke" d="M${X(4)} 158 C${X(-2)} 130 ${X(12)} 118 ${X(3)} 96 C${X(-4)} 78 ${X(14)} 70 ${X(6)} 52 C${X(0)} 36 ${X(18)} 18 ${X(34)} 8 C${X(44)} 2 ${X(40)} 14 ${X(30)} 12"/>
+        <path class="k" vector-effect="non-scaling-stroke" d="M${X(7)} 158 C${X(2)} 132 ${X(16)} 120 ${X(7)} 98 C${X(0)} 80 ${X(18)} 72 ${X(10)} 54"/>
+        <path vector-effect="non-scaling-stroke" d="M${X(3)} 96 C${X(14)} 92 ${X(20)} 84 ${X(14)} 76"/>`; };
+    svg.innerHTML = side(false) + side(true) + `<ellipse class="fl" cx="16.5" cy="12" rx="2.4" ry="1.6"/><ellipse class="fl" cx="83.5" cy="12" rx="2.4" ry="1.6"/><ellipse class="fl" cx="7.7" cy="76" rx="2" ry="1.4"/><ellipse class="fl" cx="92.3" cy="76" rx="2" ry="1.4"/>`;
+    a.prepend(svg);
+  });
+})();
+</script>
+</body>
+</html>

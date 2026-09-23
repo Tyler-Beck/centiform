@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Milano 1981 · Centiform</title>
+<style>
+/* @fonts: Shrikhand:400:block; Darker Grotesque:500,700,900:swap */
+@font-face{font-family:"Shrikhand";font-style:normal;font-weight:400;font-display:block;src:url(fonts/shrikhand-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Darker Grotesque";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/darker-grotesque-latin-500-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Darker Grotesque";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/darker-grotesque-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Darker Grotesque";font-style:normal;font-weight:900;font-display:swap;src:url(fonts/darker-grotesque-latin-900-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fff0e6;          /* showroom wall, peach */
+  --ink: #1a1a1a;         /* black laminate edge */
+  --accent-1: #ff5ca8;    /* flamingo laminate */
+  --accent-2: #1fb3e0;    /* pool-blue laminate */
+  --yel: #ffd23f;
+  --grn: #7ed957;
+  --u: 8px;
+  /* scale: 1.333 on 19px (Darker Grotesque sets small) */
+  --t-1: 15px; --t0: 19px; --t1: 25px; --t2: 34px; --t3: 45px; --t4: clamp(60px, 9vw, 150px);
+  --disp: "Shrikhand", "Cooper Black", serif;
+  --text: "Darker Grotesque", "Futura", sans-serif;
+  --squig: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><path d='M4 14 q6 -8 12 0 t12 0 t12 0' fill='none' stroke='%231a1a1a' stroke-width='3' stroke-linecap='round'/><path d='M22 44 q6 -8 12 0 t12 0' fill='none' stroke='%231a1a1a' stroke-width='3' stroke-linecap='round'/><path d='M46 26 l6 6 M52 26 l-6 6' stroke='%231a1a1a' stroke-width='2.4'/><circle cx='10' cy='34' r='2.6' fill='%231a1a1a'/></svg>");
+  --confetti: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48'><rect x='6' y='6' width='6' height='3' fill='%23ff5ca8' transform='rotate(20 9 7)'/><rect x='30' y='12' width='7' height='3' fill='%231fb3e0' transform='rotate(-35 33 13)'/><rect x='18' y='30' width='6' height='3' fill='%23ffd23f' transform='rotate(60 21 31)'/><rect x='38' y='36' width='6' height='3' fill='%231a1a1a' transform='rotate(-10 41 37)'/><circle cx='8' cy='40' r='2' fill='%237ed957'/></svg>");
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); overflow-x: hidden; }
+body { margin: 0; color: var(--ink); font: 500 var(--t0)/1.45 var(--text); overflow-x: hidden; background: var(--bg); position: relative; isolation: isolate; }
+/* the showroom's tiled floor grid, laid at an angle */
+body::before { content: ""; position: fixed; inset: -50%; z-index: -1; transform: rotate(-9deg); background: linear-gradient(transparent 0 calc(100% - 2px), rgba(26,26,26,.13) 0) 0 0 / 48px 48px, linear-gradient(90deg, transparent 0 calc(100% - 2px), rgba(26,26,26,.13) 0) 0 0 / 48px 48px; }
+a { color: inherit; }
+:focus-visible { outline: 4px dotted var(--accent-2); outline-offset: 4px; }
+header { position: relative; padding: calc(var(--u) * 6) calc(var(--u) * 6) calc(var(--u) * 3); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: calc(var(--u) * 4); align-items: end; }
+h1 { margin: 0; font: 400 var(--t4)/.86 var(--disp); color: var(--accent-1); text-shadow: 6px 6px 0 var(--ink); transform: rotate(-4deg); transform-origin: 0 100%; }
+h1 small { display: block; font: 900 var(--t1)/1 var(--text); color: var(--ink); text-shadow: none; letter-spacing: .1em; text-transform: uppercase; margin-bottom: var(--u); }
+.intro { background: var(--yel); border: 4px solid var(--ink); padding: calc(var(--u) * 2.5); transform: rotate(2deg); box-shadow: 10px 10px 0 var(--accent-2); }
+.intro p { margin: 0 0 var(--u); }
+.intro b { font-weight: 900; }
+/* the showroom floor: tilted, every surface patterned */
+.floor { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 8) calc(var(--u) * 5); padding: calc(var(--u) * 6) calc(var(--u) * 6) calc(var(--u) * 10); }
+.piece { transform: rotate(var(--tilt, 0deg)); display: flex; flex-direction: column; align-items: center; }
+.piece:nth-child(3n+2) { margin-top: calc(var(--u) * 8); }
+.obj { width: 78%; height: 250px; display: block; overflow: visible; }
+.plinth { width: 100%; border: 4px solid var(--ink); background: var(--pat); padding: calc(var(--u) * 2); position: relative; }
+.plinth::before { content: ""; position: absolute; left: -4px; right: -4px; top: -22px; height: 18px; border: 4px solid var(--ink); border-bottom: 0; background: var(--top, var(--ink)); transform: skewX(-40deg); transform-origin: 0 100%; }
+.label { background: #fff; border: 3px solid var(--ink); padding: calc(var(--u) * 1.5) calc(var(--u) * 2); }
+.label h2 { margin: 0; font: 400 var(--t1)/1.1 var(--disp); }
+.label .by { font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: var(--t-1); }
+.label p { margin: 6px 0; line-height: 1.35; }
+.label .pr { display: flex; justify-content: space-between; font-weight: 900; font-variant-numeric: tabular-nums; border-top: 3px dotted var(--ink); padding-top: 6px; }
+.p-squig { --pat: var(--squig) 0 0 / 60px 60px, #fff; }
+.p-conf { --pat: var(--confetti) 0 0 / 48px 48px, var(--ink); }
+.p-stripe { --pat: repeating-linear-gradient(45deg, var(--accent-2) 0 10px, #fff 10px 20px); }
+.p-dots { --pat: radial-gradient(circle, var(--ink) 0 3px, transparent 3.5px) 0 0 / 16px 16px, var(--accent-1); }
+.p-terr { --pat: radial-gradient(ellipse 5px 3px at 20% 30%, var(--accent-1) 90%, transparent) 0 0 / 34px 26px, radial-gradient(ellipse 4px 6px at 70% 60%, var(--accent-2) 90%, transparent) 0 0 / 29px 37px, radial-gradient(circle 3px at 40% 80%, var(--ink) 90%, transparent) 0 0 / 23px 31px, #f4e6d8; }
+.p-check { --pat: conic-gradient(var(--grn) 25%, #fff 0 50%, var(--grn) 0 75%, #fff 0) 0 0 / 28px 28px; }
+footer { border-top: 4px solid var(--ink); background: var(--accent-2); padding: calc(var(--u) * 3) calc(var(--u) * 6); display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--u); font-weight: 700; }
+@media (prefers-reduced-motion: no-preference) {
+  .piece:hover .obj, .piece:focus-within .obj { animation: jig .5s steps(4) 2; }
+  @keyframes jig { 25% { transform: rotate(-4deg) translateY(-6px); } 75% { transform: rotate(4deg) translateY(-3px); } }
+}
+@media (max-width: 1000px) {
+  header { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 2); }
+  .floor { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 4) calc(var(--u) * 3) calc(var(--u) * 8); gap: calc(var(--u) * 7); }
+  .piece:nth-child(3n+2) { margin-top: 0; }
+  h1 { text-shadow: 4px 4px 0 var(--ink); }
+  footer { padding: calc(var(--u) * 3); }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1><small>Collettivo Nebbia presents</small>Milano 1981</h1>
+  <div class="intro">
+    <p><b>Twelve pieces, no rules.</b> First shown on 18 September 1981 in a gallery on Corso Garibaldi, to a crowd of 2,000 and a very worried landlord.</p>
+    <p>Plastic laminate, lacquered wood, cast glass and neon, made in small runs by workshops in Brianza.</p>
+  </div>
+</header>
+<main class="floor" id="floor"></main>
+<footer><span>Collettivo Nebbia · Via Solferino 11 · Milano</span><span>Catalogue printed on laminate offcuts, in an edition of 500</span></footer>
+<script>
+(() => {
+  const K = "#1a1a1a", P = "#ff5ca8", B = "#1fb3e0", Y = "#ffd23f", G = "#7ed957", W = "#ffffff";
+  const S = 'stroke="#1a1a1a" stroke-width="4" stroke-linejoin="round"';
+  const I = [
+    { n: "Pagoda", by: "Ettore Cavalli", d: "Bookcase. Seven shelves, none of them level.", p: "L. 2.400.000", pat: "p-squig", top: B, t: -2,
+      s: `<rect x="90" y="20" width="20" height="220" fill="${K}"/><rect x="36" y="46" width="128" height="16" fill="${P}" ${S} transform="rotate(-14 100 54)"/><rect x="30" y="106" width="140" height="16" fill="${Y}" ${S} transform="rotate(8 100 114)"/><rect x="46" y="166" width="108" height="16" fill="${B}" ${S} transform="rotate(-10 100 174)"/><path d="M40 60 V100 M160 30 V92 M34 116 V160 M166 122 V150" ${S}/><circle cx="100" cy="16" r="12" fill="${G}" ${S}/><path d="M56 240 L100 196 L144 240Z" fill="${B}" ${S}/>` },
+    { n: "Saturno", by: "Gaia Ferri", d: "Table lamp. The ring is cast glass; the sphere is warm.", p: "L. 860.000", pat: "p-dots", top: Y, t: 3,
+      s: `<rect x="92" y="130" width="16" height="100" fill="${K}"/><ellipse cx="100" cy="236" rx="50" ry="10" fill="${G}" ${S}/><circle cx="100" cy="90" r="46" fill="${Y}" ${S}/><ellipse cx="100" cy="94" rx="86" ry="18" fill="none" stroke="${B}" stroke-width="9" transform="rotate(-14 100 94)"/><ellipse cx="100" cy="94" rx="86" ry="18" fill="none" stroke="${K}" stroke-width="2" transform="rotate(-14 100 94)"/><path d="M80 70 q10 -12 24 -10" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round"/>` },
+    { n: "Onda", by: "Marco Tessitore", d: "Low table. The top is a wave, so nothing stays put.", p: "L. 1.750.000", pat: "p-terr", top: P, t: -3,
+      s: `<path d="M20 110 q30 -30 60 0 t60 0 t40 -10 v18 q-20 10 -40 10 q-30 -30 -60 0 q-30 30 -60 0z" fill="${P}" ${S}/><rect x="40" y="130" width="22" height="100" fill="${B}" ${S}/><rect x="140" y="130" width="22" height="100" fill="${Y}" ${S}/><circle cx="100" cy="190" r="26" fill="${K}"/><circle cx="100" cy="190" r="10" fill="${G}"/>` },
+    { n: "Zig", by: "Ettore Cavalli", d: "Chair. A triangle to lean on, a disc to sit on, three legs to argue with.", p: "L. 640.000", pat: "p-stripe", top: G, t: 2,
+      s: `<path d="M50 30 L150 30 L100 120Z" fill="${G}" ${S}/><path d="M60 42 L140 42" stroke="${K}" stroke-width="3" stroke-dasharray="6 6"/><ellipse cx="100" cy="140" rx="70" ry="16" fill="${P}" ${S}/><path d="M60 150 L44 238 M140 150 L156 238 M100 156 L100 240" ${S} stroke-width="8"/>` },
+    { n: "Quattro", by: "Gaia Ferri", d: "Vase in four pieces, stacked by the owner in any order.", p: "L. 420.000", pat: "p-check", top: B, t: -1.5,
+      s: `<rect x="70" y="170" width="60" height="64" fill="${B}" ${S}/><path d="M60 170 L100 110 L140 170Z" fill="${Y}" ${S}/><circle cx="100" cy="86" r="26" fill="${P}" ${S}/><rect x="86" y="20" width="28" height="40" fill="${K}"/><path d="M76 200 h48" stroke="#fff" stroke-width="4" stroke-dasharray="4 6"/>` },
+    { n: "Nuvola", by: "Marco Tessitore", d: "Mirror. Cut to the outline of a cloud seen from Via Solferino.", p: "L. 1.100.000", pat: "p-conf", top: P, t: 2.5,
+      s: `<path d="M40 150 q-30 0 -30 -30 q0 -30 34 -30 q4 -40 46 -40 q30 0 40 24 q40 -8 50 30 q30 6 20 36 q-6 14 -30 12 z" fill="#d7f1fa" ${S}/><path d="M60 110 l30 -30 M76 120 l40 -40" stroke="#fff" stroke-width="6" stroke-linecap="round"/><rect x="92" y="150" width="16" height="70" fill="${K}"/><rect x="60" y="220" width="80" height="16" fill="${Y}" ${S}/>` }
+  ];
+  document.getElementById("floor").innerHTML = I.map((o) => `<article class="piece" style="--tilt:${o.t}deg"><svg class="obj" viewBox="0 0 200 250" role="img" aria-label="${o.n}, drawn in coloured laminate">${o.s}</svg>
+    <div class="plinth ${o.pat}" style="--top:${o.top}"><div class="label"><h2>${o.n}</h2><div class="by">${o.by}</div><p>${o.d}</p><div class="pr"><span>${o.p}</span><span>Ed. of 50</span></div></div></div></article>`).join("");
+})();
+</script>
+</body>
+</html>

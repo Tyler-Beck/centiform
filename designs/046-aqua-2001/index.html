@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aqua 2001 · Centiform</title>
+<style>
+/* @fonts: Varela Round:400:swap */
+@font-face{font-family:"Varela Round";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/varela-round-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #e9eef3;          /* pinstripe desktop */
+  --ink: #1c2733;         /* label text */
+  --accent-1: #3a8dde;    /* aqua gel */
+  --accent-2: #b9c3cc;    /* brushed aluminium */
+  --lcd: #dfe8cf;
+  --row: #edf3fe;
+  --sel: #3875d7;
+  --u: 4px;               /* a tight 4px grid, like the toolkit */
+  /* scale: 1.2 on 16px */
+  --t-2: 11px; --t-1: 13px; --t0: 16px; --t1: 19px; --t2: 23px;
+  --f: "Varela Round", "Lucida Grande", sans-serif;
+  --metal: repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 1px, rgba(0,0,0,.03) 1px 2px, rgba(255,255,255,.08) 2px 4px), linear-gradient(#d5dbe1, #b9c3cc 60%, #aab4bd);
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; min-height: 100vh; color: var(--ink); font: 400 var(--t0)/1.45 var(--f); overflow-x: hidden;
+  background: repeating-linear-gradient(0deg, #f3f6f9 0 2px, #e3e9ef 2px 4px); display: grid; grid-template-rows: auto 1fr; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid rgba(58,141,222,.7); outline-offset: 1px; border-radius: 6px; }
+/* menu bar */
+.menubar { height: 26px; display: flex; align-items: center; gap: calc(var(--u) * 5); padding: 0 calc(var(--u) * 4); background: linear-gradient(#fdfdfd, #e6e6e6); border-bottom: 1px solid #a3a3a3; font-size: 14px; }
+.menubar b { font-weight: 400; }
+.menubar .r { margin-left: auto; font-variant-numeric: tabular-nums; }
+.menubar svg { width: 14px; height: 14px; }
+.desk { padding: calc(var(--u) * 8) calc(var(--u) * 10); display: grid; place-items: center; }
+/* the window */
+.win { width: min(1180px, 100%); height: min(760px, calc(100vh - 110px)); min-height: 560px; display: grid; grid-template-rows: auto auto 1fr auto; border-radius: 8px 8px 6px 6px; background: var(--metal); box-shadow: 0 18px 40px -8px rgba(0,0,0,.45), 0 0 0 1px rgba(0,0,0,.35); overflow: hidden; }
+.title { height: 26px; position: relative; display: flex; align-items: center; justify-content: center; font-size: var(--t-1); text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+.lights { position: absolute; left: calc(var(--u) * 3); top: 5px; display: flex; gap: 7px; }
+.lights span { width: 14px; height: 14px; border-radius: 50%; position: relative; box-shadow: inset 0 0 0 1px rgba(0,0,0,.35), inset 0 -3px 4px rgba(255,255,255,.5); }
+.lights span::after { content: ""; position: absolute; left: 3px; right: 3px; top: 1px; height: 6px; border-radius: 50%; background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,0)); }
+.lights .c { background: radial-gradient(circle at 50% 70%, #ff8a80, #d8322a); }
+.lights .m { background: radial-gradient(circle at 50% 70%, #ffe27a, #d9a21c); }
+.lights .z { background: radial-gradient(circle at 50% 70%, #9ee37a, #3f9d2b); }
+/* toolbar with the gel transport and the lcd */
+.tool { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: calc(var(--u) * 5); align-items: center; padding: calc(var(--u) * 2) calc(var(--u) * 4) calc(var(--u) * 3); border-bottom: 1px solid #7d868f; }
+.transport { display: flex; gap: calc(var(--u) * 2); align-items: center; }
+.gel { position: relative; border: 0; cursor: pointer; border-radius: 999px; background: linear-gradient(#e9eef3, #b8c4cf); box-shadow: inset 0 0 0 1px rgba(28,39,51,.45), 0 2px 3px rgba(0,0,0,.25); display: grid; place-items: center; }
+.gel::before { content: ""; position: absolute; left: 12%; right: 12%; top: 3px; height: 45%; border-radius: 999px; background: linear-gradient(rgba(255,255,255,.95), rgba(255,255,255,.1)); pointer-events: none; }
+.gel svg { position: relative; fill: var(--ink); }
+.gel.round { width: 38px; height: 38px; }
+.gel.big { width: 52px; height: 52px; }
+.gel.blue { background: radial-gradient(ellipse at 50% 100%, #9fd4ff, #3a8dde 55%, #1f5fa8); box-shadow: inset 0 0 0 1px rgba(10,40,90,.7), 0 2px 4px rgba(0,0,0,.3); }
+.gel.blue svg { fill: #fff; filter: drop-shadow(0 1px 0 rgba(0,0,0,.35)); }
+.gel.pill { height: 24px; padding: 0 calc(var(--u) * 4); font-size: var(--t-1); }
+.gel.pill.blue { color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
+.lcd { height: 58px; border-radius: 10px; background: linear-gradient(#eef3e2, var(--lcd)); box-shadow: inset 0 1px 3px rgba(0,0,0,.45), 0 1px 0 rgba(255,255,255,.6); padding: 6px calc(var(--u) * 4); display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto auto; column-gap: calc(var(--u) * 3); align-items: center; text-align: center; font-size: var(--t-1); }
+.lcd .t1 { grid-column: 2; font-size: 14px; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lcd .t0 { grid-column: 1; grid-row: 1 / 3; font-variant-numeric: tabular-nums; font-size: var(--t-2); }
+.lcd .t2 { grid-column: 3; grid-row: 1 / 3; font-variant-numeric: tabular-nums; font-size: var(--t-2); }
+.bar { grid-column: 2; height: 8px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(28,39,51,.5); position: relative; overflow: hidden; }
+.bar i { position: absolute; inset: 0 auto 0 0; width: var(--p, 0%); background: repeating-linear-gradient(90deg, #56606a 0 2px, #7a848d 2px 3px); }
+.search { display: flex; gap: calc(var(--u) * 2); align-items: center; }
+.search input { width: 160px; height: 24px; border-radius: 12px; border: 1px solid #7d868f; padding: 0 12px; font: 400 var(--t-1)/1 var(--f); box-shadow: inset 0 1px 2px rgba(0,0,0,.3); }
+input[type=range] { width: 90px; accent-color: var(--accent-1); }
+/* body: source list and song table */
+.main { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 0; background: #fff; margin: 0 calc(var(--u) * 2); border: 1px solid #7d868f; }
+.src { background: #e8edf2; border-right: 1px solid #aeb6bf; padding: calc(var(--u) * 2) 0; overflow: auto; font-size: 14px; }
+.src h2 { font-size: var(--t-2); letter-spacing: .08em; text-transform: uppercase; color: #6d7784; margin: calc(var(--u) * 2) calc(var(--u) * 3) var(--u); font-weight: 400; }
+.src button { display: flex; align-items: center; gap: calc(var(--u) * 2); width: 100%; border: 0; background: transparent; padding: 5px calc(var(--u) * 3); cursor: pointer; text-align: left; font-size: 14px; }
+.src button svg { width: 16px; height: 16px; flex: none; }
+.src button[aria-pressed="true"] { background: linear-gradient(#6aa6e8, var(--sel)); color: #fff; }
+.songs { overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; font-variant-numeric: tabular-nums; }
+thead th { position: sticky; top: 0; background: linear-gradient(#fbfbfb, #dcdcdc); border-bottom: 1px solid #a1a1a1; border-right: 1px solid #c7c7c7; text-align: left; font-weight: 400; padding: 3px 8px; font-size: var(--t-1); }
+thead th.on { background: linear-gradient(#bcd6f5, #7aa9e0); }
+tbody tr:nth-child(even) { background: var(--row); }
+tbody td { padding: 4px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+tbody tr { cursor: default; }
+tbody tr.sel { background: var(--sel); color: #fff; }
+tbody td.n svg { width: 12px; height: 12px; vertical-align: -1px; }
+.status { display: flex; justify-content: center; align-items: center; gap: calc(var(--u) * 4); padding: calc(var(--u) * 2); font-size: var(--t-1); text-shadow: 0 1px 0 rgba(255,255,255,.6); }
+@media (prefers-reduced-motion: no-preference) {
+  .gel.blue.default { animation: throb 1.8s ease-in-out infinite; }
+  @keyframes throb { 50% { filter: brightness(1.18) saturate(1.1); } }
+}
+@media (max-width: 800px) {
+  .desk { padding: calc(var(--u) * 3) calc(var(--u) * 2); }
+  .win { height: auto; min-height: calc(100vh - 60px); }
+  .tool { grid-template-columns: minmax(0, 1fr); gap: calc(var(--u) * 3); }
+  .transport { justify-content: center; }
+  .search { justify-content: center; }
+  .main { grid-template-columns: minmax(0, 1fr); }
+  .src { display: flex; overflow-x: auto; padding: var(--u); border-right: 0; border-bottom: 1px solid #aeb6bf; }
+  .src h2 { display: none; }
+  .src button { width: auto; white-space: nowrap; border-radius: 12px; }
+  .hide-m { display: none; }
+  .menubar span:not(:first-child):not(.r) { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="menubar" aria-hidden="true"><span><svg viewBox="0 0 14 14"><path d="M5 11 V2 l7 -1 v8" fill="none" stroke="#1c2733" stroke-width="1.6"/><circle cx="3.5" cy="11" r="2.2" fill="#1c2733"/><circle cx="10.5" cy="9.5" r="2.2" fill="#1c2733"/></svg></span><b>Tunebox</b><span>File</span><span>Edit</span><span>Controls</span><span>Visualiser</span><span>Window</span><span>Help</span><span class="r" id="clock">Tue 9:41 PM</span></header>
+<div class="desk">
+  <main class="win" aria-label="Tunebox music player">
+    <div class="title"><div class="lights" aria-hidden="true"><span class="c"></span><span class="m"></span><span class="z"></span></div>Tunebox</div>
+    <div class="tool">
+      <div class="transport" role="group" aria-label="Transport">
+        <button class="gel round" type="button" id="prev" aria-label="Previous song"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M9 7 L17 1 V13Z M1 7 L9 1 V13Z"/></svg></button>
+        <button class="gel big blue default" type="button" id="play" aria-label="Play"><svg id="pi" width="18" height="20" viewBox="0 0 18 20"><path d="M3 1 L17 10 L3 19Z"/></svg></button>
+        <button class="gel round" type="button" id="next" aria-label="Next song"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M9 7 L1 1 V13Z M17 7 L9 1 V13Z"/></svg></button>
+        <label class="hide-m" style="display:flex;align-items:center;gap:6px;font-size:13px">vol <input type="range" min="0" max="100" value="70" aria-label="Volume"></label>
+      </div>
+      <div class="lcd" aria-live="polite"><span class="t0" id="el">0:00</span><span class="t1" id="now">Harbour Lights · The Paper Radios</span><span class="bar"><i id="bar"></i></span><span class="t2" id="rem">-3:52</span></div>
+      <div class="search"><input type="search" placeholder="Search" aria-label="Search the library" id="q"><button class="gel pill blue" type="button" id="burn">Burn Disc</button></div>
+    </div>
+    <div class="main">
+      <nav class="src" aria-label="Source">
+        <h2>Source</h2>
+        <button type="button" aria-pressed="true"><svg viewBox="0 0 16 16"><rect x="2" y="3" width="12" height="10" rx="2" fill="#3a8dde"/><path d="M7 11 V5 l4 -1 v6" stroke="#fff" fill="none"/></svg>Library</button>
+        <button type="button" aria-pressed="false"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#e9a23b"/><path d="M8 8 L12 5" stroke="#fff" stroke-width="1.5"/></svg>Radio Tuner</button>
+        <button type="button" aria-pressed="false"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#b9c3cc"/><circle cx="8" cy="8" r="1.8" fill="#fff"/></svg>Audio CD</button>
+        <h2>Playlists</h2>
+        <button type="button" aria-pressed="false"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="2" fill="#7fb04a"/><path d="M5 6 h6 M5 9 h6 M5 12 h4" stroke="#fff"/></svg>Sunday Morning</button>
+        <button type="button" aria-pressed="false"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="2" fill="#7fb04a"/><path d="M5 6 h6 M5 9 h6 M5 12 h4" stroke="#fff"/></svg>Road Trip 2001</button>
+        <button type="button" aria-pressed="false"><svg viewBox="0 0 16 16"><rect x="2" y="2" width="12" height="12" rx="2" fill="#a07ad0"/><path d="M5 6 h6 M5 9 h6 M5 12 h4" stroke="#fff"/></svg>Top 25 Most Played</button>
+      </nav>
+      <div class="songs">
+        <table>
+          <thead><tr><th style="width:28px"></th><th class="on">Song Name</th><th>Time</th><th>Artist</th><th class="hide-m">Album</th><th class="hide-m">My Rating</th></tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="status" id="status">14 songs, 58.3 minutes, 53.4 MB</div>
+  </main>
+</div>
+<script>
+(() => {
+  const S = [
+    ["Harbour Lights", 232, "The Paper Radios", "Low Tide Signals", 4], ["Firewire", 198, "Kitty Hawke", "Plug and Play", 3], ["Glass Elevator", 251, "Mono Lake", "Aluminium", 5],
+    ["Dial-Up Heart", 187, "The Paper Radios", "Low Tide Signals", 4], ["Blue Screen Lullaby", 305, "Olive Tran", "Safe Mode", 5], ["Clicking Wheels", 214, "Kitty Hawke", "Plug and Play", 2],
+    ["Tangerine Case", 243, "Mono Lake", "Aluminium", 4], ["Screensaver Sea", 356, "Olive Tran", "Safe Mode", 3], ["Rip, Mix, Sing", 176, "The Ferrite Cores", "Read Only", 3],
+    ["Pinstripe", 222, "Mono Lake", "Aluminium", 4], ["Y2K Was Fine", 199, "The Ferrite Cores", "Read Only", 2], ["Sleep Mode", 268, "Olive Tran", "Safe Mode", 5],
+    ["Genie Effect", 207, "Kitty Hawke", "Plug and Play", 4], ["Last Track, Hidden", 331, "The Paper Radios", "Low Tide Signals", 3]
+  ];
+  const $ = (id) => document.getElementById(id), fmt = (s) => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+  const speaker = `<svg viewBox="0 0 12 12"><path d="M1 4 h3 l3 -3 v10 l-3 -3 h-3z" fill="currentColor"/><path d="M9 3 q2 3 0 6" stroke="currentColor" fill="none"/></svg>`;
+  let cur = 0, pos = 0, playing = false, last = 0;
+  const draw = (filter = "") => { $("rows").innerHTML = S.map((s, i) => [s, i]).filter(([s]) => (s[0] + s[2] + s[3]).toLowerCase().includes(filter)).map(([s, i]) => `<tr data-i="${i}" class="${i === cur ? "sel" : ""}"><td class="n">${i === cur && playing ? speaker : ""}</td><td>${s[0]}</td><td>${fmt(s[1])}</td><td>${s[2]}</td><td class="hide-m">${s[3]}</td><td class="hide-m" aria-label="${s[4]} stars">${"★".repeat(s[4])}${"·".repeat(5 - s[4])}</td></tr>`).join(""); };
+  const lcd = () => { const s = S[cur]; $("now").textContent = s[0] + " · " + s[2]; $("el").textContent = fmt(pos); $("rem").textContent = "-" + fmt(s[1] - pos); $("bar").style.setProperty("--p", (pos / s[1] * 100).toFixed(2) + "%"); };
+  const setPlay = (p) => { playing = p; $("play").setAttribute("aria-label", p ? "Pause" : "Play"); $("pi").innerHTML = p ? '<path d="M3 1 h4 v18 h-4z M11 1 h4 v18 h-4z"/>' : '<path d="M3 1 L17 10 L3 19Z"/>'; draw($("q").value.toLowerCase()); };
+  const go = (i) => { cur = (i + S.length) % S.length; pos = 0; lcd(); draw($("q").value.toLowerCase()); };
+  $("play").addEventListener("click", () => setPlay(!playing));
+  $("prev").addEventListener("click", () => go(pos > 3 ? cur : cur - 1));
+  $("next").addEventListener("click", () => go(cur + 1));
+  $("rows").addEventListener("dblclick", (e) => { const r = e.target.closest("tr"); if (r) { go(+r.dataset.i); setPlay(true); } });
+  $("rows").addEventListener("click", (e) => { const r = e.target.closest("tr"); if (r) { cur = +r.dataset.i; pos = 0; lcd(); draw($("q").value.toLowerCase()); } });
+  $("q").addEventListener("input", (e) => draw(e.target.value.toLowerCase()));
+  $("burn").addEventListener("click", () => { $("status").textContent = "Please insert a blank CD-R. Burning 14 songs needs 58.3 minutes of space."; });
+  document.querySelectorAll(".src button").forEach((b) => b.addEventListener("click", () => document.querySelectorAll(".src button").forEach((x) => x.setAttribute("aria-pressed", String(x === b)))));
+  const tick = (t) => { if (playing && !document.hidden) { if (last) pos += (t - last) / 1000; if (pos >= S[cur][1]) go(cur + 1); lcd(); } last = t; requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+  const d = new Date(); $("clock").textContent = d.toLocaleDateString("en-US", { weekday: "short" }) + " " + d.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
+  draw(); lcd();
+})();
+</script>
+</body>
+</html>

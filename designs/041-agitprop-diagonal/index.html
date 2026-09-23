@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agitprop Diagonal · Centiform</title>
+<style>
+/* @fonts: Russo One:400:block; Jura:400,600:swap */
+@font-face{font-family:"Russo One";font-style:normal;font-weight:400;font-display:block;src:url(fonts/russo-one-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Jura";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jura-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Jura";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/jura-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #efe7d6;          /* newsprint poster stock */
+  --ink: #0f0f0f;         /* black */
+  --accent-1: #d7261e;    /* red */
+  --accent-2: #9a9a8e;    /* grey of the photomontage halftone */
+  --u: 8px;
+  --a: -30deg;            /* the only two angles on the page */
+  --b: 60deg;
+  /* scale: 1.5 on 16px */
+  --t-1: 13px; --t0: 17px; --t1: 24px; --t2: 36px; --t3: 54px; --t4: clamp(56px, 9.5vw, 170px);
+  --disp: "Russo One", "Arial Black", sans-serif;
+  --text: "Jura", "Verdana", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); background: var(--bg); font: 600 var(--t0)/1.45 var(--text); overflow-x: hidden; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 3px; }
+.poster { position: relative; min-height: 100vh; overflow: hidden; }
+.disc { position: absolute; width: 78vmin; aspect-ratio: 1; border-radius: 50%; background: var(--accent-1); right: -18vmin; top: -16vmin; }
+.disc.small { width: 22vmin; right: auto; left: 8vw; top: auto; bottom: 8vh; background: var(--ink); }
+.bar { position: absolute; left: -20%; width: 140%; transform: rotate(var(--a)); transform-origin: 50% 50%; }
+.bar.main { top: 44%; background: var(--ink); color: var(--bg); padding: 1.6vmin 0 1.6vmin 34%; }
+.bar.main h1 { margin: 0; font: 400 var(--t4)/.9 var(--disp); letter-spacing: -.01em; white-space: nowrap; }
+.bar.main h1 span { color: var(--accent-1); }
+.bar.thin { top: 63%; height: 1.6vmin; background: var(--accent-1); }
+.bar.freq { top: 30%; padding-left: 48%; font: 400 var(--t2)/1 var(--disp); letter-spacing: .04em; }
+.cross { position: absolute; left: 30%; top: -20%; width: 3.2vmin; height: 150%; background: var(--accent-1); transform: rotate(var(--a)); }
+.mast { position: absolute; left: 3vw; bottom: 0; height: 88vh; width: auto; }
+.waves path { fill: none; stroke: var(--ink); stroke-width: 5; }
+.slogan { position: absolute; left: 44%; top: 66%; width: 40vw; transform: rotate(var(--a)); transform-origin: 0 0; font: 600 var(--t1)/1.25 var(--text); text-transform: uppercase; letter-spacing: .04em; }
+.slogan b { background: var(--accent-1); color: var(--bg); padding: 0 .2em; }
+nav.tune { position: absolute; left: 4vw; top: 4vh; display: flex; gap: var(--u); transform: rotate(var(--a)); transform-origin: 0 0; margin-top: 18vh; }
+nav.tune a { background: var(--ink); color: var(--bg); padding: 8px 14px; text-decoration: none; font: 400 var(--t-1)/1 var(--disp); letter-spacing: .12em; }
+nav.tune a:hover { background: var(--accent-1); }
+
+/* the schedule, set on the same diagonal */
+.sched { position: relative; min-height: 110vh; overflow: hidden; background: linear-gradient(var(--b), transparent 0 58%, var(--accent-2) 58% 72%, transparent 72%), var(--bg); }
+.sched .plate { position: absolute; left: 50%; top: 52%; width: min(980px, 118vw); transform: translate(-50%, -50%) rotate(var(--a)); }
+.sched h2 { margin: 0 0 calc(var(--u) * 2); font: 400 var(--t3)/1 var(--disp); }
+.sched h2 span { color: var(--accent-1); }
+.row { display: grid; grid-template-columns: 7ch minmax(0, 1fr) 13ch; gap: calc(var(--u) * 2); align-items: baseline; border-top: 4px solid var(--ink); padding: calc(var(--u) * 1) 0; font-variant-numeric: tabular-nums; }
+.row time { font: 400 var(--t1)/1 var(--disp); }
+.row b { font: 400 var(--t1)/1.1 var(--disp); text-transform: uppercase; }
+.row span { font-size: 16px; }
+.row em { font-style: normal; text-align: right; font-size: var(--t-1); text-transform: uppercase; letter-spacing: .08em; }
+.row.red { background: var(--accent-1); color: var(--bg); border-color: var(--accent-1); padding-left: var(--u); padding-right: var(--u); }
+.stamp { position: absolute; right: 6vw; bottom: 8vh; width: 26vmin; aspect-ratio: 1; border-radius: 50%; border: 1.2vmin solid var(--ink); display: grid; place-content: center; text-align: center; transform: rotate(var(--b)); font: 400 var(--t1)/1 var(--disp); }
+.stamp small { font: 600 var(--t-1)/1.3 var(--text); }
+footer { background: var(--ink); color: var(--bg); padding: calc(var(--u) * 3) calc(var(--u) * 4); display: flex; justify-content: space-between; gap: var(--u); flex-wrap: wrap; font-size: var(--t-1); letter-spacing: .1em; text-transform: uppercase; }
+@media (prefers-reduced-motion: no-preference) {
+  .waves path { animation: tx 2.4s steps(4) infinite; }
+  .waves path:nth-child(2) { animation-delay: .6s; } .waves path:nth-child(3) { animation-delay: 1.2s; }
+  @keyframes tx { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+}
+@media (max-width: 800px) {
+  .bar.main { padding-left: 30%; top: 40%; }
+  .bar.main h1 { font-size: 46px; }
+  .slogan { left: 20%; top: 62%; width: 72vw; font-size: 17px; }
+  .mast { height: 60vh; left: -2vw; }
+  .bar.freq { font-size: 17px; white-space: nowrap; padding-left: 40%; top: 30%; }
+  nav.tune { margin-top: 26vh; }
+  .sched { min-height: 140vh; }
+  .sched .plate { width: 120vw; padding: 0 12vw; }
+  .row { grid-template-columns: 6ch minmax(0, 1fr); }
+  .row em { display: none; }
+  .row b, .row time { font-size: 18px; }
+  .stamp { width: 34vmin; }
+}
+</style>
+</head>
+<body>
+<main>
+<section class="poster" aria-labelledby="h">
+  <div class="disc" aria-hidden="true"></div>
+  <div class="cross" aria-hidden="true"></div>
+  <svg class="mast" viewBox="0 0 200 700" aria-hidden="true">
+    <g fill="none" stroke="#0f0f0f" stroke-width="3">
+      <path d="M40 700 L90 40 M160 700 L110 40 M90 40 H110"/>
+      <path d="M44 650 L156 600 M52 550 L148 510 M60 450 L140 420 M68 350 L132 330 M76 250 L124 240 M84 150 L116 145"/>
+      <path d="M156 650 L44 600 M148 550 L52 510 M140 450 L60 420 M132 350 L68 330 M124 250 L76 240 M116 150 L84 145"/>
+    </g>
+    <path d="M100 40 V0" stroke="#d7261e" stroke-width="6"/>
+    <g class="waves" transform="translate(100 20)"><path d="M26 -20 A34 34 0 0 1 26 36"/><path d="M48 -40 A64 64 0 0 1 48 58"/><path d="M70 -60 A94 94 0 0 1 70 80"/></g>
+  </svg>
+  <div class="bar freq" aria-hidden="true">Wave 7 · 412 metres · 728 kHz</div>
+  <div class="bar main"><h1 id="h">Radio <span>Volna</span> 7</h1></div>
+  <div class="bar thin" aria-hidden="true"></div>
+  <nav class="tune" aria-label="Station"><a href="#sched">Schedule</a><a href="#listen">Listen</a></nav>
+  <p class="slogan">The ironworks speaks to the whole valley. <b>Every evening from 18:00.</b> Build your own receiver: plans free at the factory gate.</p>
+  <div class="disc small" aria-hidden="true"></div>
+</section>
+
+<section class="sched" id="sched" aria-labelledby="s-h">
+  <div class="plate">
+    <h2 id="s-h">Tonight <span>on 412 m</span></h2>
+    <div class="row"><time>18:00</time><span><b>Time signal and shift report</b><br>Output of furnaces 2 and 3, read by the foreman</span><em>Studio A</em></div>
+    <div class="row"><time>18:20</time><span><b>Radio school: electricity</b><br>Lesson 14: the valve, and why it glows</span><em>Studio B</em></div>
+    <div class="row red"><time>19:00</time><span><b>The factory choir</b><br>Forty voices from the rolling mill</span><em>Live from hall 4</em></div>
+    <div class="row"><time>19:45</time><span><b>Letters from listeners</b><br>Read by Vera Makarova; answers by the engineers</span><em>Studio A</em></div>
+    <div class="row"><time>20:30</time><span><b>Chess by wire</b><br>Move 23 against the railway workers’ club</span><em>Studio B</em></div>
+    <div class="row"><time>21:30</time><span><b>Closedown</b><br>Tomorrow’s weather for the night shift</span><em>Mast</em></div>
+  </div>
+  <div class="stamp" id="listen">1928<small>Build a crystal set<br>for 3 roubles</small></div>
+</section>
+</main>
+<footer><span>Radio Volna 7 · transmitter on Slag Hill</span><span>Workers’ radio circle meets Thursdays in the canteen</span></footer>
+</body>
+</html>

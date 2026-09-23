@@ -87,3 +87,21 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Alice | OFL-1.1 | https://fontsource.org/fonts/alice | 039-scherenschnitt |
 | Rammetto One | OFL-1.1 | https://fontsource.org/fonts/rammetto-one | 040-kanga-proverb |
 | Ubuntu | UFL-1.0 | https://fontsource.org/fonts/ubuntu | 040-kanga-proverb |
+| Russo One | OFL-1.1 | https://fontsource.org/fonts/russo-one | 041-agitprop-diagonal |
+| Jura | OFL-1.1 | https://fontsource.org/fonts/jura | 041-agitprop-diagonal |
+| Federant | OFL-1.1 | https://fontsource.org/fonts/federant | 042-nouveau-whiplash |
+| Linden Hill | OFL-1.1 | https://fontsource.org/fonts/linden-hill | 042-nouveau-whiplash |
+| Didact Gothic | OFL-1.1 | https://fontsource.org/fonts/didact-gothic | 043-dessau-lowercase |
+| Shrikhand | OFL-1.1 | https://fontsource.org/fonts/shrikhand | 044-milano-1981 |
+| Darker Grotesque | OFL-1.1 | https://fontsource.org/fonts/darker-grotesque | 044-milano-1981 |
+| Kablammo | OFL-1.1 | https://fontsource.org/fonts/kablammo | 045-ballroom-1967 |
+| Averia Serif Libre | OFL-1.1 | https://fontsource.org/fonts/averia-serif-libre | 045-ballroom-1967 |
+| Varela Round | OFL-1.1 | https://fontsource.org/fonts/varela-round | 046-aqua-2001 |
+| Bodoni Moda | OFL-1.1 | https://fontsource.org/fonts/bodoni-moda | 047-parole-in-liberta |
+| League Gothic | OFL-1.1 | https://fontsource.org/fonts/league-gothic | 047-parole-in-liberta |
+| Comic Neue | OFL-1.1 | https://fontsource.org/fonts/comic-neue | 048-geocities-1998 |
+| Tinos | OFL-1.1 | https://fontsource.org/fonts/tinos | 048-geocities-1998 |
+| Federo | OFL-1.1 | https://fontsource.org/fonts/federo | 049-wiener-werkstatte |
+| Rosarivo | OFL-1.1 | https://fontsource.org/fonts/rosarivo | 049-wiener-werkstatte |
+| Cinzel | OFL-1.1 | https://fontsource.org/fonts/cinzel | 050-lapidary-capitals |
+| Castoro | OFL-1.1 | https://fontsource.org/fonts/castoro | 050-lapidary-capitals |

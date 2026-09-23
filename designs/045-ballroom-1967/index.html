@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ballroom 1967 · Centiform</title>
+<style>
+/* @fonts: Kablammo:400:block; Averia Serif Libre:400,700:swap */
+@font-face{font-family:"Kablammo";font-style:normal;font-weight:400;font-display:block;src:url(fonts/kablammo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Averia Serif Libre";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/averia-serif-libre-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Averia Serif Libre";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/averia-serif-libre-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #ff6a13;          /* day-glo orange stock */
+  --ink: #3b0a45;         /* aubergine */
+  --accent-1: #1fd1a2;    /* electric mint, vibrating against the orange */
+  --accent-2: #f9e04b;    /* lemon */
+  --pink: #ff3fa4;
+  --u: 8px;
+  /* scale: 1.414 on 18px */
+  --t-1: 14px; --t0: 18px; --t1: 25px; --t2: 36px; --t3: 51px;
+  --disp: "Kablammo", "Cooper Black", serif;
+  --text: "Averia Serif Libre", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.5 var(--text); overflow-x: hidden;
+  background: repeating-radial-gradient(circle at 50% 40%, var(--bg) 0 18px, var(--ink) 18px 26px, var(--accent-1) 26px 34px, var(--ink) 34px 42px); }
+a { color: inherit; }
+:focus-visible { outline: 4px solid var(--accent-2); outline-offset: 3px; }
+.wall { min-height: 100vh; display: grid; place-items: center; padding: 2vh 0; }
+.poster { width: min(96vw, calc(96vh * 1000 / 1400)); aspect-ratio: 1000 / 1400; background: var(--bg); border: 10px solid var(--ink); box-shadow: 0 0 0 10px var(--accent-2), 0 0 0 20px var(--ink); }
+.poster svg { width: 100%; height: 100%; display: block; }
+.poster text { font-family: var(--disp); }
+.bill { background: var(--accent-2); border-top: 10px solid var(--ink); padding: calc(var(--u) * 5) calc(var(--u) * 3); }
+.bill .in { max-width: 980px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: calc(var(--u) * 5); }
+.bill h2 { margin: 0 0 var(--u); font: 400 var(--t3)/.95 var(--disp); color: var(--pink); -webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; }
+.bill p { margin: 0 0 calc(var(--u) * 1.5); }
+.bill ol { list-style: none; margin: 0; padding: 0; }
+.bill li { display: grid; grid-template-columns: 7ch minmax(0, 1fr) auto; gap: calc(var(--u) * 2); border-bottom: 3px dotted var(--ink); padding: var(--u) 0; align-items: baseline; font-variant-numeric: tabular-nums; }
+.bill li b { font: 700 var(--t0)/1.3 var(--text); }
+.bill li span:last-child { font-size: var(--t-1); }
+footer { background: var(--ink); color: var(--accent-2); text-align: center; padding: calc(var(--u) * 3); font-size: var(--t-1); letter-spacing: .08em; }
+@media (max-width: 800px) { .bill .in { grid-template-columns: minmax(0, 1fr); } .poster { border-width: 6px; box-shadow: 0 0 0 6px var(--accent-2), 0 0 0 12px var(--ink); } }
+</style>
+</head>
+<body>
+<main>
+  <div class="wall">
+    <figure class="poster" style="margin:0">
+      <svg viewBox="0 0 1000 1400" role="img" aria-labelledby="pt">
+        <title id="pt">Poster: The Kaleido Ballroom summer series, July and August 1967</title>
+        <defs>
+          <path id="arcT" d="M70 330 C200 60 800 60 930 330"/>
+          <path id="w1" d="M130 610 C260 540 380 690 500 620 S760 540 880 620"/>
+          <path id="w2" d="M150 740 C280 800 400 670 520 740 S760 820 860 730"/>
+          <path id="w3" d="M170 900 C300 840 420 970 540 900 S760 840 850 910"/>
+          <path id="w4" d="M200 1000 C320 1050 460 960 560 1010 S760 1060 820 990"/>
+          <path id="arcB" d="M90 1110 C300 1200 700 1200 910 1110"/>
+        </defs>
+        <path d="M110 520 C60 420 220 400 300 440 C380 380 470 470 560 420 C650 360 760 430 820 470 C940 470 960 600 900 660 C980 760 900 850 880 900 C940 1000 860 1080 760 1050 C680 1110 560 1060 480 1090 C380 1120 260 1080 200 1030 C100 1010 80 900 130 850 C60 770 90 700 120 660 C70 620 70 560 110 520Z" fill="#3b0a45"/>
+        <path d="M150 540 C120 470 240 450 300 480 C380 430 470 500 560 460 C640 410 750 470 800 500 C900 510 910 610 860 660" fill="none" stroke="#1fd1a2" stroke-width="6" stroke-dasharray="2 14" stroke-linecap="round"/>
+        <text font-size="190" fill="#3b0a45" letter-spacing="2"><textPath href="#arcT" startOffset="50%" text-anchor="middle">KALEIDO</textPath></text>
+        <text font-size="182" fill="#1fd1a2" letter-spacing="2" dx="-6" dy="-6"><textPath href="#arcT" startOffset="50%" text-anchor="middle">KALEIDO</textPath></text>
+        <text x="500" y="420" text-anchor="middle" font-size="118" fill="#3b0a45">BALLROOM</text>
+        <text x="500" y="414" text-anchor="middle" font-size="118" fill="#f9e04b">BALLROOM</text>
+        <text font-size="84" fill="#1fd1a2"><textPath class="swim" href="#w1" startOffset="0%">The Lantern Mice</textPath></text>
+        <text font-size="80" fill="#f9e04b"><textPath class="swim" href="#w2" startOffset="0%">Sister Obsidian</textPath></text>
+        <text font-size="90" fill="#ff3fa4"><textPath class="swim" href="#w3" startOffset="6%">Big Weather</textPath></text>
+        <text font-size="58" fill="#1fd1a2"><textPath class="swim" href="#w4" startOffset="2%">+ Aurora Tank lights</textPath></text>
+        <g transform="translate(500 1240) scale(.8)"><circle r="70" fill="#1fd1a2"/><circle r="50" fill="#ff6a13"/><circle r="28" fill="#3b0a45"/><circle r="10" cx="-8" cy="-8" fill="#f9e04b"/></g>
+        <text font-size="54" fill="#3b0a45"><textPath href="#arcB" startOffset="50%" text-anchor="middle">JULY 7 · 8 · 9 · 1967 · 1805 GEARY</textPath></text>
+        <text x="500" y="1360" text-anchor="middle" font-family="Averia Serif Libre, serif" font-size="30" fill="#3b0a45" font-weight="700">Tickets $3.50 at the Kaleido box office &amp; the door</text>
+        <g fill="none" stroke="#3b0a45" stroke-width="6"><path d="M40 40 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120"/><path d="M960 40 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120 q40 60 0 120 q-40 60 0 120"/></g>
+      </svg>
+    </figure>
+  </div>
+  <section class="bill" aria-labelledby="bill-h">
+    <div class="in">
+      <div><h2 id="bill-h">The Summer Bill</h2><p>Nine nights in the old Masonic dance hall on Geary, from July to the end of August. Doors at 8:30. Dancing encouraged. Chairs discouraged.</p><p>The light show runs from four overhead projectors and a bowl of coloured oil.</p></div>
+      <ol>
+        <li><span>Jul 7–9</span><b>The Lantern Mice, Sister Obsidian, Big Weather</b><span>$3.50</span></li>
+        <li><span>Jul 21–23</span><b>Coyote Radio, The Glass Harmonica Band</b><span>$3.00</span></li>
+        <li><span>Aug 4–6</span><b>Mother Fern, Quicksilver Hymnal</b><span>$3.50</span></li>
+        <li><span>Aug 25–27</span><b>Closing: all six bands, till dawn</b><span>$5.00</span></li>
+      </ol>
+    </div>
+  </section>
+</main>
+<footer>Poster no. 71 · printed by Hollis Litho in three runs of 500 · please do not paste over it before September</footer>
+<script>
+(() => {
+  // letters drift slowly along their waves
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  const tps = [...document.querySelectorAll(".swim")], base = tps.map((t) => parseFloat(t.getAttribute("startOffset")));
+  let t0 = null;
+  const step = (t) => { if (t0 === null) t0 = t; if (!document.hidden) { const k = (t - t0) / 1000; tps.forEach((tp, i) => tp.setAttribute("startOffset", (base[i] + 2 + Math.sin(k * .5 + i) * 2).toFixed(2) + "%")); } requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+})();
+</script>
+</body>
+</html>
