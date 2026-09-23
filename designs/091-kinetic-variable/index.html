@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kinetic Variable · Centiform</title>
+<style>
+/* @fonts: Anybody:var-wdth:block */
+@font-face{font-family:"Anybody";font-style:normal;font-weight:100 900;font-display:block;src:url(fonts/anybody-latin-wdth-normal.woff2) format("woff2-variations");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f0f0e8;          /* uncoated poster stock */
+  --ink: #0e0e0e;
+  --accent-1: #0e0e0e;    /* there is no other colour: ink is the accent */
+  --accent-2: #f0f0e8;    /* and paper is the other accent */
+  --u: 8px;
+  --pad: calc(var(--u) * 3);
+  /* axes at rest; the script moves them with scroll speed */
+  --wdth-rest: 150; --wght-rest: 300;
+  /* scale: 1.5 on 18px for the reading lines; display lines are fitted to the measure */
+  --t-1: 13.5px; --t0: 18px; --t1: 27px; --t2: 40.5px; --t3: 60.75px;
+  --face: "Anybody", "Arial Narrow", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.45 var(--face); font-variation-settings: "wdth" 100; overflow-x: hidden; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+a:hover { font-variation-settings: "wdth" 150; font-weight: 800; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+main { padding: var(--pad); overflow-x: clip; }
+/* a fitted line: font size set so the line fills the measure at its resting width */
+.fit { display: block; margin: 0; white-space: nowrap; text-align: center; line-height: .86; letter-spacing: -.01em; font-weight: var(--w, 300);
+  font-variation-settings: "wdth" var(--x, 150); font-size: var(--fs, 10vw); }
+.fit.b { --w: 900; }
+.fit.m { --w: 600; }
+.fit.l { --w: 100; }
+h1, h2 { font: inherit; margin: 0; }
+.first { min-height: calc(100svh - var(--pad) * 2); display: grid; align-content: space-between; gap: calc(var(--u) * 2); }
+.row { display: flex; justify-content: space-between; gap: calc(var(--u) * 2); font-size: var(--t-1); letter-spacing: .12em; text-transform: uppercase; font-variation-settings: "wdth" 120; font-weight: 500; flex-wrap: wrap; }
+section { padding: calc(var(--u) * 10) 0 calc(var(--u) * 4); }
+.speak { list-style: none; margin: calc(var(--u) * 3) 0 0; padding: 0; }
+.speak li { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto; gap: calc(var(--u) * 3); align-items: baseline; padding: calc(var(--u) * 1.5) 0; border-top: 0; }
+.speak li + li { box-shadow: 0 -1px 0 var(--ink); }
+.speak b { font-size: var(--t2); font-weight: 800; font-variation-settings: "wdth" 60; line-height: 1; }
+.speak i { font-style: normal; font-size: var(--t0); font-variation-settings: "wdth" 110; }
+.speak span { font-size: var(--t-1); letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.cols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 5); margin-top: calc(var(--u) * 3); }
+.cols p { margin: 0; max-width: 26em; }
+.cols p b { display: block; font-size: var(--t1); font-weight: 800; font-variation-settings: "wdth" 50; margin-bottom: var(--u); }
+.big-num { font-size: var(--t3); font-weight: 900; font-variation-settings: "wdth" 50; line-height: 1; font-variant-numeric: tabular-nums; }
+footer { padding: calc(var(--u) * 4) var(--pad) var(--pad); }
+
+@media (min-width: 1900px) { :root { --t0: 21px; } }
+@media (max-width: 800px) {
+  .speak li { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+  .cols { grid-template-columns: minmax(0, 1fr); }
+  :root { --t2: 32px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="first">
+    <div class="row"><span>Rotterdam Type Assembly</span><span>No. 07</span><span>12–14 Nov 2026</span></div>
+    <div>
+      <h1><span class="fit b" data-g="1">STRETCH</span></h1>
+      <span class="fit l" data-g="2.2">a conference on</span>
+      <span class="fit m" data-g="1.6">VARIABLE TYPE</span>
+      <span class="fit b" data-g="2.8">12–14.11.2026</span>
+    </div>
+    <div class="row"><span>De Doelen, Kruisstraat 2</span><span>Scroll: the letters answer your speed</span><span>Tickets from €90</span></div>
+  </header>
+
+  <section aria-labelledby="sp">
+    <h2 id="sp"><span class="fit b" data-g="1.4">SPEAKERS</span></h2>
+    <ul class="speak">
+      <li><b>Mira Okafor</b><i>Axes as verbs</i><span>THU 10:00</span></li>
+      <li><b>Jonas Veld</b><i>The width of a whisper</i><span>THU 14:30</span></li>
+      <li><b>Keiko Arata</b><i>Optical size, finally explained</i><span>FRI 09:30</span></li>
+      <li><b>Teodor Lind</b><i>Grades, weights and why they lie</i><span>FRI 16:00</span></li>
+      <li><b>Amparo Ruiz</b><i>A variable font for a dying language</i><span>SAT 11:00</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="ws">
+    <h2 id="ws"><span class="fit l" data-g="2">three days, one hall,</span><span class="fit m" data-g="1.2">NO SLIDES WITHOUT TYPE</span></h2>
+    <div class="cols">
+      <p><b>Thursday</b>Talks in the Willem Burger hall. Evening: the axis bar, where every drink has a weight and a width.</p>
+      <p><b>Friday</b>Workshops in six rooms: drawing masters, interpolation, testing on e-ink, and one hour of kerning, in silence.</p>
+      <p><b>Saturday</b>Type crit, open to all. Bring a font with at least two axes. We will be kind, and exact.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="tk">
+    <h2 id="tk"><span class="fit b" data-g="2.4">TICKETS</span></h2>
+    <div class="cols">
+      <p><span class="big-num">€240</span><br>Full pass, three days, lunch and the Thursday bar.</p>
+      <p><span class="big-num">€90</span><br>Students and type-design course members, with a card.</p>
+      <p><span class="big-num">412</span><br>Seats in the hall. <a href="#tk">Reserve by 1 October</a>; after that, the door price is €280.</p>
+    </div>
+  </section>
+  <span class="fit l" data-g="3">see you in rotterdam</span>
+</main>
+<footer class="row"><span>Rotterdam Type Assembly · Stichting Letterruimte</span><span>Set in one typeface, on two axes</span></footer>
+
+<script>
+(() => {
+  // size every fitted line so it fills the measure at rest
+  const lines = [...document.querySelectorAll(".fit")];
+  // tall screens rest narrower, so the letters stand taller
+  let REST = 150;
+  const fit = () => {
+    const m = document.querySelector("main"), cs = getComputedStyle(m), W = m.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    REST = innerWidth < innerHeight ? 70 : 150;
+    lines.forEach((el) => { el.style.setProperty("--x", REST); el.style.fontSize = "100px"; el.style.display = "inline-block";
+      const w = el.getBoundingClientRect().width; el.style.display = ""; el.style.fontSize = ""; el.style.setProperty("--fs", (100 * W / w * .995).toFixed(2) + "px"); });
+  };
+  fit();
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(fit);
+  addEventListener("resize", fit);
+  if (!matchMedia("(prefers-reduced-motion: no-preference)").matches) return;
+  // scroll speed pulls each line narrower and heavier; each line has its own gain and lag
+  let lastY = scrollY, lastT = performance.now(), v = 0, running = false;
+  const state = lines.map(() => 0), base = lines.map((el) => parseInt(getComputedStyle(el).fontWeight, 10) || 300);
+  const frame = (t) => {
+    const dt = Math.max(1, t - lastT), y = scrollY;
+    const inst = Math.abs(y - lastY) / dt; lastY = y; lastT = t;
+    v += (inst - v) * .25;
+    let moving = v > .002;
+    lines.forEach((el, i) => {
+      const g = +el.dataset.g || 1, target = Math.min(1, v * g * .9);
+      state[i] += (target - state[i]) * (.08 + (i % 4) * .03);
+      if (state[i] > .002) moving = true;
+      const x = REST - state[i] * (REST - 50);
+      el.style.setProperty("--x", x.toFixed(1));
+      el.style.fontWeight = Math.round(Math.min(900, base[i] + state[i] * 500));
+    });
+    if (moving && !document.hidden) requestAnimationFrame(frame); else { running = false; v = 0; }
+  };
+  addEventListener("scroll", () => { if (!running) { running = true; lastT = performance.now(); requestAnimationFrame(frame); } }, { passive: true });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Single Hue · Centiform</title>
+<style>
+/* @fonts: Archivo:400,800 */
+@font-face{font-family:"Archivo";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/archivo-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Archivo";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/archivo-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  /* one hue, 24 degrees; nine steps from rind-dark to pith-light */
+  --t1: #4a1d00; --t2: #6b2a00; --t3: #943a00; --t4: #c24d00; --t5: #ff6a00; --t6: #ff8f40; --t7: #ffb27a; --t8: #ffd5b3; --t9: #fff3e8;
+  --bg: #fff3e8;          /* t9, pith */
+  --ink: #4a1d00;         /* t1, rind in shadow */
+  --accent-1: #ff6a00;    /* t5, the fruit itself */
+  --accent-2: #ffb27a;    /* t7, juice */
+  --u: 8px;
+  --gut: calc(var(--u) * 5);
+  /* scale: 1.414 (augmented fourth) on 18px */
+  --s-1: 13px; --s0: 18px; --s1: 25.5px; --s2: 36px; --s3: 51px; --s4: clamp(64px, 10vw, 180px);
+  --face: "Archivo", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--t1); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--s0)/1.55 var(--face); overflow-x: hidden; }
+a { color: inherit; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+:focus-visible { outline: 3px solid currentColor; outline-offset: 3px; }
+
+/* a band: one step of the ramp, a label column, then content on a 12-column grid */
+.band { background: var(--c); color: var(--fg); display: grid; grid-template-columns: 11ch repeat(11, minmax(0, 1fr)); column-gap: calc(var(--u) * 3); padding: calc(var(--u) * 2) var(--gut); align-items: center; }
+.band .step { grid-column: 1; font: 800 var(--s-1)/1.3 var(--face); letter-spacing: .08em; text-transform: uppercase; font-variant-numeric: tabular-nums; opacity: .9; }
+.band .step span { display: block; font-weight: 400; }
+.b1 { --c: var(--t1); --fg: var(--t8); } .b2 { --c: var(--t2); --fg: var(--t8); } .b3 { --c: var(--t3); --fg: var(--t9); } .b4 { --c: var(--t4); --fg: var(--t9); }
+.b5 { --c: var(--t5); --fg: var(--t1); } .b6 { --c: var(--t6); --fg: var(--t1); } .b7 { --c: var(--t7); --fg: var(--t1); } .b8 { --c: var(--t8); --fg: var(--t1); } .b9 { --c: var(--t9); --fg: var(--t1); }
+
+/* first screen: the ramp is the hero, darkest at the top */
+.ramp { min-height: 100svh; display: grid; grid-template-rows: auto 1.6fr .9fr 1fr .8fr .7fr; }
+.nav { display: flex; justify-content: space-between; gap: calc(var(--u) * 3); grid-column: 2 / -1; font-size: var(--s-1); letter-spacing: .1em; text-transform: uppercase; flex-wrap: wrap; }
+.nav a { text-decoration: none; } .nav a:hover { text-decoration: underline; }
+h1 { grid-column: 2 / -1; margin: 0; font: 800 var(--s4)/.86 var(--face); letter-spacing: -.035em; }
+.lede { grid-column: 2 / 10; margin: 0; font-size: var(--s1); line-height: 1.35; max-width: 34em; }
+.now { grid-column: 2 / -1; display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+.now b { font: 800 var(--s2)/1.05 var(--face); letter-spacing: -.02em; }
+.btn { display: inline-block; background: var(--t1); color: var(--t5); padding: 14px 24px; font: 800 var(--s0)/1 var(--face); text-decoration: none; letter-spacing: .02em; }
+.btn:hover { background: var(--t2); color: var(--t7); }
+.facts { grid-column: 2 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: calc(var(--u) * 3); }
+.facts div { font-size: var(--s-1); letter-spacing: .06em; text-transform: uppercase; }
+.facts b { display: block; font: 800 var(--s1)/1.1 var(--face); letter-spacing: -.01em; text-transform: none; font-variant-numeric: tabular-nums; }
+
+section.band { padding-block: calc(var(--u) * 10); align-items: start; }
+section h2 { grid-column: 2 / 6; margin: 0; font: 800 var(--s3)/1 var(--face); letter-spacing: -.03em; }
+section .txt { grid-column: 7 / -1; }
+section .txt p { margin: 0 0 calc(var(--u) * 2); max-width: 36em; }
+
+/* the varieties: rows set in steps of the same orange */
+.var { grid-column: 2 / -1; width: 100%; border-collapse: collapse; margin-top: calc(var(--u) * 5); font-variant-numeric: tabular-nums; }
+.var th { text-align: left; font: 800 var(--s-1)/1.2 var(--face); letter-spacing: .08em; text-transform: uppercase; padding: 0 0 var(--u); border-bottom: 3px solid currentColor; }
+.var td { padding: calc(var(--u) * 1.5) var(--u) calc(var(--u) * 1.5) 0; border-bottom: 1px solid var(--t7); vertical-align: top; }
+.var td:first-child { font: 800 var(--s1)/1.1 var(--face); }
+.var td.p { text-align: right; font-weight: 800; }
+/* harvest calendar: intensity is tone, never another colour */
+.cal { grid-column: 2 / -1; display: grid; grid-template-columns: 12ch repeat(8, minmax(0, 1fr)); gap: 3px; margin-top: calc(var(--u) * 5); font-size: var(--s-1); }
+.cal span { padding: 8px 6px; }
+.cal .m { text-transform: uppercase; letter-spacing: .08em; font-weight: 800; }
+.cal i { display: block; min-height: 36px; background: var(--c); }
+.cal .v { font-weight: 800; }
+.l0 { --c: var(--t8); } .l1 { --c: var(--t7); } .l2 { --c: var(--t4); } .l3 { --c: var(--t1); }
+.key { grid-column: 2 / -1; display: flex; gap: calc(var(--u) * 3); margin-top: calc(var(--u) * 2); font-size: var(--s-1); flex-wrap: wrap; }
+.key i { display: inline-block; width: 18px; height: 18px; vertical-align: -4px; margin-right: 6px; background: var(--c); }
+footer.band { padding-block: calc(var(--u) * 5); font-size: var(--s-1); }
+footer .nav { align-items: baseline; }
+.sig { font-weight: 800; }
+
+@media (min-width: 1900px) { :root { --s0: 21px; --s-1: 15px; } }
+@media (max-width: 900px) {
+  .band { grid-template-columns: minmax(0, 1fr); padding-inline: calc(var(--u) * 2.5); row-gap: calc(var(--u) * 1.5); }
+  .band > * { grid-column: 1 / -1 !important; }
+  .ramp { grid-template-rows: none; } .ramp > .band { min-height: 13svh; align-content: center; }
+  .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cal { grid-template-columns: 9ch repeat(8, minmax(0, 1fr)); gap: 2px; }
+  .cal span { padding: 6px 2px; font-size: 11px; }
+  .var .h { display: none; }
+}
+</style>
+</head>
+<body>
+<header class="ramp">
+  <div class="band b1"><span class="step">T1<span>#4a1d00</span></span><nav class="nav" aria-label="Farm"><a href="#fruit">The fruit</a><a href="#calendar">When</a><a href="#order">Order a box</a><span>Alzira · Valencia · since 1911</span></nav></div>
+  <div class="band b2"><span class="step">T2<span>#6b2a00</span></span><h1>Finca Almarjal</h1></div>
+  <div class="band b3"><span class="step">T3<span>#943a00</span></span><p class="lede">Oranges from eleven hectares of old trees on the Júcar plain, picked by hand the week they are ripe and sent to you in a wooden box.</p></div>
+  <div class="band b5"><span class="step">T5<span>#ff6a00</span></span><div class="now"><b>The 2026–27 harvest opens 16 November.</b><a class="btn" href="#order">Reserve your first box</a></div></div>
+  <div class="band b7"><span class="step">T7<span>#ffb27a</span></span><div class="facts"><div>Trees<b>3,900</b></div><div>Oldest<b>1934, Navel</b></div><div>Picked to box<b>&lt; 48 hours</b></div><div>Sprays<b>None after bloom</b></div></div></div>
+  <div class="band b9"><span class="step">T9<span>#fff3e8</span></span><p style="grid-column:2 / -1;margin:0;font-size:var(--s-1);letter-spacing:.1em;text-transform:uppercase">Every colour on this page is one orange, darker or lighter. There is no other.</p></div>
+</header>
+
+<section class="band b8" id="fruit" aria-labelledby="h-fruit">
+  <span class="step">T8<span>#ffd5b3</span></span>
+  <h2 id="h-fruit">Five kinds, one season</h2>
+  <div class="txt">
+    <p>My great-grandfather Vicent Soler planted the first Navels in 1934, on land his father had used for rice. We still pick those rows first.</p>
+    <p>We grow for flavour, not for shelf life, so the fruit arrives with its leaves on and a little green at the stalk. Keep it cool and eat it within three weeks.</p>
+    <p class="sig">Amparo Soler, fourth generation</p>
+  </div>
+  <table class="var">
+    <thead><tr><th scope="col">Variety</th><th scope="col">Good for</th><th scope="col" class="h">Picked</th><th scope="col" style="text-align:right">10 kg box</th></tr></thead>
+    <tbody>
+      <tr><td>Navelina</td><td>Eating in segments, children’s lunches</td><td class="h">Nov–Jan</td><td class="p">€24</td></tr>
+      <tr><td>Clemenules</td><td>Peels in one spiral, no pips</td><td class="h">Nov–Jan</td><td class="p">€26</td></tr>
+      <tr><td>Sanguinelli</td><td>Blood orange: juice the colour of wine</td><td class="h">Feb–Mar</td><td class="p">€29</td></tr>
+      <tr><td>Navel Late</td><td>Marmalade, cakes, long keeping</td><td class="h">Mar–May</td><td class="p">€24</td></tr>
+      <tr><td>Valencia Late</td><td>The juicing orange, thin skin</td><td class="h">Apr–Jun</td><td class="p">€22</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="band b6" id="calendar" aria-labelledby="h-cal">
+  <span class="step">T6<span>#ff8f40</span></span>
+  <h2 id="h-cal">When to order</h2>
+  <div class="txt"><p>Darker means better. We open each variety for orders when the sugar reads above 11 °Brix, and close it when the trees are bare.</p></div>
+  <div class="cal" id="cal" role="group" aria-label="Harvest calendar"></div>
+  <div class="key"><span><i style="--c:var(--t8)"></i>none</span><span><i style="--c:var(--t7)"></i>early</span><span><i style="--c:var(--t4)"></i>good</span><span><i style="--c:var(--t1)"></i>best</span></div>
+</section>
+
+<section class="band b4" id="order" aria-labelledby="h-order">
+  <span class="step">T4<span>#c24d00</span></span>
+  <h2 id="h-order">One box, or one a month</h2>
+  <div class="txt">
+    <p>Boxes leave Alzira on Mondays and Thursdays and reach most of Europe in two to four days. Postage is €9 in Spain and €14 elsewhere in the EU.</p>
+    <p>A season subscription sends one box a month, November to May, always of whatever is best that week. Seven boxes, €168, postage included.</p>
+    <p><a class="btn" href="#order" style="background:var(--t9);color:var(--t2)">Reserve a box</a></p>
+  </div>
+</section>
+<footer class="band b1"><span class="step">T1<span>#4a1d00</span></span><div class="nav"><span>Finca Almarjal · Camí de la Ribera 14, 46600 Alzira</span><span>+34 962 41 18 07</span><span>Picked by the Soler family and nine neighbours</span></div></footer>
+
+<script>
+(() => {
+  // harvest intensity by month, 0 to 3
+  const M = ["Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"];
+  const V = [["Navelina", [2, 3, 2, 0, 0, 0, 0, 0]], ["Clemenules", [3, 3, 1, 0, 0, 0, 0, 0]], ["Sanguinelli", [0, 0, 1, 3, 2, 0, 0, 0]], ["Navel Late", [0, 0, 0, 1, 2, 3, 2, 0]], ["Valencia Late", [0, 0, 0, 0, 0, 2, 3, 2]]];
+  const W = ["none", "early", "good", "best"];
+  document.getElementById("cal").innerHTML = `<span></span>${M.map((m) => `<span class="m">${m}</span>`).join("")}` +
+    V.map(([n, r]) => `<span class="v">${n}</span>${r.map((l, i) => `<i class="l${l}" role="img" aria-label="${n}, ${M[i]}: ${W[l]}"></i>`).join("")}`).join("");
+})();
+</script>
+</body>
+</html>

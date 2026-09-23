@@ -182,3 +182,8 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Arbutus Slab | OFL-1.1 | https://fontsource.org/fonts/arbutus-slab | 089-parlour-board-game |
 | Gluten | OFL-1.1 | https://fontsource.org/fonts/gluten | 090-gouache-picture-book |
 | Andika | OFL-1.1 | https://fontsource.org/fonts/andika | 090-gouache-picture-book |
+| Anybody | OFL-1.1 | https://fontsource.org/fonts/anybody | 091-kinetic-variable |
+| Silkscreen | OFL-1.1 | https://fontsource.org/fonts/silkscreen | 092-one-bit-desktop |
+| Jersey 10 | OFL-1.1 | https://fontsource.org/fonts/jersey-10 | 092-one-bit-desktop |
+| Inconsolata | OFL-1.1 | https://fontsource.org/fonts/inconsolata | 093-ascii-only |
+| Archivo | OFL-1.1 | https://fontsource.org/fonts/archivo | 094-single-hue |

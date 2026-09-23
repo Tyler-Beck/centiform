@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Raw HTML · Centiform</title>
+<style>
+/* The style sheet is only what the browser would do anyway, written down. */
+:root {
+  --bg: #ffffff;          /* the default canvas */
+  --ink: #000000;         /* the default text */
+  --accent-1: #0000ee;    /* an unvisited link */
+  --accent-2: #551a8b;    /* a visited link */
+  --active: #ff0000;      /* a link while you press it */
+  --u: 8px;               /* the default body margin */
+  /* the user-agent heading scale, in em of 16px */
+  --h1: 2em; --h2: 1.5em; --h3: 1.17em; --h4: 1em; --h5: .83em; --h6: .67em;
+  --measure: 38em;
+}
+body { margin: var(--u); background: var(--bg); color: var(--ink); }
+a:link { color: var(--accent-1); }
+a:visited, a.read { color: var(--accent-2); }
+a:active { color: var(--active); }
+.col { max-width: var(--measure); }
+@media (max-width: 760px) {
+  table.layout, table.layout > tbody, table.layout > tbody > tr, table.layout > tbody > tr > td { display: block; width: auto !important; }
+}
+</style>
+</head>
+<body>
+<table class="layout" width="100%" cellpadding="8" cellspacing="0" border="0">
+  <tbody>
+    <tr>
+      <td colspan="3">
+        <h1>Notes from Kestrel Lane</h1>
+        <p>Essays, lists and the odd complaint, written by <a href="#about">Ruth Abernathy</a> in Hebden Bridge since the autumn of 1998. No adverts, no tracking, no pictures. This page weighs about 8 KB.</p>
+        <hr>
+      </td>
+    </tr>
+    <tr>
+      <td width="22%" valign="top">
+        <nav aria-label="Archive">
+          <h2>Archive</h2>
+          <ul>
+            <li><a href="#essay">On keeping a web page</a> (2026)</li>
+            <li><a href="#essay" class="read">The canal in February</a> (2025)</li>
+            <li><a href="#essay" class="read">A list of kettles I have owned</a> (2023)</li>
+            <li><a href="#essay">Why I still write letters</a> (2019)</li>
+            <li><a href="#essay" class="read">Against the word “content”</a> (2014)</li>
+            <li><a href="#essay">My father’s shed, itemised</a> (2009)</li>
+            <li><a href="#essay" class="read">First post</a> (1998)</li>
+          </ul>
+          <p><small>Purple links are ones you have read. That is not my idea; it is your browser’s, and it has been since 1993.</small></p>
+          <h3>Elsewhere</h3>
+          <ul>
+            <li><a href="#ring">The Pennine Webring</a></li>
+            <li><a href="#guestbook">Guestbook</a></li>
+            <li><a href="#about">About Ruth</a></li>
+          </ul>
+        </nav>
+      </td>
+      <td width="42%" valign="top">
+        <article class="col" id="essay">
+          <h2>On keeping a web page for twenty-eight years</h2>
+          <p><i>Posted Sunday 20 September 2026. About 4 minutes to read.</i></p>
+          <p>I made this page on a Tuesday in October 1998, in a text editor, on a computer that took four minutes to wake up. It had a grey background and a picture of a kestrel that took eleven seconds to load. The kestrel is gone. The grey went in 2001. Everything else you see is roughly as it was.</p>
+          <p>People ask why it looks like this. The honest answer is that I never found a reason to change it. The browser already knows how to make a heading big and a link blue. It knows to leave a line between paragraphs. It knows that a list should have bullets. I have simply let it do its job.</p>
+          <blockquote>
+            <p>“A page that does nothing clever will still open in fifty years. A page that does everything clever will not open next spring.”</p>
+          </blockquote>
+          <p>My neighbour Graham said that in 2004, when I asked him about frames. He was right about frames.</p>
+          <p>There are 214 essays here now. The oldest ones embarrass me, but I have not deleted them, because other pages link to them, and a link is a small promise. Twelve of the pages that once linked here are still alive. I check every New Year.</p>
+          <h3>What has changed</h3>
+          <ol>
+            <li>The address, once, in 2007.</li>
+            <li>The typeface, never. It is whatever your browser likes.</li>
+            <li>The width. It used to be 640 pixels. Now it is yours.</li>
+          </ol>
+          <p>If you have read this far, thank you. The <a href="#guestbook">guestbook</a> is still open.</p>
+        </article>
+      </td>
+      <td width="36%" valign="top">
+        <section id="guestbook" aria-labelledby="gb">
+          <h2 id="gb">Guestbook</h2>
+          <form action="#guestbook">
+            <p><label>Your name<br><input type="text" name="name" size="28"></label></p>
+            <p><label>Where are you writing from?<br><select name="from"><option>Somewhere in Yorkshire</option><option>Somewhere in Lancashire</option><option>Further away</option><option>I would rather not say</option></select></label></p>
+            <fieldset>
+              <legend>How did you find this page?</legend>
+              <label><input type="radio" name="how" checked> The webring</label><br>
+              <label><input type="radio" name="how"> A search engine</label><br>
+              <label><input type="radio" name="how"> Someone sent me the link</label>
+            </fieldset>
+            <p><label>Message<br><textarea name="msg" rows="5" cols="34"></textarea></label></p>
+            <p><label><input type="checkbox" name="reply"> Please write back</label></p>
+            <p><input type="submit" value="Sign the guestbook"> <input type="reset" value="Clear"></p>
+          </form>
+          <h3>Most recent entries</h3>
+          <dl>
+            <dt><b>Oluwaseun</b>, Leeds, 18 Sep 2026</dt>
+            <dd>Read the kettle list aloud to my mother. She has owned eleven.</dd>
+            <dt><b>Marek</b>, Gdańsk, 2 Sep 2026</dt>
+            <dd>Found you through the webring in 2003. Still here. So are you.</dd>
+          </dl>
+        </section>
+        <section id="ring" aria-labelledby="rg">
+          <h3 id="rg">The Pennine Webring</h3>
+          <p><a href="#ring">&lt;&lt; previous</a> | <a href="#ring">random</a> | <a href="#ring">next &gt;&gt;</a></p>
+        </section>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <hr>
+        <address id="about">Ruth Abernathy, Kestrel Lane, Hebden Bridge. Retired librarian. Write to me at the address above; I answer every letter by hand.</address>
+        <p><small>Last updated 20 September 2026. Best viewed in any browser, at any size.</small></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>
