@@ -67,3 +67,23 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Sen | OFL-1.1 | https://fontsource.org/fonts/sen | 029-isometric-planner |
 | Italiana | OFL-1.1 | https://fontsource.org/fonts/italiana | 030-victorian-glasshouse |
 | Gelasio | OFL-1.1 | https://fontsource.org/fonts/gelasio | 030-victorian-glasshouse |
+| Aref Ruqaa | OFL-1.1 | https://fontsource.org/fonts/aref-ruqaa | 031-zellige-riad |
+| Amiri | OFL-1.1 | https://fontsource.org/fonts/amiri | 031-zellige-riad |
+| Yuji Syuku | OFL-1.1 | https://fontsource.org/fonts/yuji-syuku | 032-boro-indigo |
+| Zen Old Mincho | OFL-1.1 | https://fontsource.org/fonts/zen-old-mincho | 032-boro-indigo |
+| Lilita One | OFL-1.1 | https://fontsource.org/fonts/lilita-one | 033-papel-picado |
+| Asap | OFL-1.1 | https://fontsource.org/fonts/asap | 033-papel-picado |
+| Yatra One | OFL-1.1 | https://fontsource.org/fonts/yatra-one | 034-bagru-block-print |
+| Martel | OFL-1.1 | https://fontsource.org/fonts/martel | 034-bagru-block-print |
+| Lalezar | OFL-1.1 | https://fontsource.org/fonts/lalezar | 035-miniature-folio |
+| Vazirmatn | OFL-1.1 | https://fontsource.org/fonts/vazirmatn | 035-miniature-folio |
+| Ma Shan Zheng | OFL-1.1 | https://fontsource.org/fonts/ma-shan-zheng | 036-shan-shui-scroll |
+| Noto Serif SC | OFL-1.1 | https://fontsource.org/fonts/noto-serif-sc | 036-shan-shui-scroll |
+| Gowun Batang | OFL-1.1 | https://fontsource.org/fonts/gowun-batang | 037-bojagi-light |
+| Gowun Dodum | OFL-1.1 | https://fontsource.org/fonts/gowun-dodum | 037-bojagi-light |
+| Rozha One | OFL-1.1 | https://fontsource.org/fonts/rozha-one | 038-azulejo-facade |
+| Lusitana | OFL-1.1 | https://fontsource.org/fonts/lusitana | 038-azulejo-facade |
+| Pirata One | OFL-1.1 | https://fontsource.org/fonts/pirata-one | 039-scherenschnitt |
+| Alice | OFL-1.1 | https://fontsource.org/fonts/alice | 039-scherenschnitt |
+| Rammetto One | OFL-1.1 | https://fontsource.org/fonts/rammetto-one | 040-kanga-proverb |
+| Ubuntu | UFL-1.0 | https://fontsource.org/fonts/ubuntu | 040-kanga-proverb |

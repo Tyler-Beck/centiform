@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bojagi Light · Centiform</title>
+<style>
+/* @fonts: Gowun Batang:400,700:block; Gowun Dodum:400:swap */
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gowun-batang-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gowun-batang-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gowun-batang-118-400-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:400;font-display:block;src:url(fonts/gowun-batang-119-400-normal.woff2) format("woff2");unicode-range:U+20-22,U+27-2a,U+2c-38,U+3a-3b,U+3f,U+41-47,U+4a-4c,U+4f-5d,U+61-7b,U+7d,U+a1,U+ab,U+ae,U+b7,U+bb,U+bf,U+2013-2014,U+201c-201d,U+2122,U+ac00,U+ace0,U+ae30,U+b2e4,U+b85c,U+b9ac,U+c0ac,U+c2a4,U+c2dc,U+c774,U+c778,U+c9c0,U+d558;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:700;font-display:block;src:url(fonts/gowun-batang-latin-ext-700-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:700;font-display:block;src:url(fonts/gowun-batang-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:700;font-display:block;src:url(fonts/gowun-batang-118-700-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Gowun Batang";font-style:normal;font-weight:700;font-display:block;src:url(fonts/gowun-batang-119-700-normal.woff2) format("woff2");unicode-range:U+20-22,U+27-2a,U+2c-38,U+3a-3b,U+3f,U+41-47,U+4a-4c,U+4f-5d,U+61-7b,U+7d,U+a1,U+ab,U+ae,U+b7,U+bb,U+bf,U+2013-2014,U+201c-201d,U+2122,U+ac00,U+ace0,U+ae30,U+b2e4,U+b85c,U+b9ac,U+c0ac,U+c2a4,U+c2dc,U+c774,U+c778,U+c9c0,U+d558;}
+@font-face{font-family:"Gowun Dodum";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gowun-dodum-latin-ext-400-normal.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Gowun Dodum";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gowun-dodum-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Gowun Dodum";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gowun-dodum-118-400-normal.woff2) format("woff2");unicode-range:U+39,U+49,U+4d-4e,U+a0,U+ac04,U+ac1c,U+ac70,U+ac8c,U+acbd,U+acf5,U+acfc,U+ad00,U+ad6c,U+adf8,U+b098,U+b0b4,U+b294,U+b2c8,U+b300,U+b3c4,U+b3d9,U+b4dc,U+b4e4,U+b77c,U+b7ec,U+b85d,U+b97c,U+b9c8,U+b9cc,U+ba54,U+ba74,U+ba85,U+baa8,U+bb34,U+bb38,U+bbf8,U+bc14,U+bc29,U+bc88,U+bcf4,U+bd80,U+be44,U+c0c1,U+c11c,U+c120,U+c131,U+c138,U+c18c,U+c218,U+c2b5,U+c2e0,U+c544,U+c548,U+c5b4,U+c5d0,U+c5ec,U+c5f0,U+c601,U+c624,U+c694,U+c6a9,U+c6b0,U+c6b4,U+c6d0,U+c704,U+c720,U+c73c,U+c740,U+c744,U+c74c,U+c758,U+c77c,U+c785,U+c788,U+c790-c791,U+c7a5,U+c804,U+c815,U+c81c,U+c870,U+c8fc,U+c911,U+c9c4,U+ccb4,U+ce58,U+ce74,U+d06c,U+d0c0,U+d130,U+d2b8,U+d3ec,U+d504,U+d55c,U+d569,U+d574,U+d638,U+d654,U+d68c;}
+@font-face{font-family:"Gowun Dodum";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/gowun-dodum-119-400-normal.woff2) format("woff2");unicode-range:U+20-22,U+27-2a,U+2c-38,U+3a-3b,U+3f,U+41-47,U+4a-4c,U+4f-5d,U+61-7b,U+7d,U+a1,U+ab,U+ae,U+b7,U+bb,U+bf,U+2013-2014,U+201c-201d,U+2122,U+ac00,U+ace0,U+ae30,U+b2e4,U+b85c,U+b9ac,U+c0ac,U+c2a4,U+c2dc,U+c774,U+c778,U+c9c0,U+d558;}
+/* @fonts-end */
+:root {
+  --bg: #f7f4ec;          /* undyed ramie against the window */
+  --ink: #4a4a44;         /* thread, sumi grey */
+  --accent-1: #e7b7a3;    /* safflower pink, faded */
+  --accent-2: #a9c3b8;    /* jade-green ramie */
+  --pink: rgba(231,183,163,.5);
+  --sage: rgba(169,195,184,.55);
+  --ivory: rgba(252,250,244,.62);
+  --stone: rgba(74,74,68,.1);
+  --plum: rgba(190,140,150,.32);
+  --seam: rgba(74,74,68,.38);
+  --u: 8px;
+  /* scale: 1.2 on 18px */
+  --t-1: 14.5px; --t0: 18px; --t1: 21.6px; --t2: 26px; --t3: 31px; --t4: clamp(44px, 5.2vw, 88px);
+  --batang: "Gowun Batang", serif;
+  --dodum: "Gowun Dodum", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; color: var(--ink); font: 400 var(--t0)/1.65 var(--dodum); min-height: 100vh; overflow-x: hidden;
+  background:
+    linear-gradient(90deg, transparent 0 32%, rgba(74,74,68,.05) 32% 33.2%, transparent 33.2% 66%, rgba(74,74,68,.05) 66% 67.2%, transparent 67.2%),
+    radial-gradient(60% 70% at var(--lx, 38%) 30%, #fffdf6, #efe9dc 70%, #e2dccd); }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+/* the cloth: patches of ramie, each overlapping its neighbours at the seam */
+.cloth { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-template-rows: repeat(8, minmax(88px, auto)); margin: calc(var(--u) * 4); min-height: calc(100vh - var(--u) * 8); filter: drop-shadow(0 18px 24px rgba(74,74,68,.12)); }
+.p { position: relative; grid-column: var(--c); grid-row: var(--r); margin: -3px; background: var(--t, var(--ivory)); padding: calc(var(--u) * 3) calc(var(--u) * 3.5);
+  border: 1px solid var(--seam); outline: 1px solid rgba(74,74,68,.22); outline-offset: -6px; }
+/* ssamsol: the enclosed double seam, a narrow band where two layers meet */
+.p::after { content: ""; position: absolute; inset: 1px; pointer-events: none; box-shadow: inset 0 0 0 4px rgba(74,74,68,.06); }
+.p.knot::before { content: ""; position: absolute; width: 22px; height: 22px; right: -11px; top: -11px; z-index: 2; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #f7d9cc, var(--accent-1) 60%, #c9907b); box-shadow: 0 2px 3px rgba(74,74,68,.3); }
+.title { display: flex; flex-direction: column; justify-content: space-between; }
+.title .ko { font: 700 var(--t3)/1 var(--batang); letter-spacing: .3em; }
+h1 { margin: 0; font: 700 var(--t4)/1.02 var(--batang); letter-spacing: -.01em; }
+.title p { margin: calc(var(--u) * 2) 0 0; max-width: 34ch; font-size: var(--t1); line-height: 1.5; font-family: var(--batang); }
+h2 { margin: 0 0 var(--u); font: 700 var(--t2)/1.2 var(--batang); }
+h2 small { display: block; font: 400 var(--t-1)/1.4 var(--dodum); letter-spacing: .2em; color: #6b6b62; }
+.p p { margin: 0 0 var(--u); max-width: 40ch; }
+.p dl { margin: var(--u) 0 0; display: grid; grid-template-columns: auto 1fr; gap: 2px calc(var(--u) * 2); font-size: 16px; font-variant-numeric: tabular-nums; }
+.p dt { font-family: var(--batang); font-weight: 700; }
+.p dd { margin: 0; }
+nav.ties { display: flex; gap: calc(var(--u) * 3); font-size: var(--t-1); letter-spacing: .12em; flex-wrap: wrap; }
+nav.ties a { text-decoration: none; border-bottom: 1px solid var(--seam); }
+.p.deco { padding: 0; display: grid; }
+.sub { position: absolute; background: var(--t); border: 1px solid var(--seam); outline: 1px solid rgba(74,74,68,.2); outline-offset: -5px; }
+footer { margin: 0 calc(var(--u) * 4) calc(var(--u) * 4); display: flex; justify-content: space-between; gap: calc(var(--u) * 2); flex-wrap: wrap; font-size: var(--t-1); }
+@media (prefers-reduced-motion: no-preference) {
+  body { animation: sun 40s ease-in-out infinite alternate; }
+  @keyframes sun { from { --lx: 22%; } to { --lx: 78%; } }
+}
+@property --lx { syntax: "<percentage>"; inherits: true; initial-value: 38%; }
+@media (max-width: 900px) {
+  .cloth { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: minmax(40px, auto); margin: calc(var(--u) * 2); }
+  .p { grid-column: var(--mc, 1 / -1); grid-row: auto; }
+  .p.deco { min-height: 48px; }
+  footer { margin: 0 calc(var(--u) * 2) calc(var(--u) * 3); }
+}
+</style>
+</head>
+<body>
+<main class="cloth">
+  <header class="p title knot" style="--c: 1 / 7; --r: 1 / 5; --t: var(--ivory)">
+    <nav class="ties" aria-label="Atelier"><a href="#ramie">Ramie</a><a href="#class">Classes</a><a href="#order">Commissions</a><a href="#visit">Visit</a></nav>
+    <div>
+      <div class="ko" lang="ko">모시 보자기</div>
+      <h1>Sunmi Ramie Atelier</h1>
+      <p>Wrapping cloths pieced from ramie offcuts, sewn by hand so that every seam shows when you hold the cloth to a window.</p>
+    </div>
+  </header>
+  <div class="p deco" aria-hidden="true" style="--c: 7 / 9; --r: 1 / 3; --t: var(--pink); --mc: 1 / 3"></div>
+  <div class="p deco" aria-hidden="true" style="--c: 9 / 13; --r: 1 / 2; --t: var(--sage); --mc: 3 / 7"></div>
+  <section class="p" id="ramie" style="--c: 9 / 13; --r: 2 / 5; --t: var(--ivory)" aria-labelledby="r-h">
+    <h2 id="r-h">Hansan ramie<small>THE CLOTH</small></h2>
+    <p>Our ramie is woven in Hansan by two women who split the fibre with their teeth, as their mothers did. One bolt of 21 metres takes them about three months.</p>
+    <dl><dt>Weight</dt><dd>Fine, 15 threads per cm</dd><dt>Colours</dt><dd>Undyed, safflower, jade, persimmon</dd></dl>
+  </section>
+  <div class="p deco" aria-hidden="true" style="--c: 7 / 9; --r: 3 / 5; --t: var(--stone); --mc: 1 / 5"></div>
+  <section class="p knot" id="class" style="--c: 1 / 5; --r: 5 / 9; --t: var(--sage)" aria-labelledby="c-h">
+    <h2 id="c-h">Jogakbo classes<small>SEWING</small></h2>
+    <p>Six Thursday evenings. You will learn the enclosed seam, gekki and gamchimjil, and finish one cloth the size of a table napkin.</p>
+    <dl><dt>When</dt><dd>Thursdays, 19:00–21:30</dd><dt>Fee</dt><dd>₩280,000, cloth and thread included</dd><dt>Places</dt><dd>Six at the table</dd></dl>
+  </section>
+  <div class="p deco" aria-hidden="true" style="--c: 5 / 6; --r: 5 / 7; --t: var(--plum); --mc: 5 / 7"></div>
+  <section class="p" id="order" style="--c: 6 / 10; --r: 5 / 8; --t: var(--pink)" aria-labelledby="o-h">
+    <h2 id="o-h">Commissions<small>ORDERS</small></h2>
+    <p>Wedding wrapping cloths, a cover for a tea tray, a curtain for a south window. Tell us the room and the light; we choose the patches from there.</p>
+    <dl><dt>Small, 45 cm</dt><dd>from ₩180,000</dd><dt>Curtain</dt><dd>from ₩1,200,000</dd><dt>Time</dt><dd>Six to ten weeks</dd></dl>
+  </section>
+  <div class="p deco" aria-hidden="true" style="--c: 10 / 13; --r: 5 / 6; --t: var(--ivory); --mc: 1 / 4"></div>
+  <section class="p knot" id="visit" style="--c: 10 / 13; --r: 6 / 9; --t: var(--ivory)" aria-labelledby="v-h">
+    <h2 id="v-h">Visit<small>THE ROOM</small></h2>
+    <p>Second floor, 14 Bukchon-ro 11-gil. The cloths hang in the east window; come before noon to see them lit.</p>
+    <dl><dt>Open</dt><dd>Tue–Sat, 10:00–17:00</dd></dl>
+  </section>
+  <div class="p deco" aria-hidden="true" style="--c: 5 / 6; --r: 7 / 9; --t: var(--sage); --mc: 4 / 7"></div>
+  <div class="p deco" aria-hidden="true" style="--c: 6 / 10; --r: 8 / 9; --t: var(--stone)"></div>
+</main>
+<footer><span>Sunmi Ramie Atelier · Seoul</span><span>Hand-sewn · no two cloths share a layout</span></footer>
+<script>
+(() => {
+  // jogakbo: each plain patch is itself pieced from smaller offcuts, cut by straight seams
+  const T = ["rgba(231,183,163,.55)", "rgba(169,195,184,.6)", "rgba(252,250,244,.7)", "rgba(74,74,68,.12)", "rgba(190,140,150,.34)", "rgba(214,196,150,.4)"];
+  let seed = 37; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  const cut = (el, x, y, w, h, d) => {
+    if (d > 2 || (w < 22 && h < 22) || (d > 0 && rnd() < .3)) {
+      const s = document.createElement("span"); s.className = "sub";
+      Object.assign(s.style, { left: x + "%", top: y + "%", width: w + "%", height: h + "%" }); s.style.setProperty("--t", T[Math.floor(rnd() * T.length)]);
+      el.appendChild(s); return;
+    }
+    const k = .3 + rnd() * .4;
+    if (w >= h) { cut(el, x, y, w * k, h, d + 1); cut(el, x + w * k, y, w * (1 - k), h, d + 1); }
+    else { cut(el, x, y, w, h * k, d + 1); cut(el, x, y + h * k, w, h * (1 - k), d + 1); }
+  };
+  document.querySelectorAll(".p.deco").forEach((el) => cut(el, 0, 0, 100, 100, 0));
+})();
+</script>
+</body>
+</html>
