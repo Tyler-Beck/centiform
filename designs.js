@@ -141,7 +141,7 @@ window.CENTIFORM = [
     fonts: ["Syncopate","Fragment Mono"], swatch: ["#1a0503","#ff3a1f","#f3e9dc","#5c1a10"],
     grammar: "Film strips of 36 frames, selected frames circled",
     motif: "Film-edge codes and frame numbers along each strip",
-    status: "planned" },
+    status: "done" },
   { n: 21, slug: "021-beton-brut", title: "Beton Brut", family: "Architecture",
     subject: "A fictional civic concert hall.", format: "landing", mode: "light",
     thesis: "Brutalist architecture: board-formed concrete, deep shadows, mass",

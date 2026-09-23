@@ -45,3 +45,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Pixelify Sans | OFL-1.1 | https://fontsource.org/fonts/pixelify-sans | 018-four-shade-handheld |
 | Jost | OFL-1.1 | https://fontsource.org/fonts/jost | 019-hifi-brochure-1965 |
 | Chivo Mono | OFL-1.1 | https://fontsource.org/fonts/chivo-mono | 019-hifi-brochure-1965 |
+| Syncopate | Apache-2.0 | https://fontsource.org/fonts/syncopate | 020-darkroom-contact-sheet |
+| Fragment Mono | OFL-1.1 | https://fontsource.org/fonts/fragment-mono | 020-darkroom-contact-sheet |
