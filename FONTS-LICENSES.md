@@ -153,3 +153,12 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Encode Sans | OFL-1.1 | https://fontsource.org/fonts/encode-sans | 074-transit-diagram |
 | Libre Caslon Display | OFL-1.1 | https://fontsource.org/fonts/libre-caslon-display | 075-engraved-score |
 | Noto Music | OFL-1.1 | https://fontsource.org/fonts/noto-music | 075-engraved-score |
+| Commissioner | OFL-1.1 | https://fontsource.org/fonts/commissioner | 076-labanotation |
+| Belleza | OFL-1.1 | https://fontsource.org/fonts/belleza | 077-paint-fan-deck |
+| Albert Sans | OFL-1.1 | https://fontsource.org/fonts/albert-sans | 077-paint-fan-deck |
+| Oswald | OFL-1.1 | https://fontsource.org/fonts/oswald | 078-film-call-sheet |
+| Courier Prime | OFL-1.1 | https://fontsource.org/fonts/courier-prime | 078-film-call-sheet |
+| Libre Bodoni | OFL-1.1 | https://fontsource.org/fonts/libre-bodoni | 079-philately-sheet |
+| Stint Ultra Expanded | OFL-1.1 | https://fontsource.org/fonts/stint-ultra-expanded | 079-philately-sheet |
+| Domine | OFL-1.1 | https://fontsource.org/fonts/domine | 080-reykjavik-1972 |
+| Noto Sans Symbols 2 | OFL-1.1 | https://fontsource.org/fonts/noto-sans-symbols-2 | 080-reykjavik-1972 |

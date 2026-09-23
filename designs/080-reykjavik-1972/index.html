@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reykjavik 1972 · Centiform</title>
+<style>
+/* @fonts: Domine:400,700; Noto Sans Symbols 2:400:block */
+@font-face{font-family:"Domine";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/domine-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Domine";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/domine-latin-700-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Noto Sans Symbols 2";font-style:normal;font-weight:400;font-display:block;src:url(fonts/noto-sans-symbols-2-symbols-400-normal.woff2) format("woff2");unicode-range:U+0001-000C,U+000E-001F,U+007F-009F,U+20DD-20E0,U+20E2-20E4,U+2150-218F,U+2190,U+2192,U+2194-2199,U+21AF,U+21E6-21F0,U+21F3,U+2218-2219,U+2299,U+22C4-22C6,U+2300-243F,U+2440-244A,U+2460-24FF,U+25A0-27BF,U+2800-28FF,U+2921-2922,U+2981,U+29BF,U+29EB,U+2B00-2BFF,U+4DC0-4DFF,U+FFF9-FFFB,U+10140-1018E,U+10190-1019C,U+101A0,U+101D0-101FD,U+102E0-102FB,U+10E60-10E7E,U+1D2C0-1D2D3,U+1D2E0-1D37F,U+1F000-1F0FF,U+1F100-1F1AD,U+1F1E6-1F1FF,U+1F30D-1F30F,U+1F315,U+1F31C,U+1F31E,U+1F320-1F32C,U+1F336,U+1F378,U+1F37D,U+1F382,U+1F393-1F39F,U+1F3A7-1F3A8,U+1F3AC-1F3AF,U+1F3C2,U+1F3C4-1F3C6,U+1F3CA-1F3CE,U+1F3D4-1F3E0,U+1F3ED,U+1F3F1-1F3F3,U+1F3F5-1F3F7,U+1F408,U+1F415,U+1F41F,U+1F426,U+1F43F,U+1F441-1F442,U+1F444,U+1F446-1F449,U+1F44C-1F44E,U+1F453,U+1F46A,U+1F47D,U+1F4A3,U+1F4B0,U+1F4B3,U+1F4B9,U+1F4BB,U+1F4BF,U+1F4C8-1F4CB,U+1F4D6,U+1F4DA,U+1F4DF,U+1F4E3-1F4E6,U+1F4EA-1F4ED,U+1F4F7,U+1F4F9-1F4FB,U+1F4FD-1F4FE,U+1F503,U+1F507-1F50B,U+1F50D,U+1F512-1F513,U+1F53E-1F54A,U+1F54F-1F5FA,U+1F610,U+1F650-1F67F,U+1F687,U+1F68D,U+1F691,U+1F694,U+1F698,U+1F6AD,U+1F6B2,U+1F6B9-1F6BA,U+1F6BC,U+1F6C6-1F6CF,U+1F6D3-1F6D7,U+1F6E0-1F6EA,U+1F6F0-1F6F3,U+1F6F7-1F6FC,U+1F700-1F7FF,U+1F800-1F80B,U+1F810-1F847,U+1F850-1F859,U+1F860-1F887,U+1F890-1F8AD,U+1F8B0-1F8BB,U+1F8C0-1F8C1,U+1F900-1F90B,U+1F93B,U+1F946,U+1F984,U+1F996,U+1F9E9,U+1FA00-1FA6F,U+1FA70-1FA7C,U+1FA80-1FA89,U+1FA8F-1FAC6,U+1FACE-1FADC,U+1FADF-1FAE9,U+1FAF0-1FAF8,U+1FB00-1FBFF;}
+@font-face{font-family:"Noto Sans Symbols 2";font-style:normal;font-weight:400;font-display:block;src:url(fonts/noto-sans-symbols-2-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #f0ece3;          /* scoresheet stock */
+  --ink: #1e1e1e;
+  --accent-1: #7a5230;    /* walnut: dark squares, the clock case */
+  --accent-2: #c7b299;    /* maple: light squares */
+  --felt: #2f4a3a;        /* the table under the board */
+  --paper: #faf8f2;
+  --rule: #b9ad98;
+  --flag: #b3261e;
+  --muted: #5a5347;
+  --u: 8px;
+  --sq: min(7vh, 5.4vw, 76px);   /* one board square */
+  /* scale: 1.2 on 17px */
+  --t-2: 11.8px; --t-1: 14.2px; --t0: 17px; --t1: 20.4px; --t2: 24.5px; --t3: clamp(29px, 2.6vw, 44px);
+  --serif: "Domine", Georgia, serif;
+  --chess: "Noto Sans Symbols 2", "Segoe UI Symbol", serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--serif); overflow-x: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--accent-1); outline-offset: 2px; }
+
+.hall { display: grid; grid-template-columns: minmax(250px, 1fr) auto minmax(280px, 1fr); grid-template-rows: auto 1fr; gap: calc(var(--u) * 3) calc(var(--u) * 5); padding: calc(var(--u) * 3) calc(var(--u) * 5); min-height: 100svh; }
+.top { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: end; gap: calc(var(--u) * 3); border-bottom: 3px double var(--ink); padding-bottom: calc(var(--u) * 1.5); flex-wrap: wrap; }
+.top h1 { margin: 0; font: 700 var(--t3)/1 var(--serif); letter-spacing: -.01em; }
+.top h1 small { display: block; font: 400 var(--t-1)/1.4 var(--serif); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+.top p { margin: 0; font-size: var(--t-1); text-align: right; color: var(--muted); }
+
+/* scoresheet: the official form, two columns of moves */
+.sheet { background: var(--paper); border: 1px solid var(--rule); padding: calc(var(--u) * 2); align-self: start; min-width: 0; }
+.sheet h2, .side h2 { margin: 0 0 var(--u); font: 700 var(--t-2)/1.3 var(--serif); letter-spacing: .16em; text-transform: uppercase; }
+.names { display: grid; grid-template-columns: 2.2em 1fr 1fr; font-size: var(--t-1); border-bottom: 2px solid var(--ink); padding-bottom: 4px; }
+.names b { font-weight: 700; }
+.moves { position: relative; max-height: calc(100svh - 300px); overflow-y: auto; font-variant-numeric: tabular-nums; }
+.mv { display: grid; grid-template-columns: 2.2em 1fr 1fr; border-bottom: 1px solid var(--rule); font-size: var(--t-1); }
+.mv span { padding: 3px 0; color: var(--muted); }
+.mv button { background: none; border: 0; text-align: left; padding: 3px 6px; margin-left: -6px; font-size: var(--t-1); }
+.mv button:hover { background: rgba(199, 178, 153, .4); }
+.mv button[aria-current="true"] { background: var(--ink); color: var(--paper); }
+.res { margin-top: var(--u); font: 700 var(--t1)/1 var(--serif); text-align: center; }
+.sig { display: flex; justify-content: space-between; font-size: var(--t-2); color: var(--muted); margin-top: var(--u); gap: var(--u); }
+
+/* the board on its felt */
+.table { background: var(--felt); padding: calc(var(--u) * 3); align-self: start; display: grid; gap: calc(var(--u) * 2); justify-items: center; }
+.frame { padding: calc(var(--sq) * .32); background: var(--accent-1); box-shadow: inset 0 0 0 2px #5b3c22, 0 10px 24px rgba(0, 0, 0, .35); position: relative; }
+.board { width: calc(var(--sq) * 8); height: calc(var(--sq) * 8); position: relative; display: grid; grid-template-columns: repeat(8, var(--sq)); }
+.board i { background: var(--accent-2); }
+.board i.d { background: #8d6440; }
+.board i.hl { box-shadow: inset 0 0 0 calc(var(--sq) * .06) rgba(250, 240, 200, .9); }
+.coord { position: absolute; font: 700 10px/1 var(--serif); color: #e9dcc6; }
+.pc { position: absolute; left: 0; top: 0; width: var(--sq); height: var(--sq); display: grid; place-items: center; font: 400 calc(var(--sq) * .78)/1 var(--chess); font-variant-emoji: text; pointer-events: none; }
+.pc.w { color: #fbf7ee; -webkit-text-stroke: 1.2px #1e1e1e; paint-order: stroke fill; text-shadow: 0 2px 2px rgba(0,0,0,.25); }
+.pc.b { color: #1e1e1e; text-shadow: 0 1px 0 rgba(255,255,255,.25); }
+.pc.gone { opacity: 0; }
+@media (prefers-reduced-motion: no-preference) { .pc { transition: transform .38s cubic-bezier(.4, 0, .2, 1), opacity .3s; } }
+.ctl { display: flex; gap: var(--u); align-items: center; flex-wrap: wrap; justify-content: center; }
+.ctl button { background: var(--bg); border: 0; min-width: 44px; padding: 6px 12px; font: 700 var(--t-1)/1.2 var(--serif); }
+.ctl button:hover { background: var(--accent-2); }
+.ctl output { color: var(--bg); font-size: var(--t-1); min-width: 9em; text-align: center; }
+
+/* right: the clock and the time record */
+.side { display: grid; gap: calc(var(--u) * 3); align-content: start; min-width: 0; }
+.clock { width: 100%; max-width: 420px; height: auto; display: block; }
+.note { font-size: var(--t-1); color: var(--muted); margin: 0; }
+.bars { display: grid; grid-template-columns: repeat(41, minmax(0, 1fr)); gap: 1px; height: 110px; align-items: end; border-bottom: 1px solid var(--ink); position: relative; }
+.bars div { display: grid; align-items: end; height: 100%; grid-template-rows: 1fr 1fr; }
+.bars b { background: var(--accent-1); align-self: end; }
+.bars s { background: var(--ink); align-self: start; text-decoration: none; }
+.bars div.now b, .bars div.now s { background: var(--flag); }
+.bars::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: 1px solid var(--rule); }
+.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--u); font-size: var(--t-2); text-transform: uppercase; letter-spacing: .1em; }
+.stats b { display: block; font: 700 var(--t1)/1.2 var(--serif); letter-spacing: 0; text-transform: none; font-variant-numeric: tabular-nums; }
+
+@media (min-width: 1900px) { :root { --t0: 19px; --t-1: 16px; } }
+@media (max-width: 1180px) { .hall { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .table { grid-column: 1 / -1; grid-row: 2; justify-self: center; } :root { --sq: min(9.4vw, 72px); } }
+@media (max-width: 700px) {
+  .hall { grid-template-columns: minmax(0, 1fr); padding: calc(var(--u) * 2); }
+  .top p { text-align: left; }
+  .table { padding: calc(var(--u) * 1.5); justify-self: stretch; }
+  :root { --sq: calc((100vw - 32px - 24px) / 8.64); }
+  .moves { max-height: 300px; }
+}
+</style>
+</head>
+<body>
+<div class="hall">
+  <header class="top">
+    <h1><small>Laugardalshöll · Reykjavík · World Championship Challenge 1972</small>Game 6: Ólafsdóttir – Sokolin</h1>
+    <p>Sunday 23 July 1972, 17:00 · 40 moves in 2 h 30 min<br>Arbiter: Einar Bjarnason · Board 1 of 1 · Replay from the original sheets</p>
+  </header>
+
+  <section class="sheet" aria-labelledby="sh">
+    <h2 id="sh">Scoresheet</h2>
+    <div class="names"><span>No.</span><b>Rannveig Ólafsdóttir</b><b>Grigori Sokolin</b></div>
+    <div class="moves" id="moves"></div>
+    <p class="res">1–0</p>
+    <div class="sig"><span>Black resigned after 41. Qf4</span><span>Time: 5 h 05</span></div>
+  </section>
+
+  <section class="table" aria-label="Board">
+    <div class="frame"><div class="board" id="board" role="img" aria-label="Chess position"></div></div>
+    <div class="ctl">
+      <button type="button" id="first" aria-label="Start position">«</button>
+      <button type="button" id="prev" aria-label="Previous move">‹</button>
+      <button type="button" id="play" aria-pressed="false">Play</button>
+      <button type="button" id="next" aria-label="Next move">›</button>
+      <button type="button" id="last" aria-label="Final position">»</button>
+      <output id="now">Start</output>
+    </div>
+  </section>
+
+  <aside class="side" aria-labelledby="cl">
+    <div>
+      <h2 id="cl">The clock</h2>
+      <svg class="clock" id="clock" viewBox="0 0 420 250" role="img" aria-label="Analogue chess clock"></svg>
+    </div>
+    <div class="stats">
+      <div>White used<b id="tw">0:00</b></div>
+      <div>Black used<b id="tb">0:00</b></div>
+      <div>Material<b id="mat">0</b></div>
+    </div>
+    <div>
+      <h2>Minutes per move</h2>
+      <div class="bars" id="bars" aria-hidden="true"></div>
+      <p class="note">White above the line, Black below. Sokolin spent 31 minutes on move 26 and never recovered the time. When a flag falls, the game is lost on time; neither flag fell.</p>
+    </div>
+  </aside>
+</div>
+<script>
+(() => {
+  const SAN = "c4 e6 Nf3 d5 d4 Nf6 Nc3 Be7 Bg5 O-O e3 h6 Bh4 b6 cxd5 Nxd5 Bxe7 Qxe7 Nxd5 exd5 Rc1 Be6 Qa4 c5 Qa3 Rc8 Bb5 a6 dxc5 bxc5 O-O Ra7 Be2 Nd7 Nd4 Qf8 Nxe6 fxe6 e4 d4 f4 Qe7 e5 Rb8 Bc4 Kh8 Qh3 Nf8 b3 a5 f5 exf5 Rxf5 Nh7 Rcf1 Qd8 Qg3 Re7 h4 Rbb7 e6 Rbc7 Qe5 Qe8 a4 Qd8 R1f2 Qe8 R2f3 Qd8 Bd3 Qe8 Qe4 Nf6 Rxf6 gxf6 Rxf6 Kg8 Bc4 Kh8 Qf4".split(" ");
+  // minutes each move took, as the arbiter logged them
+  const MIN = [0,1,1,0,1,1,2,1,1,2,1,1,3,4,2,3,1,1,1,2,4,3,6,5,3,4,5,3,2,6,3,7,4,5,2,6,3,4,5,8,4,6,7,9,3,5,6,11,4,7,5,31,3,6,6,9,4,5,3,6,2,5,4,7,3,4,2,3,2,2,2,3,3,2,4,3,2,2,1,2,1];
+
+  // a small SAN reader: enough rules to find which piece moved
+  const sq = (s) => (s.charCodeAt(0) - 97) + (s[1] - 1) * 8;
+  const name = (i) => "abcdefgh"[i % 8] + (Math.floor(i / 8) + 1);
+  const start = "RNBQKBNRPPPPPPPP" + ".".repeat(32) + "pppppppprnbqkbnr";
+  const white = (p) => p !== "." && p === p.toUpperCase();
+  const DIRS = { N: [[1, 2], [2, 1], [-1, 2], [-2, 1], [1, -2], [2, -1], [-1, -2], [-2, -1]], K: [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]], B: [[1, 1], [1, -1], [-1, 1], [-1, -1]], R: [[1, 0], [-1, 0], [0, 1], [0, -1]] };
+  DIRS.Q = DIRS.K;
+  const reach = (b, from, to, t) => {
+    const fx = from % 8, fy = from >> 3, tx = to % 8, ty = to >> 3;
+    if (t === "N" || t === "K") return DIRS[t].some(([dx, dy]) => fx + dx === tx && fy + dy === ty);
+    return DIRS[t].some(([dx, dy]) => { let x = fx + dx, y = fy + dy; while (x >= 0 && x < 8 && y >= 0 && y < 8) { if (x === tx && y === ty) return true; if (b[y * 8 + x] !== ".") return false; x += dx; y += dy; } return false; });
+  };
+  const attacked = (b, at, byWhite) => b.some((p, i) => p !== "." && white(p) === byWhite && (p.toUpperCase() === "P" ? (at >> 3) - (i >> 3) === (byWhite ? 1 : -1) && Math.abs((at % 8) - (i % 8)) === 1 : reach(b, i, at, p.toUpperCase())));
+  const play = (b, san, w) => {
+    const m = san.replace(/[+#!?]/g, "");
+    const nb = b.slice(); let from, to, extra = null;
+    if (m === "O-O" || m === "O-O-O") { const r = w ? 0 : 56, long = m === "O-O-O"; from = r + 4; to = r + (long ? 2 : 6); extra = [r + (long ? 0 : 7), r + (long ? 3 : 5)]; }
+    else {
+      const [, pc = "P", df, dr, x, tgt, promo] = m.match(/^([NBRQK])?([a-h])?([1-8])?(x)?([a-h][1-8])(=[NBRQ])?$/) || [];
+      if (!tgt) throw new Error("bad SAN " + san);
+      to = sq(tgt);
+      const cands = b.map((p, i) => i).filter((i) => { const p = b[i]; if (p === "." || white(p) !== w || p.toUpperCase() !== pc) return false;
+        if (df && "abcdefgh"[i % 8] !== df) return false; if (dr && String((i >> 3) + 1) !== dr) return false;
+        if (pc === "P") { const dir = w ? 1 : -1, dy = (to >> 3) - (i >> 3), dx = (to % 8) - (i % 8);
+          if (x) return dy === dir && Math.abs(dx) === 1;
+          return dx === 0 && b[to] === "." && (dy === dir || (dy === 2 * dir && (i >> 3) === (w ? 1 : 6) && b[i + 8 * dir] === ".")); }
+        return reach(b, i, to, pc); });
+      const legal = cands.filter((i) => { const t = b.slice(); t[to] = t[i]; t[i] = "."; const k = t.indexOf(w ? "K" : "k"); return !attacked(t, k, !w); });
+      if (legal.length !== 1) throw new Error(`cannot resolve ${san}: ${legal.length} candidates`);
+      from = legal[0];
+      if (promo) extra = ["promo", w ? promo[1] : promo[1].toLowerCase()];
+    }
+    nb[to] = nb[from]; nb[from] = ".";
+    if (extra && extra[0] === "promo") nb[to] = extra[1]; else if (extra) { nb[extra[1]] = nb[extra[0]]; nb[extra[0]] = "."; }
+    return { b: nb, from, to, rook: extra && extra[0] !== "promo" ? extra : null };
+  };
+
+  // walk the game once; keep every position with piece identities so pieces can slide
+  let ids = [...start].map((p, i) => (p === "." ? null : i));
+  const POS = [{ b: [...start], ids: ids.slice(), from: -1, to: -1 }];
+  SAN.forEach((s, k) => {
+    const prev = POS[POS.length - 1], r = play(prev.b, s, k % 2 === 0), nid = prev.ids.slice();
+    nid[r.to] = nid[r.from]; nid[r.from] = null;
+    if (r.rook) { nid[r.rook[1]] = nid[r.rook[0]]; nid[r.rook[0]] = null; }
+    POS.push({ b: r.b, ids: nid, from: r.from, to: r.to });
+  });
+
+  const G = { K: "♚", Q: "♛", R: "♜", B: "♝", N: "♞", P: "♟" };
+  const boardEl = document.getElementById("board");
+  boardEl.innerHTML = Array.from({ length: 64 }, (_, i) => { const x = i % 8, y = 7 - (i >> 3); return `<i class="${(x + y) % 2 === 0 ? "d" : ""}" data-s="${y * 8 + x}"></i>`; }).join("");
+  const cells = [...boardEl.querySelectorAll("i")];
+  const pieceEl = {};
+  [...start].forEach((p, i) => { if (p === ".") return; const e = document.createElement("span"); e.className = "pc " + (white(p) ? "w" : "b"); e.textContent = G[p.toUpperCase()]; boardEl.appendChild(e); pieceEl[i] = e; });
+  "abcdefgh".split("").forEach((f, i) => boardEl.insertAdjacentHTML("beforeend", `<span class="coord" style="left:calc(var(--sq) * ${i + .45});bottom:calc(var(--sq) * -.27)">${f}</span><span class="coord" style="left:calc(var(--sq) * -.22);top:calc(var(--sq) * ${7 - i + .42})">${i + 1}</span>`));
+
+  // scoresheet rows
+  const mv = document.getElementById("moves");
+  let rows = "";
+  for (let n = 0; n < SAN.length; n += 2) rows += `<div class="mv"><span>${n / 2 + 1}.</span><button type="button" data-p="${n + 1}">${SAN[n]}</button>${SAN[n + 1] ? `<button type="button" data-p="${n + 2}">${SAN[n + 1]}</button>` : "<span></span>"}</div>`;
+  mv.innerHTML = rows;
+  const bars = document.getElementById("bars");
+  bars.innerHTML = Array.from({ length: 41 }, (_, n) => `<div><b style="height:${Math.min(100, (MIN[n * 2] || 0) / 16 * 100)}%"></b><s style="height:${Math.min(100, (MIN[n * 2 + 1] || 0) / 16 * 100)}%"></s></div>`).join("");
+
+  // the clock: two dials, each with its own flag near twelve
+  const clock = document.getElementById("clock");
+  const dial = (cx, lab) => { let o = `<circle cx="${cx}" cy="140" r="78" fill="#faf8f2" stroke="#1e1e1e" stroke-width="2"/>`;
+    for (let k = 0; k < 60; k++) { const a = k * Math.PI / 30, r1 = k % 5 ? 70 : 64; o += `<line x1="${cx + Math.sin(a) * r1}" y1="${140 - Math.cos(a) * r1}" x2="${cx + Math.sin(a) * 74}" y2="${140 - Math.cos(a) * 74}" stroke="#1e1e1e" stroke-width="${k % 5 ? 1 : 2.4}"/>`; }
+    [12, 3, 6, 9].forEach((h, k) => { const a = k * Math.PI / 2; o += `<text x="${cx + Math.sin(a) * 52}" y="${146 - Math.cos(a) * 52}" text-anchor="middle" font-family="Domine, serif" font-size="16" font-weight="700">${h}</text>`; });
+    o += `<path id="flag${lab}" d="M${cx + 2} ${80} l0 -18 l14 6 l-14 6" fill="#b3261e" stroke="#1e1e1e" stroke-width="1" style="transform-origin:${cx + 2}px 80px"/>`;
+    o += `<line id="h${lab}" x1="${cx}" y1="140" x2="${cx}" y2="100" stroke="#1e1e1e" stroke-width="5" stroke-linecap="round"/><line id="m${lab}" x1="${cx}" y1="140" x2="${cx}" y2="72" stroke="#1e1e1e" stroke-width="3" stroke-linecap="round"/><circle cx="${cx}" cy="140" r="5" fill="#1e1e1e"/>`;
+    return o; };
+  clock.innerHTML = `<path d="M18 50 L402 50 L412 238 L8 238 Z" fill="#7a5230" stroke="#4d321b" stroke-width="2"/><rect x="92" y="24" width="56" height="26" fill="#1e1e1e" id="bw"/><rect x="272" y="24" width="56" height="26" fill="#1e1e1e" id="bb"/>${dial(112, "w")}${dial(308, "b")}<text x="112" y="232" text-anchor="middle" font-family="Domine, serif" font-size="12" fill="#f0ece3" letter-spacing="2">ÓLAFSDÓTTIR</text><text x="308" y="232" text-anchor="middle" font-family="Domine, serif" font-size="12" fill="#f0ece3" letter-spacing="2">SOKOLIN</text>`;
+  // clocks are set so the flag falls at six o’clock: 2 h 30 before
+  const hand = (lab, used) => { const t = 3.5 * 60 + used; const mA = (t % 60) * 6, hA = (t / 60) * 30;
+    document.getElementById("m" + lab).setAttribute("transform", `rotate(${mA} ${lab === "w" ? 112 : 308} 140)`);
+    document.getElementById("h" + lab).setAttribute("transform", `rotate(${hA} ${lab === "w" ? 112 : 308} 140)`);
+    const near = Math.max(0, used - 120) / 30; document.getElementById("flag" + lab).style.transform = `rotate(${-near * 40}deg)`; };
+  const fmt = (m) => `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`;
+  const VAL = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 };
+
+  let cur = 0;
+  const show = (p) => {
+    cur = Math.max(0, Math.min(SAN.length, p));
+    const P = POS[cur];
+    const seen = new Set();
+    P.ids.forEach((id, s) => { if (id == null) return; seen.add(id); const e = pieceEl[id]; e.classList.remove("gone"); e.style.transform = `translate(calc(var(--sq) * ${s % 8}), calc(var(--sq) * ${7 - (s >> 3)}))`; });
+    Object.keys(pieceEl).forEach((id) => { if (!seen.has(+id)) pieceEl[id].classList.add("gone"); });
+    cells.forEach((c) => c.classList.toggle("hl", +c.dataset.s === P.from || +c.dataset.s === P.to));
+    mv.querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(+b.dataset.p === cur)));
+    const act = mv.querySelector(`[data-p="${cur}"]`); if (act) { const r = act.parentElement; if (r.offsetTop < mv.scrollTop || r.offsetTop > mv.scrollTop + mv.clientHeight - 40) mv.scrollTop = r.offsetTop - 80; }
+    const uw = MIN.slice(0, cur).filter((_, i) => i % 2 === 0).reduce((a, b) => a + b, 0), ub = MIN.slice(0, cur).filter((_, i) => i % 2 === 1).reduce((a, b) => a + b, 0);
+    hand("w", uw); hand("b", ub);
+    document.getElementById("tw").textContent = fmt(uw); document.getElementById("tb").textContent = fmt(ub);
+    // the button of the side that just moved is pressed down
+    document.getElementById("bw").setAttribute("y", cur % 2 === 1 ? 34 : 24); document.getElementById("bb").setAttribute("y", cur % 2 === 0 && cur ? 34 : 24);
+    const mat = P.b.reduce((a, p) => a + (p === "." ? 0 : (white(p) ? 1 : -1) * VAL[p.toLowerCase()]), 0);
+    document.getElementById("mat").textContent = mat > 0 ? "+" + mat + " White" : mat < 0 ? mat + " Black" : "Level";
+    [...bars.children].forEach((d, n) => d.classList.toggle("now", n === Math.floor((cur - 1) / 2)));
+    document.getElementById("now").textContent = cur ? `${Math.ceil(cur / 2)}${cur % 2 ? "." : "…"} ${SAN[cur - 1]}` : "Start position";
+  };
+  mv.addEventListener("click", (e) => { const b = e.target.closest("button"); if (b) { stop(); show(+b.dataset.p); } });
+  document.getElementById("first").onclick = () => { stop(); show(0); };
+  document.getElementById("prev").onclick = () => { stop(); show(cur - 1); };
+  document.getElementById("next").onclick = () => { stop(); show(cur + 1); };
+  document.getElementById("last").onclick = () => { stop(); show(SAN.length); };
+  document.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") show(cur + 1); if (e.key === "ArrowLeft") show(cur - 1); });
+  // replay: one move a second, paused while the tab is hidden
+  const pb = document.getElementById("play");
+  let run = false, last = 0;
+  const tick = (t) => { if (!run) return; if (!document.hidden && t - last > 1100) { last = t; if (cur >= SAN.length) { stop(); return; } show(cur + 1); } requestAnimationFrame(tick); };
+  function stop() { run = false; pb.setAttribute("aria-pressed", "false"); pb.textContent = "Play"; }
+  pb.onclick = () => { if (run) return stop(); if (cur >= SAN.length) show(0); run = true; pb.setAttribute("aria-pressed", "true"); pb.textContent = "Pause"; requestAnimationFrame(tick); };
+  show(51);
+})();
+</script>
+</body>
+</html>

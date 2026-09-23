@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paint Fan Deck · Centiform</title>
+<style>
+/* @fonts: Belleza:400:block; Albert Sans:400,600 */
+@font-face{font-family:"Belleza";font-style:normal;font-weight:400;font-display:block;src:url(fonts/belleza-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Albert Sans";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/albert-sans-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+@font-face{font-family:"Albert Sans";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/albert-sans-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* @fonts-end */
+:root {
+  --bg: #fafafa;          /* the showroom counter */
+  --ink: #202020;
+  --accent-1: #6a8caf;    /* Harbour 4, the house blue */
+  --accent-2: #d17a5c;    /* Kiln 4, the house terracotta */
+  --card: #ffffff;        /* chip-card stock */
+  --edge: #d9d6d0;
+  --muted: #5d5a55;
+  --brass-hi: #f3d98b; --brass: #b8913a; --brass-lo: #6f5418;
+  --u: 6px;               /* chip gutter; everything is a multiple */
+  --len: min(470px, 58vh); /* strip length, rivet to tip */
+  --w: 84px;              /* strip width, closed */
+  /* scale: 1.2 (minor third) on 17px */
+  --t-2: 11.8px; --t-1: 14.2px; --t0: 17px; --t1: 20.4px; --t2: 24.5px; --t3: 29.4px; --t4: clamp(40px, 4.4vw, 68px);
+  --display: "Belleza", "Gill Sans", sans-serif;
+  --text: "Albert Sans", "Helvetica Neue", sans-serif;
+}
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--t0)/1.5 var(--text); overflow-x: hidden; }
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.wrap { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(320px, 1fr); min-height: 100svh; }
+.bench { position: relative; display: grid; grid-template-rows: auto 1fr auto; padding: calc(var(--u) * 5) calc(var(--u) * 6) calc(var(--u) * 4); min-width: 0; overflow: hidden; }
+.mast { display: flex; justify-content: space-between; align-items: baseline; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+.mast h1 { margin: 0; font: 400 var(--t4)/.95 var(--display); letter-spacing: .02em; }
+.mast h1 span { display: block; font: 600 var(--t-2)/1.4 var(--text); letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--u); }
+.mast p { margin: 0; font-size: var(--t-1); color: var(--muted); max-width: 22em; }
+
+/* the deck: every strip turns on one rivet */
+.fan { position: relative; min-height: calc(var(--len) + 90px); }
+.strip { position: absolute; left: 50%; bottom: 40px; width: var(--w); height: var(--len); margin-left: calc(var(--w) / -2);
+  transform-origin: 50% calc(100% - 26px); transform: rotate(var(--a, 0deg)); background: var(--card); border: 1px solid var(--edge);
+  display: grid; grid-template-rows: repeat(6, minmax(0, 1fr)) 64px; padding: var(--u); gap: var(--u); box-shadow: 0 1px 0 rgba(0,0,0,.06), 2px 3px 8px rgba(40,30,20,.08); }
+.strip.sel { width: calc(var(--w) * 1.9); margin-left: calc(var(--w) * -.95); z-index: 50 !important; box-shadow: 0 1px 0 rgba(0,0,0,.08), 6px 10px 22px rgba(40,30,20,.16); }
+.chip { border: 0; padding: 0; display: flex; align-items: flex-end; justify-content: space-between; padding: 3px 5px; background: var(--c); color: var(--on); font: 600 9px/1.1 var(--text); letter-spacing: .02em; text-align: left; min-height: 0; overflow: hidden; }
+.chip span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; }
+.chip small { font-weight: 400; opacity: 0; }
+.strip.sel .chip span, .strip.sel .chip small { opacity: 1; font-size: 11px; }
+.chip[aria-pressed="true"] { box-shadow: inset 0 0 0 3px var(--card), inset 0 0 0 4px var(--ink); }
+.chip:focus-visible { outline-offset: -4px; outline-color: var(--on); }
+.tab { border: 0; background: none; padding: 2px 0 0; display: grid; align-content: start; justify-items: center; text-align: center; font: 600 8.5px/1.25 var(--text); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); position: relative; }
+.tab b { font: 400 15px/1 var(--display); letter-spacing: .04em; color: var(--ink); }
+.hole { position: absolute; left: 50%; bottom: 13px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: #e8e5df; box-shadow: inset 0 1px 2px rgba(0,0,0,.3); }
+.rivet { position: absolute; left: 50%; bottom: 40px; width: 30px; height: 30px; margin: 0 0 11px -15px; border-radius: 50%; z-index: 60; pointer-events: none;
+  background: radial-gradient(circle at 36% 32%, var(--brass-hi) 0 18%, var(--brass) 48%, var(--brass-lo) 100%); box-shadow: 0 2px 3px rgba(40,25,0,.45), inset 0 0 0 1px rgba(80,55,10,.5); }
+.rivet::after { content: ""; position: absolute; inset: 7px; border-radius: 50%; background: radial-gradient(circle at 60% 65%, rgba(255,240,190,.7), transparent 60%), linear-gradient(135deg, transparent 44%, rgba(70,45,5,.55) 44% 56%, transparent 56%); }
+.hint { font-size: var(--t-2); letter-spacing: .14em; text-transform: uppercase; color: var(--muted); display: flex; gap: calc(var(--u) * 3); flex-wrap: wrap; }
+@media (prefers-reduced-motion: no-preference) {
+  .strip { transition: transform .62s cubic-bezier(.3, 1.35, .5, 1), width .32s ease, margin-left .32s ease; }
+  .chip span, .chip small { transition: opacity .2s .15s; }
+}
+
+/* the back of the chip card */
+.back { background: var(--card); border-left: 1px solid var(--edge); padding: calc(var(--u) * 5) calc(var(--u) * 6); display: grid; grid-template-rows: auto auto 1fr auto; gap: calc(var(--u) * 4); min-width: 0; }
+.swatch { aspect-ratio: 4 / 3; background: var(--pick); position: relative; display: flex; align-items: flex-end; padding: calc(var(--u) * 3); color: var(--pick-on); }
+.swatch .code { font: 600 var(--t-1)/1 var(--text); letter-spacing: .1em; font-variant-numeric: tabular-nums; }
+.swatch::before { content: ""; position: absolute; top: calc(var(--u) * 3); right: calc(var(--u) * 3); width: 44px; height: 44px; border: 1px solid currentColor; border-radius: 50%; opacity: .5; }
+.name h2 { margin: 0; font: 400 var(--t3)/1.1 var(--display); }
+.name p { margin: var(--u) 0 0; color: var(--muted); max-width: 30em; }
+dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: calc(var(--u) * 1) calc(var(--u) * 3); font-size: var(--t-1); font-variant-numeric: tabular-nums; align-content: start; }
+dt { color: var(--muted); letter-spacing: .08em; text-transform: uppercase; font-size: var(--t-2); padding-top: 2px; }
+dd { margin: 0; }
+.pairs { display: flex; gap: calc(var(--u) * 2); flex-wrap: wrap; }
+.pair { display: grid; grid-template-columns: 30px auto; gap: var(--u); align-items: center; background: none; border: 1px solid var(--edge); padding: 4px 10px 4px 4px; font-size: var(--t-2); }
+.pair i { width: 30px; height: 30px; background: var(--c); }
+.pair:hover { border-color: var(--ink); }
+.foot { font-size: var(--t-2); color: var(--muted); border-top: 1px solid var(--edge); padding-top: calc(var(--u) * 2); line-height: 1.6; }
+
+@media (min-width: 1900px) { :root { --len: min(620px, 62vh); --w: 104px; --t0: 19px; } }
+@media (max-width: 900px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); }
+  .back { border-left: 0; border-top: 1px solid var(--edge); }
+}
+@media (max-width: 560px) {
+  :root { --len: 300px; --w: 50px; }
+  .bench { padding: calc(var(--u) * 3); }
+  .back { padding: calc(var(--u) * 4) calc(var(--u) * 3); }
+  .strip { grid-template-rows: repeat(6, minmax(0, 1fr)) 46px; padding: 4px; gap: 4px; }
+  .strip.sel { width: calc(var(--w) * 2.3); margin-left: calc(var(--w) * -1.15); }
+  .tab { font-size: 7px; } .tab b { font-size: 12px; }
+  .strip.sel .chip span { font-size: 10px; } .strip.sel .chip small { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="bench" aria-label="Fan deck">
+    <header class="mast">
+      <h1><span>Harrow &amp; Lune · Est. 1923 · Bristol</span>The Interior Fan Deck</h1>
+      <p>Seventy-two colours on twelve cards, all mixed at the Feeder Road works. Pull a card from the fan, then choose a chip.</p>
+    </header>
+    <div class="fan" id="fan" role="listbox" aria-label="Colour cards" tabindex="0"><div class="rivet" aria-hidden="true"></div></div>
+    <p class="hint"><span>← → turn the deck</span><span>Edition 14 · autumn 2026</span><span>Chips are printed; always try a sample pot</span></p>
+  </section>
+  <aside class="back" aria-live="polite">
+    <div class="swatch" id="sw"><span class="code" id="code"></span></div>
+    <div class="name"><h2 id="nm"></h2><p id="note"></p></div>
+    <dl id="spec"></dl>
+    <div>
+      <div class="pairs" id="pairs"></div>
+      <p class="foot">Sample pot 250 ml £4.80 · Matt emulsion 2.5 L £38 · Eggshell 2.5 L £44. Printed colours are a guide only: hold the chip to the wall in daylight, at the height you will see it.</p>
+    </div>
+  </aside>
+</div>
+<script>
+(() => {
+  // twelve cards; each is one pigment family mixed from pale to deep
+  const CARDS = [
+    ["Harbour", 211, 30, ["Sea Fret", "Quay Mist", "Pilot Blue", "Harbour", "Deep Mooring", "Night Tide"], "The house blue, first mixed in 1926 for the harbour master’s office."],
+    ["Kiln", 15, 55, ["Biscuit Clay", "Rose Slip", "Warm Saggar", "Kiln", "Fired Brick", "Oxblood Glaze"], "An earth red with a little yellow ochre, after the tiles at the old pottery on Feeder Road."],
+    ["Ochre", 40, 62, ["Cream Tea", "Wheat Rick", "Mustard Seed", "Raw Ochre", "Tanner’s Yard", "Burnt Straw"], "Warm yellows that stay calm in north light."],
+    ["Moss", 90, 22, ["Pale Lichen", "Hedge Silver", "Wet Moss", "Moss", "Holloway", "Old Yew"], "Grey-greens for rooms that face a garden."],
+    ["Heather", 300, 16, ["Lavender Ash", "Heath Bloom", "Dusk Heather", "Heather", "Bramble", "Damson Skin"], "A soft purple-grey; the deepest two read almost brown at night."],
+    ["Slate", 205, 10, ["Paper Ash", "Pale Slate", "Roof Tile", "Welsh Slate", "Wet Lead", "Coal Hole"], "Cool greys with a touch of blue-black."],
+    ["Rosehip", 350, 38, ["Petal Dust", "Sugared Almond", "Rosehip", "Hip Syrup", "Claret", "Late Plum"], "Pinks that deepen to wine. Good for small rooms."],
+    ["Fjord", 185, 32, ["Glacier Milk", "Sea Glass", "Fjord", "Teal Deep", "Kelp Bed", "Undertow"], "Green-blue, mixed for a hotel in Bergen in 1968."],
+    ["Oat", 35, 18, ["Linen White", "Porridge", "Oat", "Hessian", "Barley Sack", "Stoneware"], "The neutral card. Every colour in the deck sits well beside it."],
+    ["Fern", 130, 28, ["Frond Tip", "Fern Light", "Glade", "Fern", "Bottle Wood", "Forest Floor"], "Clear greens, for kitchens and doors."],
+    ["Marigold", 28, 78, ["Apricot Cream", "Marigold Pale", "Marigold", "Saffron", "Rust Belt", "Chestnut"], "Our brightest card. Use it in halls and on a single wall."],
+    ["Ink", 225, 26, ["Chalk Blue", "Blotting Paper", "Quill", "Iron Gall", "Ink", "Midnight Ledger"], "Blue-blacks from a stationer’s shop palette, 1931."],
+  ];
+  const L = [92, 83, 72, 59, 45, 30];
+  const hsl = (h, s, l) => { s /= 100; l /= 100; const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+    const f = (n) => Math.round(255 * (l - a * Math.max(-1, Math.min(k(n) - 3, 9 - k(n), 1)))); return [f(0), f(8), f(4)]; };
+  const hex = (c) => "#" + c.map((v) => v.toString(16).padStart(2, "0")).join("");
+  const lum = (c) => { const [r, g, b] = c.map((v) => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; }); return .2126 * r + .7152 * g + .0722 * b; };
+  const chips = CARDS.map(([fam, h, s, names], ci) => names.map((nm, k) => {
+    let rgb = hsl(h, s, L[k]);
+    if (fam === "Harbour" && k === 3) rgb = [0x6a, 0x8c, 0xaf];
+    if (fam === "Kiln" && k === 3) rgb = [0xd1, 0x7a, 0x5c];
+    const Y = lum(rgb);
+    return { ci, k, nm, fam, hex: hex(rgb), lrv: Math.round(Y * 100), on: Y > .3 ? "#202020" : "#ffffff", code: `HL ${String(ci + 1).padStart(2, "0")}${40 + k * 7}-${k + 1}` };
+  }));
+
+  const fan = document.getElementById("fan");
+  fan.insertAdjacentHTML("afterbegin", CARDS.map(([fam], ci) => `<div class="strip" data-ci="${ci}" style="z-index:${ci + 1}">${chips[ci].map((c) =>
+    `<button class="chip" type="button" data-ci="${ci}" data-k="${c.k}" aria-pressed="false" style="--c:${c.hex};--on:${c.on}" aria-label="${c.nm}, ${c.code}"><span>${c.nm}</span><small>${c.lrv}</small></button>`).join("")}
+    <button class="tab" type="button" data-ci="${ci}" aria-label="Card ${ci + 1}, ${fam}"><b>${fam}</b>Card ${String(ci + 1).padStart(2, "0")}<span class="hole"></span></button></div>`).join(""));
+  const strips = [...fan.querySelectorAll(".strip")];
+  let cur = 6, pick = 2;
+
+  // the pulled card stands upright; the rest spread either side of it
+  const layout = (closed) => {
+    const n = strips.length;
+    strips.forEach((s, i) => {
+      let a;
+      if (closed) a = -4 + i * .6;
+      else if (i === cur) a = 0;
+      else if (i < cur) a = -72 + (i / Math.max(1, cur)) * 58;
+      else a = 14 + ((i - cur - 1) / Math.max(1, n - cur - 1)) * 58;
+      s.style.setProperty("--a", a.toFixed(1) + "deg");
+      s.classList.toggle("sel", i === cur && !closed);
+      s.style.zIndex = i < cur ? i + 1 : n - i + 1;
+    });
+  };
+  const show = () => {
+    const c = chips[cur][pick];
+    fan.querySelectorAll(".chip").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.ci === cur && +b.dataset.k === pick)));
+    const sw = document.getElementById("sw");
+    sw.style.setProperty("--pick", c.hex); sw.style.setProperty("--pick-on", c.on);
+    document.getElementById("code").textContent = c.code;
+    document.getElementById("nm").textContent = c.nm;
+    document.getElementById("note").textContent = CARDS[cur][4];
+    const trim = chips[8][0], wall = chips[(cur + 6) % 12][Math.min(5, Math.max(0, 5 - pick))];
+    document.getElementById("spec").innerHTML = `<dt>Card</dt><dd>${String(cur + 1).padStart(2, "0")} · ${c.fam}, chip ${pick + 1} of 6</dd><dt>LRV</dt><dd>${c.lrv} <span style="color:var(--muted)">(light reflectance, 0 black to 100 white)</span></dd><dt>Screen</dt><dd>${c.hex.toUpperCase()}</dd><dt>Coverage</dt><dd>${pick > 3 ? "13" : "15"} m² per litre, two coats</dd><dt>Base</dt><dd>${pick < 2 ? "White base, tint A" : pick < 4 ? "Mid base, tint B" : "Deep base, tint D"}</dd>`;
+    const pairs = [[8, 0, "on the ceiling"], [wall.ci, wall.k, "across the room"], [cur, Math.min(5, pick + 2), "on the woodwork"]];
+    document.getElementById("pairs").innerHTML = pairs.map(([ci, k, where]) => { const p = chips[ci][k]; return `<button class="pair" type="button" data-ci="${ci}" data-k="${k}"><i style="--c:${p.hex}"></i><span><b>${p.nm}</b><br>${where}</span></button>`; }).join("");
+  };
+  const select = (ci, k) => { cur = ci; if (k != null) pick = k; layout(false); show(); };
+  document.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ci]"); if (!b || b.classList.contains("strip")) return;
+    select(+b.dataset.ci, b.dataset.k != null ? +b.dataset.k : pick);
+  });
+  fan.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") { e.preventDefault(); select((cur + (e.key === "ArrowRight" ? 1 : 11)) % 12); }
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") { e.preventDefault(); pick = Math.max(0, Math.min(5, pick + (e.key === "ArrowDown" ? 1 : -1))); show(); }
+  });
+  show();
+  // the deck arrives closed and fans open once, like a thumb pushing it out
+  if (matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+    layout(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => layout(false), 250)));
+  } else layout(false);
+})();
+</script>
+</body>
+</html>
