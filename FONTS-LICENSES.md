@@ -15,3 +15,5 @@ here when it vendors a new family. Design 095 uses the browser default serif and
 | Rubik | OFL-1.1 | https://fontsource.org/fonts/rubik | 003-riso-repair-zine |
 | UnifrakturMaguntia | OFL-1.1 | https://fontsource.org/fonts/unifrakturmaguntia | 004-exposition-broadsheet |
 | Old Standard TT | OFL-1.1 | https://fontsource.org/fonts/old-standard-tt | 004-exposition-broadsheet |
+| Josefin Sans | OFL-1.1 | https://fontsource.org/fonts/josefin-sans | 005-triband-paperbacks |
+| Crimson Pro | OFL-1.1 | https://fontsource.org/fonts/crimson-pro | 005-triband-paperbacks |

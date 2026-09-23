@@ -36,7 +36,7 @@ window.CENTIFORM = [
     fonts: ["Josefin Sans","Crimson Pro"], swatch: ["#f4efe1","#1d1d1b","#e8702a","#2d7d46"],
     grammar: "A shelf of spines that pull out into full tri-band covers",
     motif: "Three horizontal bands with a centred cartouche",
-    status: "planned" },
+    status: "done" },
   { n: 6, slug: "006-herbarium-sheets", title: "Herbarium Sheets", family: "Paper & Print",
     subject: "Accession records of a university herbarium.", format: "catalog", mode: "light",
     thesis: "Pressed plants on rag paper with typed labels and linen tape",
